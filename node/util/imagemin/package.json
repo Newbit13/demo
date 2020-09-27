@@ -1,0 +1,17 @@
+{
+  "name": "yytest",
+  "version": "1.0.0",
+  "description": "test Img min",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "imagemin-jpegtran": "^6.0.0",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "imagemin-webp": "^5.1.0"
+  }
+}
