@@ -3,7 +3,7 @@ import React from 'react';
 export default () => {
     return (
         <div>
-            i am fruit
+            i am fruit!
         </div>
     )
 };
