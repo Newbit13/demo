@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function () {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"i am fruit!\");\n});\n\n//# sourceURL=webpack:///./src/client/pages/Fruit/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function () {\n  var cb = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useCallback\"])(function () {\n    console.log(1);\n  }, []);\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    onClick: cb\n  }, \"i am fruit!\");\n});\n\n//# sourceURL=webpack:///./src/client/pages/Fruit/index.js?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! express */ \"express\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _client_pages_Fruit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../client/pages/Fruit */ \"./src/client/pages/Fruit/index.js\");\n\n\n\n\nvar app = express__WEBPACK_IMPORTED_MODULE_2___default()();\napp.use(express__WEBPACK_IMPORTED_MODULE_2___default.a[\"static\"]('./dist/client')); // app.use(ssr);\n\napp.get('/', function (req, res) {\n  var reactStr = Object(react_dom_server__WEBPACK_IMPORTED_MODULE_0__[\"renderToString\"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_client_pages_Fruit__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null));\n  var html = \"<!DOCTYPE html>\\n  <html lang=\\\"en\\\">\\n  <head>\\n      <meta charset=\\\"UTF-8\\\">\\n      <title></title>\\n  </head>\\n  <body>\\n      <div id=\\\"root\\\">\".concat(reactStr, \"</div>\\n      <script type=\\\"text/javascript\\\" src=\\\"/index.js\\\"></script>\\n  </body>\\n  </html>\");\n  return res.send(html);\n});\napp.listen(9999, function () {\n  return console.log('node listen 9999');\n});\n\n//# sourceURL=webpack:///./src/server/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! express */ \"express\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _client_pages_Fruit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../client/pages/Fruit */ \"./src/client/pages/Fruit/index.js\");\n\n\n\n\n\nvar fs = __webpack_require__(/*! fs */ \"fs\");\n\nvar app = express__WEBPACK_IMPORTED_MODULE_2___default()();\napp.use(express__WEBPACK_IMPORTED_MODULE_2___default.a[\"static\"]('./dist/client')); // app.use(ssr);\n\napp.get('/', function (req, res) {\n  var reactStr = Object(react_dom_server__WEBPACK_IMPORTED_MODULE_0__[\"renderToString\"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_client_pages_Fruit__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null));\n  var html = fs.readFileSync('./index.html').toString();\n  html = html.replace(\"<div id=\\\"root\\\"></div>\", \"<div id=\\\"root\\\">\".concat(reactStr, \"</div>\"));\n  html = html.replace(\"</body>\", \"<script type=\\\"text/javascript\\\" src=\\\"/index.js\\\"></script></body>\"); // const html = `<!DOCTYPE html>\n  // <html lang=\"en\">\n  // <head>\n  //     <meta charset=\"UTF-8\">\n  //     <title></title>\n  // </head>\n  // <body>\n  //     <div id=\"root\">${reactStr}</div>\n  //     <script type=\"text/javascript\" src=\"/index.js\"></script>\n  // </body>\n  // </html>`;\n\n  return res.send(html);\n});\napp.listen(9999, function () {\n  return console.log('node listen 9999');\n});\n\n//# sourceURL=webpack:///./src/server/index.js?");
 
 /***/ }),
 
@@ -118,6 +118,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"express\");\n\n//# sourceURL=webpack:///external_%22express%22?");
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"fs\");\n\n//# sourceURL=webpack:///external_%22fs%22?");
 
 /***/ }),
 

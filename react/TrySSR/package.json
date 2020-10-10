@@ -1,10 +1,10 @@
 {
-  "name": "TrySSR",
+  "name": "try_ssr",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "client:dev2": "webpack-dev-server --config ./webpack.client.dev.js",
     "client:dev": "webpack --watch --config ./webpack.client.dev.js",
     "server:dev": "webpack --watch --config ./webpack.server.dev.js",
     "node:dev": "nodemon ./dist/server/index.js -w ./dist",
@@ -26,9 +26,11 @@
   "devDependencies": {
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^4.5.0",
     "nodemon": "^2.0.4",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.2.0",
     "webpack-node-externals": "^2.5.2"
   }
