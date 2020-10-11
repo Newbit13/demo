@@ -6,9 +6,9 @@ import {App} from './route';
 
 let initialData = 'sss2';
 try {
-    initialData = JSON.parse(document.getElementById('curcompvalue').value);
+    initialData = document.getElementById('curcompvalue') && JSON.parse(document.getElementById('curcompvalue').value || '');
 } catch (error) {
-    initialData = document.getElementById('curcompvalue').value;
+    initialData = document && document.getElementById('curcompvalue').value || '';
 }
 
 ReactDOM.hydrate(

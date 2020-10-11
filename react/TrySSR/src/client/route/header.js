@@ -8,9 +8,11 @@ export default ()=>{
         <div>
             {
                 routeConfig.map((v)=>(
-                    <Link key={v.path} to={v.path}>
-                        {v.name}
-                    </Link>
+                    <button key={v.path}>
+                        <Link to={v.path}>
+                            {v.name}
+                        </Link>
+                    </button>
                 ))
             }
         </div>

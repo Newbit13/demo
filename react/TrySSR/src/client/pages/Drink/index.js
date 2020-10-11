@@ -2,7 +2,9 @@ import React,{useCallback,useState,useEffect} from 'react';
 import axios from 'axios';
 
 import {envInitialData} from '../../util'
-
+// import styles from './style.css'
+import './style.css'
+// console.log(styles);
 const Index = (prop) => {
     const [msg,setMsg] = useState(envInitialData(prop));
     const cb = useCallback(async ()=>{
@@ -19,7 +21,8 @@ const Index = (prop) => {
     return (
         <div>
             <button onClick={cb}>i am Drink!</button>
-            <p>{msg}</p>
+            {/* <p className={styles.drink_p}>{msg}</p> */}
+            <p className="drink_p">{msg}</p>
         </div>
     )
 };

@@ -37,11 +37,13 @@ export default async (req,res,next)=>{
           <App />
         </StaticRouter>
       );
-      
+    //   console.log(context);
       const $ = cheerio.load(fs.readFileSync('./index.html').toString());
       $('#root').html(reactStr);
       $('body').append(`<input id="curcompvalue" value="${typeof initialData == 'object' ? JSON.stringify(initialData):initialData}" />`);
       $('body').append('<script type="text/javascript" src="/index.js"></script></body>');
+      $('head').append('<link rel="stylesheet" href="/index.css"></link>');
+      
       // html = html.replace(`<div id="root"></div>`,`<div id="root">${reactStr}</div>`);
       // html = html.replace(`</body>`,`<script type="text/javascript" src="/index.js"></script></body>`);
     
