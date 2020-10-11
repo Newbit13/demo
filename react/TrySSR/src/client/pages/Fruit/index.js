@@ -1,12 +1,14 @@
-import React,{useCallback} from 'react';
+import React,{useCallback,useState} from 'react';
 
 export default () => {
+    let [count,setCount] = useState(0);
     const cb = useCallback(()=>{
-        console.log(1);
+        setCount(++count);
     },[])
     return (
-        <div onClick={cb}>
-            i am fruit!
+        <div>
+            <button  onClick={cb}> i am fruit!</button>
+            <p>{count}</p>
         </div>
     )
 };

@@ -1,10 +1,13 @@
 import express from 'express';
 
 import ssr from './middleWare/ssr';
+import router from './router'
 
 const app = express();
 
 app.use(express.static('./dist/client'));
+
+app.use('/',router);//app.use(router);
 
 app.use(ssr);
 

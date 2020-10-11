@@ -19,15 +19,18 @@ module.exports = merge(base,{
     // hotOnly:true
   },
   plugins:[
-    new htmlWebpackPlugin({
-      title:"ssr title",
-      template:"./index.html",
-      // minify:{
-      //   removeComments:true,
-      //   collapseWhitespace:true,
-      //   minifyCSS:true
-      // }
+    // new htmlWebpackPlugin({
+    //   title:"ssr title",
+    //   template:"./index.html",
+    //   // minify:{
+    //   //   removeComments:true,
+    //   //   collapseWhitespace:true,
+    //   //   minifyCSS:true
+    //   // }
+    // }),
+    // new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      '__isServer': false,   // 服务端设置true，客户端设置false
     }),
-    new webpack.HotModuleReplacementPlugin()
   ]
 });
