@@ -1,10 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Fruit from './pages/Fruit'
+import {BrowserRouter} from 'react-router-dom';
+import {App} from './route';
 
 
 ReactDOM.hydrate(
-    <Fruit />,
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>,
     document.getElementById('root')
 );

@@ -19,15 +19,15 @@ module.exports = merge(base,{
     // hotOnly:true
   },
   plugins:[
-    // new htmlWebpackPlugin({
-    //   title:"ssr title",
-    //   template:"./index.html",
-    //   // minify:{
-    //   //   removeComments:true,
-    //   //   collapseWhitespace:true,
-    //   //   minifyCSS:true
-    //   // }
-    // }),
-    // new webpack.HotModuleReplacementPlugin()
+    new htmlWebpackPlugin({
+      title:"ssr title",
+      template:"./index.html",
+      // minify:{
+      //   removeComments:true,
+      //   collapseWhitespace:true,
+      //   minifyCSS:true
+      // }
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ]
 });
