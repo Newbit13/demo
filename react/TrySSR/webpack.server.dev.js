@@ -18,9 +18,16 @@ module.exports = merge(base,{
     rules: [{
       test: /.css$/,
       use: [
-        './webpack/loader/css-remove-loader',
+        // './webpack/loader/css-remove-loader',
         // MiniCssExtractPlugin.loader,
-        // 'css-loader?modules'
+        {
+          loader:'css-loader',
+          options: {
+            modules: {
+              localIdentName: '[path][name]__[local]--[hash:base64:5]',
+            },
+          },
+        }
       ]//服务端不需要引入css，用客户端的就好
     }]
   },
