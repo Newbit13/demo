@@ -1,3 +1,6 @@
 .drink_p{
     color: red;
 }
+:global .haha{
+    color:green;
+}

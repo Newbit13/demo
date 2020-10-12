@@ -4,8 +4,6 @@ const webpack = require('webpack');
 const base = require('./webpack.base');
 const {merge} = require('webpack-merge');
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 module.exports = merge(base,{
   entry: path.resolve(__dirname,'./src/server/index.js'),
   output: {
@@ -24,6 +22,8 @@ module.exports = merge(base,{
           loader:'css-loader',
           options: {
             modules: {
+              // exportGlobals:true,//本来就全局的css，没必要也返回该className了
+              exportOnlyLocals: true,//不加的话服务端导出一个包含其他信息的对象，跟客户端格式不相符
               localIdentName: '[path][name]__[local]--[hash:base64:5]',
             },
           },

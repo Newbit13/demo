@@ -4,7 +4,8 @@ import axios from 'axios';
 import {envInitialData} from '../../util'
 import styles from './style.css'
 // import './style.css'
-// console.log(styles['locals']);
+// const styles = require('./style.css')
+console.log(styles);
 // const zz = styles['locals'] || styles//服务端跟客户端的styles格式不一样
 const Index = (prop) => {
     const [msg,setMsg] = useState(envInitialData(prop));
