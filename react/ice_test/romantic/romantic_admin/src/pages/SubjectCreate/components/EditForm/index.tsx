@@ -28,6 +28,18 @@ export interface BasicFormProps {
   onCancel?: () => void;
 }
 
+export interface subjcetSchma {
+  index?: number;
+  canSkip?: boolean;
+  aspect?: never[];
+  type?: string;
+  title?: string;
+  item?: {
+      text: string;
+      value: number;
+  }[];
+}
+
 const DEFAULT_DATA: DataSource = {
   type: 'private',
 };
@@ -49,7 +61,7 @@ const BasicForm: React.SFC<BasicFormProps> = (props): JSX.Element => {
   } = props;
 
   const [postData, setValue] = useState<BasicFormProps>(dataSource);
-  const [subjcetJson,setSubjectJson] = useSetState({});
+  const [subjcetSchma,setSubjcetSchma] = useState<subjcetSchma[]>([]);
 
   const formChange = (values: BasicFormProps): void => {
     console.log({values});
@@ -57,7 +69,24 @@ const BasicForm: React.SFC<BasicFormProps> = (props): JSX.Element => {
   };
 
   const sigleButton = ()=>{
-
+    const itemIndex = subjcetSchma.length;
+    const newValue = [
+      ...subjcetSchma,
+      {
+        index:itemIndex,
+        canSkip:true,
+        aspect:[],
+        type:'single',
+        title:'',
+        item:[{
+          text:'',
+          value:0
+        }]
+      }
+    ];
+    // console.log(newValue);
+    console.log(typeof newValue);
+    setSubjcetSchma(newValue)
   }
 
   const doubleButton = ()=>{
@@ -77,24 +106,31 @@ const BasicForm: React.SFC<BasicFormProps> = (props): JSX.Element => {
             <br />
             <Button onClick={doubleButton} type="primary">多选题</Button>
           </div>
-          <Form
-            className={styles.BasicForm}
-            responsive
-            fullWidth
-            value={postData}
-            labelAlign="top"
-            onChange={formChange}
-          >
-            <FormItem {...formItemLayout} label="题目名称：">
-              <Input placeholder="请输入题目名称" name="subjectItemTitle" />
-            </FormItem>
-            <Divider dashed />
-            <FormItem {...formItemLayout} label="选项：">
-              <Input placeholder="请输入选项" name="subjectItem" />
-            </FormItem>
-            <FormItem colSpan={12}>
-              <Button onClick={addItem} type="primary" style={{marginBottom:'10px'}}>增加选项</Button>
-            </FormItem>
+          {
+            subjcetSchma.map((v)=>(
+              <Form
+                className={styles.BasicForm}
+                responsive
+                fullWidth
+                // value={postData}
+                labelAlign="top"
+                // onChange={formChange}
+                key={v.index}
+              >
+                <FormItem {...formItemLayout} label="题目名称：">
+                  <Input placeholder="请输入题目名称" name="subjectItemTitle" />
+                </FormItem>
+                <Divider dashed />
+                <FormItem {...formItemLayout} label="选项：">
+                  <Input placeholder="请输入选项" name="subjectItem" />
+                </FormItem>
+                <FormItem colSpan={12}>
+                  <Button onClick={addItem} type="primary" style={{marginBottom:'10px'}}>增加选项</Button>
+                </FormItem>
+              </Form>
+            ))
+          }
+            
             
             {/* <FormItem {...formItemLayout} label="项目权限：" >
               <Radio.Group name="type" aria-labelledby="authority of project">
@@ -118,7 +154,6 @@ const BasicForm: React.SFC<BasicFormProps> = (props): JSX.Element => {
                 <Button onClick={onCancel} type="secondary">取消</Button>
               </Box>
             </FormItem>
-          </Form>
         </Box>
       </Card.Content>
     </Card>
