@@ -48,7 +48,7 @@ const BasicForm: React.SFC<BasicFormProps> = (props): JSX.Element => {
   });
   const [subjcetSchma,setSubjcetSchma] = useState<subjcetSchma[]>([]);
   const [editBoxVisible,setEditBoxVisible] = useState(false);
-  console.log(postData);
+  // console.log(postData);
   
   const formChange = (values: BasicFormProps): void => {
     setValue({
@@ -98,7 +98,7 @@ const BasicForm: React.SFC<BasicFormProps> = (props): JSX.Element => {
       item:[
         ...postData.item,
         {
-          key: Date.now(),
+          key: new Date().getTime(),
           text:'',
           value:0
         }
@@ -168,13 +168,15 @@ const BasicForm: React.SFC<BasicFormProps> = (props): JSX.Element => {
                     <Checkbox name="skip" checked={postData.canSkip}>可跳过</Checkbox>
               </FormItem>
               {/* <Divider dashed /> */}
-              {postData.item.map((v,i)=>(
-                <FormItem {...formItemLayout} label={'选项'+(i + 1)+'：'} key={v.key}>
-                  <Input placeholder="请输入选项" name={"subjectItem"+(i+1)} defaultValue={v.text}/>
-                  <NumberPicker  placeholder="请输入分值" name={"subjectItemValue"+(i+1)} defaultValue={v.value}/>
-                  <Button onClick={delItem(i)} type="primary">删除</Button>
-                </FormItem>
-              ))}
+              {postData.item.map((v,i)=>{
+                return (
+                  <FormItem {...formItemLayout} label={'选项'+(i + 1)+'：'} key={v.key}>
+                    <Input placeholder="请输入选项" name={"subjectItem"+(i+1)} value={v.text}/>
+                    <NumberPicker  placeholder="请输入分值" name={"subjectItemValue"+(i+1)} defaultValue={v.value}/>
+                    <Button onClick={delItem(i)} type="primary">删除</Button>
+                  </FormItem>
+                )
+              })}
               
               <FormItem colSpan={12}>
                 <Button onClick={addItem} type="primary">增加选项</Button>
