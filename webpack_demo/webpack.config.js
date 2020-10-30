@@ -8,16 +8,34 @@ const path = require('path');
 
 // const webpackConfig = smp.wrap({
 //     module:{
-//         noParse: /jquery/,
+//         rules: [
+//             // {//全局暴露jq
+//             //     test: require.resolve('jquery'),
+//             //     use: [{
+//             //         loader: 'expose-loader',
+//             //         options: {
+//             //             exposes: ['$', 'jQuery'],
+//             //         }
+//             //     }]
+//             // }
+//         ]
 //     },
-//     entry: './src/index.js',
+//     externals:{//不打包jq,但是jq链接得自己引用
+//         jquery:'$',
+//     },
+//     entry: {
+//         index:'./src/index.js',
+//     },
 //     output: {
-//         filename: 'bundle.js',
+//         filename: '[name].bundle.js',
 //         path: path.resolve(__dirname, 'dist')
 //     },
-//     // plugins: [new HtmlWebpackPlugin({
-//     //     template: './index.html'
-//     // })]
+//     plugins: [
+//         // new CleanWebpackPlugin(),
+//         // new HtmlWebpackPlugin({
+//         //     template: './index.html',
+//         // })
+//     ]
 // })
 
 const webpackConfig = {
@@ -34,9 +52,9 @@ const webpackConfig = {
             // }
         ]
     },
-    externals:{//不打包jq,但是jq链接得自己引用
-        jquery:'$',
-    },
+    // externals:{//不打包jq,但是jq链接得自己引用
+    //     jquery:'$',
+    // },
     entry: {
         index:'./src/index.js',
     },
@@ -49,7 +67,22 @@ const webpackConfig = {
         new HtmlWebpackPlugin({
             template: './index.html',
         })
-    ]
+    ],
+    optimization: {
+        splitChunks: {
+            chunks: 'initial',
+            automaticNameDelimiter: '.',
+            cacheGroups: {
+            vendors: {
+                test: /[\\/]node_modules[\\/]/,
+                priority: 1
+            }
+            }
+        },
+        // runtimeChunk: {
+        //     name: entrypoint => `manifest.${entrypoint.name}`
+        // }
+    }
 }
 
 module.exports = webpackConfig;
