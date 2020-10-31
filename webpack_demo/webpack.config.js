@@ -1,11 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
 
 // const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // const smp = new SpeedMeasurePlugin();
-
 // const webpackConfig = smp.wrap({
 //     module:{
 //         rules: [
@@ -20,9 +20,9 @@ const path = require('path');
 //             // }
 //         ]
 //     },
-//     externals:{//不打包jq,但是jq链接得自己引用
-//         jquery:'$',
-//     },
+//     // externals:{//不打包jq,但是jq链接得自己引用
+//     //     jquery:'$',
+//     // },
 //     entry: {
 //         index:'./src/index.js',
 //     },
@@ -35,7 +35,23 @@ const path = require('path');
 //         // new HtmlWebpackPlugin({
 //         //     template: './index.html',
 //         // })
-//     ]
+//     ],
+//     optimization: {
+//         splitChunks: {//为了避免重复引用 || 把大的文件提取出来
+//             chunks: 'initial',
+//             automaticNameDelimiter: '.',
+//             name: 'vendors_hahaha',
+//             cacheGroups: {
+//                 vendors: {//cacheGroups里可以设置多个对象，通过priority优先级来判断执行哪个对象的内容
+//                     test: /[\\/]node_modules[\\/]/,
+//                     priority: 1
+//                 }
+//             }
+//         },
+//         // runtimeChunk: {
+//         //     name: entrypoint => `manifest.${entrypoint.name}`
+//         // }
+//     }
 // })
 
 const webpackConfig = {
@@ -54,9 +70,12 @@ const webpackConfig = {
     },
     // externals:{//不打包jq,但是jq链接得自己引用
     //     jquery:'$',
+    //     react:'React',
+    //     'react-dom':'ReactDOM'
     // },
     entry: {
         index:'./src/index.js',
+        index2:'./src/index2.js',
     },
     output: {
         filename: '[name].bundle.js',
@@ -64,19 +83,25 @@ const webpackConfig = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: path.resolve(__dirname, 'build/manifest.json'),//require('./manifest.json'),
+        }),
         new HtmlWebpackPlugin({
             template: './index.html',
-        })
+        }),
+        // new BundleAnalyzerPlugin()//查看打包结果
     ],
     optimization: {
-        splitChunks: {
+        splitChunks: {//为了避免重复引用 || 把大的文件提取出来
             chunks: 'initial',
             automaticNameDelimiter: '.',
+            name: 'vendors_hahaha',
             cacheGroups: {
-            vendors: {
-                test: /[\\/]node_modules[\\/]/,
-                priority: 1
-            }
+                vendors: {//cacheGroups里可以设置多个对象，通过priority优先级来判断执行哪个对象的内容
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: 1
+                }
             }
         },
         // runtimeChunk: {

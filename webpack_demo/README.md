@@ -16,6 +16,19 @@ const webpackConfig = smp.wrap({
   ]
 });
 ```
+## 分析包大小
+```
+npm install --save-dev webpack-bundle-analyzer
+```
+```
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+module.exports = {
+  plugins: [
+    new BundleAnalyzerPlugin()
+  ]
+}
+```
 
 ## 分析影响打包速度环节
     解析时间   loader执行耗时
@@ -31,6 +44,54 @@ const webpackConfig = smp.wrap({
     利用缓存会增加初始构建时间，缩短连续构建时间
 ### cache-loader
 ### HardSourceWebpackPlugin
+
+## 三、提前解析耗时、稳定的模块
+  webpack.DllPlugin和webpack.DllReferencePlugin
+  与config.externals原理类似，都是跳过需要解析的包，并在html下手动引入被跳过的包
+
+  首先配置webpack.config.dll.js
+  ```
+  const webpack = require('webpack');
+  const path = require('path');
+
+  const vendors = [
+      'react',
+      'react-dom',
+      'jquery',
+      // ...其它库
+  ];
+
+  const webpackConfig = {
+      output: {
+          path: path.resolve(__dirname, 'build'),
+          filename: '[name].js',
+          library: '[name]',
+      },
+      entry: {
+          "lib": vendors,
+      },
+      plugins: [
+          new webpack.DllPlugin({
+              path: path.resolve(__dirname, 'build/manifest.json'),
+              name: '[name]',
+              context: __dirname,
+          }),
+      ],
+  };
+
+  module.exports = webpackConfig;
+  ```
+  webpack运行后得到想要加入html的lib.js以及记录需要跳过解析的包（给DllReferencePlugin用的）
+  
+  然后在webpack.config.js添加：
+  ```
+  plugins: [
+      new webpack.DllReferencePlugin({
+          context: __dirname,
+          manifest: path.resolve(__dirname, 'build/manifest.json'),
+      }),
+  ],
+  ```
 
 # 优化压缩时间
     原理：开启并行
