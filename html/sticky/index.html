@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css sticky</title>
+    <style>
+        *{padding:0;margin:0;}
+        
+        .content{
+            background: #17dbf5;
+            height: 200px;
+        }
+        .content2{
+            background: #7dee8c;
+        }
+        footer{
+            background: #8996df;
+        }
+
+        body {
+            height: 2000px;
+        }
+        footer {
+            position: sticky;
+            top: 500px;
+            /* bottom: 0; */
+            background: #8e90e4;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">Content</div>
+    <div class="content2">Content2</div>
+    <footer>footer</footer>
+</body>
+</html>
