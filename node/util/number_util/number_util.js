@@ -23,8 +23,36 @@ function getCalculatorDecimalDigits(a){
 // console.log(1.000000000000001 * 10000000000000000);
 // console.log(1.000000000000001 * 1000000000000000);
 
-var Decimal = require('decimal.js');
-x = new Decimal(1.0000000000000001) //1
-y = new Decimal(1.0000000000000001) 
-z = x.plus(y)
-console.log(z);//2
+// var Decimal = require('decimal.js');
+// x = new Decimal(1.0000000000000001) //1
+// x = new Decimal("1.0000000000000001") //1.0000000000000001
+// y = new Decimal("1.0000000000000001") 
+// z = x.plus(y)
+// console.log(z);//2.0000000000000002
+
+// console.log(new Decimal(9999999999999999));//×
+// console.log(new Decimal("9999999999999999").plus(2));//√
+// console.log(9999999999999999 + 2);//×
+
+
+// const BigNumber = require('bignumber.js');
+// a = new BigNumber(1.0000000000000001)        
+// b = new BigNumber(1.1231231231231231)      
+// c = a.plus(b) 
+// console.log(a.toString()); //1
+// console.log(b.toString()); //1.1231231231231231
+// console.log(c.toString()); //2.1231231231231231
+
+// a = new BigNumber("1.0000000000000001")        
+// b = new BigNumber("1.1231231231231231")      
+// c = a.plus(b) 
+// console.log(a.toString()); //1.0000000000000001
+// console.log(b.toString()); //1.1231231231231231
+// console.log(c.toString()); //2.1231231231231232
+
+
+//为什么1.0000000000000001 === 1？
+// 1.xxxx不为1的极限在哪
+
+// 从IEEE-754双精度的设计角度来计算
+let ecode = '';
