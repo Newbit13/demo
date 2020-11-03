@@ -25,6 +25,7 @@ function getCalculatorDecimalDigits(a){
 
 // var Decimal = require('decimal.js');
 // x = new Decimal(1.0000000000000001) //1
+
 // x = new Decimal("1.0000000000000001") //1.0000000000000001
 // y = new Decimal("1.0000000000000001") 
 // z = x.plus(y)
@@ -50,9 +51,48 @@ function getCalculatorDecimalDigits(a){
 // console.log(b.toString()); //1.1231231231231231
 // console.log(c.toString()); //2.1231231231231232
 
+// y = new Decimal(1.0000000000000001) 
+// z = x.plus(y)
+// console.log(z);//2
+
+// let a = '';
+// for(var i=0;i<53;i++)a+=1;
+
+// // let b = '';
+// // for(var i=0;i<52;i++)b+=0;
+// // b += 1;
+
+// let result = parseInt(a,2)*Math.pow(2,-52)*Math.pow(2,1023);
+// let result2 = Math.pow(2,-52)*Math.pow(2,-1022);//parseInt(b,2)*Math.pow(2,-52)*Math.pow(2,1023);
+
+// let gapValue = Math.pow(2,-52)*Math.pow(2,1023);//2^971
+
+// console.log(result);
+// console.log(result == Number.MAX_VALUE);
+
+// console.log(result2);
+// console.log(result - result2);
+// console.log(gapValue);
+// console.log(gapValue - 1);
+// console.log(Math.pow(2,971));
+// console.log(Math.pow(2,971) - 1);
+
+
+
+
 
 //为什么1.0000000000000001 === 1？
 // 1.xxxx不为1的极限在哪
 
 // 从IEEE-754双精度的设计角度来计算
 let ecode = '';
+// for(var i=0;i<53;i++)a+=1;
+
+// // let b = '';
+// // for(var i=0;i<52;i++)b+=0;
+// // b += 1;
+
+// let result = parseInt(a,2)*Math.pow(2,-52)*Math.pow(2,1023);
+
+
+
