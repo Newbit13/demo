@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div onclick="t2()">
+        <button onclick="t()">sss</button>
+        <input type="checkbox" onclick="t()">
+    </div>
+    <script>
+        function t(){
+            // console.log(event.stopPropagation);
+            // console.log(event.cancelBubble);
+
+            // console.log(event.preventDefault);
+            // event.stopPropagation();
+            // event.cancelBubble = true;
+
+            //你可以使用 Event.cancelable 来检查该事件是否支持取消。为一个不支持cancelable的事件调用preventDefault()将没有效果。
+            event.preventDefault();
+        }
+
+        function t2(){
+            console.log('-------------------------------');
+        }
+    </script>
+</body>
+</html>
