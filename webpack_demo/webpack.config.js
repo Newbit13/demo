@@ -55,17 +55,16 @@ const path = require('path');
 // })
 
 const webpackConfig = {
+    mode: 'development',
     module:{
         rules: [
-            // {//全局暴露jq
-            //     test: require.resolve('jquery'),
-            //     use: [{
-            //         loader: 'expose-loader',
-            //         options: {
-            //             exposes: ['$', 'jQuery'],
-            //         }
-            //     }]
-            // }
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'gg',
+                }]
+            }
         ]
     },
     // externals:{//不打包jq,但是jq链接得自己引用
@@ -107,6 +106,9 @@ const webpackConfig = {
         // runtimeChunk: {
         //     name: entrypoint => `manifest.${entrypoint.name}`
         // }
+    },
+    resolveLoader:{//自定义loader时，在开发阶段需要指定loader的位置，否则默认只会在node_modules中找
+        modules: ['node_modules','loader']
     }
 }
 
