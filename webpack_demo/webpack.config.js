@@ -61,9 +61,17 @@ const webpackConfig = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: [{
-                    loader: 'gg',
-                }]
+                use: [
+                    {
+                        loader: 'gg',
+                    },
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env']
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -73,8 +81,8 @@ const webpackConfig = {
     //     'react-dom':'ReactDOM'
     // },
     entry: {
-        index:'./src/index.js',
-        index2:'./src/index2.js',
+        index:["babel-polyfill",'./src/index.js'],
+        // index2:'./src/index2.js',
     },
     output: {
         filename: '[name].bundle.js',

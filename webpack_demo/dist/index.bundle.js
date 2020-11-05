@@ -9,144 +9,15 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/a.js":
-/*!******************!*\
-  !*** ./src/a.js ***!
-  \******************/
-/*! namespace exports */
-/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony import */ var _b_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./b.js */ \"./src/b.js\");\n/* harmony import */ var _a1_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./a1.js */ \"./src/a1.js\");\n/*copy@ newbit*/\r\n\r\nfunction aaa(){\r\n    console.log(_b_js__WEBPACK_IMPORTED_MODULE_0__.default);\r\n}\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (aaa);console.log(\"gg\")\n\n//# sourceURL=webpack://webpack_demo/./src/a.js?");
-
-/***/ }),
-
-/***/ "./src/a1.js":
-/*!*******************!*\
-  !*** ./src/a1.js ***!
-  \*******************/
-/*! namespace exports */
-/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n/*copy@ newbit*/\r\njquery__WEBPACK_IMPORTED_MODULE_0___default()('#lz').html(\"webpack2222\");\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});console.log(\"gg\")\n\n//# sourceURL=webpack://webpack_demo/./src/a1.js?");
-
-/***/ }),
-
-/***/ "./src/b.js":
-/*!******************!*\
-  !*** ./src/b.js ***!
-  \******************/
-/*! namespace exports */
-/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/*copy@ newbit*/console.log(2);\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({ha:1});console.log(\"gg\")\n\n//# sourceURL=webpack://webpack_demo/./src/b.js?");
-
-/***/ }),
-
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! namespace exports */
-/*! exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _a_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./a.js */ \"./src/a.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_addons_css_transition_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-addons-css-transition-group */ \"./node_modules/react-addons-css-transition-group/index.js\");\n/* harmony import */ var react_addons_css_transition_group__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_addons_css_transition_group__WEBPACK_IMPORTED_MODULE_3__);\n/*copy@ newbit*/\r\n\r\n\r\n;(0,_a_js__WEBPACK_IMPORTED_MODULE_0__.default)()\r\njquery__WEBPACK_IMPORTED_MODULE_1___default()('#ha').html(\"webpack\");\r\n\r\n\r\n\r\nconsole.log(react__WEBPACK_IMPORTED_MODULE_2__);;console.log(\"gg\")\n\n//# sourceURL=webpack://webpack_demo/./src/index.js?");
-
-/***/ }),
-
-/***/ "./node_modules/react/index.js":
-/*!**********************************************************************!*\
-  !*** delegated ./node_modules/react/index.js from dll-reference lib ***!
-  \**********************************************************************/
-/*! dynamic exports */
-/*! export Children [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export Component [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export Fragment [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export Profiler [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export PureComponent [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export StrictMode [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export Suspense [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export __esModule [not provided] [no usage info] [missing usage info prevents renaming] */
-/*! export cloneElement [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export createContext [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export createElement [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export createFactory [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export createRef [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export forwardRef [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export isValidElement [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export lazy [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export memo [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export useCallback [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export useContext [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export useDebugValue [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export useEffect [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export useImperativeHandle [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export useLayoutEffect [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export useMemo [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export useReducer [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export useRef [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export useState [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! export version [provided] [no usage info] [provision prevents renaming (no use info)] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: module, __webpack_require__ */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("module.exports = (__webpack_require__(/*! dll-reference lib */ \"dll-reference lib\"))(294);\n\n//# sourceURL=webpack://webpack_demo/delegated_./node_modules/react/index.js_from_dll-reference_lib?");
-
-/***/ }),
-
-/***/ "./node_modules/jquery/dist/jquery.js":
-/*!*****************************************************************************!*\
-  !*** delegated ./node_modules/jquery/dist/jquery.js from dll-reference lib ***!
-  \*****************************************************************************/
 /*! unknown exports (runtime-defined) */
-/*! runtime requirements: module, __webpack_require__ */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/*! runtime requirements:  */
+/***/ (() => {
 
-eval("module.exports = (__webpack_require__(/*! dll-reference lib */ \"dll-reference lib\"))(755);\n\n//# sourceURL=webpack://webpack_demo/delegated_./node_modules/jquery/dist/jquery.js_from_dll-reference_lib?");
-
-/***/ }),
-
-/***/ "./node_modules/react-addons-css-transition-group/index.js":
-/*!**************************************************************************************************!*\
-  !*** delegated ./node_modules/react-addons-css-transition-group/index.js from dll-reference lib ***!
-  \**************************************************************************************************/
-/*! dynamic exports */
-/*! export __esModule [maybe provided (runtime-defined)] [no usage info] [provision prevents renaming (no use info)] */
-/*! other exports [maybe provided (runtime-defined)] [no usage info] */
-/*! runtime requirements: module, __webpack_require__ */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("module.exports = (__webpack_require__(/*! dll-reference lib */ \"dll-reference lib\"))(81);\n\n//# sourceURL=webpack://webpack_demo/delegated_./node_modules/react-addons-css-transition-group/index.js_from_dll-reference_lib?");
-
-/***/ }),
-
-/***/ "dll-reference lib":
-/*!**********************!*\
-  !*** external "lib" ***!
-  \**********************/
-/*! dynamic exports */
-/*! exports [maybe provided (runtime-defined)] [no usage info] */
-/*! runtime requirements: module */
-/***/ ((module) => {
-
-"use strict";
-eval("module.exports = lib;\n\n//# sourceURL=webpack://webpack_demo/external_%22lib%22?");
+eval("/*copy@ newbit*/Promise.resolve(\"pppppp\").then(function (res) {\n  console.log(res);\n});\nvar _ja = {\n  ja: 22\n},\n    ja = _ja.ja;\nconsole.log(ja);;console.log(\"gg\")\n\n//# sourceURL=webpack://webpack_demo/./src/index.js?");
 
 /***/ })
 
@@ -169,35 +40,26 @@ eval("module.exports = lib;\n\n//# sourceURL=webpack://webpack_demo/external_%22
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => module['default'] :
-/******/ 				() => module;
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
-/******/ 	/* webpack/runtime/define property getters */
+/************************************************************************/
+/******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
 /******/ 			}
-/******/ 		};
+/******/ 		})();
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
@@ -205,21 +67,104 @@ eval("module.exports = lib;\n\n//# sourceURL=webpack://webpack_demo/external_%22
 /******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// Promise = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"index": 0
 /******/ 		};
+/******/ 		
+/******/ 		var deferredModules = [
+/******/ 			["./node_modules/babel-polyfill/lib/index.js","vendors_hahaha"],
+/******/ 			["./src/index.js","vendors_hahaha"]
+/******/ 		];
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		var checkDeferredModules = () => {
+/******/ 		
+/******/ 		};
+/******/ 		function checkDeferredModulesImpl() {
+/******/ 			var result;
+/******/ 			for(var i = 0; i < deferredModules.length; i++) {
+/******/ 				var deferredModule = deferredModules[i];
+/******/ 				var fulfilled = true;
+/******/ 				for(var j = 1; j < deferredModule.length; j++) {
+/******/ 					var depId = deferredModule[j];
+/******/ 					if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferredModules.splice(i--, 1);
+/******/ 					result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 				}
+/******/ 			}
+/******/ 			if(deferredModules.length === 0) {
+/******/ 				__webpack_require__.x();
+/******/ 				__webpack_require__.x = () => {
+/******/ 		
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		}
+/******/ 		__webpack_require__.x = () => {
+/******/ 			// reset startup function so it can be called again when more startup code is added
+/******/ 			__webpack_require__.x = () => {
+/******/ 		
+/******/ 			}
+/******/ 			chunkLoadingGlobal = chunkLoadingGlobal.slice();
+/******/ 			for(var i = 0; i < chunkLoadingGlobal.length; i++) webpackJsonpCallback(chunkLoadingGlobal[i]);
+/******/ 			return (checkDeferredModules = checkDeferredModulesImpl)();
+/******/ 		};
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (data) => {
+/******/ 			var [chunkIds, moreModules, runtime, executeModules] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0, resolves = [];
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					resolves.push(installedChunks[chunkId][0]);
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			for(moduleId in moreModules) {
+/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 				}
+/******/ 			}
+/******/ 			if(runtime) runtime(__webpack_require__);
+/******/ 			parentChunkLoadingFunction(data);
+/******/ 			while(resolves.length) {
+/******/ 				resolves.shift()();
+/******/ 			}
+/******/ 		
+/******/ 			// add entry modules from loaded chunk to deferred list
+/******/ 			if(executeModules) deferredModules.push.apply(deferredModules, executeModules);
+/******/ 		
+/******/ 			// run deferred modules when all chunks ready
+/******/ 			return checkDeferredModules();
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunkwebpack_demo"] = self["webpackChunkwebpack_demo"] || [];
+/******/ 		var parentChunkLoadingFunction = chunkLoadingGlobal.push.bind(chunkLoadingGlobal);
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	// startup
-/******/ 	// Load entry module
-/******/ 	__webpack_require__("./src/index.js");
-/******/ 	// This entry module used 'exports' so it can't be inlined
+/******/ 	// run startup
+/******/ 	return __webpack_require__.x();
 /******/ })()
 ;

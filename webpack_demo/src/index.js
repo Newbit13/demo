@@ -1,9 +1,6 @@
-import aaa from './a.js';
-import $ from 'jquery'
+Promise.resolve("pppppp").then(function(res){
+    console.log(res);
+})
 
-aaa()
-$('#ha').html("webpack");
-
-import React from 'react';
-import ReactAddonsCssTransitionGroup from 'react-addons-css-transition-group';
-console.log(React);
+const {ja}  = {ja:22};
+console.log(ja);
