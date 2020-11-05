@@ -2,5 +2,9 @@ Promise.resolve("pppppp").then(function(res){
     console.log(res);
 })
 
-const {ja}  = {ja:22};
-console.log(ja);
+// const a = ()=>{
+//     console.log(1);
+// }
+// a();
+// console.log("".padStart(10,"0"));
+// console.log(233);
