@@ -57,7 +57,7 @@ const path = require('path');
 const webpackConfig = {
     // mode: 'development',
     mode: 'none',
-    target: ["web", "es2014"],//不然生成的代码包裹在es6的arrow function里,output.environment 也可以起到同样的效果
+    target: ["web", "es2013"],//不然生成的代码包裹在es6的arrow function里,output.environment 也可以起到同样的效果
     module:{
         rules: [
             {
@@ -72,11 +72,26 @@ const webpackConfig = {
                         options: {
                             presets: [
                                 // '@babel/preset-env'
-                                ['@babel/preset-env',{
-                                    "useBuiltIns": "usage"
-                                }]
+                                ['@babel/preset-env',//转换插件的集合,如果源码中使用了不在 @babel/preset-env 中的语法，会报错，手动在 plugins 中增加即可
+                                {//useBuiltIns配置在使用@babel/plugin-transform-runtime后就不需要了，plugin-transform-runtime以沙箱垫片(shim)的方式防止污染全局（不用plugin-transform-runtime时，"".padStart在IE9是个function）,一起使用时，"useBuiltIns": "usage"会跟没有使用一样，而跟"useBuiltIns": "entry"一起使用会重复引入，所以不要一起使用就对了
+                                    // debug: true,
+                                    // "useBuiltIns": "entry",//需要在入口处import "core-js"，这种方法就是全引入
+                                    // "useBuiltIns": "usage",//按需
+                                    // corejs: 3,//bug：本来不用加的，加了一次之后反而不能去掉了
+                                    // modules:false,
+                                    // loose: true//没用？
+                                    // "targets": {
+                                    //     "esmodules": true
+                                    //   },
+                                    // "targets":{
+                                    //     // "ie":"8"
+                                    //     "chrome":"70"
+                                    // }//没用，IE还是没有Object.defineProperty,这个
+                                }
+                                ]
                             ],
-                            plugins: ['@babel/transform-runtime'] //根据需要引入polyfill
+                            // plugins: [['@babel/transform-runtime',{corejs: 3}]] //就是@babel/plugin-transform-runtime吗？ 作用：缩减代码、解决polyfill直接修改api带来的全局污染问题
+                            // plugins: [['@babel/plugin-transform-runtime',{corejs: 3}]] //作用：缩减代码、解决polyfill直接修改api带来的全局污染问题,比如"".padStart 是undefined    这个不受presets的targets影响，比如"chrome":"70"没用
                         }
                     }
                 ]
