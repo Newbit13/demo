@@ -1,9 +1,10 @@
 module.exports = function(source,map){
-    this.cacheable && this.cacheable()
-    this.value = source;
-    console.log('---------------');
-    console.log(source);
-    console.log('---------------');
+    // console.log(this.loaders[this.loaderIndex].options);
+    // this.cacheable && this.cacheable()
+    // this.value = source;
+    // console.log('---------------');
+    // console.log(source);
+    // console.log('---------------');
 
     // var callback = this.async();//异步时调用
     // setTimeout(function(){

@@ -66,6 +66,9 @@ const webpackConfig = {
                 use: [
                     {
                         loader: 'gg',
+                        options:{
+                            ha:'sss'
+                        }
                     },
                     {
                         loader: 'babel-loader',
@@ -79,7 +82,7 @@ const webpackConfig = {
                                     // "useBuiltIns": "usage",//按需
                                     // corejs: 3,//bug：本来不用加的，加了一次之后反而不能去掉了
                                     // modules:false,
-                                    modules: "commonjs" //这样就能解决ie8的Object.defineProperty问题了
+                                    modules: "commonjs" //这样就能解决ie8的Object.defineProperty问题了(只是设置这个是没用的，还是需要plugins的配合)
                                     // loose: true//没用？
                                     // "targets": {
                                     //     "esmodules": true
@@ -92,7 +95,7 @@ const webpackConfig = {
                                 ]
                             ],
                             // plugins: [['@babel/transform-runtime',{corejs: 3}]] //就是@babel/plugin-transform-runtime吗？ 作用：缩减代码、解决polyfill直接修改api带来的全局污染问题
-                            plugins: [['@babel/plugin-transform-runtime',{corejs: 3}]] //作用：缩减代码、解决polyfill直接修改api带来的全局污染问题,比如"".padStart 是undefined    这个不受presets的targets影响，比如"chrome":"70"没用
+                            plugins: [['@babel/plugin-transform-runtime',{corejs: 3}]] //作用：缩减代码、解决polyfill直接修改api带来的全局污染问题,比如"".padStart 是undefined    这个不受presets的targets影响，比如"chrome":"70"没用   modules不设置为"commonjs"的话，一开始就会调用Object.defineProperty
                         }
                     }
                 ]

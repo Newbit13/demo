@@ -1,3 +1,3 @@
 console.log(2);
 
-export default {ha:1}
+export const ha = {ha:1}
