@@ -9,5 +9,5 @@ module.exports = function(source,map){
     // setTimeout(function(){
     //     callback(null,'/*copy@ newbit*/'+source+';console.log("gg")');
     // },2000);
-    return '/*copy@ newbit*/'+source+';console.log("gg")';
+    return '/*copy@ newbit start*/'+source+'/*copy@ newbit end*/';
 }

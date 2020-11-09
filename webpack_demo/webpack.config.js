@@ -57,7 +57,7 @@ const path = require('path');
 const webpackConfig = {
     // mode: 'development',
     mode: 'none',
-    target: ["web", "es2013"],//不然生成的代码包裹在es6的arrow function里,output.environment 也可以起到同样的效果
+    target: ["web", "es3"],//不然生成的代码包裹在es6的arrow function里,output.environment 也可以起到同样的效果
     module:{
         rules: [
             {
@@ -79,6 +79,7 @@ const webpackConfig = {
                                     // "useBuiltIns": "usage",//按需
                                     // corejs: 3,//bug：本来不用加的，加了一次之后反而不能去掉了
                                     // modules:false,
+                                    modules: "commonjs" //这样就能解决ie8的Object.defineProperty问题了
                                     // loose: true//没用？
                                     // "targets": {
                                     //     "esmodules": true
@@ -91,7 +92,7 @@ const webpackConfig = {
                                 ]
                             ],
                             // plugins: [['@babel/transform-runtime',{corejs: 3}]] //就是@babel/plugin-transform-runtime吗？ 作用：缩减代码、解决polyfill直接修改api带来的全局污染问题
-                            // plugins: [['@babel/plugin-transform-runtime',{corejs: 3}]] //作用：缩减代码、解决polyfill直接修改api带来的全局污染问题,比如"".padStart 是undefined    这个不受presets的targets影响，比如"chrome":"70"没用
+                            plugins: [['@babel/plugin-transform-runtime',{corejs: 3}]] //作用：缩减代码、解决polyfill直接修改api带来的全局污染问题,比如"".padStart 是undefined    这个不受presets的targets影响，比如"chrome":"70"没用
                         }
                     }
                 ]

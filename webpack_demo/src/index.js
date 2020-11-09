@@ -16,7 +16,7 @@ const arr = [1,2,3,4].map(item => item * item)
 console.log(arr)
 console.log(a);
 b();
-console.log("".padStart(10,"h"));
+// console.log("".padStart(10,"h"));
 // let a = new Map();
 // a.set('z',1);
 // console.log(a.get('z'));
