@@ -1,5 +1,8 @@
 module.exports = function(source,map){
     // console.log(this.loaders[this.loaderIndex].options);
+    // console.log(this.resourcePath);
+    // console.log(this.query); //相当于options
+
     // this.cacheable && this.cacheable()
     // this.value = source;
     // console.log('---------------');

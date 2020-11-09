@@ -27,6 +27,20 @@
   
   最终解决方案：[Allow module system that does not rely on getters in Webpack 4 #6979](https://github.com/webpack/webpack/issues/6979)
 
+# 收获
+babel-loader 的配置参数里有个customize，提供可自定义功能，例如 通过环境决定用什么babel plugin (被你发现我没看过官网文档了...)
+
+# 过程中遇到的困难
+在查看babel-loader的源码时，有一句
+
+```
+const validateOptions = require("schema-utils");
+```
+
+  根目录下的“node_modules”里有“schema-utils”,babel-loader文件夹下也有“schema-utils”，笔者不小心看错了文件夹
+
+  教训：以后记得用编辑器的自动跳转功能（require的读取规则得弄清楚，别再乌龙了）
+
 # 参考资料
 [Allow module system that does not rely on getters in Webpack 4 #6979](https://github.com/webpack/webpack/issues/6979)
 
