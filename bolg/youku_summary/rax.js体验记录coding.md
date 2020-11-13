@@ -68,7 +68,21 @@ if (headers) {
 
 再回头看看编译完的小程序，正常运行，完美！
 
-boundary可以自己拼吗，可以：[npm包form-data](https://www.npmjs.com/package/form-data)
+boundary可以自己拼吗，可以！
+查看[npm包form-data](https://www.npmjs.com/package/form-data)源码发现boundary也可以很普通：
+```
+FormData.prototype._generateBoundary = function() {
+  // This generates a 50 character boundary similar to those used by Firefox.
+  // They are optimized for boyer-moore parsing.
+  var boundary = '--------------------------';
+  for (var i = 0; i < 24; i++) {
+    boundary += Math.floor(Math.random() * 10).toString(16);
+  }
+
+  this._boundary = boundary;
+};
+```
+可以看出boundary只是起到一个分割线的意义，不是通过formData的值计算而来
 
 # 参考资料
 [Rax](https://rax.js.org/)
