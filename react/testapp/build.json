@@ -1,0 +1,17 @@
+{
+  "eslint": true,
+  "targets": [
+    "web",
+    "wechat-miniprogram"
+  ],
+  "plugins": [],
+  "proxy": {
+    "/guess-youku/api/": {
+      "target": "https://txt-api-test.sportsdt.com/",
+      "changeOrigin": true
+    }
+  },
+  "publicPath": "/youku/static/web/",
+  "sourceMap": true,
+  "minify": false
+}

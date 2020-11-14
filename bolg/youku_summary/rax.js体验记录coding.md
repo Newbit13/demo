@@ -1,7 +1,7 @@
 # Rax.js
     超轻量，高性能，易上手的前端解决方案。一次开发多端运行，解放重复工作，专注产品逻辑，提升开发效率。
 
-阿里的Rax.js对应的竞品，应该是京东的Taro.js
+阿里的Rax.js对应的竞品，应该是京东的Taro.js，本文为体验记录，顺便列出一些需要注意的点
 
 # 官方提醒
     为扩展 Rax 体系能力边界，我们为开发者提供了一系列的 Universal API，开发者可以通过调用这些 API 快速开发多端应用。
@@ -20,7 +20,30 @@
 ```<span><span>```会变成
 ```<View class="h5-span" onTap=xxx onDoubleTap=yyy ...></View> ```
 ## rpx
+    我们规定屏幕宽度为 750rpx。以 iPhone6 为例，它的屏幕宽度为 375px，则 750rpx = 375px = 100vw，所以在 iPhone6 中，1rpx = 0.5px = 100/750vw。
+    建议开发 Rax 页面时设计师用 750 作为设计稿的标准
 
+
+## 生命周期
+class组件使用：
+```import { withPageLifeCycle } from 'rax-app';```
+function组件使用：
+```import { usePageShow } from 'rax-app';```
+就可以拥有监听页面显示、隐藏等方法
+
+## 状态管理
+    多页模式下不能使用全局状态，多页模式中每个页面都是独立的，无法共享状态
+
+## 不同平台的处理
+```import { isMiniApp } from 'universal-env';```判断是否为小程序
+
+```import { registerNativeEventListeners, addNativeEventListener, removeNativeEventListener } from 'rax-app';```注册、监听、取消监听原生事件
+
+可以与原生小程序混用，需要注意：
+
+    所有原生页面使用到的原生自定义组件（如上面项目中的 List 组件）必须放置于 src/miniapp-native 文件夹中，否则无法使用
+    如果你的项目不是从原生小程序项目迁移而来，原生小程序页面建议放在 src/miniapp-native 文件夹中，而不是上面 src/pages/About 的做法
+    如果在 src/pages 下面存在小程序原生页面，必须要在 src/app.json 对应的路由下面加上 targets 字段，从而保证其他端编译的时候不会编译该页面
 
 
 
