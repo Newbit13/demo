@@ -32,6 +32,7 @@ export default async (req,res,next)=>{
         initialData
     };
 
+    //不用context，也可以用<App initialData={initialData}/>,这样在组件里也不用判断是staticContext与否
     const reactStr = renderToString(
         <StaticRouter location={path} context={context}>
           <App />

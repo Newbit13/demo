@@ -1,24 +1,27 @@
+做项目时由于需要做些测试页面供测试人员使用，并且无任何UI、框架上的要求，能用就好，我突然想起在掘金看到某些博主的项目里提到Rax.js，打算体验一下，所以就有了这篇文章
 # Rax.js
     超轻量，高性能，易上手的前端解决方案。一次开发多端运行，解放重复工作，专注产品逻辑，提升开发效率。
 
-阿里的Rax.js对应的竞品，应该是京东的Taro.js，本文为体验记录，顺便列出一些需要注意的点
+阿里的Rax.js对应的竞品，应该是京东的Taro.js，本文为体验记录，顺便列出一些需要注意的点(包括官方提醒)
 
 # 官方提醒
     为扩展 Rax 体系能力边界，我们为开发者提供了一系列的 Universal API，开发者可以通过调用这些 API 快速开发多端应用。
     目前的 API 并不是全平台支持的，每个 API 的详细文档中会通过图片标识相应平台的支持程度
-# 疑问
-- 是不是我想多端运行，就好就是用官方已有的api（踩坑心得）？
-- 遇到不同平台的能力，如何做抹平处理？
-- 我写jsx代码，就能转换成Flutter界面？
-- 怎么写能让Flutter拥有webview？
+
+# 体验结果
+- 想多端运行，最好就是用官方已有的api（踩坑心得），不兼容其他市面上的UI框架
+- 不同平台可以通过```universal-env```区分
+- 接口请求、webview兼容性体验不好（下方有详细说明）
+- Kraken命令行工具没安装成功
+
+目前来看，只能说，祝RAX再接再厉！
 
 # 体验
-带着疑问，我开始了体验之旅
 ## 布局
 编写的div，p，span标签会在小程序里转换成View标签，并且会有相应的样式，比如:
 
 ```<span><span>```会变成
-```<View class="h5-span" onTap=xxx onDoubleTap=yyy ...></View> ```
+```<View class="h5-span" bindtap="onTap" bindtouchcancel="onTouchCancel" ...></View> ```
 ## rpx
     我们规定屏幕宽度为 750rpx。以 iPhone6 为例，它的屏幕宽度为 375px，则 750rpx = 375px = 100vw，所以在 iPhone6 中，1rpx = 0.5px = 100/750vw。
     建议开发 Rax 页面时设计师用 750 作为设计稿的标准
@@ -26,18 +29,23 @@
 
 ## 生命周期
 class组件使用：
+
 ```import { withPageLifeCycle } from 'rax-app';```
+
 function组件使用：
+
 ```import { usePageShow } from 'rax-app';```
+
 就可以拥有监听页面显示、隐藏等方法
 
 ## 状态管理
     多页模式下不能使用全局状态，多页模式中每个页面都是独立的，无法共享状态
 
 ## 不同平台的处理
-```import { isMiniApp } from 'universal-env';```判断是否为小程序
+```import { isWeex, isWeb, isMiniApp, isNode, isWeChatMiniProgram, isByteDanceMicroApp, isQuickApp } from 'universal-env';```不同平台的判断
 
 ```import { registerNativeEventListeners, addNativeEventListener, removeNativeEventListener } from 'rax-app';```注册、监听、取消监听原生事件
+
 
 可以与原生小程序混用，需要注意：
 
@@ -45,7 +53,12 @@ function组件使用：
     如果你的项目不是从原生小程序项目迁移而来，原生小程序页面建议放在 src/miniapp-native 文件夹中，而不是上面 src/pages/About 的做法
     如果在 src/pages 下面存在小程序原生页面，必须要在 src/app.json 对应的路由下面加上 targets 字段，从而保证其他端编译的时候不会编译该页面
 
+注意：小程序[编译时方案语法约束](https://rax.js.org/docs/guide/syntax-constraints)
 
+## Kraken
+    基于 Flutter 和 Web 标准，面向 IoT 的自绘渲染引擎
+
+没运行起来，猜测是没兼容windows的原因
 
 # 开发过程遇到问题
 ## 数据请求接口报错
@@ -107,8 +120,46 @@ FormData.prototype._generateBoundary = function() {
 ```
 可以看出boundary只是起到一个分割线的意义，不是通过formData的值计算而来
 
-# 参考资料
-[Rax](https://rax.js.org/)
+顺便一提，微信、支付宝小程序不支持```new FormData()```，只能自己拼接字符串：
 
-# 其他
-做项目时由于需要做些测试页面供测试人员使用，并且无任何UI、框架上的要求，能用就好，我突然想起在掘金看到某些博主的项目里提到Rax.js，打算体验一下，所以就有了这篇文章
+```
+微信实例代码：
+wx.request({
+      url:'http://localhost:8080/test/multipart-form',
+      method:'POST',
+      header: {
+        'content-type':'multipart/form-data; boundary=XXX'
+      },
+      data:
+        '\r\n--XXX' +
+        '\r\nContent-Disposition: form-data; name="field1"' +
+        '\r\n' +
+        '\r\nvalue1' +
+        '\r\n--XXX' +
+        '\r\nContent-Disposition: form-data; name="field2"' +
+        '\r\n' +
+        '\r\nvalue2' +
+        '\r\n--XXX--'
+    })
+```
+## webview
+```
+import Embed from 'rax-embed';
+
+export default function Home() {
+    return (
+        <Embed
+            src={'https://baidu.com'}
+        />
+    );
+}
+```
+
+在微信小程序上不起作用（写成iframe更不行：```<View class="h5-iframe"></View>```）
+所以我再提[issue](https://github.com/alibaba/rax/issues/2032) 为什么我要说再...
+
+支付宝小程序可以(并且是铺满全屏)
+
+# 参考资料
+[Rax官网](https://rax.js.org/)
+

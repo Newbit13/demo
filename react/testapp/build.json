@@ -2,6 +2,8 @@
   "eslint": true,
   "targets": [
     "web",
+    "kraken",
+    "miniapp",
     "wechat-miniprogram"
   ],
   "plugins": [],

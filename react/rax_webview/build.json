@@ -1,0 +1,9 @@
+{
+  "eslint": true,
+  "targets": [
+    "web",
+    "wechat-miniprogram",
+    "miniapp"
+  ],
+  "plugins": []
+}

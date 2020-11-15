@@ -1,5 +1,5 @@
 {
-  "name": "testapp",
+  "name": "rax_webview",
   "author": "rax",
   "description": "Rax 无线跨端应用工程，使用 JavaScript。",
   "version": "0.1.0",
@@ -11,17 +11,13 @@
     "lint": "npm run eslint && npm run stylelint"
   },
   "dependencies": {
-    "form-data": "^3.0.0",
     "rax": "^1.1.0",
     "rax-document": "^0.1.0",
     "rax-embed": "^1.1.1",
     "rax-image": "^2.0.0",
     "rax-link": "^1.0.1",
-    "rax-slider": "^2.3.9",
     "rax-text": "^2.0.0",
-    "rax-view": "^2.0.0",
-    "universal-env": "^3.2.2",
-    "universal-request": "^2.2.0"
+    "rax-view": "^2.0.0"
   },
   "devDependencies": {
     "@iceworks/spec": "^1.0.0",
