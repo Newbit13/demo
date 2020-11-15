@@ -100,7 +100,7 @@ if (headers) {
 }
 ```
 重新编译下，果然可以了！
-没地方提PR,就提[issue](https://github.com/alibaba/rax/issues/2031)吧
+没地方提PR,就提[issue](https://github.com/alibaba/rax/issues/2031)吧,其实上述方法只是一个应急方案，个人认为Content-Type就不应该有默认值才对！
 
 再回头看看编译完的小程序，正常运行，完美！
 
