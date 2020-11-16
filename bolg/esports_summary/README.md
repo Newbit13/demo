@@ -113,7 +113,9 @@ socket.io vs ws
 可以先看下这个结论，理性看待，不是说socket.io不好
 [Differences between socket.io and websockets](https://stackoverflow.com/questions/10112178/differences-between-socket-io-and-websockets/38558531#38558531)
 
-总的来说，socket.io相比ws,缺点是180KB,服务端要配合使用该库（目前支持node.js、java、C++、Swift、Dart）;优点是优雅的升级请求方式，失败重连
+总的来说，socket.io相比ws,缺点是180KB,服务端要配合使用该库（目前支持node.js、java、C++、Swift、Dart）;优点是:
+- 可靠性，可以用在：代理、负载均衡、个人防火墙、反病毒软件
+- 自动重连支持
 
 # 参考资料
 
