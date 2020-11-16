@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>websocket</title>
+    <script>
+        //监听不到语法错误，静态资源加载、接口连接错误
+        window.onerror = function(message, source, lineno, colno, error) { 
+            console.log(message);    
+            console.log(source);    
+            console.log(lineno);    
+            console.log(colno);    
+            console.log(error);    
+        }
+
+        //监听不到语法错误，websocket连接错误
+        window.addEventListener('error',function(e){
+            console.log("addEventListener",e);
+        },true)//只有第三个参数为true时才能监听到静态资源加载、接口连接错误
+
+        //捕获promise project
+        window.addEventListener('unhandledrejection',function(e){
+            console.log("unhandledrejection",e);
+        })
+    </script>
+</head>
+<body>
+    <img src="./xxxx.png">
+    <script>
+        // try catch只能捕获同步异常
+        // setTimeout(function(){
+        //     Promise.reject('promise error');
+        //     throw new Error("我错了")
+        // },1000)
+        try{
+
+            var socket = new WebSocket("ws://localhost:3000/test/123");
+            var timmer;
+            socket.onopen = function (evt) {
+                console.log('open',evt);
+                timmer = setInterval(function(){
+                    socket.send(new Date().getSeconds());
+                },1000)
+            };
+            //收到消息 触发回调
+            socket.onmessage = function (evt) {
+                console.log('msg',evt);
+                // socket.close();//服务端可以主动关闭连接并且服务端不会发现连接已经被关闭
+            };
+
+            socket.onerror = function (evt) { //失败重连 
+                console.log('e',evt);
+                clearInterval(timmer);
+            };
+
+            socket.onclose = function (evt) { //失败重连 
+                console.log('close',evt);
+                clearInterval(timmer);
+            };
+        }catch(e){
+            console.log('tttttttt');
+        }
+
+    </script>
+</body>
+</html>
