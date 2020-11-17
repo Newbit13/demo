@@ -2,7 +2,11 @@ const Koa = require('koa');
 const route = require('koa-route');
 const websockify = require('koa-websocket');
 
-const app = websockify(new Koa());
+const KoaApp = new Koa();
+const staticServer = require('koa-static')//静态资源服务插件
+KoaApp.use(staticServer('./client'));
+
+const app = websockify(KoaApp);
 
 // Regular middleware
 // Note it's app.ws.use and not app.use
@@ -21,10 +25,11 @@ app.ws.use(route.all('/test/:id', function (ctx) {
       // do something with the message from client
           console.log(message);
           ctx.websocket.send('Hello World2');
-          ctx.websocket.terminate();
-        //   setTimeout(function(){
-            // throw new Error("我错了")
-        //   },5000)
+        //   ctx.websocket.terminate();
+        setTimeout(function(){
+        // throw new Error("我错了")
+        ctx.websocket.send('Hello World2');
+        },2000)
     });
 }));
 

@@ -1,5 +1,3 @@
-# 如何稳定的实时更新数据
-本次项目采用ajax轮询 + websocket的方式，在一定程度上保证了数据获取的稳定性，并兼容不支持websocket的浏览器。
 ## websocket
 [websocket兼容性](https://caniuse.com/?search=websocket)
 
@@ -55,13 +53,16 @@ app.listen(3000);
 ```
 
 ## websocket什么时候会断开
-1. 服务器原因
+1. 服务端原因
 
 当服务端断开不做任何动作就关闭链接时（直接退出进程，或者抛出错误或者重启）， 如果客户端不向服务端发送数据或者连接请求的话，是不知道连接已经断开了的。就好像你不跟我说话，你就不知道我有没有在听。
 
-    所以设置心跳包的作用只是为了确认双方还在不在，而不是为了保持连接不断开（服务端如果不自己写超时断开的逻辑代码的话，正常情况下websocket是会一直保持连接的）。如果不在早点断开，别占着坑...
+    所以设置心跳包的作用只是为了确认双方还在不在，而不是为了保持连接不断开（正常情况下websocket是会一直保持连接的）。如果不在早点释放内存资源，别占着坑...
 
-客户端：
+### websocket断开重连
+服务端异常断开重启后，客户端需要重新```new websocket```才能重新连接上
+
+在客户端：
 第一次连接失败会提示：
 
 ```index.html:10 WebSocket connection to 'ws://xxxx' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED```
@@ -81,20 +82,56 @@ app.listen(3000);
 并且把错误栈指向我的代码```socket.send```
 
 控制台会提示你WebSocket正在关闭或者已经关闭。
-注意！上述的连接失败、发送数据失败，都不能用```try catch```、```window.onerror```、```window.addEventListener('error',function(){})```来监听、捕获该异常
+注意！上述的连接失败、发送数据失败，用```try catch```、```window.onerror```、```window.addEventListener('error',function(){})```都无法监听、捕获该异常。所以用WebSocket实例的onclose函数处理错误情况是唯一选择
+
 
 ### 小结
+用心跳包是为了即时发现断开情况，并做重启或释放资源的处理
+websocket处理断开的情况，使用onclose可有效解决浏览器兼容性问题
 websocket除了监听自身的error，close状态，无法使用其他手段进行异常监听
 
 
-服务端异常断开重启后，客户端需要重新```new websocket```才能重新连接上
-
-
 2. 客户端原因
+比如断网、关闭浏览器，这些服务端都不会察觉，所以需要引入心跳的机制
 
-## websocket断开重连
 
-# 对于历史socket数据如何调试
+# node的websocket库
+## socket.io  github 51.6 stars
+如果客户端要使用该库，服务端也要相应的配合使用该库，目前支持node.js、java、C++、Swift、Dart（PHP：“我大意了啊，没有s”）
+特性
+- 可靠性，可以用在：代理、负载均衡、个人防火墙、反病毒软件
+- 自动重连支持
+
+### 保持长连接的原理
+
+他的核心是用了[Engine.IO](https://github.com/socketio/engine.io)这个库,该库先发起长连接（LongPolling），并尝试升级连接（换成websocket）
+他所谓的长连接长什么样，为了看到清楚点，我在客户端一开始就```WebSocket = undefined;```，然后可以在控制台看到以下截图：
+
+![](./socketio.png)
+
+可以看到除了第一次会发起5个请求，之后每次会发起2个请求，其中一个会处于pending状态，持续一段时间。这段时间内如果服务器有数据要推过来，会请求成功，否则这段时间过后也会自动请求成功并又再起发起两个请求。以下贴一段引用：
+
+    LongPolling
+    Browser/UA发送Get请求到Web服务器，这时Web服务器可以做两件事情，第一，如果服务器端有新的数据需要传送，就立即把数据发回给Browser/UA，Browser/UA收到数据后，立即再发送Get请求给Web Server；第二，如果服务器端没有新的数据需要发送，这里与Polling方法不同的是，服务器不是立即发送回应给Browser/UA，而是把这个请求保持住，等待有新的数据到来时，再来响应这个请求；当然了，如果服务器的数据长期没有更新，一段时间后，这个Get请求就会超时，Browser/UA收到超时消息后，再立即发送一个新的Get请求给服务器。然后依次循环这个过程。
+
+    这种方式虽然在某种程度上减小了网络带宽和CPU利用率等问题，但是仍然存在缺陷，例如假设服务器端的数据更新速率较快，服务器在传送一个数据包给Browser后必须等待Browser的下一个Get请求到来，才能传递第二个更新的数据包给Browser，那么这样的话，Browser显示实时数据最快的时间为2×RTT（往返时间），另外在网络拥塞的情况下，这个应该是不能让用户接受的。另外，由于http数据包的头部数据量往往很大（通常有400多个字节），但是真正被服务器需要的数据却很少（有时只有10个字节左右），这样的数据包在网络上周期性的传输，难免对网络带宽是一种浪费。
+
+    通过上面的分析可知，要是在Browser能有一种新的网络协议，能支持客户端和服务器端的双向通信，而且协议的头部又不那么庞大就好了。WebSocket就是肩负这样一个使命登上舞台的。
+
+
+## ws  github 15.2 stars
+看express-ws的源码可以发现用的是ws库，koa-websocket也是
+
+socket.io vs ws
+可以先看下这个结论，理性看待，具体使用哪个看情况（主要考虑后端语言、浏览器兼容性）
+[Differences between socket.io and websockets](https://stackoverflow.com/questions/10112178/differences-between-socket-io-and-websockets/38558531#38558531)
+
+# 本人在项目中的使用websocket的总结
+## 如何稳定的实时更新数据
+
+项目后台为PHP（所以没有用socket.io），采用ajax轮询 + websocket的方式，在一定程度上保证了数据获取的稳定性，并兼容不支持websocket的浏览器。
+
+## 对于历史socket数据如何调试
 后端导出历史数据，前端复现
 
 两种做法：
@@ -103,20 +140,6 @@ websocket除了监听自身的error，close状态，无法使用其他手段进�
 
 显然第二种做法对源代码的入侵性较低，客户端只需要改一下socket地址即可
 
-# node的websocket库
-## socket.io  github 51.6 stars
-
-## ws  github 15.2 stars
-看express-ws的源码可以发现用的是ws库，koa-websocket也是
-
-socket.io vs ws
-可以先看下这个结论，理性看待，不是说socket.io不好
-[Differences between socket.io and websockets](https://stackoverflow.com/questions/10112178/differences-between-socket-io-and-websockets/38558531#38558531)
-
-总的来说，socket.io相比ws,缺点是180KB,服务端要配合使用该库（目前支持node.js、java、C++、Swift、Dart）;优点是:
-- 可靠性，可以用在：代理、负载均衡、个人防火墙、反病毒软件
-- 自动重连支持
-
 # 参考资料
 
 [nodejs消息推送之socket.io 与 ws对比](https://blog.csdn.net/swimming_in_it_/article/details/81451491)
@@ -124,5 +147,7 @@ socket.io vs ws
 [ws](https://github.com/websockets/ws)
 
 [socket.io](https://github.com/socketio/socket.io)
+
+[转载：WebSocket 原理介绍及服务器搭建](https://blog.csdn.net/qq_39101111/article/details/78627393)
 
 
