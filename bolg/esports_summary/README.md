@@ -1,4 +1,4 @@
-## websocket
+# websocket
 [websocket兼容性](https://caniuse.com/?search=websocket)
 
 ## 简单DEMO
@@ -53,46 +53,60 @@ app.ws.use(route.all('/test/:id', function (ctx) {
 
 app.listen(3000);
 ```
+# 注意
 
+    浏览器端（客户端）或者服务端中有一方突然切断网络，另一方是无法通过事件监听到的。所以心跳机制不止用于保持连接，还用于确认对方是否存活。
+为什么要把注意写在这里？因为一开始我在本地实验发现，无论是浏览器端的关闭浏览器，刷新，关闭标签页，调用close函数操作，还是服务端的退出进程、抛出异常、调用close函数操作，都会使对方的close事件被触发。并且我在nodejs服务器环境下开启websocket服务，发现不管过了多久，就算没有数据发送，连接也一直存在（比如用定时器设置几小时后再发一条信息也是能成功的）。这让我产生了“我们不需要心跳机制”的错觉。
+
+后来我用手机测试，关闭手机WIFI时发现，服务器不会触发任何事件，意味着他不知道浏览器什么时候已经断开了连接。并且引入nginx做反向代理后，如果没有数据交互，没过一会就自动断开了。
+
+    如果你的服务所在的域是HTTPS，那么使用的WebSocket协议也必须是wss, 而不能是ws
+
+# 正文
 ## websocket什么时候会断开
+    再次强调：太突然的异常如断网之类，一方来不及通知对方关闭，那么对方也不会触发关闭事件。
 ### 客户端原因
-比如断网、关闭浏览器，这些服务端可以通过close事件进行监听
+比如断网、关闭浏览器、关闭标签页，刷新页面等。
 
 ### 服务端原因
 
-服务端不做任何动作就关闭链接（直接退出进程，或者抛出错误或者重启）。
+服务端直接退出进程、抛出错误、重启等。
 
-服务端异常断开重启后，客户端需要重新```new websocket```才能重新连接上
+    服务端异常断开重启后，客户端需要重新```new websocket```才能重新连接上
 
-在客户端：
+- 在客户端：
+
 第一次连接失败会提示：
 
 ```index.html:10 WebSocket connection to 'ws://xxxx' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED```
 
-这时候会触发WebSocket实例的onerror、onclose回调函数执行
+    这时候会触发WebSocket实例的onerror、onclose回调函数执行
 
-注意:
-
-服务端意外报错或者关闭（调用websocket.terminate()）时，在chrome浏览器下,onerror函数并不会触发,而是触发onclose函数
-
-而在firefox下，服务端报错时触发onerror，关闭时触发onclose
-
-而在IE10下,服务端报错时onerror和onclose函数都会触发，并提示```WebSocket Error: Network Error 12030, 与服务器的连接意外终止```
-
-    所以在onerror和onclose中，只用onclose是个不错的选择
 
 连接成功后如果后面服务端关闭，而客户端执行```socket.send```，chrome控制台会报错(其他浏览器不会)：```WebSocket is already in CLOSING or CLOSED state.```
 
 并且把错误栈指向我的代码：```socket.send```
 
 控制台会提示你WebSocket正在关闭或者已经关闭。
-注意！上述的连接失败、发送数据失败，用```try catch```、```window.onerror```、```window.addEventListener('error',function(){})```都无法监听、捕获该异常。所以用WebSocket实例的onclose函数阻止```socket.send```执行是最佳选择
+注意！上述的连接失败、发送数据失败，用```try catch```、```window.onerror```、```window.addEventListener('error',function(){})```都无法监听、捕获该异常。
+
+服务端意外报错或者关闭（调用websocket.terminate()）时，各浏览器表现不一：
+|浏览器 | onerror | onclose |
+|----  | ----  | ----  |
+|chrome|×|√|
+|firefox|服务端报错时√|服务端报错时、关闭时√|
+|IE10|√|√|
+
+    在chrome浏览器下,onerror函数并不会触发,而是触发onclose函数；
+
+    而在firefox下，服务端报错时触发onerror、onclose，关闭时触发onclose；
+
+    而在IE10下,服务端报错时onerror和onclose函数都会触发，并提示 WebSocket Error: Network Error 12030, 与服务器的连接意外终止 ；
+
+所以在onerror和onclose中，只用onclose是个不错的选择；
 
 ### 为什么需要心跳机制？
-websocket会不会主动断开（这里的意思是如果长时间双方都没有数据来往，会不会自动断开）?
-
-在我的node服务上，我发现就算没有心跳，websocket也能一直连接着（我承认只观察了2h），那么收集下网上的说法：
-- nginx会主动关闭websocket
+在我的node服务上，我发现就算没有心跳，websocket也能一直连接着，收集了网上的说法后发现，nginx会主动关闭websocket
 
 我们用ngnix开启反向代理：
 ```
@@ -115,18 +129,20 @@ server {
 ```
 果然没一会儿就触发close事件，所以等到关闭的时候再来重新连接，不如用一个心跳机制让他保持不断开。
 
-考虑一件事就是：close事件是否肯定触发，让ngnix不设置超时时间，而通过onclose事件去判断是否需要重连是否会更加低成本？（心跳也算成本）
-
 #### 小结
-处理websocket服务端的断开，使用onclose可有效解决浏览器兼容性问题
 websocket除了监听自身的error，close状态，无其他手段进行异常监听
+
+在浏览器端，使用onclose处理端口情况可有效解决浏览器兼容性问题
+
+nginx会在规定时间内自动端口websocket连接
+
 
 # websocket尝试传输文件
 to do
 
 # node的websocket库
 ## socket.io  github 51.6 stars
-如果客户端要使用该库，服务端也要相应的配合使用该库，目前支持node.js、java、C++、Swift、Dart（PHP：“我大意了啊，没有s”）
+如果客户端要使用该库，服务端也要相应的配合使用该库，目前支持node.js、java、C++、Swift、Dart
 
 特性(简单翻译下官网给的特性+解释)
 - 可靠性，可以用在：代理、负载均衡、个人防火墙、反病毒软件
@@ -162,9 +178,6 @@ socket.io vs ws
 
 可以先看下这个结论，理性看待，具体使用哪个看情况（主要考虑后端语言、浏览器兼容性）
 [Differences between socket.io and websockets](https://stackoverflow.com/questions/10112178/differences-between-socket-io-and-websockets/38558531#38558531)
-
-# 注意
-如果你的服务所在的域是HTTPS，那么使用的WebSocket协议也必须是wss, 而不能是ws
 
 # 本人在项目中的使用websocket的总结
 ## 如何稳定的实时更新数据

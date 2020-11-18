@@ -34,8 +34,9 @@
         //     throw new Error("我错了")
         // },1000)
         try{
-
-            var socket = new WebSocket("ws://node-test.com/test/123");
+            // var socket = new WebSocket("ws://node-test.com/test/123");
+            // var socket = new WebSocket("ws://127.0.0.1:3000/test/123");
+            var socket = new WebSocket("ws://192.168.10.7:3000/test/123");
             var timmer;
             socket.onopen = function (evt) {
                 console.log('open',evt);
@@ -58,13 +59,16 @@
             socket.onerror = function (evt) { //失败重连 
                 console.log('e',evt);
                 clearInterval(timmer);
+                // alert(2)
             };
 
             socket.onclose = function (evt) { //失败重连 
                 console.log('close',evt);
                 clearInterval(timmer);
+                // alert(1)
             };
         }catch(e){
+            alert(3)
             console.log('tttttttt');
         }
 

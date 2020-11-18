@@ -4,6 +4,10 @@ const websockify = require('koa-websocket');
 
 const KoaApp = new Koa();
 const staticServer = require('koa-static')//静态资源服务插件
+KoaApp.use(function(ctx,next){
+    console.log(2333);
+    return next();
+});
 KoaApp.use(staticServer('./client'));
 
 const app = websockify(KoaApp);
@@ -27,9 +31,10 @@ app.ws.use(route.all('/test/:id', function (ctx) {
         // ctx.websocket.send('Hello World2');
         //   ctx.websocket.terminate();
         ctx.websocket.send('svr:'+message);
-        // setTimeout(function(){
-        // // throw new Error("我错了")
-        // },2000)
+        setTimeout(function(){
+        // throw new Error("我错了")
+        ctx.websocket.terminate();
+        },2000)
     });
 
     ctx.websocket.on('close', function(message) {
