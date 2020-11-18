@@ -35,13 +35,19 @@
         // },1000)
         try{
 
-            var socket = new WebSocket("ws://localhost:3000/test/123");
+            var socket = new WebSocket("ws://node-test.com/test/123");
             var timmer;
             socket.onopen = function (evt) {
                 console.log('open',evt);
+                var s = 0
+                socket.send(s);
                 timmer = setInterval(function(){
-                    socket.send(new Date().getSeconds());
+                    socket.send(++s);
                 },1000)
+                // setTimeout(function(){
+                //     console.log('gggg');
+                //     socket.close();//就算先服务端关闭，我们后关闭也不会报错
+                // },3000)
             };
             //收到消息 触发回调
             socket.onmessage = function (evt) {

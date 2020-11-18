@@ -22,14 +22,23 @@ app.ws.use(route.all('/test/:id', function (ctx) {
     ctx.websocket.send('Hello World');
     // console.log(ctx.websocket);
     ctx.websocket.on('message', function(message) {
-      // do something with the message from client
-          console.log(message);
-          ctx.websocket.send('Hello World2');
+        // do something with the message from client
+        console.log(message);
+        // ctx.websocket.send('Hello World2');
         //   ctx.websocket.terminate();
-        setTimeout(function(){
-        // throw new Error("我错了")
-        ctx.websocket.send('Hello World2');
-        },2000)
+        ctx.websocket.send('svr:'+message);
+        // setTimeout(function(){
+        // // throw new Error("我错了")
+        // },2000)
+    });
+
+    ctx.websocket.on('close', function(message) {
+        console.log(message);
+        console.log("close");
+    });
+    ctx.websocket.on('error', function(message) {
+        console.log(message);
+        console.log("error");
     });
 }));
 

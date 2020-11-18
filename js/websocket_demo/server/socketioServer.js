@@ -4,8 +4,14 @@ const staticServer = require('koa-static')//静态资源服务插件
 app.use(staticServer('./client'));
 
 const server = require('http').createServer(app.callback());
-const options = { /* ... */ };
-const io = require('socket.io')(server, options);
+const io = require('socket.io')(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+        // allowedHeaders: ["my-custom-header"],
+        // credentials: true
+    }
+});
 
 io.on('connection', socket => {
     // console.log(socket.constructor);

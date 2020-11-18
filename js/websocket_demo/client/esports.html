@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var socket;
+        var esportsLive = {
+            val:{},
+            socketHeart: function () {
+                var data2 = {
+                    type: 'heart_beat',
+                    params: {
+                        lan: base.getCurentLangID(),
+                        plat: 4//平台
+                    }
+
+                };
+
+                if (esportsLive.val.socketNumAll < 10) {
+                    if (esportsLive.val.isSocketLive) {//冷却
+                        esportsLive.val.socketNum = 0;
+                        esportsLive.val.socketNumAll = 0;
+                        esportsLive.val.isSocketLive = false;
+                        socket.send(JSON.stringify(data2));
+                        clearInterval(esportsLive.val.heartBeatTiming);
+                        esportsLive.val.heartBeatTiming = setTimeout(function () {
+                            esportsLive.socketHeart()
+                        }, esportsLive.randomNum(30, 50) * 1000)
+                    } else {
+                        esportsLive.val.socketNum++;
+                        if (esportsLive.val.socketNum >= 4) {
+                            esportsLive.val.socketNum = 0;
+                            esportsLive.val.socketNumAll++;
+                            if (esportsLive.val.socketNumAll >= 10) {
+                                esportsLive.geiAjaxLI();
+                            }
+                            clearInterval(esportsLive.val.heartBeatTiming);//否则会出现socket已经关闭而心跳在发送数据的情况
+                            esportsLive.socketInit()
+                        } else {
+                            socket.send(JSON.stringify(data2));
+                            clearInterval(esportsLive.val.heartBeatTiming);
+                            esportsLive.val.heartBeatTiming = setTimeout(function () {
+                                esportsLive.socketHeart()
+                            }, esportsLive.randomNum(30, 50) * 1000)
+                        }
+                    }
+                } else {
+                    //停-加载AJAX
+                    esportsLive.geiAjaxLI();
+                }
+            },
+            socketInit:function(){
+                socket = new WebSocket("ws://websocket-dev.7m.com.cn:25000/esports-live/");
+                socket.onopen = function () {
+                    var data = {
+                        type: 'list_open',
+                        params: {
+                            lan: base.getCurentLangID(),
+                            plat: 4//平台
+                        }
+
+                    };
+                    esportsLive.val.socketNum = 0;
+                    socket.send(JSON.stringify(data));
+                    // console.log("连接成功");
+                    esportsLive.socketHeart();
+                    clearInterval(esportsLive.val.heartBeatTiming);
+                    esportsLive.val.heartBeatTiming = setTimeout(function () {
+                        esportsLive.socketHeart()
+                    }, esportsLive.randomNum(30, 50) * 1000)
+                };
+                //收到消息 触发回调
+                socket.onmessage = function (evt) {
+                    var data = JSON.parse(evt.data);
+                    if (data.event == 'match_live_list') {
+                        //执行xxxx
+
+                        //重连成功
+                        esportsLive.val.socketNumAll = 0;
+                        esportsLive.val.socketNum = 0;
+                        esportsLive.val.isSocketLive = false;
+                        esportsLive.socketHeart();
+                        clearInterval(esportsLive.val.getLiAjaxTiming);//停掉AJAX
+                    }
+
+                    //心跳包
+                    if (data.event == 'heart_beat') { //心跳包重置
+                        esportsLive.val.isSocketLive = true;
+                    }
+                };
+
+                socket.onerror = function (evt) { //失败重连 
+                    esportsLive.val.socketNumAll++;
+                    if (esportsLive.val.socketNumAll < 10) {
+                        clearInterval(esportsLive.val.heartBeatTiming);
+                        esportsLive.val.heartBeatTiming = setTimeout(function () {
+                            esportsLive.socketInit()
+                        }, esportsLive.randomNum(30, 50) * 1000)
+                    } else {
+                        esportsLive.geiAjaxLI();
+                    }
+
+                };
+            }
+        }
+    </script>
+</body>
+</html>
