@@ -1,7 +1,8 @@
-# websocket
+# websocket兼容性
 [websocket兼容性](https://caniuse.com/?search=websocket)
 
-## 简单DEMO
+# DEMO
+## 基本结构
 客户端：
 ```
 //./client/index.html
@@ -52,6 +53,101 @@ app.ws.use(route.all('/test/:id', function (ctx) {
 }));
 
 app.listen(3000);
+```
+
+## 加入心跳机制
+    注意这里用的ping、pong不是一端各自使用其中一个，而是两个都需要用到。我们可以这样理解，pong：你在吗？ ping：我在啊。对方pong你时你必须马上回应ping。如果对方已经正在和你聊天，你就得把pong这事延一延，不要聊着聊着突然来一句，你在吗？[翻白眼]
+
+客户端：
+```
+//./client/index.html
+var socket = new WebSocket("ws://127.0.0.1:3000/test/123");
+var socketLive = false;
+var heartCheckTimer;
+var timmer;
+function heartCheck(){
+    clearTimeout(heartCheckTimer);
+    heartCheckTimer = setTimeout(function(){
+        if(socketLive){
+            socketLive = false;
+            socket.send('pong');
+            heartCheck();
+        }else{
+            console.log('对方挂了，准备重启');
+        }
+    },3000);
+}
+
+socket.onopen = function (evt) {
+    console.log('open',evt.data);
+    socketLive = true;
+
+    var s = 0
+    timmer = setInterval(function(){
+        socket.send(++s);
+    },1000)
+    heartCheck();
+};
+//收到消息 触发回调
+socket.onmessage = function (evt) {
+    console.log('msg',evt.data);
+    socketLive = true;
+    heartCheck();
+    if(evt.data == 'pong'){
+        socket.send('ping');
+    }
+};
+
+socket.onerror = function (evt) { //失败重连 
+    console.log('e',evt);
+    clearInterval(timmer);
+};
+
+socket.onclose = function (evt) { //失败重连 
+    console.log('close',evt);
+    clearInterval(timmer);
+};
+```
+服务端：
+```
+//./server/index.js
+var heartCheckTimer;
+function heartCheck(socket){
+    clearTimeout(heartCheckTimer);
+    heartCheckTimer = setTimeout(function(){
+        if(socket.socketLive){
+            socket.socketLive = false;
+            socket.send('pong');
+            heartCheck(socket);
+        }else{
+            console.log('对方挂了,准备重启');
+        }
+    },3000);
+}
+app.ws.use(route.all('/test/:id', function (ctx) {
+    ctx.websocket.socketLive = true;
+    heartCheck(ctx.websocket);
+    setInterval(function(){
+        ctx.websocket.send('Hello World');
+    },1000)
+    ctx.websocket.on('message', function(message) {
+        console.log(message);
+        ctx.websocket.socketLive = true;
+        if(message == 'pong'){
+            ctx.websocket.send('ping');
+        }
+        heartCheck(ctx.websocket);
+    });
+
+    ctx.websocket.on('close', function(message) {
+        console.log(message);
+        console.log("close");
+    });
+    ctx.websocket.on('error', function(message) {
+        console.log(message);
+        console.log("error");
+    });
+}));
 ```
 # 注意
 
@@ -137,8 +233,73 @@ websocket除了监听自身的error，close状态，无其他手段进行异常�
 nginx会在规定时间内自动端口websocket连接
 
 
-# websocket尝试传输文件
-to do
+# websocket传输文件
+
+服务端发送文件：
+
+服务端使用```fs.readFileSync```读取得到Buffer类型数据，然后发送给浏览器端，浏览器端接收到的是一个Blob类型的数据：
+```
+let content = fs.readFileSync(path.resolve('./test.txt'));
+ctx.websocket.send(content);
+```
+这时浏览器打印结果：```Blob {size: 10, type: ""}```
+
+如果将Buffer类型数据放入对象并序列号：
+```
+ctx.websocket.send(JSON.stringify({foo:content}));
+```
+这时浏览器打印结果：```{"foo":{"type":"Buffer","data":[97,98,99,100,13,10,65,66,67,68]}}```,对于data里的数组，假如数据是张图片，如何转成url呢？两种方法
+
+- 第一种方法：
+```
+let url = URL.createObjectURL(new Blob([new Uint8Array(fileObj.foo.data)]));
+```
+url不用时记得释放：```URL.revokeObjectURL(url)```
+
+- 第二种方法：
+```
+let B = new Blob([new Uint8Array(fileObj.foo.data)]);
+var reader = new FileReader();
+reader.readAsDataURL(B);
+reader.onload = function (e) {
+    console.info(reader);
+    let url = reader.result;
+}
+```
+
+
+浏览器端发送文件：
+浏览器用：```socket.send(new File(["a".repeat(100)], "test.txt"));```;服务端接收到的是一个Buffer类型的数据：```<Buffer 61 61 ... 50 more bytes>```
+
+当我用大文件传输时，直接报错：```close CloseEvent {isTrusted: true, wasClean: false, code: 1006, reason: "", type: "close", …}```
+
+## 分片
+需要考虑一个问题，就是如何保证分片后的传输顺序正确。
+服务端传浏览器端时可以添加一些信息和Buffer数据在空对象中，然后序列化后发送；
+
+而浏览器端不可以将Blob类型JSON.stringfy，
+所以有两种方法：
+1. 分片后换成传base64，这样就可以带上序号了，关键代码:
+```
+let base64Data = message.replace(/^data:\w+\/\w+;base64,/, "");
+let dataBuffer = Buffer.from(base64Data, 'base64');
+fs.writeFile("./server_save/a.png", dataBuffer, function(err) {
+    console.log(err);
+});
+```
+
+2. 转成Uint8Array：
+```
+var reader = new FileReader();
+reader.readAsArrayBuffer(B);
+reader.onload = function (e) {
+    console.info(reader);
+    socket.send(reader.result);
+}
+```
+直接发送ArrayBuffer给服务端时，服务端收到的是Buffer类型的数据。但是将其放入空对象后序列化会消失，所以无法添加序号信息。
+
+我尝试在ArrayBuffer类型的数据上添加序号，todo
 
 # node的websocket库
 ## socket.io  github 51.6 stars
@@ -179,20 +340,6 @@ socket.io vs ws
 可以先看下这个结论，理性看待，具体使用哪个看情况（主要考虑后端语言、浏览器兼容性）
 [Differences between socket.io and websockets](https://stackoverflow.com/questions/10112178/differences-between-socket-io-and-websockets/38558531#38558531)
 
-# 本人在项目中的使用websocket的总结
-## 如何稳定的实时更新数据
-
-项目后台为PHP（所以没有用socket.io），采用ajax轮询 + websocket的方式，在一定程度上保证了数据获取的稳定性，并兼容不支持websocket的浏览器。
-
-## 对于历史socket数据如何调试
-后端导出历史数据，前端复现
-
-两种做法：
-- 将数据作为变量写进页面脚本里
-- 本地使用node读取数据并建立websocket
-
-显然第二种做法对源代码的入侵性较低，客户端只需要改一下socket地址即可
-
 # 参考资料
 
 [nodejs消息推送之socket.io 与 ws对比](https://blog.csdn.net/swimming_in_it_/article/details/81451491)
@@ -202,5 +349,7 @@ socket.io vs ws
 [socket.io](https://github.com/socketio/socket.io)
 
 [转载：WebSocket 原理介绍及服务器搭建](https://blog.csdn.net/qq_39101111/article/details/78627393)
+
+[你不知道的 Blob](https://juejin.cn/post/6844904178725158926?utm_source=gold_browser_extension%3Futm_source%3Dgold_browser_extension#heading-6)
 
 

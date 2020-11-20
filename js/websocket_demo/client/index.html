@@ -26,7 +26,9 @@
     </script>
 </head>
 <body>
-    <img src="./xxxx.png">
+    <input type="file" id="inputF">
+    <img src="./xxxx.png" id='imgbox' width="200">
+    <img src="./xxxx.png" id='imgbox2' width="200">
     <script>
         // try catch只能捕获同步异常
         // setTimeout(function(){
@@ -34,25 +36,109 @@
         //     throw new Error("我错了")
         // },1000)
         try{
-            // var socket = new WebSocket("ws://node-test.com/test/123");
+            var socket = new WebSocket("ws://node-test.com/test/123");
             // var socket = new WebSocket("ws://127.0.0.1:3000/test/123");
-            var socket = new WebSocket("ws://192.168.10.7:3000/test/123");
+            // var socket = new WebSocket("ws://192.168.10.7:3000/test/123");
+
+            var socketLive = false;
+            var heartCheckTimer;
             var timmer;
+            function heartCheck(){
+                clearTimeout(heartCheckTimer);
+                heartCheckTimer = setTimeout(function(){
+                    // console.log('heartCheck');
+                    if(socketLive){
+                        socketLive = false;
+                        socket.send('pong');
+                        heartCheck();
+                    }else{
+                        console.log('对方挂了，准备重启');
+                    }
+                },50000);
+            }
+            inputF.onchange = function(a){
+                // socket.send(a.target.files[0]);
+                var reader = new FileReader();
+                // reader.readAsDataURL(a.target.files[0]);
+                reader.readAsArrayBuffer(a.target.files[0]);
+                reader.onload = function (e) {
+                    // console.log(typeof reader.result);//ArrayBuffer
+                    socket.send(reader.result);
+                }
+            }
             socket.onopen = function (evt) {
-                console.log('open',evt);
-                var s = 0
-                socket.send(s);
-                timmer = setInterval(function(){
-                    socket.send(++s);
-                },1000)
+                console.log('open');
+                socketLive = true;
+                // socket.send(new File(["a".repeat(100)], "test.txt"));
+                // socket.send(new File(["a".repeat(100)], "test.txt"));
+                // new File(["a".repeat(100)], "test.txt").arrayBuffer().then((r)=>socket.send(r));
+                // var s = 0
+                // timmer = setInterval(function(){
+                //     socket.send(++s);
+                // },1000)
                 // setTimeout(function(){
                 //     console.log('gggg');
                 //     socket.close();//就算先服务端关闭，我们后关闭也不会报错
                 // },3000)
+                heartCheck();
             };
             //收到消息 触发回调
             socket.onmessage = function (evt) {
-                console.log('msg',evt);
+                // console.log('msg',evt.data);
+                // console.log(typeof evt.data);
+                if(evt.data instanceof Blob){
+                    //第一种方法
+                    let url = URL.createObjectURL(evt.data);
+                    // let url = URL.createObjectURL(evt.data.slice(0,192225));
+                    // imgbox.src =url;
+                    let a = document.createElement('a')
+                    a.setAttribute('download', '图片.png')
+                    a.href = url
+                    // a.click();
+                    document.body.appendChild(a);
+                    imgbox.src = url;
+                    // URL.revokeObjectURL(url)
+                    //第二种方法
+                    let B = evt.data;
+                    var reader = new FileReader();
+                    reader.readAsDataURL(B);
+                    reader.onload = function (e) {
+                        console.info(reader);
+                        imgbox.src = reader.result;
+                    }
+                }
+                if(typeof evt.data === 'string' && evt.data.indexOf('{')>-1){
+                    try{
+                        //第一种方法
+                        var fileObj = JSON.parse(evt.data);
+                        console.log(fileObj);
+                        console.log(fileObj.foo.type);
+                        let url = URL.createObjectURL(new Blob([new Uint8Array(fileObj.foo.data)]));
+                        // imgbox.src =url;
+                        let a = document.createElement('a')
+                        a.setAttribute('download', '图片.png')
+                        a.href = url;
+                        // a.click();
+                        document.body.appendChild(a);
+                        imgbox2.src = url;
+                        //第二种方法
+                        let B = new Blob([new Uint8Array(fileObj.foo.data)]);//Blob构造函数的第二个参数可以指定类型：{type:'data:image/png'}
+                        var reader = new FileReader();
+                        reader.readAsDataURL(B);
+                        reader.onload = function (e) {
+                            console.info(reader);
+                            imgbox2.src = reader.result;
+                        }
+                    }catch(e){
+                        console.log('普通字符串');
+                    }
+                    
+                }
+                socketLive = true;
+                heartCheck();
+                if(evt.data == 'pong'){
+                    socket.send('ping');
+                }
                 // socket.close();//服务端可以主动关闭连接并且服务端不会发现连接已经被关闭
             };
 
@@ -68,8 +154,8 @@
                 // alert(1)
             };
         }catch(e){
-            alert(3)
-            console.log('tttttttt');
+            // 只有不兼容websocket的浏览器才会报错到这
+            console.log('改用ajax');
         }
 
     </script>
