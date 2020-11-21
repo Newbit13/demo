@@ -34,6 +34,8 @@ function heartCheck(socket){
         }
     },50000);
 }
+var splitBuffer;
+var chunkDataList = [];
 // Using routes
 app.ws.use(route.all('/test/:id', function (ctx) {
     // `ctx` is the regular koa context created from the `ws` onConnection `socket.upgradeReq` object.
@@ -52,16 +54,33 @@ app.ws.use(route.all('/test/:id', function (ctx) {
     // console.log(ctx.websocket);
     ctx.websocket.on('message', function(message) {
         // do something with the message from client
-        console.log(message);
+        // console.log(message);
         ctx.websocket.socketLive = true;
         if(message == 'pong'){
             ctx.websocket.send('ping');
         }
         heartCheck(ctx.websocket);
         if(message instanceof Buffer){
-            fs.writeFile(path.resolve('./server_save/big'),message,function(e){
-                console.log(e);
-            });
+            if(message.length == 3){//mock 拿到分隔符
+                splitBuffer = message;
+            }else if(message.length == 5){
+                console.log('传输完成');
+                // console.log(chunkDataList);
+                fs.writeFile(path.resolve('./server_save/a.psd'),Buffer.concat(chunkDataList),function(e){
+                    if(e){
+                        console.log(e);
+                    }
+                });
+            }else{
+                let splitIndex = message.indexOf(splitBuffer);
+                let indexNum = message.slice(0,splitIndex);
+                // console.log(indexNum);
+                // indexNum.toString = function(){return 0}
+                let chunkData = message.slice(splitIndex + splitBuffer.length);
+                chunkDataList[indexNum] = chunkData;//indexNum是Buffer类型，在这会自动调用toString方法，转成我需要的下表
+                // console.log(chunkData);
+                
+            }
         }
         if(/^data:\w+\/\w+;base64,/.test(message.slice(0,30))){
             let base64Data = message.replace(/^data:\w+\/\w+;base64,/, "");

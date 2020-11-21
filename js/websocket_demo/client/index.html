@@ -27,7 +27,9 @@
 </head>
 <body>
     <input type="file" id="inputF">
-    <img src="./xxxx.png" id='imgbox' width="200">
+    <input type="text">
+    <img src="./ddd.jpg" width="200">
+    <img src="./xxxx.jpg" id='imgbox' width="200">
     <img src="./xxxx.png" id='imgbox2' width="200">
     <script>
         // try catch只能捕获同步异常
@@ -36,8 +38,8 @@
         //     throw new Error("我错了")
         // },1000)
         try{
-            var socket = new WebSocket("ws://node-test.com/test/123");
-            // var socket = new WebSocket("ws://127.0.0.1:3000/test/123");
+            // var socket = new WebSocket("ws://node-test.com/test/123");
+            var socket = new WebSocket("ws://127.0.0.1:3000/test/123");
             // var socket = new WebSocket("ws://192.168.10.7:3000/test/123");
 
             var socketLive = false;
@@ -58,13 +60,36 @@
             }
             inputF.onchange = function(a){
                 // socket.send(a.target.files[0]);
-                var reader = new FileReader();
+                // return
+                // var reader = new FileReader();
                 // reader.readAsDataURL(a.target.files[0]);
-                reader.readAsArrayBuffer(a.target.files[0]);
-                reader.onload = function (e) {
-                    // console.log(typeof reader.result);//ArrayBuffer
-                    socket.send(reader.result);
+
+                // reader.readAsArrayBuffer(a.target.files[0]);
+                // reader.onload = function (e) {
+                //     // console.log(typeof reader.result);//ArrayBuffer
+                //     socket.send(reader.result);
+                // }
+
+                var TestB = a.target.files[0];
+                var splitB = new Blob(['---']);
+                socket.send(splitB);//开始，传个分隔符
+
+                let chunk = 50000000;//每5000字节为一个单位进行分割
+                let chunkNums = Math.ceil(TestB.size / chunk);//向上取整
+                console.log(chunkNums);
+                // return
+                for(var i = 0;i < chunkNums;i++){
+                    let chunkData;
+                    if(i == chunkNums - 1){
+                        chunkData = TestB.slice(i*chunk);//最后一个chunk
+                    }else{
+                        chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+                    }
+                    let TestB2 = new Blob([i,splitB,chunkData]);
+                    console.log('传输',i);
+                    socket.send(TestB2);
                 }
+                socket.send(new Blob(['11111']));//结束
             }
             socket.onopen = function (evt) {
                 console.log('open');
@@ -87,6 +112,50 @@
                 // console.log('msg',evt.data);
                 // console.log(typeof evt.data);
                 if(evt.data instanceof Blob){
+                    //Blob实验：
+                    let TestB = evt.data;
+                    // console.log(TestB);
+                    // // Blob转ArrayBuffer（Blob的arrayBuffer、stream、text兼容性都不行）
+                    // // console.log(TestB.stream());
+                    // TestB.arrayBuffer().then(
+                    //     (r)=>{
+                    //         console.log(r);
+                    //         var resUnit8Array = new Uint8Array(r);
+                    //         console.log(resUnit8Array);
+                    //         new Blob(['123---']).arrayBuffer().then(
+                    //             (r2)=>{
+                    //                 var resUnit8Array2 = new Uint8Array(r2);
+                    //                 console.log(resUnit8Array2);
+                    //                 var al = resUnit8Array2.length + resUnit8Array.length;
+                    //                 var combinUnit8Array = new Uint8Array(al);
+                    //                 combinUnit8Array.set(resUnit8Array2);
+                    //                 combinUnit8Array.set(resUnit8Array,resUnit8Array2.length);
+                    //                 console.log(combinUnit8Array);
+                    //                 socket.send(combinUnit8Array);
+                    //             }
+                    //         )
+                    //     }
+                    // );
+
+                    //分片上传
+                    // var splitB = new Blob(['---']);
+                    // socket.send(splitB);//开始，传个分隔符
+
+                    // let chunk = 5000;//每5000字节为一个单位进行分割
+                    // let chunkNums = Math.ceil(TestB.size / 5000);//向上取整
+                    // for(var i = 0;i < chunkNums;i++){
+                    //     let chunkData;
+                    //     if(i == chunkNums - 1){
+                    //         chunkData = TestB.slice(i*chunk);//最后一个chunk
+                    //     }else{
+                    //         chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+                    //     }
+                    //     let TestB2 = new Blob([i,splitB,chunkData]);
+                    //     socket.send(TestB2);
+                    // }
+                    // socket.send(new Blob(['11111']));//结束
+
+
                     //第一种方法
                     let url = URL.createObjectURL(evt.data);
                     // let url = URL.createObjectURL(evt.data.slice(0,192225));
@@ -103,7 +172,7 @@
                     var reader = new FileReader();
                     reader.readAsDataURL(B);
                     reader.onload = function (e) {
-                        console.info(reader);
+                        // console.info(reader);
                         imgbox.src = reader.result;
                     }
                 }
@@ -111,8 +180,7 @@
                     try{
                         //第一种方法
                         var fileObj = JSON.parse(evt.data);
-                        console.log(fileObj);
-                        console.log(fileObj.foo.type);
+                        // console.log(fileObj);
                         let url = URL.createObjectURL(new Blob([new Uint8Array(fileObj.foo.data)]));
                         // imgbox.src =url;
                         let a = document.createElement('a')
@@ -126,7 +194,7 @@
                         var reader = new FileReader();
                         reader.readAsDataURL(B);
                         reader.onload = function (e) {
-                            console.info(reader);
+                            // console.info(reader);
                             imgbox2.src = reader.result;
                         }
                     }catch(e){

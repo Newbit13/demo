@@ -254,7 +254,7 @@ ctx.websocket.send(JSON.stringify({foo:content}));
 ```
 let url = URL.createObjectURL(new Blob([new Uint8Array(fileObj.foo.data)]));
 ```
-url不用时记得释放：```URL.revokeObjectURL(url)```
+url不用时记得释放掉：```URL.revokeObjectURL(url)```
 
 - 第二种方法：
 ```
@@ -263,7 +263,7 @@ var reader = new FileReader();
 reader.readAsDataURL(B);
 reader.onload = function (e) {
     console.info(reader);
-    let url = reader.result;
+    let url = reader.result;//base64格式
 }
 ```
 
@@ -273,14 +273,17 @@ reader.onload = function (e) {
 
 当我用大文件传输时，直接报错：```close CloseEvent {isTrusted: true, wasClean: false, code: 1006, reason: "", type: "close", …}```
 
-## 分片
-需要考虑一个问题，就是如何保证分片后的传输顺序正确。
-服务端传浏览器端时可以添加一些信息和Buffer数据在空对象中，然后序列化后发送；
+这就需要考虑分片上传了
 
-而浏览器端不可以将Blob类型JSON.stringfy，
-所以有两种方法：
-1. 分片后换成传base64，这样就可以带上序号了，关键代码:
+## 分片
+如果是简单的分片，那太简单了。那么考虑的一个问题，如何保证分片后的传输顺序正确？那就需要给分片后的数据带上序号（额外信息）
+如上文所说，服务端传浏览器端时可以把添加的额外信息和Buffer数据一起放在空对象中，并序列化后发送；
+
+而浏览器端不可以将Blob类型JSON.stringfy，但是转成base64就可以序列化了。
+
+在服务端，接收到base64格式的数据后需要做点处理，关键代码:
 ```
+//服务端
 let base64Data = message.replace(/^data:\w+\/\w+;base64,/, "");
 let dataBuffer = Buffer.from(base64Data, 'base64');
 fs.writeFile("./server_save/a.png", dataBuffer, function(err) {
@@ -288,18 +291,53 @@ fs.writeFile("./server_save/a.png", dataBuffer, function(err) {
 });
 ```
 
-2. 转成Uint8Array：
-```
-var reader = new FileReader();
-reader.readAsArrayBuffer(B);
-reader.onload = function (e) {
-    console.info(reader);
-    socket.send(reader.result);
-}
-```
-直接发送ArrayBuffer给服务端时，服务端收到的是Buffer类型的数据。但是将其放入空对象后序列化会消失，所以无法添加序号信息。
+### 现在我们不用序列化，将附加信息直接写入Blob或者Buffer中
+在浏览器端，我们将额外的信息（序号）先转成Blob，再与分片后的Blob合到一起
 
-我尝试在ArrayBuffer类型的数据上添加序号，todo
+首先我们约定好结构：序号+分隔符+分片数据
+
+然后我们先给服务端发送分隔符，比如我用---作为分隔符：
+```
+var splitB = new Blob(['---']);
+socket.send(splitB);
+```
+然后我再发送约定好的数据结构：
+```
+var blobToSend = new Blob([123,splitB,sliceBlob])//sliceBlob为某个想发送的大文件，slice之后的小片段
+```
+后端拿到数据后是Buffer类型的数据:
+```
+let splitIndex = message.indexOf(splitBuffer);//message是前端传过来的数据；splitBuffer也是前端传过来的，是分隔符
+let indexNum = message.slice(0,splitIndex);//得到序号（Buffer类型数据）
+let chunkData = message.slice(splitIndex + splitBuffer.length)//得到分片数据
+```
+剩下的工作就是约定好开始、接收、及如何拼接分片：
+```
+var TestB = a.target.files[0];
+var splitB = new Blob(['---']);
+socket.send(new Blob(['00000']));//开始，这是约定的开始数据
+socket.send(splitB);//传个分隔符
+
+let chunk = 5000;//每5000字节为一个单位进行分割
+let chunkNums = Math.ceil(TestB.size / 5000);//向上取整
+for(var i = 0;i < chunkNums;i++){
+    let chunkData;
+    if(i == chunkNums - 1){
+        chunkData = TestB.slice(i*chunk);//最后一个chunk
+    }else{
+        chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+    }
+    let TestB2 = new Blob([i,splitB,chunkData]);
+    console.log('传输',i);
+    socket.send(TestB2);
+}
+socket.send(new Blob(['11111']));//结束,这是约定的结束数据
+```
+这个过程，如果数据量才大的话，会堵塞js进程、UI进程。所以我们需要：异步函数setTimeout
+
+
+### 后续
+再进一步可以做的功能就是发现缺失的分片，并向对方重新请求
 
 # node的websocket库
 ## socket.io  github 51.6 stars
@@ -351,5 +389,7 @@ socket.io vs ws
 [转载：WebSocket 原理介绍及服务器搭建](https://blog.csdn.net/qq_39101111/article/details/78627393)
 
 [你不知道的 Blob](https://juejin.cn/post/6844904178725158926?utm_source=gold_browser_extension%3Futm_source%3Dgold_browser_extension#heading-6)
+
+[聊聊JS的二进制家族：Blob、ArrayBuffer和Buffer](https://zhuanlan.zhihu.com/p/97768916)
 
 
