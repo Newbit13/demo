@@ -26,6 +26,7 @@
     </script>
 </head>
 <body>
+    <div>进度：<span id='process_span'>0</span>/<span id='total_span'>0</span></div>
     <input type="file" id="inputF">
     <input type="text">
     <img src="./ddd.jpg" width="200">
@@ -74,22 +75,54 @@
                 var splitB = new Blob(['---']);
                 socket.send(splitB);//开始，传个分隔符
 
-                let chunk = 50000000;//每5000字节为一个单位进行分割
+                // let chunk = 50000000;//每5000字节为一个单位进行分割
+                let chunk = 50000;//每5000字节为一个单位进行分割
                 let chunkNums = Math.ceil(TestB.size / chunk);//向上取整
                 console.log(chunkNums);
+                total_span.innerText = chunkNums;
                 // return
-                for(var i = 0;i < chunkNums;i++){
-                    let chunkData;
-                    if(i == chunkNums - 1){
-                        chunkData = TestB.slice(i*chunk);//最后一个chunk
-                    }else{
-                        chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+                // for(var i = 0;i < chunkNums;i++){
+                //     let chunkData;
+                //     if(i == chunkNums - 1){
+                //         chunkData = TestB.slice(i*chunk);//最后一个chunk
+                //     }else{
+                //         chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+                //     }
+                //     let TestB2 = new Blob([i,splitB,chunkData]);
+                //     console.log('传输',i);
+                //     socket.send(TestB2);
+                // }
+                // socket.send(new Blob(['11111']));//结束
+                
+                let p = new Promise((resolve,reject)=>{
+                    var Sign = 0
+                    for(var i = 0;i < chunkNums;i++){
+                        (function(i){
+                            requestIdleCallback(function(){
+                                let chunkData;
+                                if(i == chunkNums - 1){
+                                    chunkData = TestB.slice(i*chunk);//最后一个chunk
+                                    
+                                }else{
+                                    chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+                                }
+                                let TestB2 = new Blob([i,splitB,chunkData]);
+                                console.log('传输',i);
+                                process_span.innerText = ++Sign;
+                                socket.send(TestB2);
+                                if(Sign == chunkNums){
+                                    resolve(1);
+                                }
+                            })
+                        })(i)
                     }
-                    let TestB2 = new Blob([i,splitB,chunkData]);
-                    console.log('传输',i);
-                    socket.send(TestB2);
-                }
-                socket.send(new Blob(['11111']));//结束
+                });
+                
+                p.then((r)=>{
+                    console.log(r);
+                    socket.send(new Blob(['11111']));//结束
+                    console.log("结束");
+                });
             }
             socket.onopen = function (evt) {
                 console.log('open');

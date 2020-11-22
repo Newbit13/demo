@@ -54,7 +54,8 @@ app.ws.use(route.all('/test/:id', function (ctx) {
     // console.log(ctx.websocket);
     ctx.websocket.on('message', function(message) {
         // do something with the message from client
-        // console.log(message);
+        console.log(message);
+        // console.log(1);
         ctx.websocket.socketLive = true;
         if(message == 'pong'){
             ctx.websocket.send('ping');

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>websocket</title>
+</head>
+<body>
+    <div>进度：<span id='process_span'>0</span>/<span id='total_span'>0</span></div>
+    <input type="file" id="inputF">
+    <input type="text">
+    <img src="./ddd.jpg" width="200">
+    <img src="./xxxx.jpg" id='imgbox' width="200">
+    <img src="./xxxx.png" id='imgbox2' width="200">
+    <script>
+        var cancelIdleCallBackId;
+        var currentIndex;
+        function cancelUpload(){
+            cancelIdleCallback(cancelIdleCallBackId);
+            // cancelAnimationFrame(cancelIdleCallBackId);
+            // clearTimeout(cancelIdleCallBackId);
+        }
+
+        function continueUpload(){
+            uploadData(currentIndex);
+        }
+        var sss = 0;
+        try{
+            // var socket = new WebSocket("ws://node-test.com/test/123");
+            var socket = new WebSocket("ws://127.0.0.1:3000/test/123");
+            // var socket = new WebSocket("ws://192.168.10.7:3000/test/123");
+
+            var socketLive = false;
+            var heartCheckTimer;
+            var timmer;
+            function heartCheck(){
+                clearTimeout(heartCheckTimer);
+                heartCheckTimer = setTimeout(function(){
+                    // console.log('heartCheck');
+                    if(socketLive){
+                        socketLive = false;
+                        socket.send('pong');
+                        heartCheck();
+                    }else{
+                        console.log('对方挂了，准备重启');
+                    }
+                },50000);
+            }
+            inputF.onchange = function(a){
+
+                var TestB = a.target.files[0];
+                var splitB = new Blob(['---']);
+                socket.send(splitB);//开始，传个分隔符
+
+                let chunk = 50000;//每5000字节为一个单位进行分割
+                let chunkNums = Math.ceil(TestB.size / chunk);//向上取整
+                console.log(chunkNums);
+                total_span.innerText = chunkNums;
+                
+                let p = new Promise((resolve,reject)=>{
+                    var Sign = 0;
+                    window.uploadData = function uploadData(i){
+                        let chunkData;
+                        if(i == chunkNums - 1){
+                            chunkData = TestB.slice(i*chunk);//最后一个chunk
+                        }else{
+                            chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+                        }
+                        let TestB2 = new Blob([i,splitB,chunkData]);
+                        console.log('传输',i);
+                        // process_span.innerText = ++Sign;
+                        requestAnimationFrame(()=>{
+                            process_span.innerText = ++Sign;
+                        });
+                        socket.send(TestB2);
+                        if(Sign == chunkNums){
+                            resolve(1);
+                            return;
+                        }
+                        currentIndex = i;
+                        cancelIdleCallBackId = requestIdleCallback(function(){
+                            uploadData(++i)
+                        });
+                        // cancelIdleCallBackId = requestAnimationFrame(function(){
+                        //     uploadData(++i)
+                        // });
+                        // cancelIdleCallBackId = setTimeout(function(){
+                        //     uploadData(++i)
+                        // },1);
+                       
+                    }
+                    uploadData(0);
+                })
+                p.then((r)=>{
+                    console.log(r);
+                    socket.send(new Blob(['11111']));//结束
+                    console.log("结束");
+                });
+            }
+            socket.onopen = function (evt) {
+                console.log('open');
+                socketLive = true;
+                heartCheck();
+                // setInterval(()=>{
+                //     socket.send(sss = sss == 0?1:0);
+                // },1)
+            };
+            //收到消息 触发回调
+            socket.onmessage = function (evt) {
+                if(evt.data instanceof Blob){
+                    let B = evt.data;
+                    var reader = new FileReader();
+                    reader.readAsDataURL(B);
+                    reader.onload = function (e) {
+                        // console.info(reader);
+                        imgbox.src = reader.result;
+                    }
+                }
+                if(typeof evt.data === 'string' && evt.data.indexOf('{')>-1){
+                    try{
+                        var fileObj = JSON.parse(evt.data);
+                        let B = new Blob([new Uint8Array(fileObj.foo.data)]);//Blob构造函数的第二个参数可以指定类型：{type:'data:image/png'}
+                        var reader = new FileReader();
+                        reader.readAsDataURL(B);
+                        reader.onload = function (e) {
+                            imgbox2.src = reader.result;
+                        }
+                    }catch(e){
+                        console.log('普通字符串');
+                    }
+                    
+                }
+                socketLive = true;
+                heartCheck();
+                if(evt.data == 'pong'){
+                    socket.send('ping');
+                }
+            };
+
+            socket.onerror = function (evt) { //失败重连 
+                console.log('e',evt);
+                clearInterval(timmer);
+            };
+
+            socket.onclose = function (evt) { //失败重连 
+                console.log('close',evt);
+                clearInterval(timmer);
+            };
+        }catch(e){
+            // 只有不兼容websocket的浏览器才会报错到这
+            console.log('改用ajax');
+        }
+
+    </script>
+    <input type="button" value="暂停" onclick="cancelUpload()">
+    <input type="button" value="继续" onclick="continueUpload()">
+</body>
+</html>

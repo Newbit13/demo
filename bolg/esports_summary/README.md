@@ -150,13 +150,14 @@ app.ws.use(route.all('/test/:id', function (ctx) {
 }));
 ```
 # 注意
+    如果你的服务所在的域是HTTPS，那么使用的WebSocket协议也必须是wss, 而不能是ws
 
     浏览器端（客户端）或者服务端中有一方突然切断网络，另一方是无法通过事件监听到的。所以心跳机制不止用于保持连接，还用于确认对方是否存活。
-为什么要把注意写在这里？因为一开始我在本地实验发现，无论是浏览器端的关闭浏览器，刷新，关闭标签页，调用close函数操作，还是服务端的退出进程、抛出异常、调用close函数操作，都会使对方的close事件被触发。并且我在nodejs服务器环境下开启websocket服务，发现不管过了多久，就算没有数据发送，连接也一直存在（比如用定时器设置几小时后再发一条信息也是能成功的）。这让我产生了“我们不需要心跳机制”的错觉。
 
-后来我用手机测试，关闭手机WIFI时发现，服务器不会触发任何事件，意味着他不知道浏览器什么时候已经断开了连接。并且引入nginx做反向代理后，如果没有数据交互，没过一会就自动断开了。
+为什么要把注意写在这里？因为一开始我在本地测试发现，无论是浏览器端的关闭浏览器，刷新，关闭标签页，调用close函数，还是服务端的退出进程、抛出异常、调用close，都会使对方的close事件被触发。并且我在nodejs服务器环境下开启websocket服务，发现不管过了多久，就算没有数据发送，连接也一直存在（比如用定时器设置几小时后再发一条信息也是能成功的）。这让我产生了“我们不需要心跳机制”的错觉（错觉一：不会断开；错觉二：断开可以通过监听close事件去重连）。
 
-    如果你的服务所在的域是HTTPS，那么使用的WebSocket协议也必须是wss, 而不能是ws
+后来我用手机测试，发现**关闭手机WIFI**时，服务器不会触发任何事件，意味着他不知道浏览器什么时候已经断开了连接。并且**引入nginx做反向代理**后，如果没有数据交互，没过一会就自动断开了。
+
 
 # 正文
 ## websocket什么时候会断开
@@ -168,7 +169,7 @@ app.ws.use(route.all('/test/:id', function (ctx) {
 
 服务端直接退出进程、抛出错误、重启等。
 
-    服务端异常断开重启后，客户端需要重新```new websocket```才能重新连接上
+服务端异常断开重启后，客户端需要重新```new websocket```才能重新连接上
 
 - 在客户端：
 
@@ -244,7 +245,7 @@ ctx.websocket.send(content);
 ```
 这时浏览器打印结果：```Blob {size: 10, type: ""}```
 
-如果将Buffer类型数据放入对象并序列号：
+如果将Buffer类型数据放入对象并序列化：
 ```
 ctx.websocket.send(JSON.stringify({foo:content}));
 ```
@@ -252,7 +253,7 @@ ctx.websocket.send(JSON.stringify({foo:content}));
 
 - 第一种方法：
 ```
-let url = URL.createObjectURL(new Blob([new Uint8Array(fileObj.foo.data)]));
+let url = URL.createObjectURL(new Blob([new Uint8Array(fileObj.foo.data)]));//这个地址只是一个临时的引用地址
 ```
 url不用时记得释放掉：```URL.revokeObjectURL(url)```
 
@@ -273,10 +274,13 @@ reader.onload = function (e) {
 
 当我用大文件传输时，直接报错：```close CloseEvent {isTrusted: true, wasClean: false, code: 1006, reason: "", type: "close", …}```
 
+实测在我电脑上，只要传输的文件大于或等于100M，就会触发```RangeError: Max payload size exceeded```
+
 这就需要考虑分片上传了
 
 ## 分片
-如果是简单的分片，那太简单了。那么考虑的一个问题，如何保证分片后的传输顺序正确？那就需要给分片后的数据带上序号（额外信息）
+
+分片上传的核心在于Blob类型的数据可以用slice进行分割，那么我们来考虑的一个问题，如何保证分片后的传输顺序正确？那就需要给分片后的数据带上序号（额外信息）
 如上文所说，服务端传浏览器端时可以把添加的额外信息和Buffer数据一起放在空对象中，并序列化后发送；
 
 而浏览器端不可以将Blob类型JSON.stringfy，但是转成base64就可以序列化了。
@@ -303,17 +307,17 @@ socket.send(splitB);
 ```
 然后我再发送约定好的数据结构：
 ```
-var blobToSend = new Blob([123,splitB,sliceBlob])//sliceBlob为某个想发送的大文件，slice之后的小片段
+var blobToSend = new Blob([123,splitB,sliceBlob])//sliceBlob为某个想发送的大文件切割后的小片段之一
 ```
 后端拿到数据后是Buffer类型的数据:
 ```
-let splitIndex = message.indexOf(splitBuffer);//message是前端传过来的数据；splitBuffer也是前端传过来的，是分隔符
+let splitIndex = message.indexOf(splitBuffer);//message是前端传过来的数据；splitBuffer也是前端传过来的，是分隔符（分隔符也可以为了方便一开始就约定好长什么样）
 let indexNum = message.slice(0,splitIndex);//得到序号（Buffer类型数据）
 let chunkData = message.slice(splitIndex + splitBuffer.length)//得到分片数据
 ```
 剩下的工作就是约定好开始、接收、及如何拼接分片：
 ```
-var TestB = a.target.files[0];
+var TestB = a.target.files[0];//此处为监听input file的onchange事件得到的File类型文件
 var splitB = new Blob(['---']);
 socket.send(new Blob(['00000']));//开始，这是约定的开始数据
 socket.send(splitB);//传个分隔符
@@ -333,13 +337,199 @@ for(var i = 0;i < chunkNums;i++){
 }
 socket.send(new Blob(['11111']));//结束,这是约定的结束数据
 ```
-这个过程，如果数据量才大的话，会堵塞js进程、UI进程。所以我们需要：异步函数setTimeout
+这个过程，如果数据量太大,分片会分成很多片。执行for循环去发送数据会堵塞js进程、UI进程。所以我们需要进行一些处理
+1. 引入```requestIdleCallback```(兼容性不太好)
+```
+for(var i = 0;i < chunkNums;i++){
+    (function(i){
+        requestIdleCallback(function(){
+            let chunkData;
+            if(i == chunkNums - 1){
+                chunkData = TestB.slice(i*chunk);//最后一个chunk
+            }else{
+                chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+            }
+            let TestB2 = new Blob([i,splitB,chunkData]);
+            console.log('传输',i);
+            socket.send(TestB2);
+            if(i == chunkNums - 1){
+                socket.send(new Blob(['11111']));//结束
+            }
+        })
+    })(i)
+}
+```
+![bug1](./requestIdleCallback.png)
 
+上述代码有两问题：
+- requestIdleCallback不能保证执行的顺序，就是那个结束的信号```socket.send(new Blob(['11111']))```，不一定是最后才执行（比如在传第三个分片数据时，有可能因为别的耗时工作而打断，等到其他分片传输完毕才执行这个被打断的函数，见上方截图）
+- 没有暂停功能，比如异常时暂停、主动暂停
+
+既然不能解决执行顺序问题，那么换种思路，保证所有数据传输完毕再发送信号就可以了。这需要引入一个变量，来判断是否传输完毕，这里我用promise（可不用） + 一个不断自增的变量Sign：
+```
+let p = new Promise((resolve,reject)=>{
+    var Sign = 0
+    for(var i = 0;i < chunkNums;i++){
+        (function(i){
+            requestIdleCallback(function(){
+                let chunkData;
+                if(i == chunkNums - 1){
+                    chunkData = TestB.slice(i*chunk);//最后一个chunk
+                    
+                }else{
+                    chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+                }
+                let TestB2 = new Blob([i,splitB,chunkData]);
+                console.log('传输',i);
+                process_span.innerText = ++Sign;
+                socket.send(TestB2);
+                if(Sign == chunkNums){
+                    resolve(1);
+                }
+            })
+        })(i)
+    }
+});
+
+p.then((r)=>{
+    console.log(r);
+    socket.send(new Blob(['11111']));//结束
+    console.log("结束");
+});
+```
+
+解决第二个问题，暂停:
+要实现这个功能，看来我不能用for循环来发送分片数据，得换成递归的方式:
+```
+let p = new Promise((resolve,reject)=>{
+    var Sign = 0;
+    window.uploadData = function uploadData(i){
+        let chunkData;
+        if(i == chunkNums - 1){
+            chunkData = TestB.slice(i*chunk);//最后一个chunk
+        }else{
+            chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+        }
+        let TestB2 = new Blob([i,splitB,chunkData]);
+        console.log('传输',i);
+        ++Sign
+        requestAnimationFrame(()=>{
+            process_span.innerText = Sign;
+        });
+        socket.send(TestB2);
+        if(Sign == chunkNums){
+            resolve(1);
+            return;
+        }
+        currentIndex = i;//currentIndex为全局变量，方便恢复上传数据
+
+        //cancelIdleCallBackId注册为全局变量，方便调用cancelIdleCallback来暂停上传数据
+        cancelIdleCallBackId = requestIdleCallback(function(){
+            uploadData(++i)
+        });
+        
+    }
+    uploadData(0);
+})
+p.then((r)=>{
+    console.log(r);
+    socket.send(new Blob(['11111']));//结束
+    console.log("结束");
+});
+```
+    为什么在上述代码中引入了requestAnimationFrame(IE9及以下不兼容)：
+    “ 避免在空闲回调中改变 DOM。 空闲回调执行的时候，当前帧已经结束绘制了，所有布局的更新和计算也已经完成。如果你做的改变影响了布局， 你可能会强制停止浏览器并重新计算，而从另一方面来看，这是不必要的。 如果你的回调需要改变DOM，它应该使用Window.requestAnimationFrame()来调度它。”
+
+我发现requestIdleCallback会在chrome浏览器切换到其他的标签页或者将浏览器缩下来时会暂停，这就不太合适了，我想后台运行时你给我暂停。由于requestIdleCallback是在浏览器每一帧渲染后有剩余时间时执行，那么当切换便签页后原来的标签页应该会停止渲染，所以requestIdleCallback也随之暂停、requestAnimationFrame同理。（firefox会缓慢执行，ie就算了，就Edge旧版本也不支持requestIdleCallback）
+
+如果我把requestIdleCallback换成setTimeout的话，一旦我把浏览器按同样的方法操作，setTimeout会立即变得相当缓慢，即使我的第二个参数设置为0（chrome、firefox、ie一样）
+
+查阅资料后（[How can I make setInterval also work when a tab is inactive in Chrome?
+](https://stackoverflow.com/questions/5927284/how-can-i-make-setinterval-also-work-when-a-tab-is-inactive-in-chrome)）,我决定用Web Workers试试，刚好也就是下面要提及的方法。
+
+
+2. 要考虑兼容性的话，还是推荐使用Web Workers（IE9以下不兼容）
+核心代码：
+```
+//./client/index.html
+var worker = new Worker('./js/work.js');
+
+inputF.onchange = function(a){
+    worker.postMessage(a.target.files[0]);
+}
+```
+```
+//./client/js/work.js
+var self = this;
+var socket = new WebSocket("ws://127.0.0.1:3000/test/123");
+
+self.addEventListener('message', function (e) {
+    var TestB = e.data;
+    var splitB = new Blob(['---']);
+    socket.send(splitB);//开始，传个分隔符
+
+    let chunk = 50000;//每5000字节为一个单位进行分割
+    let chunkNums = Math.ceil(TestB.size / chunk);//向上取整
+    console.log(chunkNums);
+
+    self.postMessage(JSON.stringify({
+        name:'total_span',
+        value:chunkNums
+    }));
+    
+    let p = new Promise((resolve,reject)=>{
+        var Sign = 0;
+        self.uploadData = function uploadData(i){
+            let chunkData;
+            if(i == chunkNums - 1){
+                chunkData = TestB.slice(i*chunk);//最后一个chunk
+            }else{
+                chunkData = TestB.slice(i*chunk,(i+1)*chunk);
+            }
+            let TestB2 = new Blob([i,splitB,chunkData]);
+            console.log('传输',i);
+            // process_span.innerText = ++Sign;
+            ++Sign;
+            requestAnimationFrame(()=>{
+                self.postMessage(JSON.stringify({
+                    name:'process_span',
+                    value:Sign
+                }));
+            });
+            socket.send(TestB2);
+            if(Sign == chunkNums){
+                resolve(1);
+                return;
+            }
+            currentIndex = i;
+            cancelIdleCallBackId = setTimeout(function(){//requestIdleCallback未定义
+                uploadData(++i)
+            },1);
+            
+        }
+        uploadData(0);
+    })
+    p.then((r)=>{
+        console.log(r);
+        socket.send(new Blob(['11111']));//结束
+        console.log("结束");
+    });
+}, false);
+
+```
+    注意：
+    requestIdleCallback在web worker中提示未定义
+    数组最大长度是2^32-1,所以分块不能分这么多（一般也不会有这情况）
+
+以上完美解决后台运行+分片上传功能
+
+如果想参考demo，[我的github地址在此](https://github.com/Newbit13/demo/tree/master/js/websocket_demo)
 
 ### 后续
-再进一步可以做的功能就是发现缺失的分片，并向对方重新请求
+- 再进一步可以做的功能就是发现缺失的分片，并向对方重新发起请求
+- 根据网络状况自动调整分片大小
 
-# node的websocket库
+# 额外 node的websocket库
 ## socket.io  github 51.6 stars
 如果客户端要使用该库，服务端也要相应的配合使用该库，目前支持node.js、java、C++、Swift、Dart
 
@@ -391,5 +581,7 @@ socket.io vs ws
 [你不知道的 Blob](https://juejin.cn/post/6844904178725158926?utm_source=gold_browser_extension%3Futm_source%3Dgold_browser_extension#heading-6)
 
 [聊聊JS的二进制家族：Blob、ArrayBuffer和Buffer](https://zhuanlan.zhihu.com/p/97768916)
+
+[requestIdleCallback](https://wiki.developer.mozilla.org/zh-CN/docs/Web/API/Background_Tasks_API)
 
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>websocket</title>
+</head>
+<body>
+    <div>进度：<span id='process_span'>0</span>/<span id='total_span'>0</span></div>
+    <input type="file" id="inputF">
+    <input type="text">
+    <img src="./ddd.jpg" width="200">
+    <img src="./xxxx.jpg" id='imgbox' width="200">
+    <img src="./xxxx.png" id='imgbox2' width="200">
+    <script>
+        var cancelIdleCallBackId;
+        var currentIndex;
+        function cancelUpload(){
+            cancelIdleCallback(cancelIdleCallBackId);
+            // clearTimeout(cancelIdleCallBackId);
+        }
+
+        function continueUpload(){
+            uploadData(currentIndex);
+        }
+        var worker = new Worker('./js/work.js');
+
+        worker.onmessage = function (event) {
+            // console.log('Received message ' + event.data);
+            var res = JSON.parse(event.data);
+            if(res.name == 'xx1'){
+                imgbox.src = res.value;
+            }else if(res.name == 'xx2'){
+                imgbox2.src = res.value;
+            }else if(res.name == 'total_span'){
+                total_span.innerText = res.value;
+            }else if(res.name == 'process_span'){
+                process_span.innerText = res.value;
+            }
+        }
+        inputF.onchange = function(a){
+            worker.postMessage(a.target.files[0]);
+        }
+    </script>
+    <input type="button" value="暂停" onclick="cancelUpload()">
+    <input type="button" value="继续" onclick="continueUpload()">
+</body>
+</html>
