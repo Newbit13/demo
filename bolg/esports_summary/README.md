@@ -529,6 +529,9 @@ self.addEventListener('message', function (e) {
 - 再进一步可以做的功能就是发现缺失的分片，并向对方重新发起请求
 - 根据网络状况自动调整分片大小
 
+推荐阅读：
+[大规格文件的上传优化](https://mp.weixin.qq.com/s/af-F2goqnfMEo_yT_yFUMw)
+
 # 额外 node的websocket库
 ## socket.io  github 51.6 stars
 如果客户端要使用该库，服务端也要相应的配合使用该库，目前支持node.js、java、C++、Swift、Dart
