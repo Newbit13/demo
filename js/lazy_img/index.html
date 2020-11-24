@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img[data-src] {
+            filter: blur(0.2em);
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            filter: blur(0em);
+            transition: filter 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <img src="loading.jpg" data-src="1.jpg" />
+    <img src="loading.jpg" data-src="2.jpg" />sadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsa
+    <img src="loading.jpg" data-src="3.jpg" />sadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsa
+    <img src="loading.jpg" data-src="4.jpg" />dsadsasadsasadsa
+    <img src="loading.jpg" data-src="5.jpg" />dsad
+    <img src="loading.jpg" data-src="6.jpg" />sadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsasadsa
+    <img src="loading.jpg" data-src="7.jpg" />dsad
+    <img src="loading.jpg" data-src="8.jpg" />
+    <img src="loading.jpg" data-src="9.jpg" />
+    <img src="loading.jpg" data-src="10.jpg" />
+    <img src="loading.jpg" data-src="11.jpg" />
+    <img src="loading.jpg" data-src="12.jpg" />
+    <img src="loading.jpg" data-src="13.jpg" />
+    <script>
+        // index.js
+        (function lazyLoad(){
+            const imageToLazy = document.querySelectorAll('img[data-src]');
+            const loadImage = function (image) {
+                image.setAttribute('src', image.getAttribute('data-src'));
+                image.addEventListener('load', function() {
+                    image.removeAttribute("data-src");
+                })
+            }
+
+
+            const intersectionObserver = new IntersectionObserver(function(items, observer) {
+                items.forEach(function(item) {
+                    if(item.isIntersecting) {
+                        loadImage(item.target);
+                        observer.unobserve(item.target);
+                    }
+                });
+            });
+
+            imageToLazy.forEach(function(image){
+                // IntersectionObserver//兼容性不好
+                // intersectionObserver.observe(image);
+                loadImage(image);
+            })
+        })()
+    </script>
+</body>
+</html>

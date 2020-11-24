@@ -13,3 +13,16 @@ console.log(JSON.stringify(
     },
     2
 ));
+
+//监听元素是否显示或隐藏在视窗内
+// IntersectionObserver
+const intersectionObserver = new IntersectionObserver(function(items, observer) {
+    items.forEach(function(item) {
+        if(item.isIntersecting) {
+            // loadImage(item.target);
+            observer.unobserve(item.target);
+        }
+    });
+});
+
+intersectionObserver.observe(image);
