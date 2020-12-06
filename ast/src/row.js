@@ -1,3 +1,3 @@
-const a = ()=>{
-    console.log(123);
+function square(n) {
+    return n * n;
 }
