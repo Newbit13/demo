@@ -22,13 +22,31 @@
 
 ```
 //沙箱：
-const run = function (window){
+let run = function (window){
   eval(`
-    window.a = 1;
+    window.a = 233;
     console.log(window.a);
+    console.log(window.document.documentElement);
   `)
 }
-run(new Proxy({}))
+const forkWindow = {};
+run(new Proxy(window,{
+get(target, key) {
+      console.log('获取了getter属性');
+      if(key in forkWindow){
+        return forkWindow[key];
+      }else{
+        return target[key]
+      }
+      
+    },
+set(target, key,val) {
+      console.log('设置了setter属性');
+      return forkWindow[key] = val;
+    }
+}))
+
+
 
 //使用了 MutationObserver 对沙箱外部的世界进行观察，一旦发现逃逸，就塞回原沙箱
 new MutationObserver((mutations) => {
