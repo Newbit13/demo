@@ -31,8 +31,9 @@ the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler)
 - 代码高亮
 - ES6 转 ES5
 - css加前缀
-- 梳理、破解混淆过的代码
-- 编写自己的DSL、H5转小程序等
+- 梳理、破解混淆过的代码（to do）
+- 编写自己的DSL、H5转小程序等（to do）
+- 通过注解自动生成测试用例（to do）
 
 可以做的事情很多，这应该就是传说中的终极技能了
 
