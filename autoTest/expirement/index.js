@@ -1,4 +1,4 @@
-var babylon = require("babel-core");
+var babylon = require("babylon");
 const traverse = require("babel-traverse").default;
 const t = require('babel-types');
 const generate = require('babel-generator').default;
@@ -30,33 +30,6 @@ fs.readFile('./sum.js',function(err,data){
 
     //根据ast生成代码
     let testAst;
-    // testAst = t.expressionStatement(
-    //     t.callExpression(
-    //         t.memberExpression(
-    //             t.identifier("console"),
-    //             t.identifier("log")
-    //         ),
-    //         [t.stringLiteral("is be called")]
-    //     )
-    // )
-
-    // testAst = t.expressionStatement(
-    //     t.variableDeclaration("const",[
-    //         t.variableDeclaration(null,[
-    //             t.variableDeclarator(
-    //                 t.objectPattern([
-    //                     t.objectProperty(
-    //                         t.identifier("sum"),
-    //                         t.identifier("sum"),
-    //                         false,
-    //                         true,
-    //                     )
-    //                 ]),
-    //                 t.callExpression()
-    //             )
-    //         ])
-    //     ])
-    // )
 
     testAst = fnCall();
     console.log(generate(testAst, {}).code);
