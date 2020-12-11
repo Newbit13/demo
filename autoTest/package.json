@@ -1,11 +1,11 @@
 {
-  "name": "autoTest",
+  "name": "auto_test",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "start": "nodemon expirement/index.js"
+    "test": "jest demo",
+    "start": "nodemon demo/index.js --ignore *.test.js"
   },
   "keywords": [],
   "author": "",
