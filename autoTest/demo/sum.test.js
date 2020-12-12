@@ -25,3 +25,9 @@ test("undefined equal undefined", () => {
 test("null equal null", () => {
   expect(isNull(null)).toBe(null);
 });
+// test("dddd", (done) => {
+//   setTimeout(()=>{
+//     expect(1).toBe(2);
+//     done()
+//   },2000)
+// });
