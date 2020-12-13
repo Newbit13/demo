@@ -17,7 +17,7 @@ module.exports = {
             recommended: true,
             url: "https://www.baidu.com"
         },
-        fixable: null,  // or "code" or "whitespace"
+        fixable: "code",  // or "code" or "whitespace"
         schema: [
             // fill in your schema
         ]
@@ -42,10 +42,14 @@ module.exports = {
                 if(node.name === "a"){
                     context.report({
                         node,
+                        // loc: 2,
                         messageId: "avoidName",
                         data: {
                             name: "a",
-                        }
+                        },
+                        // fix(fixer) {
+                        //     return null;
+                        // }
                     });
                 }
             }
