@@ -43,7 +43,7 @@ module.exports = {
                     context.report({
                         node,
                         // loc: 2,
-                        message: "avoidName",
+                        message: "再用a打屎",
                         data: {
                             name: "a",
                         },
