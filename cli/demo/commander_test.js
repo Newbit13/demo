@@ -2,7 +2,7 @@ const chalk = require('chalk');
 const { program } = require('commander');
 
 program.version('0.0.1');//--version
-program.name("cc").usage('<command> [options]');
+program.usage('<command> [options]');
 
 program
     .option('-d, --debug', 'output extra debugging')
@@ -11,11 +11,10 @@ program
     // .option('-p, --pizza-type <type>', 'flavour of pizza','fffloat')//执行时不用-p、--pizza-type、参数也不用
 
 program
-    .command('init <aaa> [bbbb]', 'Update packages of taro')
+    .command('init', 'Update packages of taro')
     .option('-sb, --sbbbb', 'hhhhhhhh')
-    .action((aaa,bbb)=>{
-        console.log(aaa);
-        console.log(bbb);
+    .action((options)=>{
+        // console.log(options.action);
     });
 
 
