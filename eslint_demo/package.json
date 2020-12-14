@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.15.0",
-    "eslint-plugin-noa": "0.0.0"
+    "eslint": "^7.15.0"
   }
 }

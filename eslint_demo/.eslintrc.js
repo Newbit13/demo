@@ -13,7 +13,7 @@ module.exports = {
     "rules": {
         "semi": ["error", "always"],
         "eqeqeq": "error",
-        // "noa/noa": "error",
+        "noa/noa": "error",
     },
     "plugins":["noa"]
 };
