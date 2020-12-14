@@ -16,18 +16,18 @@ program
 
 program
     // .command('init <aaa> [bbbb]', 'init packages of cc')
-    .command('init <aaa> [bbbb]')//没有第二个参数时action才会执行
+    .option('-sb, --sbbbb', 'hhhhhhhh')
+    .command('init <aaa> [bbbb]','22')//没有第二个参数时action才会执行,有第二个参数时会执行index-init.js
     .description('init~~~~~')
     .action((aaa,bbb)=>{
         console.log(aaa);
         console.log(bbb);
     })
-    .option('-sb, --sbbbb', 'hhhhhhhh')
     .option('-s, --small <type>', 'small pizza size',123)//<必选> [可选]
     .option('-p, --pizza <type>', 'flavour of pizza');
     
 
-
+// program.command会让后面的语句不执行
 program.parse(process.argv);//process.argv 可以拿到在命令行的输入
 
 //提到option的，program.xx为true；有设置值或者没提到但有默认值的，program.xx为该值

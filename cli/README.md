@@ -8,5 +8,12 @@
 [chalk.js](https://github.com/chalk/chalk)
 可以用于控制终端输出字符串的样式
 
+[Inquirer.js](https://github.com/SBoudrias/Inquirer.js/)
+处理命令行交互
+
+[ora](https://github.com/sindresorhus/ora)
+loading效果
+
+
 # 参考资料
 [Taro 技术揭秘：taro-cli](https://juejin.cn/post/6844903633557913608)
