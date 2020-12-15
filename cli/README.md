@@ -14,6 +14,8 @@
 [ora](https://github.com/sindresorhus/ora)
 loading效果
 
+[shelljs](https://github.com/shelljs/shelljs)
+执行shell 脚本,用处如：项目初始化后自动安装依赖```npm install```
 
 # 参考资料
 [Taro 技术揭秘：taro-cli](https://juejin.cn/post/6844903633557913608)
