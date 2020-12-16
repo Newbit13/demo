@@ -24,7 +24,11 @@ loading效果
 <!-- [node-fs-extra](https://github.com/jprichardson/node-fs-extra/blob/master/docs/readJson.md)
 跟fs差不多，多个readJson可以读json文件，返回对象 -->
 
+操作模板方面可以用的库：
 [mem-fs-editor](https://github.com/SBoudrias/mem-fs-editor)
+主要用的api是copyTpl；也可以解析json；
+
+[cheerio](https://github.com/cheeriojs/cheerio)
 
 # 参考资料
 [Taro 技术揭秘：taro-cli](https://juejin.cn/post/6844903633557913608)
