@@ -21,5 +21,10 @@ loading效果
 [node-glob](https://github.com/isaacs/node-glob)
 可以通过类似**/*.js获取所有匹配模式下的文件
 
+<!-- [node-fs-extra](https://github.com/jprichardson/node-fs-extra/blob/master/docs/readJson.md)
+跟fs差不多，多个readJson可以读json文件，返回对象 -->
+
+[mem-fs-editor](https://github.com/SBoudrias/mem-fs-editor)
+
 # 参考资料
 [Taro 技术揭秘：taro-cli](https://juejin.cn/post/6844903633557913608)

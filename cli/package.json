@@ -15,6 +15,8 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "commander": "^6.2.1",
+    "mem-fs": "^1.2.0",
+    "mem-fs-editor": "^7.1.0",
     "ora": "^5.1.0",
     "shell.js": "^3.2.3"
   },
