@@ -16,6 +16,10 @@ loading效果
 
 [shelljs](https://github.com/shelljs/shelljs)
 执行shell 脚本,用处如：项目初始化后自动安装依赖```npm install```
+还可以复制、删除目录；批量替换文件中的值；执行git操作（前提是你有git命令可以用）
+
+[node-glob](https://github.com/isaacs/node-glob)
+可以通过类似**/*.js获取所有匹配模式下的文件
 
 # 参考资料
 [Taro 技术揭秘：taro-cli](https://juejin.cn/post/6844903633557913608)
