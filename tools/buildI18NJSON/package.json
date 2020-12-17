@@ -1,0 +1,25 @@
+{
+  "name": "build_i18n_json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/index.js -i ./dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^6.2.1",
+    "mem-fs": "^1.2.0",
+    "mem-fs-editor": "^7.1.0",
+    "ora": "^5.1.0",
+    "shell.js": "^3.2.3",
+    "babel-generator": "^6.26.1",
+    "babel-traverse": "^6.26.0",
+    "babel-types": "^6.26.0",
+    "babylon": "^6.18.0"
+  }
+}

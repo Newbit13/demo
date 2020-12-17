@@ -1,0 +1,7 @@
+{
+  "function(){\r\n            return 1;\r\n        }": "go",
+  "选择赛事": "filter😁filter_title",
+  "全部": "filter😁All",
+  "DOTA2": "filter😁DOTA2",
+  "周日,周一,周二,周三,周四,周五,周六": "base😁week"
+}
