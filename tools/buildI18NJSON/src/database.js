@@ -59,9 +59,7 @@ var textAll = {
             "state": { // textAll[lan]["gameLi"]['state']
                 0: '未开始',
                 1: '进行中',
-                2: '已完场',
                 3: '延期',
-                4: '取消',
                 5: '待定'
             },
             'camp_lol': { // textAll[lan]["gameLi"]['camp_lol']
@@ -100,15 +98,8 @@ var textAll = {
         },
         'common_header': {
             'live': "实时赛况",
-            'analyse': "数据分析"
         },
         "goaldata": {
-            'kills': '击杀数',
-            'moneys': '经济',
-            'pushTowers': '推塔',
-            'dragon': '小龙',
-            'baron': '大龙',
-            'barracks': '兵营',
             'lookLive': '看直播',
             
             'needAnthorName': {
@@ -123,7 +114,6 @@ var textAll = {
             "skill": "技能",
             "heroLevel": "等级",
             "kda": "K/D/A",
-            "moneys": "经济",
             "rop": "参团率",
             "lastHits": "正补",
             "creepKills": "补刀",
@@ -213,7 +203,6 @@ var textAll = {
             result:'完场',
             fixture:'赛程',
             yes:'确定',
-            cancel:'取消',
             captchaTip1:'请先通过下方的智能验证',
             captchaTip2:'请输入正确的邮箱格式',
             captchaTip3:'点击按钮开始智能验证',
@@ -233,7 +222,6 @@ var textAll = {
             ing: '赛季中'//赛季中
         },
         news: {
-            other: '其他',
             point: '焦点',
             runs: '第_局'
         },
@@ -243,11 +231,7 @@ var textAll = {
             },
             season: '选择赛季',
             stage: '选择阶段',
-            match_time: '比赛时间',
-            team: '战队',
-            score: '比分',
             number: '局数',
-            match: '赛事',
             integrals: '积分表',
             point: '积分',
             team_top: '战队榜',
@@ -263,16 +247,9 @@ var textAll = {
             loss: '负',
             match_explain: '赛事说明',
             match_session: '比赛场次',
-            win_rate: '胜率',
-            FirstBloodRate: '一血率',
-            FirstTurretRate: '一塔率',
-            FirstRoshanRate: '首肉山率',
             durationPerGame: '局均时长',
             turretsPerGame: '局均推塔',
-            boutDurationPerGame: '场均时长',
             boutTurretsPerGame: '场均推塔',
-            firstBaronRate: '首大龙率',
-            firstDragonRate: '首小龙率',
             at1stHalfWinRate: '上半场手枪获胜率',
             at2ndHalfWinRate: '下半场手枪获胜率',
             player: '选手',
@@ -296,9 +273,6 @@ var textAll = {
             killsPerRound: '回合击杀数',
             assistsPerRound: '回合助攻数',
             deathsPerRound: '回合死亡数', 
-            Rating: 'Rating',
-            ADR: 'ADR',
-            KAST: 'KAST',
             total: '局总数',
             count_win_rate: '局胜率'
         },
@@ -326,11 +300,8 @@ var textAll = {
             allMatch: '全部赛事',
             noIntro: '暂无战队简介',
             noLineUpData: '暂无阵容数据',
-            noMatchData: '暂无赛事数据',
             fitures_results: '赛程赛果',
             data: '数据',
-            allCompetitions: '全部赛事',
-            league: '赛事',
             profile: '战队简介：',
             lineUp: '战队阵容',
             gamePlayed: '总场数',
@@ -339,7 +310,6 @@ var textAll = {
             loss: '失败数',
             statistics: '数据统计',
             headshotsPerGame: '局均爆头数',
-            boutHeadshotsPerGame: '局均爆头数',
             recentEncounters: function (n) {
                 return '近 ' + n + ' 场交锋';
             },
@@ -360,7 +330,6 @@ var textAll = {
             gamePosition: {
                 // DOTA2  0 未知 1 抗压路 3 中路 4 优势路 5 辅助
                 1: {
-                    0: '-',
                     1: '抗压路',
                     3: '中路',
                     4: '优势路',
@@ -368,21 +337,14 @@ var textAll = {
                 },
                 // LOL 0 未知 1 上路 2 打野 3 中路 4 下路 5 辅助
                 2: {
-                    0: '-',
                     1: '上路',
                     2: '打野',
-                    3: '中路',
                     4: '下路',
-                    5: '辅助'
                 },
                 // 王者荣耀 0 未知 1 边路 2 打野 3 中路 4 射手 5 辅助
                 4: {
-                    0: '-',
                     1: '边路',
-                    2: '打野',
-                    3: '中路',
                     4: '射手',
-                    5: '辅助' 
                 }
                 
             },
@@ -398,12 +360,6 @@ var textAll = {
                 return '出场' + n + '次';
             },
             moreFixtures: '更多赛程',
-            result: function (n) {
-                return {
-                    1: '胜',
-                    2: '负',
-                }[n]
-            },
             gameOfNumber: function (n) {
                 return '第' + n + '局';
             }
@@ -469,9 +425,7 @@ var textAll = {
             "state": { // textAll[lan]["gameLi"]['state']
                 0: '未開始',
                 1: '進行中',
-                2: '已完場',
                 3: '延期',
-                4: '取消',
                 5: '待定'
             },
             'camp_lol': { // textAll[lan]["gameLi"]['camp_lol']
@@ -483,7 +437,6 @@ var textAll = {
                 2: '輝'
             },
             'nav': { // textAll[lan]["gameLi"]['nav']['optional']
-                'optional': '選擇賽事',
                 'select': '精選比賽',
                 'all': '全部比賽',
                 'category': '按聯賽顯示',
@@ -511,15 +464,8 @@ var textAll = {
         },
         'common_header': {
             'live': "實時賽況",
-            'analyse': "數據分析"
         },
         "goaldata": {
-            'kills': '擊殺數',
-            'moneys': '經濟',
-            'pushTowers': '推塔',
-            'dragon': '小龍',
-            'baron': '大龍',
-            'barracks': '兵營',
             'lookLive': '看直播',
             
             'needAnthorName': {
@@ -534,7 +480,6 @@ var textAll = {
             "skill": "技能",
             "heroLevel": "等級",
             "kda": "K/D/A",
-            "moneys": "經濟",
             "rop": "參團率",
             "lastHits": "正補",
             "creepKills": "補刀",
@@ -625,7 +570,6 @@ var textAll = {
             result:'完場',
             fixture:'賽程',
             yes:'確定',
-            cancel:'取消',
             captchaTip1:'請先通過下方的智能驗證',
             captchaTip2:'請輸入正確的郵箱格式',
             captchaTip3:'點擊按鈕開始智能驗證',
@@ -637,7 +581,6 @@ var textAll = {
             copyTip3:'請先生成地址或代碼'
         },
         dataBank: {
-            all: '全部',
             internation: '國際',
             europe: '歐洲',
             asia: '亞洲',
@@ -650,8 +593,6 @@ var textAll = {
             ing: '賽季中'
         },
         news: {
-            all: '全部',
-            other: '其他',
             point: '焦點',
             runs: '第_局'
         },
@@ -661,11 +602,7 @@ var textAll = {
             },
             season: '選擇賽季',
             stage: '選擇階段',
-            match_time: '比賽時間',
-            team: '戰隊',
-            score: '比分',
             number: '局數',
-            match: '賽事',
             integrals: '積分表',
             point: '積分',
             team_top: '戰隊榜',
@@ -681,16 +618,9 @@ var textAll = {
             loss: '負',
             match_explain: '賽事說明',
             match_session: '比賽場次',
-            win_rate: '勝率',
-            FirstBloodRate: '壹血率',
-            FirstTurretRate: '壹塔率',
-            FirstRoshanRate: '首肉山率',
             durationPerGame: '局均時長',
             turretsPerGame: '局均推塔',
-            boutDurationPerGame: '場均時長',
             boutTurretsPerGame: '場均推塔',
-            firstBaronRate: '首大龍率',
-            firstDragonRate: '首小龍率',
             at1stHalfWinRate: '上半場手槍獲勝率',
             at2ndHalfWinRate: '下半場手槍獲勝率',
             player: '選手',
@@ -713,10 +643,7 @@ var textAll = {
             headshotPercentage: '爆頭率',
             killsPerRound: '回合擊殺數',
             assistsPerRound: '回合助攻數',
-            deathsPerRound: '回合死亡數', 
-            Rating: 'Rating',
-            ADR: 'ADR',
-            KAST: 'KAST',
+            deathsPerRound: '回合死亡數',
             total: '局總數',
             count_win_rate: '局勝率',
         },
@@ -744,11 +671,8 @@ var textAll = {
             allMatch: '全部賽事',
             noIntro: '暫無戰隊簡介',
             noLineUpData: '暫無陣容數據',
-            noMatchData: '暫無賽事數據',
             fitures_results: '賽程賽果',
             data: '數據',
-            allCompetitions: '全部賽事',
-            league: '賽事',
             profile: '戰隊簡介：',
             lineUp: '戰隊陣容',
             gamePlayed: '總場數',
@@ -778,7 +702,6 @@ var textAll = {
             gamePosition: {
                 // DOTA2  0 未知 1 抗压路 3 中路 4 优势路 5 辅助
                 1: {
-                    0: '-',
                     1: '抗壓路',
                     3: '中路',
                     4: '優勢路',
@@ -786,21 +709,14 @@ var textAll = {
                 },
                 // LOL 0 未知 1 上路 2 打野 3 中路 4 下路 5 輔助
                 2: {
-                    0: '-',
                     1: '上路',
                     2: '打野',
-                    3: '中路',
                     4: '下路',
-                    5: '輔助'
                 },
                 // 王者荣耀 0 未知 1 边路 2 打野 3 中路 4 射手 5 辅助
                 4: {
-                    0: '-',
                     1: '邊路',
-                    2: '打野',
-                    3: '中路',
                     4: '射手',
-                    5: '輔助' 
                 }    
             },
             team: '效力戰隊',
@@ -815,12 +731,6 @@ var textAll = {
                 return '出場' + n + '次';
             },
             moreFixtures: '更多賽程',
-            result: function (n) {
-                return {
-                    1: '勝',
-                    2: '負',
-                }[n]
-            },
             gameOfNumber: function (n) {
                 return '第' + n + '局';
             }

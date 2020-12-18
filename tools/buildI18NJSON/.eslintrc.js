@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = {
     "env": {
         "browser": true,
@@ -13,7 +14,7 @@ module.exports = {
     },
     "overrides": [
         {
-            "files": ["./src/database.js"],
+            "files": ["./src/database_part.js"],
             "rules": {
                 "multipObjVal/noa": "error"
             }
