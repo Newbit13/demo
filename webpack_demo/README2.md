@@ -1,6 +1,98 @@
 # 解决webpack5使用babel后IE8不兼容的问题（深入）
 
-# 问题背景(可跳过)
+# loose mode
+用Babel将ES6转ES5有两种模式,普通(normal)和宽松(loose)模式，默认是normal模式。
+- 支持宽松模式的人：
+生成的代码可能更快，并且与旧引擎更兼容。它也趋向于更干净，更es5风格。
+
+- 反对宽松模式的人：
+当您以后从编译ES6换成用原生的ES6时，您可能会遇到问题。
+
+遇到什么问题？下面栗子可以让你看到区别
+
+比如现在有一段代码：
+```
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    toString() {
+        return `(${this.x}, ${this.y})`;
+    }
+}
+```
+
+用普通模式,这样用到了IE8所不兼容的defineProperty，因为根据ES6规范，class里的方法，属性这些都不可枚举:
+```
+"use strict";
+
+var _createClass = (function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor) descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor); // (A)
+        }
+    }
+    return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);
+        if (staticProps) defineProperties(Constructor, staticProps);
+        return Constructor;
+    };
+})();
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
+
+var Point = (function () {
+    function Point(x, y) {
+        _classCallCheck(this, Point);
+
+        this.x = x;
+        this.y = y;
+    }
+
+    _createClass(Point, [{
+        key: "toString",
+        value: function toString() {
+            return "(" + this.x + ", " + this.y + ")";
+        }
+    }]);
+
+    return Point;
+})();
+```
+
+而使用宽松模式时:
+```
+"use strict";
+
+function _classCallCheck(instance, Constructor) { ··· }
+
+var Point = (function () {
+    function Point(x, y) {
+        _classCallCheck(this, Point);
+
+        this.x = x;
+        this.y = y;
+    }
+
+    Point.prototype.toString = function toString() { // (A)
+        return "(" + this.x + ", " + this.y + ")";
+    };
+
+    return Point;
+})();
+```
+
+这也是为什么babel出来的代码**一般**IE8运行不起来的原因。
+
 
 # babel-loader先加载preset还是plugins？他们的区别是什么？
 
@@ -51,3 +143,5 @@ const validateOptions = require("schema-utils");
 [Babel —— 把 ES6 送上天的通天塔](https://www.cnblogs.com/vivotech/p/13330393.html)
 
 [@babel/preset-env 与@babel/plugin-transform-runtime 使用及场景区别](https://segmentfault.com/a/1190000021188054)
+
+[Babel 6: loose mode](https://2ality.com/2015/12/babel6-loose-mode.html)
