@@ -758,7 +758,7 @@ var textAll = {
         },
         "gameLi": {
             'section': { // textAll[lan]["gameLi"]['section']
-                'all': 'All',
+                
                 '1st': '1st',
                 '2nd': '2nd',
                 'ot': 'OT',
@@ -803,7 +803,7 @@ var textAll = {
                 'live': 'Live',
                 'live_video':'Match streams:',
                 'to_top':'Top',
-                'to_bottom':'Cancel',
+                
                 'analyse':'Analysis',
                 'analyseTitle':'Data Analysis'
 
@@ -811,7 +811,7 @@ var textAll = {
             "state": { // textAll[lan]["gameLi"]['state']
                 0: 'Not Started',
                 1: 'In-play',
-                2: 'Finished',
+                
                 3: 'Postponed',
                 4: 'Canceled',
                 5: 'Pending'
@@ -822,7 +822,7 @@ var textAll = {
             },
             'camp_dota2': {
                 1: 'D', //'Dire',
-                2: 'R' //'Radiant'
+                //'Radiant'
             },
             'nav': { // textAll[lan]["gameLi"]['nav']['optional']
                 'optional': 'Select Competitions',
@@ -839,7 +839,7 @@ var textAll = {
         tips: {
             no_support: 'Sorry, the current version of your browser is too old to update the score data in real time. Please upgrade it to the latest version!',
             no_data: 'No data now',
-            to_top:'Top'
+            
         },
         menu: 'Esports Scores',
 
@@ -850,15 +850,15 @@ var textAll = {
         },
         'common_header': {
             'live': "Real-time",
-            'analyse': "Data Analysis"
+            
         },
         "goaldata": {
-            'kills': 'Kills',
-            'moneys': 'Gold',
-            'pushTowers': 'Turrets',
-            'dragon': 'Dragons',
-            'baron': 'Barons',
-            'barracks': 'Barracks',
+            
+            
+            
+            
+            
+            
             'lookLive': 'Watch the Live',
             
             'needAnthorName': {
@@ -873,7 +873,7 @@ var textAll = {
             "skill": "Skills",
             "heroLevel": "Grade",
             "kda": "K/D/A",
-            "moneys": "Gold",
+            
             "rop": "KP",
             "lastHits": "Last Hits",
             "creepKills": "Creep Kills",
@@ -884,9 +884,9 @@ var textAll = {
 
             "firstHalfWins": "1st Half",
             "secondHalfWins": "2nd Half",
-            "otWins": "OT",
+            
             "Khs": "K(hs)",
-            "D": "D",
+            
             "A": "A(f)",
             "KAST": "KAST",
             "ADR": "ADR",
@@ -920,7 +920,7 @@ var textAll = {
             'league':'Competition',
             'betTime':'Date',
             'team':'Team',
-            'score':'Score',
+            
 
             'data_comp':'Data Comparison',
             'h2h_rc':'H2H Records',
@@ -961,10 +961,10 @@ var textAll = {
             freeUseTip2:'7M Esports Live Scores page',
             smallTip:'You only need to fill in the following information to use the free feed service',
             live:'Live Scores',
-            result:'Results',
-            fixture:'Fixtures',
+            
+            
             yes:'Confirm',
-            cancel:'Cancel',
+            
             captchaTip1:'Please go through the smart verification below first',
             captchaTip2:'Please enter the correct email format',
             captchaTip3:'Click here to start smart verification',
@@ -976,7 +976,7 @@ var textAll = {
             copyTip3:'Please generate the address or code first'
         },
         dataBank: {
-            all: 'All',
+            
             internation: 'International',
             europe: 'Europe',
             asia: 'Asia',
@@ -1002,17 +1002,17 @@ var textAll = {
             },
             season: 'Select Season',
             stage: 'Select Stage',
-            match_time: 'Time',
-            team: 'Team',
-            score: 'Score',
+            
+            
+            
             number: 'No. of Game',
             match: 'Competitions',
             integrals: 'Points',
-            point: 'Points',
+            
             team_top: 'Teams',
             player_top: 'Players',
             match_short: "Competition's Short Name",
-            hold_time: 'Date',
+            
             hold_site: 'Venue',
             url: 'Official Website',
             recommended: 'Recommended',
@@ -1022,29 +1022,29 @@ var textAll = {
             loss: 'Loss',
             match_explain: 'Introduction',
             match_session: 'Game Played',
-            win_rate: 'Win Rate',
-            FirstBloodRate: 'First Blood Rate',
-            FirstTurretRate: 'First Turret Rate',
-            FirstRoshanRate: 'First Roshan Rate',
-            durationPerGame: 'Duration Per Game',
+            
+            
+            
+            
+            
             turretsPerGame: 'Turrets Per Game',
-            boutDurationPerGame: 'Duration Per Game',
-            boutTurretsPerGame: 'Turrets Per Game',
-            firstBaronRate: 'First Baron Rate',
-            firstDragonRate: 'First Dragon Rate',
+            
+            
+            
+            
             at1stHalfWinRate: 'Pistol Round Win Rate at 1st Half',
             at2ndHalfWinRate: 'Pistol Round Win Rate at 2nd Half',
             player: 'Player',
             kda: 'KDA',
-            belong_team: 'Team',
+            
             kd: 'K/D',
             appearance: 'Appearances',
-            killsPerGame: 'Kills Per Game',
+            
             deathsPerGame: 'Deaths Per Game',
             assistsPerGame: 'Assists Per Game',
-            boutKillsPerGame: 'Kills Per Game',
-            boutDeathsPerGame: 'Deaths Per Game',
-            boutAssistsPerGame: 'Assists Per Game',
+            
+            
+            
             goldPerMinute: 'Gold Per Minute',
             damageDealtPerMinute: 'Damage Dealt Per Minute',
             damageTakenPerMinute: 'Damage Taken Per Minute',
@@ -1055,14 +1055,14 @@ var textAll = {
             killsPerRound: 'Kills Per Round',
             assistsPerRound: 'Assists Per Round',
             deathsPerRound: 'Deaths Per Round',
-            boutKillsPerRound: 'Kills Per Round',
-            boutAssistsPerRound: 'Assists Per Round',
-            boutDeathsPerRound: 'Deaths Per Round', 
-            Rating: 'Rating',
-            ADR: 'ADR',
-            KAST: 'KAST',
+            
+            
+             
+            
+            
+            
             total: 'Total Rounds',
-            count_win_rate: 'Win Rate'
+            
         },
         teamPage: {
             established: function (time, country) {
@@ -1094,17 +1094,17 @@ var textAll = {
             noMatchData: 'No competitions data yet',
             fitures_results: 'Fixtures & Results',
             data: 'Data',
-            allCompetitions: 'All Competitions',
-            league: 'Competitions',
+            
+            
             profile: 'Profile:',
             lineUp: 'Line-up',
-            gamePlayed: 'Game Played',
-            win: 'Win',
-            draw: 'Draw',
-            loss: 'Loss',
+            
+            
+            
+            
             statistics: 'Statistics',
             headshotsPerGame: 'Headshots Per Game',
-            boutHeadshotsPerGame: 'Headshots Per Game',
+            
             recentEncounters: function (n) {
                 return 'Recent ' + n + ' Encounters';
             },
@@ -1126,7 +1126,7 @@ var textAll = {
             gamePosition: {
                 // DOTA2  0 未知 1 抗压路 3 中路 4 优势路 5 辅助  OFFLANE/MID/SAFE LANE/SUP
                 1: {
-                    0: '-',
+                    
                     1: 'OFFLANE',
                     3: 'MID',
                     4: 'SAFE LANE',
@@ -1134,24 +1134,24 @@ var textAll = {
                 },
                 // LOL 0 未知 1 上路 2 打野 3 中路 4 下路 5 辅助 TOP/MID/ADC/JUG/SUP
                 2: {
-                    0: '-',
+                    
                     1: 'TOP',
-                    2: 'MID',
+                    
                     3: 'ADC',
                     4: 'JUG',
-                    5: 'SUP'
+                    
                 },
                 // 王者荣耀 0 未知 1 边路 3 中路 4 射手 5 辅助 2 打野  SIDE/MID/ADC/SUP/JUG
                 4: {
-                    0: '-',
+                    
                     1: 'SIDE',
-                    2: 'JUG',
-                    3: 'MID',
-                    4: 'ADC',
-                    5: 'SUP'
+                    
+                    
+                    
+                    
                 }
             },
-            team: 'Team',
+            
             overallData: 'Overall Data',
             teammates: 'Teammates',
             noPlayerData: 'No player data yet',
@@ -1165,8 +1165,8 @@ var textAll = {
             moreFixtures: 'More Fixtures',
             result: function (n) {
                 return {
-                    1: 'Win',
-                    2: 'Loss',
+                    
+                    
                 }[n]
             },
             gameOfNumber: function (n) {
@@ -1226,7 +1226,7 @@ var textAll = {
                 'live': 'ถ่ายทอดสด',
                 'live_video':'แชร์ถ่ายทอดสด:',
                 'to_top':'Top',
-                'to_bottom':'ยกเลิก',
+                
                 'analyse':'วิเคราะห์',
                 'analyseTitle':'การวิเคราะห์ข้อมูล'
 
@@ -1236,7 +1236,7 @@ var textAll = {
                 1: 'live',
                 2: 'FT',
                 3: 'เลื่อนเวลา',
-                4: 'ยกเลิก',
+                
                 5: 'รอการระบุเวลา'
             },
             'camp_lol': { // textAll[lan]["gameLi"]['camp_lol']
@@ -1245,7 +1245,7 @@ var textAll = {
             },
             'camp_dota2': {
                 1: 'D', //'Dire',
-                2: 'R' //'Radiant'
+                //'Radiant'
             },
             'nav': { // textAll[lan]["gameLi"]['nav']['optional']
                 'optional': 'เลือกเกม',
@@ -1262,7 +1262,7 @@ var textAll = {
         tips: {
             no_support: 'ขอโทษ เวอร์ชั่นเบราว์เซอร์ของคุณเป็นรุ่นเก่า ไม่สามารถอัพเดทข้อมูลผลการแข่งขัน โปรดอัพเดทเวอร์ชั่นล่าสุด',
             no_data: 'ยังไม่มีข้อมูล',
-            to_top:'Top'
+            
         },
         menu: 'ผลอีสปอร์ต',
 
@@ -1273,15 +1273,15 @@ var textAll = {
         },
         'common_header': {
             'live': "ผลอีสปอร์ตสด",
-            'analyse': "การวิเคราะห์ข้อมูล"
+            
         },
         "goaldata": {
-            'kills': 'kills',
-            'moneys': 'ตังค์',
-            'pushTowers': 'ทำลายป้อม',
-            'dragon': 'มังกรเล็ก',
-            'baron': 'มังกรใหญ่',
-            'barracks': 'ค่ายทหาร',
+            
+            
+            
+            
+            
+            
             'lookLive': 'ดูถ่ายทอดสด',
             
             'needAnthorName': {
@@ -1296,7 +1296,7 @@ var textAll = {
             "skill": "สกิล",
             "heroLevel": "ระดับ",
             "kda": "K/D/A",
-            "moneys": "ตังค์",
+            
             "rop": "KP",
             "lastHits": "ฆ่าครีปฝั่งตรงข้าม",
             "creepKills": "คืบคลานฆ่า",
@@ -1309,7 +1309,7 @@ var textAll = {
             "secondHalfWins": "ครึ่งหลัง",
             "otWins": "ต่อเวลา",
             "Khs": "K(hs)",
-            "D": "D",
+            
             "A": "A(f)",
             "KAST": "KAST",
             "ADR": "ADR",
@@ -1386,8 +1386,8 @@ var textAll = {
             live:'ผลเกมสด',
             result:'ผลเกมย้อนหลัง',
             fixture:'โปรแกรม',
-            yes:'ยืนยัน',
-            cancel:'ยกเลิก',
+            
+            
             captchaTip1:'โปรดผ่านการยืนยันแบบสมาร์ทของข้างล่างก่อน',
             captchaTip2:'โปรดกรอกรูปแบบอีเมลที่ถูกต้อง',
             captchaTip3:'กดปุ่มเพื่อเริ่มการยืนยันแบบสมาร์ท',
@@ -1399,7 +1399,7 @@ var textAll = {
             copyTip3:'โปรดสร้างที่อยู่ลิงค์หรือโค้ดก่อน'
         },
         dataBank: {
-            all: 'ทั้งหมด',
+            
             internation: 'สากล',
             europe: 'ยุโรป',
             asia: 'เอเชีย',
@@ -1412,7 +1412,7 @@ var textAll = {
             ing: 'กลางฤดูกาล'
         },
         news: {
-            all: 'ทั้งหมด',
+            
             other: 'อื่นๆ ',
             point: 'โฟกัส',
             runs: 'เกมที่'
@@ -1425,13 +1425,13 @@ var textAll = {
             },
             season: 'เลือกฤดูกาล',
             stage: 'เลือกสเตจ',
-            match_time: 'เวลา',
-            team: 'ทีม',
-            score: 'สกอร์',
+            
+            
+            
             number: 'จำนวนเกม',
-            match: 'การแข่งขัน',
+            
             integrals: 'ตารางคะแนน',
-            point: 'คะแนน',
+            
             team_top: 'ตารางทีม',
             player_top: 'ตารางผู้เล่น',
             match_short: 'ตัวย่อการแข่งขัน',
@@ -1445,29 +1445,29 @@ var textAll = {
             loss: 'แพ้',
             match_explain: 'คำอธิบายของเกม',
             match_session: 'รอบ',
-            win_rate: 'อัตราชนะ',
-            FirstBloodRate: 'อัตราเลือดครั้งแรก',
-            FirstTurretRate: 'อัตราป้อมแรก',
+            
+            
+            
             FirstRoshanRate: 'อัตราโรซันแรก',
-            durationPerGame: 'เวลาเฉลี่ยต่อเกม',
+            
             turretsPerGame: 'เฉลี่ยทำลายป้อมต่อเกม',
-            boutDurationPerGame: 'เวลาเฉลี่ยต่อเกม',
-            boutTurretsPerGame: 'เฉลี่ยทำลายป้อมต่อเกม',
+            
+            
             firstBaronRate: 'อัตรามันกรใหญ่แรก',
             firstDragonRate: 'อัตรมันกรเล็กแรก',
             at1stHalfWinRate: 'อัตราชนะของปืนพกครึ่งแรก',
             at2ndHalfWinRate: 'อัตราชนะของปืนพกครึ่งหลัง',
             player: 'ผู้เล่น',
             kda: 'KDA',
-            belong_team: 'ทีม',
+            
             kd: 'K/D',
             appearance: 'การปรากฏตัว',
             killsPerGame: 'เฉลี่ยฆ่าต่อเกม',
             deathsPerGame: 'เฉลี่ยตายต่อเกม',
             assistsPerGame: 'เฉลี่ยแอสซิสต์ต่อเกม',
-            boutKillsPerGame: 'เฉลี่ยฆ่าต่อเกม',
-            boutDeathsPerGame: 'เฉลี่ยตายต่อเกม',
-            boutAssistsPerGame: 'เฉลี่ยแอสซิสต์ต่อเกม',
+            
+            
+            
             goldPerMinute: 'เฉลี่ยตังค์ต่อนาที',
             damageDealtPerMinute: 'เฉลี่ยทำลายต่อนาที',
             damageTakenPerMinute: 'เฉลี่ยรับทำลายต่อนาที',
@@ -1478,14 +1478,14 @@ var textAll = {
             killsPerRound: 'เฉลี่ยฆ่าต่อรอบ',
             assistsPerRound: 'เฉลี่ยแอสซิสต์ต่อรอบ',
             deathsPerRound: 'เฉลี่ยตายต่อรอบ', 
-            boutKillsPerRound: 'เฉลี่ยฆ่าต่อรอบ',
-            boutAssistsPerRound: 'เฉลี่ยแอสซิสต์ต่อรอบ',
-            boutDeathsPerRound: 'เฉลี่ยตายต่อรอบ', 
-            Rating: 'Rating',
-            ADR: 'ADR',
-            KAST: 'KAST',
+            
+            
+             
+            
+            
+            
             total: 'รอบรวม',
-            count_win_rate: 'อัตราชนะ',
+            
         },
         teamPage: {
             established: function (time, country) {
@@ -1514,17 +1514,17 @@ var textAll = {
             noMatchData: 'ไม่พบข้อมูลของรายการ',
             fitures_results: 'โปรแกรม/ผลบอล',
             data: 'ข้อมูล',
-            allCompetitions: 'การแข่งขันทั้งหมด',
-            league: 'การแข่งขัน',
+            
+            
             profile: 'รายละเอียดทีม:',
-            lineUp: 'รายชื่อผู้เล่น',
+            
             gamePlayed: 'จำนวนเกมทั้งหมด',
             win: 'จำนวนชนะ',
             draw: 'จำนวนเสมอ',
             loss: 'จำนวนแพ้',
             statistics: 'สถิติการข้อมูล',
             headshotsPerGame: 'เฮดช็อตต่อเกม',
-            boutHeadshotsPerGame: 'เฮดช็อตต่อเกม',
+            
             recentEncounters: function (n) {
                 return  n + ' เกมหลังที่พบกัน';
             },
@@ -1545,7 +1545,7 @@ var textAll = {
             gamePosition: {
                 // DOTA2  0 未知 1 抗压路 3 中路 4 优势路 5 辅助  ออฟเลน/เลนกลาง/เลนแห่งความหวัง/สนับสนุน
                 1: {
-                    0: '-',
+                    
                     1: 'ออฟเลน',
                     3: 'เลนกลาง',
                     4: 'เลนแห่งความหวัง',
@@ -1553,24 +1553,24 @@ var textAll = {
                 },
                 // LOL 0 未知 1 上路 2 打野 3 中路 4 下路 5 辅助  เลนบน/เลนกลาง/เลนล่าง/ฟาร์มป่า/สนับสนุน
                 2: {
-                    0: '-',
+                    
                     1: 'เลนบน',
-                    2: 'เลนกลาง',
+                    
                     3: 'เลนล่าง',
                     4: 'ฟาร์มป่า',
-                    5: 'สนับสนุน'
+                    
                 },
                 // 王者荣耀 0 未知 1 边路 3 中路 4 射手 5 辅助 2 打野  เลนข้าง/เลนกลาง/นักแม่นปืน/สนับสนุน/ฟาร์มป่า
                 4: {
-                    0: '-',
+                    
                     1: 'เลนข้าง',
-                    2: 'ฟาร์มป่า',
-                    3: 'เลนกลาง',
+                    
+                    
                     4: 'นักแม่นปืน',
-                    5: 'สนับสนุน'
+                    
                 }
             },
-            team: 'ทีม',
+            
             overallData: 'ข้อมูลครอบคลุม',
             teammates: 'เกมเมอร์ทีมเดียวกัน',
             noPlayerData: 'ไม่พบข้อมูล<br />ของเกมเมอร์',
@@ -1584,8 +1584,8 @@ var textAll = {
             moreFixtures: 'โปรแกรมเพิ่งเติม',
             result: function (n) {
                 return {
-                    1: 'ชนะ',
-                    2: 'แพ้',
+                    
+                    
                 }[n]
             },
             gameOfNumber: function (n) {
@@ -1653,7 +1653,7 @@ var textAll = {
                 1: '진행중',
                 2: '경기종료',
                 3: '연기',
-                4: '취소',
+                
                 5: '미확정'
             },
             'camp_lol': { // textAll[lan]["gameLi"]['camp_lol']
@@ -1662,10 +1662,10 @@ var textAll = {
             },
             'camp_dota2': {
                 1: 'D', //'Dire',
-                2: 'R' //'Radiant'
+                //'Radiant'
             },
             'nav': { // textAll[lan]["gameLi"]['nav']['optional']
-                'optional': '경기 선택',
+                
                 'select': '특선 경기',
                 'all': '모든 경기',
                 'category': '리그순',
@@ -1686,20 +1686,20 @@ var textAll = {
         'result': {
             'calendar': '캘린더',
             'schedule': '경기일정',
-            'afterGame': '경기결과'
+            
         },
-        menu: 'e스포츠 스코어',
+        
         'common_header': {
             'live': "실시간",
-            'analyse': "데이터 분석"
+            
         },
         "goaldata": {
-            'kills': '킬 횟수',
-            'moneys': '골드',
-            'pushTowers': '포탑 공격',
-            'dragon': '드래곤',
-            'baron': '바론',
-            'barracks': '배럭',
+            
+            
+            
+            
+            
+            
             'lookLive': '생방송 보기',
             
             'needAnthorName': {
@@ -1714,10 +1714,10 @@ var textAll = {
             "skill": "스킬",
             "heroLevel": "레벨",
             "kda": "K/D/A",
-            "moneys": "골드",
+            
             "rop": "KP",
             "lastHits": "막타",
-            "creepKills": "막타",
+            
             "creepDenies": "디나이",
             "exports": "데미지 딜트",
             "hurts": "데미지 테이큰",
@@ -1727,12 +1727,12 @@ var textAll = {
             "secondHalfWins": "후반전",
             "otWins": "연장전",
             "Khs": "K(hs)",
-            "D": "D",
+            
             "A": "A(f)",
             "KAST": "KAST",
             "ADR": "ADR",
             "Rating": "Rating",
-            "no_game_data": "데이터가 없습니다.",
+            
             "loading_game_data": "데이터 업데이트 중, 잠시 후에 다시 시도해주세요.",
             "ground":function(num){
                 return num+'세트';
@@ -1758,7 +1758,7 @@ var textAll = {
                 return '최근 '+num+'경기';
             },
             'league':'경기',
-            'betTime':'시간',
+            
             'team':'팀',
             'score':'스코어',
 
@@ -1801,10 +1801,10 @@ var textAll = {
             freeUseTip2:'7M e스포츠 라이브스코어',
             smallTip:'하기 정보를 완성하시면 사용할 수 있습니다.',
             live:'라이브스코어',
-            result:'경기결과',
-            fixture:'경기일정',
+            
+            
             yes:'확정',
-            cancel:'취소',
+            
             captchaTip1:'하기의 인증을 하세요.',
             captchaTip2:'정확한 이메일을 입력하세요.',
             captchaTip3:'버튼을 클릭해서 인증하세요.',
@@ -1816,7 +1816,7 @@ var textAll = {
             copyTip3:'먼저 주소나 코드를 생성하세요.'
         },
         dataBank: {
-            all: '모두',
+            
             internation: '국제',
             europe: '유럽',
             asia: '아시아',
@@ -1829,8 +1829,8 @@ var textAll = {
             ing: '시즌 중'
         },
         news: {
-            all: '모두',
-            other: '기타',
+            
+            
             point: '인기',
             runs: 'X세트'
         },
@@ -1843,10 +1843,10 @@ var textAll = {
             season: '시즌 선택',
             stage: '단계 선택',
             match_time: '경기 시간',
-            team: '팀',
-            score: '스코어',
+            
+            
             number: '세트',
-            match: '경기',
+            
             integrals: '랭킹순위',
             point: '점수',
             team_top: '팀 순위',
@@ -1862,29 +1862,29 @@ var textAll = {
             loss: '패',
             match_explain: '경기 사항',
             match_session: '경기수',
-            win_rate: '승률',
-            FirstBloodRate: '첫 킬 비율',
-            FirstTurretRate: '첫 타워 비율',
-            FirstRoshanRate: '첫 로샨 비율',
-            durationPerGame: '경기당 시간',
+            
+            
+            
+            
+            
             turretsPerGame: '경기당 포탑 공격',
-            boutDurationPerGame: '경기당 시간',
-            boutTurretsPerGame: '경기당 포탑 공격',
-            firstBaronRate: '첫 바론 비율',
-            firstDragonRate: '첫 드래곤 비율',
-            at1stHalfWinRate: '전반전 권총전 승률',
-            at2ndHalfWinRate: '후반전 권총전 승률',
+            
+            
+            
+            
+            
+            
             player: '선수',
             kda: 'KDA',
             kd: 'K/D',
             belong_team: '소속팀',
             appearance: '출장 횟수',
-            killsPerGame: '경기당 킬 횟수',
+            
             deathsPerGame: '경기당 사망 횟수',
             assistsPerGame: '경기당 어시스트 횟수',
-            boutKillsPerGame: '경기당 킬 횟수',
-            boutDeathsPerGame: '경기당 사망 횟수',
-            boutAssistsPerGame: '경기당 어시스트 횟수',
+            
+            
+            
             goldPerMinute: '분당 골드',
             damageDealtPerMinute: '분당 데미지 딜트',
             damageTakenPerMinute: '분당 데미지 테이큰',
@@ -1895,13 +1895,13 @@ var textAll = {
             killsPerRound: '세트당 킬',
             assistsPerRound: '세트당 어시스트',
             deathsPerRound: '세트당 사망', 
-            boutKillsPerRound: '세트당 킬',
-            boutAssistsPerRound: '세트당 어시스트',
-            boutDeathsPerRound: '세트당 사망', 
-            Rating: 'Rating',
-            ADR: 'ADR',
-            KAST: 'KAST',
-            total: '경기수',
+            
+            
+             
+            
+            
+            
+            
             count_win_rate: '경기당 승률',
         },
         teamPage: {
@@ -1911,7 +1911,7 @@ var textAll = {
                 // return '설립날짜: ' + date[0] + ' 년 ' + date[1] + ' 월 ' + date[2] + ' 일 ' + '(' + (country? country : '-') + ')';
                 return (time?'설립날짜: ' + date[0] + '년 ' + date[1] + '월 ' + date[2] + '일 ': '-/') + '('+(country? country : '-')+')';
             },
-            abbreviation: '약칭',
+            
             recentRecords: '최근 전적',
             type: '팀 유형',
             details: '더보기',
@@ -1926,23 +1926,23 @@ var textAll = {
                     3: '임시'    
                 }[num]    
             },
-            allMatch: '모든 경기',
+            
             noIntro: '데이터가 없음',
-            noLineUpData: '데이터가 없음',
-            noMatchData: '데이터가 없음',
+            
+            
             fitures_results: '일정/결과',
             data: '데이터',
-            allCompetitions: '모든 경기',
-            league: '경기',
+            
+            
             profile: '팀 소개:',
-            lineUp: '라인업',
-            gamePlayed: '경기수',
+            
+            
             win: '승전 횟수',
             draw: '무승부 횟수',
             loss: '패전 횟수',
             statistics: '데이터 통계',
             headshotsPerGame: '경기당 헤드샷 비율',
-            boutHeadshotsPerGame: '경기당 헤드샷 비율',
+            
             recentEncounters: function (n) {
                 return '최근 대진 ' + n + '경기';
             },
@@ -1964,7 +1964,7 @@ var textAll = {
             gamePosition: {
                 // DOTA2  0 未知 1 抗压路 3 中路 4 优势路 5 辅助  오프/미드/세이프/서폿
                 1: {
-                    0: '-',
+                    
                     1: '오프',
                     3: '미드',
                     4: '세이프',
@@ -1972,28 +1972,28 @@ var textAll = {
                 },
                 // LOL 0 未知 1 上路 2 打野 3 中路 4 下路 5 辅助  탑/미드/원딜/정글/서폿
                 2: {
-                    0: '-',
+                    
                     1: '탑',
-                    2: '미드',
+                    
                     3: '원딜',
                     4: '정글',
-                    5: '서폿'
+                    
                 },
                 // 王者荣耀 0 未知 1 边路 3 中路 4 射手 5 辅助 2 打野  측면/미드/원딜/서폿/정글
                 4: {
-                    0: '-',
+                    
                     1: '측면',
-                    2: '정글',
-                    3: '미드',
-                    4: '원딜',
-                    5: '서폿'
+                    
+                    
+                    
+                    
                 }           
             },
-            team: '소속팀',
+            
             overallData: '종합 데이터',
             teammates: '동료',
-            noPlayerData: '데이터가 없음',
-            noHeroData: '데이터가 없음',
+            
+            
             matchRecords: '경기 기록',
             mostPicks: '애용 영웅',
             none: 'none',
@@ -2003,8 +2003,8 @@ var textAll = {
             moreFixtures: '더 보기',
             result: function (n) {
                 return {
-                    1: '승',
-                    2: '패',
+                    
+                    
                 }[n]
             },
             gameOfNumber: function (n) {
@@ -2072,9 +2072,9 @@ var textAll = {
             "state": { // textAll[lan]["gameLi"]['state']
                 0: 'Chưa bắt đầu',
                 1: 'Đang diễn ra',
-                2: 'Đã kết thúc',
+                
                 3: 'Hoãn',
-                4: 'Hủy',
+                
                 5: 'Chờ xác định'
             },
             'camp_lol': { // textAll[lan]["gameLi"]['camp_lol']
@@ -2083,12 +2083,12 @@ var textAll = {
             },
             'camp_dota2': {
                 1: 'D', //'Dire',
-                2: 'R' //'Radiant'
+                //'Radiant'
             },
             'nav': { // textAll[lan]["gameLi"]['nav']['optional']
-                'optional': 'Chọn giải đấu',
-                'select': 'Giải hot',
-                'all': 'Tất cả',
+                
+                
+                
                 'category': 'Hiển thị theo giải đấu',
                 'time': 'Hiển thị theo thời gian',
                 'refresh': 'Click: Làm mới trang',
@@ -2114,12 +2114,12 @@ var textAll = {
             'analyse': "Game Statistics"
         },
         "goaldata": {
-            'kills': 'Kills',
-            'moneys': 'Tiền',
-            'pushTowers': 'Phá Tower',
-            'dragon': 'Rồng',
-            'baron': 'Baron',
-            'barracks': 'Doanh trại',
+            
+            
+            
+            
+            
+            
             'lookLive': 'Xem trực tuyến',
             
             'needAnthorName': {
@@ -2134,7 +2134,7 @@ var textAll = {
             "skill": "Kỹ năng",
             "heroLevel": "Đẳng cấp",
             "kda": "K/D/A",
-            "moneys": "Tiền",
+            
             "rop": "KP",
             "lastHits": "Last Hits",
             "creepKills": "Creep Kills",
@@ -2145,9 +2145,9 @@ var textAll = {
 
             "firstHalfWins": "1st Half",
             "secondHalfWins": "2nd Half",
-            "otWins": "OT",
+            
             "Khs": "K(hs)",
-            "D": "D",
+            
             "A": "A(f)",
             "KAST": "KAST",
             "ADR": "ADR",
@@ -2168,18 +2168,18 @@ var textAll = {
             "winRate":"Tỷ lệ thắng",
             "avgKills":"Kills Per Game",
             "avgTimeLen":"Duration Per Game",
-            "firstBloodRate":"First Blood",
-            "firstTowerRate":"Trụ đầu tiên",
+            
+            
             "firstRouShanRate":"First Roshan",
-            "firstBaronRate":"Baron đầu tiên",
-            "firstDragonRate":"Rồng đầu tiên",
+            
+            
             "firstHalfPistolRate":"Pistol Round Win Rate<br/>at 1st Half",
             "secondHalfPistolRate":"Pistol Round Win Rate<br/>at 2nd Half",
             "recentRound":function(num){
                 return num+' trận gần đây';
             },
             'league':'Giải đấu',
-            'betTime':'Thời gian',
+            
             'team':'Đội',
             'score':'Tỷ số',
 
@@ -2222,8 +2222,8 @@ var textAll = {
             freeUseTip2:'trang tỷ số trực tuyến eSports 7M',
             smallTip:'Bạn chỉ cần điền thông tin sau đây thì có thể sử dụng',
             live:'Tỷ số trực tuyến',
-            result:'Kết quả',
-            fixture:'Lịch thi đấu',
+            
+            
             yes:'Xác định',
             cancel:'Hủy bỏ',
             captchaTip1:'Vui lòng thông qua việc xác minh thông minh dưới đây trước',
@@ -2237,7 +2237,7 @@ var textAll = {
             copyTip3:'Vui lòng khởi tạo địa chỉ hoặc Code trước'
         },
         dataBank: {
-            all: 'Tất cả',
+            
             internation: 'Quốc tế',
             europe: 'Châu Âu',
             asia: 'Châu Á',
@@ -2250,8 +2250,8 @@ var textAll = {
             ing: 'Giữa mùa'
         },
         news: {
-            all: 'Tất cả',
-            other: 'Khác',
+            
+            
             point: 'Nóng',
             runs: 'Ván thứ '
         },
@@ -2263,17 +2263,17 @@ var textAll = {
             },
             season: 'Chọn mùa giải',
             stage: 'Chọn giai đoạn',
-            match_time: 'Thời gian',
+            
             team: 'Team',
-            score: 'Tỷ số',
+            
             number: 'Ván',
-            match: 'Giải đấu',
+            
             integrals: 'BXH',
             point: 'Điểm',
-            team_top: 'Đội',
+            
             player_top: 'Game thủ',
             match_short: 'Tên viết tắt giải đấu',
-            hold_time: 'Thời gian',
+            
             hold_site: 'Địa điểm',
             url: 'Trang web chính thức',
             recommended: 'Giải Hot',
@@ -2283,29 +2283,29 @@ var textAll = {
             loss: 'Thua',
             match_explain: 'Giới thiệu về giải đấu',
             match_session: 'Trận',
-            win_rate: 'Tỷ lệ thắng',
-            FirstBloodRate: 'First Blood',
-            FirstTurretRate: 'Trụ đầu tiên',
+            
+            
+            
             FirstRoshanRate: 'Roshan đầu tiên',
             durationPerGame: 'Thời gian trung bình',
             turretsPerGame: 'Trung bình phá trụ ',
-            boutDurationPerGame: 'Thời gian trung bình',
-            boutTurretsPerGame: 'Trung bình phá trụ ',
-            firstBaronRate: 'Baron đầu tiên',
+            
+            
+            
             firstDragonRate: 'Dragon đầu tiên',
             at1stHalfWinRate: 'Pistol Round Win Rate at 1st Half',
             at2ndHalfWinRate: 'Pistol Round Win Rate at 2nd Half',
-            player: 'Game thủ',
+            
             kda: 'KDA',
             kd: 'K/D',
-            belong_team: 'Team',
+            
             appearance: 'Số lần đấu',
-            killsPerGame: 'Kills Per Game',
+            
             deathsPerGame: 'Deaths Per Game',
             assistsPerGame: 'Assists Per Game',
-            boutKillsPerGame: 'Kills Per Game',
-            boutDeathsPerGame: 'Deaths Per Game',
-            boutAssistsPerGame: 'Assists Per Game',
+            
+            
+            
             goldPerMinute: 'Gold Per Minute',
             damageDealtPerMinute: 'Damage Dealt Per Minute',
             damageTakenPerMinute: 'Damage Taken Per Minute',
@@ -2316,14 +2316,14 @@ var textAll = {
             killsPerRound: 'Kills Per Round',
             assistsPerRound: 'Assists Per Round',
             deathsPerRound: 'Deaths Per Round', 
-            boutKillsPerRound: 'Kills Per Round',
-            boutAssistsPerRound: 'Assists Per Round',
-            boutDeathsPerRound: 'Deaths Per Round', 
-            Rating: 'Rating',
-            ADR: 'ADR',
-            KAST: 'KAST',
+            
+            
+             
+            
+            
+            
             total: 'Tổng số ván',
-            count_win_rate: 'Tỷ lệ thắng'
+            
         },
         teamPage: {
             established: function (time, country) {
@@ -2353,17 +2353,17 @@ var textAll = {
             noMatchData: 'Tạm không có dữ liệu của giải đấu',
             fitures_results: 'Lịch thi đấu & Kết quả',
             data: 'Số liệu',
-            allCompetitions: 'Tất cả giải đấu',
-            league: 'Giải đấu',
+            
+            
             profile: 'Giới thiệu tóm tắt:',
-            lineUp: 'Đội hình',
+            
             gamePlayed: 'Tổng số trận',
-            win: 'Thắng',
-            draw: 'Hòa',
-            loss: 'Thua',
+            
+            
+            
             statistics: ' Thống kê số liệu',
             headshotsPerGame: 'Headshot trung bình',
-            boutHeadshotsPerGame: 'Headshot trung bình',
+            
             recentEncounters: function (n) {
                 return n + ' trận đối đầu gần đây';
             },
@@ -2385,7 +2385,7 @@ var textAll = {
             gamePosition: {
                 // DOTA2  0 未知 1 抗压路 3 中路 4 优势路 5 辅助  OFFLANE/MID/SAFE LANE/SUP
                 1: {
-                    0: '-',
+                    
                     1: 'OFFLANE',
                     3: 'MID',
                     4: 'SAFE LANE',
@@ -2393,7 +2393,7 @@ var textAll = {
                 },
                 // LOL 0 未知 1 上路 2 打野 3 中路 4 下路 5 辅助  Đấu sĩ/Pháp sư/Xạ thủ/Sát thủ/Hỗ trợ
                 2: {
-                    0: '-',
+                    
                     1: 'Đấu sĩ',
                     2: 'Pháp sư',
                     3: 'Xạ thủ',
@@ -2402,15 +2402,15 @@ var textAll = {
                 },
                 // 王者荣耀 0 未知 1 边路 3 中路 4 射手 5 辅助 2 打野  Đấu sĩ/Pháp sư/Xạ thủ/Hỗ trợ/ Sát thủ
                 4: {
-                    0: '-',
-                    1: 'Đấu sĩ',
-                    2: 'Sát thủ',
-                    3: 'Pháp sư',
-                    4: 'Xạ thủ',
-                    5: 'Hỗ trợ'
+                    
+                    
+                    
+                    
+                    
+                    
                 }
             },
-            team: 'Team',
+            
             overallData: 'Số liệu thống kê',
             teammates: 'Game thủ cùng đội',
             noPlayerData: 'Tạm không có dữ liệu<br />game thủ',
@@ -2421,11 +2421,11 @@ var textAll = {
             appearance: function (n) {
                 return n + ' lần đấu';
             },
-            moreFixtures: 'Lịch thi đấu',
+            
             result: function (n) {
                 return {
-                    1: 'Thắng',
-                    2: 'Thua',
+                    
+                    
                 }[n]
             },
             gameOfNumber: function (n) {

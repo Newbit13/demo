@@ -1,21 +1,21 @@
 var textAll = {
-    "en": {
+    "vn": {
         'filter': {
-            filter_title: 'Choose Competitions',
-            All: 'All',
+            filter_title: 'Chọn giải đấu',
+            All: 'Tất cả',
             DOTA2: 'DOTA2',
             LOL: 'LOL',
             CSGO: 'CS:GO',
-            HOK: 'HOK',
+            HOK: 'VGVD',
 
-            submit: 'Submit',
-            featured: 'Featured',
-            selectAll: 'Select All',
-            reset: 'Reset',
-            cancel: 'Cancel',
+            submit: 'Xác nhận',
+            featured: 'Giải hot',
+            selectAll: 'Chọn hết',
+            reset: 'Đặt lại',
+            cancel: 'Hủy',
 
-            cookie_tip: 'Note: To save the settings in this window, your browser is required to be able to support and open Cookie.'
-        }, 
+            cookie_tip: 'Lưu ý: giữ cài đặt của cửa sổ hiện tại phải có sự ủng hộ của trình duyệt của bạn và bật Cookie.'
+        },
         'base':{
             'week':["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."]
         },
@@ -26,58 +26,43 @@ var textAll = {
                 '2nd': '2nd',
                 'ot': 'OT',
                 'kills': 'Kills',
-                'moneys': 'Gold',
-                'pushTowers': 'Turrets',
-                'dragon': 'Dragons',
-                'baron': 'Barons',
-                'barracks': 'Barracks',
+                'moneys': 'Tiền',
+                'pushTowers': 'Phá Tower',
+                'dragon': 'Rồng',
+                'baron': 'Baron',
+                'barracks': 'Doanh trại',
                 "innings": function (num) { // textAll[lan]["gameLi"]['section'].innings()
-                    var numTxt;
-                    switch (num) {
-                        case 1:
-                            numTxt = '1st';
-                            break;
-                        case 2:
-                            numTxt = '2nd';
-                            break;
-                        case 3:
-                            numTxt = '3rd';
-                            break;
-                        default:
-                            numTxt = num + 'th';
-                            break;
-                    }
-                    return "The " + numTxt + " Game"; //(备注：中间的num不能直接用数字代替，需要改为序数词，第1到第10的序数词分别为：1st, 2nd, 3rd, 4th, 5th, 6th, 7th, 8th, 9th, 10th)
+                    return "Ván thứ " + num; //备注: 越语用, "Map" + num (示例第1局: Map 1,中间需要空格) 
                 },
                 "inningsNum": function (num) { // textAll[lan]["gameLi"]['section'].inningsNum()
-                    return "BO" + num;
+                    return "BO" + num; //(备注: 数字前面需要空格)
                 },
-                'gameEnd': 'Finished', // textAll[lan]["gameLi"]['section']['gameEnd']
-                'pup_score': 'Score',
-                'pup_scoreNone': 'Score Cancelled',
+                'gameEnd': 'Đã kết thúc', // textAll[lan]["gameLi"]['section']['gameEnd']
+                'pup_score': 'Ghi điểm',
+                'pup_scoreNone': 'Hủy điểm',
                 'FirstBlood': 'First Blood',
-                'FirstTurret': 'First Turret',
-                'FirstBaron': 'First Baron',
-                'FirstDragon': 'First Dragon',
-                'FirstBarrack': 'First Barrack',
+                'FirstTurret': 'Trụ đầu tiên',
+                'FirstBaron': 'Baron đầu tiên',
+                'FirstDragon': 'Rồng đầu tiên',
+                'FirstBarrack': 'Doanh trại đầu tiên',
                 'stHalf1': 'Pistol Round Winner at 1st Half',
                 'stHalf2': 'Pistol Round Winner at 2nd Half',
-                'team_side':'Lineup',
-                'live': 'Live',
-                'live_video':'Match streams:',
-                'to_top':'Top',
-                'to_bottom':'Cancel',
-                'analyse':'Analysis',
-                'analyseTitle':'Data Analysis'
+                'team_side':'Đội hình',
+                'live': 'Trực tuyến',
+                'live_video':'Chia sẻ:',
+                'to_top':'Ghim',
+                'to_bottom':'Bỏ ghim',
+                'analyse':'Phân tích',
+                'analyseTitle':'Phân tích dữ liệu'
 
             },
             "state": { // textAll[lan]["gameLi"]['state']
-                0: 'Not Started',
-                1: 'In-play',
-                2: 'Finished',
-                3: 'Postponed',
-                4: 'Canceled',
-                5: 'Pending'
+                0: 'Chưa bắt đầu',
+                1: 'Đang diễn ra',
+                
+                3: 'Hoãn',
+                
+                5: 'Chờ xác định'
             },
             'camp_lol': { // textAll[lan]["gameLi"]['camp_lol']
                 1: 'R', //'Blue',
@@ -85,358 +70,356 @@ var textAll = {
             },
             'camp_dota2': {
                 1: 'D', //'Dire',
-                2: 'R' //'Radiant'
+                //'Radiant'
             },
             'nav': { // textAll[lan]["gameLi"]['nav']['optional']
-                'optional': 'Select Competitions',
-                'select': 'Selected Matches',
-                'all': 'All Matches',
-                'category': 'Order by Competitions',
-                'time': 'Order by Time',
-                'refresh': 'Click：Refresh the Page',
-                'openSound': 'Click：Turn on the Prompt Tone',
-                'offSound': 'Click：Turn off the Prompt Tone',
-                'list_show_tip':'Shown in the list:'
+                
+                
+                
+                'category': 'Hiển thị theo giải đấu',
+                'time': 'Hiển thị theo thời gian',
+                'refresh': 'Click: Làm mới trang',
+                'openSound': 'Click: bật âm thanh gợi ý',
+                'offSound': 'Click: tắt âm thanh gợi ý',
+                'list_show_tip':'Chọn cách hiển thị:'
             }
         },
         tips: {
-            no_support: 'Sorry, the current version of your browser is too old to update the score data in real time. Please upgrade it to the latest version!',
-            no_data: 'No data now',
+            no_support: 'Xin lỗi, không thể cập nhật dữ liệu vì phiên bản trình duyệt của bạn quá thấp, vui lòng cập nhật phiên bản mới nhất!',
+            no_data: 'Tạm không dữ liệu',
             to_top:'Top'
         },
-        menu: 'Esports Scores',
+        menu: 'Tỷ số eSports',
 
         'result': {
-            'calendar': 'Calendar',
-            'schedule': 'Fixtures',
-            'afterGame': 'Results'
+            'calendar': 'Lịch ngày',//'Ngày lịch',
+            'schedule': 'Lịch thi đấu',
+            'afterGame': 'Kết quả'
         },
         'common_header': {
             'live': "Real-time",
-            'analyse': "Data Analysis"
+            'analyse': "Game Statistics"
         },
         "goaldata": {
-            'kills': 'Kills',
-            'moneys': 'Gold',
-            'pushTowers': 'Turrets',
-            'dragon': 'Dragons',
-            'baron': 'Barons',
-            'barracks': 'Barracks',
-            'lookLive': 'Watch the Live',
+            
+            
+            
+            
+            
+            
+            'lookLive': 'Xem trực tuyến',
             
             'needAnthorName': {
                 'lol': {
-                    'barracks': 'Inhibitors'
+                    'barracks': 'Nhà chính'
                 }
             },
-            "roshan": "Roshans",
+            "roshan": "Roshan",
 
-            "summonerSkill": "Hero/Skills",
-            "hero": "Hero",
-            "skill": "Skills",
-            "heroLevel": "Grade",
+            "summonerSkill": "Tướng/Kỹ năng",
+            "hero": "Tướng",
+            "skill": "Kỹ năng",
+            "heroLevel": "Đẳng cấp",
             "kda": "K/D/A",
-            "moneys": "Gold",
+            
             "rop": "KP",
             "lastHits": "Last Hits",
             "creepKills": "Creep Kills",
             "creepDenies": "Creep Denies",
             "exports": "Damage Dealt",
             "hurts": "Damage Taken",
-            "equipment": "Equipments",
+            "equipment": "Trang bị",
 
             "firstHalfWins": "1st Half",
             "secondHalfWins": "2nd Half",
-            "otWins": "OT",
+            
             "Khs": "K(hs)",
-            "D": "D",
+            
             "A": "A(f)",
             "KAST": "KAST",
             "ADR": "ADR",
             "Rating": "Rating",
-            "no_game_data": "No Data Now",
-            "loading_game_data": "The data are updating now. Please try again later.",
+            "no_game_data": "Tạm không có dữ liệu ",
+            "loading_game_data": "Dữ liệu đang cập nhật. Vui lòng thử lại sau.",
             "ground":function(num){
-                return 'Game '+num;
+                return 'Ván thứ '+num;
             },
             //新增
             "goldDiff":"Gold Difference",
             "teamGold":"Team Gold",
             "teamCreepKill":"Team Creep Kills",
-            "time":"Time"
+            "time":"Thời gian"
 
         },
         "analyse":{
-            "winRate":"Win Rate",
+            "winRate":"Tỷ lệ thắng",
             "avgKills":"Kills Per Game",
             "avgTimeLen":"Duration Per Game",
-            "firstBloodRate":"First Blood Rate",
-            "firstTowerRate":"First Turret Rate",
-            "firstRouShanRate":"First Roshan Rate",
-            "firstBaronRate":"First Baron Rate",
-            "firstDragonRate":"First Dragon Rate",
+            
+            
+            "firstRouShanRate":"First Roshan",
+            
+            
             "firstHalfPistolRate":"Pistol Round Win Rate<br/>at 1st Half",
             "secondHalfPistolRate":"Pistol Round Win Rate<br/>at 2nd Half",
             "recentRound":function(num){
-                return 'Last '+num+' Games';
+                return num+' trận gần đây';
             },
-            'league':'Competition',
-            'betTime':'Date',
-            'team':'Team',
-            'score':'Score',
+            'league':'Giải đấu',
+            
+            'team':'Đội',
+            'score':'Tỷ số',
 
-            'data_comp':'Data Comparison',
-            'h2h_rc':'H2H Records',
-            'past_rc':'Past Records',
+            'data_comp':'Thống kê số liệu',
+            'h2h_rc':'Lịch sử đối đầu',
+            'past_rc':'Chiến tích',
             'result_rate_rc':function(){
                 var dom = '';
                 dom +=
-                '<span>Last <i class="total">0</i> Games </span>'+
-                '<span class="win_box">Win <i class="win">0</i></span><span class="lost_box"> Loss <i class="lost">0</i></span>'+
-                '<span>Win Rate：<i class="rate">0%</i></span>';
+                '<span><i class="total">0</i> trận gần đây </span>'+
+                '<span class="win_box"><i class="win">0</i> thắng </span><span class="lost_box"><i class="lost">0</i> thua</span>'+
+                '<span>Tỷ lệ thắng: <i class="rate">0%</i></span>';
                 return dom
             }
         },
         //新增
-        'friendLink':'Link Exchanges',
+        'friendLink':'Trao đổi liên kết',
         //新增
         'apply':{
-            style:'Format',
-            width:'Width',
-            widthNote:'Note: The width should be at least 740. You can set either a specific number or a percentage, such as 100%.',
-            TimeZone:'Time Zone',
-            TimeZoneNote:"Note: The 'Time Zone Setting' can be set according to the time zone where the majority of visitors of your site are located, so that users can view the scores in local time to achieve the best effect.",
-            colorStyle:'Style',
-            darkBlue:'Dark Blue',
-            red:'Red',
-            green:'Green',
-            blue:'Blue',
-            codeAndResult:'Code & Preview',
-            codeNote1:'Generating Calling URL: It means generating the URL of the free feed page. As long as you open the URL directly or put it into the frame page, the live score information can be shown.',
-            codeNote2:'Generating Calling Code: It means generating the calling code of the free feed page. As long as you put it into the webpage, the live score information can be shown.',
-            preview:'Preview',
-            getUseUrl:'Generating Calling URL',
-            getUseCode:'Generating Calling Code',
+            style:'Kiểu thức',
+            width:'Chiều rộng',
+            widthNote:'Lưu ý: Chiều rộng ít nhất phải là 740, có thể đặt theo con số cụ thể, cũng có thể đặt theo tỷ lệ phần trăm như: 100%.',
+            TimeZone:'Múi giờ',
+            TimeZoneNote:'Chú: “Đặt múi giờ” có thể đặt theo đa số users của quý website nằm ở, để họ có thể cập nhật tỷ số theo giờ địa phương, truy cập website với hiệu quả tốt nhất.',
+            colorStyle:'Phong cách',
+            darkBlue:'Màu xanh đậm',
+            red:'Màu đỏ',
+            green:'Màu xanh lá cây',
+            blue:'Màu xanh lam',
+            codeAndResult:'Code và hiệu quả',
+            codeNote1:'Khởi tạo & sử dụng URL: Tức là sử dụng địa chỉ của trang web, chỉ cần mở trang web trực tiếp hoặc đặt vào khung trang web, thì có thể hiển thị thông tin tỷ số.',
+            codeNote2:'Khởi tạo & sử dụng Code: Tức là sử dụng Code của trang web, chỉ cần đặt vào trang web, thì có thể hiển thị thông tin tỷ số.',
+            preview:'Hiệu quả xem trước',
+            getUseUrl:'Khởi tạo & sử dụng URL',
+            getUseCode:'Khởi tạo & sử dụng Code',
             copyCode:'Copy Code',
-            emailTip1:'In order to provide you with better service, please leave your email address',
-            emailTip2:'Please enter your email account',
-            freeUseTip1:'Free Feed of',
-            freeUseTip2:'7M Esports Live Scores page',
-            smallTip:'You only need to fill in the following information to use the free feed service',
-            live:'Live Scores',
-            result:'Results',
-            fixture:'Fixtures',
-            yes:'Confirm',
-            cancel:'Cancel',
-            captchaTip1:'Please go through the smart verification below first',
-            captchaTip2:'Please enter the correct email format',
-            captchaTip3:'Click here to start smart verification',
-            captchaTip4:'Verified',
-            captchaTip5:'Failed. Please click here to refresh',
-            captchaTip6:'Verifying',
-            copyTip1:'Copied',
-            copyTip2:'Your browser does not currently support this operation',
-            copyTip3:'Please generate the address or code first'
+            emailTip1:'Vui lòng để lại email để cung cấp phục vụ tốt hơn cho bạn',
+            emailTip2:'Vui lòng nhập tài khoản email của bạn',
+            freeUseTip1:'Tiện ích miễn phí',
+            freeUseTip2:'trang tỷ số trực tuyến eSports 7M',
+            smallTip:'Bạn chỉ cần điền thông tin sau đây thì có thể sử dụng',
+            live:'Tỷ số trực tuyến',
+            
+            
+            yes:'Xác định',
+            cancel:'Hủy bỏ',
+            captchaTip1:'Vui lòng thông qua việc xác minh thông minh dưới đây trước',
+            captchaTip2:'Vui lòng nhập đúng định dạng email',
+            captchaTip3:'Nhấn nút để bắt đầu xác minh thông minh',
+            captchaTip4:'Xác minh thành công',
+            captchaTip5:'Xác minh thất bại, vui lòng nhấn nút này để làm mới',
+            captchaTip6:'Đang xác minh thông minh',
+            copyTip1:'Đã sao chép',
+            copyTip2:'Trình duyệt của bạn không ủng hộ thao tác này',
+            copyTip3:'Vui lòng khởi tạo địa chỉ hoặc Code trước'
         },
         dataBank: {
-            all: 'All',
-            internation: 'International',
-            europe: 'Europe',
-            asia: 'Asia',
-            america: 'America',
-            others: 'Others',
-            home: 'Home',
-            previous: 'Previous',
-            next: 'Next',
-            last: 'Last',
-            ing: 'Mid-Season'
+            
+            internation: 'Quốc tế',
+            europe: 'Châu Âu',
+            asia: 'Châu Á',
+            america: 'Châu Mỹ',
+            others: 'Khác',
+            home: 'Trang chủ',
+            previous: 'Trang trước',
+            next: 'Trang sau',
+            last: 'Cuối trang',
+            ing: 'Giữa mùa'
         },
         news: {
-            all: '全部',
-            other: '其他',
-            point: '焦点',
-            runs: '第_局'
+            
+            
+            point: 'Nóng',
+            runs: 'Ván thứ '
         },
         matchPage: {
             hold_at: function (stateTime, endTime) {
                 var start_date = stateTime.split('-');
                 var end_date = endTime.split('-');
-                return 'From ' + start_date[2] + '/' + start_date[1] + '/' + start_date[0] + ' to ' + end_date[2] + '/' + end_date[1] + '/' + end_date[0]; 
+                return 'Từ ' + start_date[2] + '/' + start_date[1] + '/' + start_date[0] + ' đến ' + end_date[2] + '/' + end_date[1] + '/' + end_date[0];        
             },
-            season: 'Select Season',
-            stage: 'Select Stage',
-            match_time: 'Time',
+            season: 'Chọn mùa giải',
+            stage: 'Chọn giai đoạn',
+            
             team: 'Team',
-            score: 'Score',
-            number: 'No. of Game',
-            match: 'Competitions',
-            integrals: 'Points',
-            point: 'Points',
-            team_top: 'Teams',
-            player_top: 'Players',
-            match_short: "Competition's Short Name",
-            hold_time: 'Date',
-            hold_site: 'Venue',
-            url: 'Official Website',
-            recommended: 'Recommended',
-            rank: 'Ranking',
-            win: 'Win',
-            draw: 'Draw',
-            loss: 'Loss',
-            match_explain: 'Introduction',
-            match_session: 'Game Played',
-            win_rate: 'Win Rate',
-            FirstBloodRate: 'First Blood Rate',
-            FirstTurretRate: 'First Turret Rate',
-            FirstRoshanRate: 'First Roshan Rate',
-            durationPerGame: 'Duration Per Game',
-            turretsPerGame: 'Turrets Per Game',
-            boutDurationPerGame: 'Duration Per Game',
-            boutTurretsPerGame: 'Turrets Per Game',
-            firstBaronRate: 'First Baron Rate',
-            firstDragonRate: 'First Dragon Rate',
+            
+            number: 'Ván',
+            
+            integrals: 'BXH',
+            point: 'Điểm',
+            
+            player_top: 'Game thủ',
+            match_short: 'Tên viết tắt giải đấu',
+            
+            hold_site: 'Địa điểm',
+            url: 'Trang web chính thức',
+            recommended: 'Giải Hot',
+            rank: 'Xếp hạng',
+            win: 'Thắng',
+            draw: 'Hòa',
+            loss: 'Thua',
+            match_explain: 'Giới thiệu về giải đấu',
+            match_session: 'Trận',
+            
+            
+            
+            FirstRoshanRate: 'Roshan đầu tiên',
+            durationPerGame: 'Thời gian trung bình',
+            turretsPerGame: 'Trung bình phá trụ ',
+            
+            
+            
+            firstDragonRate: 'Dragon đầu tiên',
             at1stHalfWinRate: 'Pistol Round Win Rate at 1st Half',
             at2ndHalfWinRate: 'Pistol Round Win Rate at 2nd Half',
-            player: 'Player',
+            
             kda: 'KDA',
-            belong_team: 'Team',
             kd: 'K/D',
-            appearance: 'Appearances',
-            killsPerGame: 'Kills Per Game',
+            
+            appearance: 'Số lần đấu',
+            
             deathsPerGame: 'Deaths Per Game',
             assistsPerGame: 'Assists Per Game',
-            boutKillsPerGame: 'Kills Per Game',
-            boutDeathsPerGame: 'Deaths Per Game',
-            boutAssistsPerGame: 'Assists Per Game',
+            
+            
+            
             goldPerMinute: 'Gold Per Minute',
             damageDealtPerMinute: 'Damage Dealt Per Minute',
             damageTakenPerMinute: 'Damage Taken Per Minute',
             lastHitsPerMinute: 'Last Hits Per Minute',
             creepDeniesPerMinute: 'Creep Denies Per Minute',
             creepKillsPerMinute: 'Creep Kills Per Minute',
-            headshotPercentage: 'Headshot Percentage',
+            headshotPercentage: 'Tỷ lệ Headshot',
             killsPerRound: 'Kills Per Round',
             assistsPerRound: 'Assists Per Round',
-            deathsPerRound: 'Deaths Per Round',
-            boutKillsPerRound: 'Kills Per Round',
-            boutAssistsPerRound: 'Assists Per Round',
-            boutDeathsPerRound: 'Deaths Per Round', 
-            Rating: 'Rating',
-            ADR: 'ADR',
-            KAST: 'KAST',
-            total: 'Total Rounds',
-            count_win_rate: 'Win Rate'
+            deathsPerRound: 'Deaths Per Round', 
+            
+            
+             
+            
+            
+            
+            total: 'Tổng số ván',
+            
         },
         teamPage: {
             established: function (time, country) {
                 if(!time && !country) return '-/-';
                 var date = time.split('-');
-                // return 'Established on ' + date[2] + '-' + date[1] + '-' + date[0] + ' / ' + (country? country : '-');
-                return (time?'Established on ' + date[2] + '-' + date[1] + '-' + date[0] + ' / ': 'Established on ') + (country? country : '-');
+                // return 'Thành lập vào ' + date[2] + '-' + date[1] + '-' + date[0] + '/' + (country? country : '-');
+                return (time?'Thành lập vào ' + date[2] + '-' + date[1] + '-' + date[0] + '/': '-/') + (country? country : '-');
             },
-            abbreviation: 'Abbreviation',
-            recentRecords: 'Recent Records',
-            type: 'Type',
-            details: 'More',
+            abbreviation: 'Viết tắt',
+            recentRecords: 'Chiến tích gần đây',
+            type: 'Loại hình',
+            details: 'Chi tiết',
             wl: function (win, loss) {
-                var wintext = win > 1?'Wins':'Win';
-                var losstext = loss > 1?'Losses':'Loss';
-                return '<span style="color: #d3b47e">' + win +' '+wintext+'</span><span style="color: #204b82"> ' + loss + ' '+losstext+'</span>'  
+                return '<span style="color: #d3b47e">' + win +' Thắng </span><span style="color: #204b82">' + loss + ' Thua</span>'  
             },
             club: function (num) {
                 return {
                     0: '-',
-                    1: 'Club',
-                    2: 'Country',
-                    3: 'Temporary'    
+                    1: 'CLB',
+                    2: 'Quốc gia',
+                    3: 'Tạm thời'    
                 }[num]    
             },
-            allMatch: 'All Competitions',
-            noIntro: 'No profile yet',
-            noLineUpData: 'No line-up data yet',
-            noMatchData: 'No competitions data yet',
-            fitures_results: 'Fixtures & Results',
-            data: 'Data',
-            allCompetitions: 'All Competitions',
-            league: 'Competitions',
-            profile: 'Profile:',
-            lineUp: 'Line-up',
-            gamePlayed: 'Game Played',
-            win: 'Win',
-            draw: 'Draw',
-            loss: 'Loss',
-            statistics: 'Statistics',
-            headshotsPerGame: 'Headshots Per Game',
-            boutHeadshotsPerGame: 'Headshots Per Game',
+            allMatch: 'Tất cả giải đấu',
+            noIntro: 'Tạm không có giới thiệu về đội bóng',
+            noLineUpData: 'Tạm không có dữ liệu của đội hình',
+            noMatchData: 'Tạm không có dữ liệu của giải đấu',
+            fitures_results: 'Lịch thi đấu & Kết quả',
+            data: 'Số liệu',
+            
+            
+            profile: 'Giới thiệu tóm tắt:',
+            
+            gamePlayed: 'Tổng số trận',
+            
+            
+            
+            statistics: ' Thống kê số liệu',
+            headshotsPerGame: 'Headshot trung bình',
+            
             recentEncounters: function (n) {
-                return 'Recent ' + n + ' Encounters';
+                return n + ' trận đối đầu gần đây';
             },
             winPercent: function (win, loss) {
-                return win + ' Win(s) ' + (loss == 0? '100%' : ((win * 100 / (win + loss)).toFixed(2) + '%'));
+                return win + ' thắng ' + (loss == 0? '100%' : ((win * 100 / (win + loss)).toFixed(2) + '%'));
             },
             lossPercent: function (win, loss) {
-                return loss + ' Loss(es) ' + (win == 0? '100%' : ((loss * 100 / (win + loss)).toFixed(2) + '%'));
+                return loss + ' thua ' + (win == 0? '100%' : ((loss * 100 / (win + loss)).toFixed(2) + '%'));
             }
         },
         playerPage: {
             born: function (time, country) {
                 if(!time && !country) return '-/-';
                 var date = time.split('-');
-                return (time?(date[2] + '-' + date[1] + '-' + date[0]) : '-') + ' / ' + (country? country : '-');
+                return (time? (date[2] + '-' + date[1] + '-' + date[0]) : '-') + ' / ' + (country? country : '-');
             },
-            name: 'Name',
-            position: 'Position',
+            name: 'Tên',
+            position: 'Vị trí',
             gamePosition: {
                 // DOTA2  0 未知 1 抗压路 3 中路 4 优势路 5 辅助  OFFLANE/MID/SAFE LANE/SUP
                 1: {
-                    0: '-',
+                    
                     1: 'OFFLANE',
                     3: 'MID',
                     4: 'SAFE LANE',
                     5: 'SUP'
                 },
-                // LOL 0 未知 1 上路 2 打野 3 中路 4 下路 5 辅助 TOP/MID/ADC/JUG/SUP
+                // LOL 0 未知 1 上路 2 打野 3 中路 4 下路 5 辅助  Đấu sĩ/Pháp sư/Xạ thủ/Sát thủ/Hỗ trợ
                 2: {
-                    0: '-',
-                    1: 'TOP',
-                    2: 'MID',
-                    3: 'ADC',
-                    4: 'JUG',
-                    5: 'SUP'
+                    
+                    1: 'Đấu sĩ',
+                    2: 'Pháp sư',
+                    3: 'Xạ thủ',
+                    4: 'Sát thủ',
+                    5: 'Hỗ trợ'
                 },
-                // 王者荣耀 0 未知 1 边路 3 中路 4 射手 5 辅助 2 打野  SIDE/MID/ADC/SUP/JUG
+                // 王者荣耀 0 未知 1 边路 3 中路 4 射手 5 辅助 2 打野  Đấu sĩ/Pháp sư/Xạ thủ/Hỗ trợ/ Sát thủ
                 4: {
-                    0: '-',
-                    1: 'SIDE',
-                    2: 'JUG',
-                    3: 'MID',
-                    4: 'ADC',
-                    5: 'SUP'
+                    
+                    
+                    
+                    
+                    
+                    
                 }
             },
-            team: 'Team',
-            overallData: 'Overall Data',
-            teammates: 'Teammates',
-            noPlayerData: 'No player data yet',
-            noHeroData: 'No hero data yet',
-            matchRecords: 'Match Records',
-            mostPicks: 'Most Picks',
+            
+            overallData: 'Số liệu thống kê',
+            teammates: 'Game thủ cùng đội',
+            noPlayerData: 'Tạm không có dữ liệu<br />game thủ',
+            noHeroData: 'Tạm không có dữ liệu của tướng',
+            matchRecords: 'Lịch sử đấu',
+            mostPicks: 'Tướng thường dùng',
             none: 'none',
             appearance: function (n) {
-                return 'Appearance: ' + n;
+                return n + ' lần đấu';
             },
-            moreFixtures: 'More Fixtures',
+            
             result: function (n) {
                 return {
-                    1: 'Win',
-                    2: 'Loss',
+                    
+                    
                 }[n]
             },
             gameOfNumber: function (n) {
-                return 'Game ' + n;
+                return 'Ván thứ ' + n;
             }
         }
-    },
+    }
 }
 
 module.exports = textAll;
