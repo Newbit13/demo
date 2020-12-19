@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .a777{
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='48px' height='35px'><text x='10' y='22' fill='black' font-size='12'>haha</text></svg>");
+            height: 200px;
+            width: 200px;
+        }
+        #ha,#line{
+            transition: all 1s;
+        }
+        svg:hover #ha{
+            cursor: pointer;
+            stroke-dashoffset:50;
+            /* stroke-dashoffset:-100; */
+        }
+        svg:hover #line{
+            cursor: pointer;
+            stroke-dashoffset:100;
+            /* stroke-dashoffset:-100; */
+        }
+        svg #ha{
+            cursor: pointer;
+            stroke-dashoffset:0;
+            animation: loading 10s 0s steps(13) infinite;
+        }
+
+        svg #ha2{
+            cursor: pointer;
+            stroke-dashoffset:0;
+            animation: loading 2s 0s linear infinite;
+        }
+
+        @keyframes loading {     
+            0%{
+                stroke-dashoffset: -157;
+            }
+            100%{
+                stroke-dashoffset: -314; /* 线条顺时针偏移 */
+            }
+        }
+
+        input:checked+.main{
+            animation-play-state: paused;
+        }
+
+        .main{
+        width: 260px;
+        height: 200px;
+        background: url(./tet.png) no-repeat;
+        background-size: 100%;
+        animation: animate 2s 1s steps(47) infinite alternate;
+        }
+
+        @keyframes animate {
+            0% {
+                background-position: 0 0
+            }
+
+            100% {
+                background-position: 0 100%
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>巧用svg让文字铺满元素，IE无效</h1>
+    <div class="a777"></div>
+    <h1>svg绘制loading</h1>
+    <p>周长为157.08</p>
+    <svg with='200' height='200' viewBox="0 0 100 100"  >
+        <circle cx="50" cy="50" r="25"  fill="transparent" stroke-width="4" stroke="#0079f5" ></circle>
+    </svg>
+    <svg with='200' height='200' viewBox="0 0 100 100"  >
+        <circle cx="50" cy="50" r="25"  fill="transparent" stroke-width="4" stroke-dasharray="20" stroke="#0079f5" ></circle>
+    </svg>
+    <svg with='200' height='200' viewBox="0 0 100 100"  >
+        <circle cx="50" cy="50" r="25"  fill="transparent" stroke-width="4" stroke-dasharray="40" stroke="#0079f5" ></circle>
+    </svg>
+    <svg with='200' height='200' viewBox="0 0 100 100"  >
+        <circle cx="50" cy="50" r="25"  fill="transparent" stroke-width="4" stroke-dasharray="50" stroke="#0079f5" ></circle>
+    </svg>
+    <svg with='200' height='200' viewBox="0 0 100 100"  >
+        <circle cx="50" cy="50" r="25"  fill="transparent" stroke-width="4" stroke-dasharray="50" stroke-dashoffset="20" stroke="#0079f5" ></circle>
+    </svg>
+    <svg with='200' height='200' viewBox="0 0 100 100"  >
+        <circle id="ha" cx="50" cy="50" r="25"  fill="transparent" stroke-width="4" stroke-dasharray="50" stroke="#0079f5" >
+        </circle>
+        <text x='35' y='53' fill='#0079f5' font-size='12'>hover</text>
+    </svg>
+    <svg with='200' height='200' viewBox="0 0 100 100"  >
+        <circle id="ha2" cx="50" cy="50" r="25"  fill="transparent" stroke-width="4" stroke-dasharray="157 157" stroke="#0079f5" >
+        </circle>
+    </svg>
+    <svg >
+    　　<line id="line" x1="30" y1="30" x2="300" y2="30" stroke-width="20" stroke="#0079f5" stroke-dasharray="10,20"/>
+    </svg>
+    <h1>动画暂停&帧动画</h1>
+    <input type='checkbox'   />
+    <div class='main'></div>
+</body>
+</html>
