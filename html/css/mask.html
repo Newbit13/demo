@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html{
+            background: #f1f2f5;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+        }
+        .mask{
+            background: url('./image/cat.jpg') no-repeat center/contain;
+            /* background: #00f; */
+            mask: linear-gradient(90deg, transparent, #f00);
+            /* -webkit-mask: linear-gradient(90deg, transparent , #f00); */
+            -webkit-mask: linear-gradient(135deg, transparent 35px, #fff 0)
+            top left,
+            linear-gradient(-135deg, transparent 35px, #fff 0)
+            top right,
+            linear-gradient(-45deg, transparent 35px, #fff 0)
+            bottom right,
+            linear-gradient(45deg, transparent 35px, #fff 0)
+            bottom left;
+            -webkit-mask-size: 50% 50%;
+            -webkit-mask-repeat: no-repeat;
+        }
+
+        .mask2{
+            position: relative;
+            background: url('./image/cat.jpg') no-repeat center/cover;
+        }
+        .mask2::before {
+            position: absolute;
+            content: "";
+            top: 0;left: 0; right: 0;bottom: 0;
+            background: url(./image/dog.jpg) no-repeat center/cover;
+            -webkit-mask: linear-gradient(45deg, #000 40%, transparent 60%);
+        }
+    </style>
+</head>
+<body>
+    <div class="box mask"></div>
+    <div class="box mask2"></div>
+</body>
+</html>
