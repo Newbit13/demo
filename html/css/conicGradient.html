@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 250px;
+            height: 250px;
+            margin: 50px auto;
+            background: conic-gradient(#000 12.5%, #fff 0 37.5%, #000 0 62.5%, #fff 0 87.5%, #000 0);
+            background-size: 50px 50px;
+        }
+        .box_bg{
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+        .box1{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -100px;
+            margin-top: -100px;
+            width: 200px;
+            height: 200px;
+            background: repeating-conic-gradient(rgb(255, 20, 147,0.8) 0 15deg, rgb(154, 205, 50,0.8) 0 30deg);
+            border: 1px solid #000;
+            animation: rotate 5s linear infinite;
+            mix-blend-mode: overlay;
+        }
+
+        @keyframes rotate { 
+            to { 
+                transform: rotate(1turn); 
+            } 
+        }
+
+        /* 仪表盘 */
+        .bg {
+            position: relative;
+            margin: 50px auto;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: conic-gradient(#f1462c 0%, #fc5d2c 12.4%, #fff 12.5%, #fff 12.5%, #fc5d2c 12.5%, #fba73e 24.9%, #fff 24.9%, #fff 25%, #fba73e 25%, #e0fa4e 37.4%, #fff 37.4%, #fff 37.5%, #e0fa4e 37.5%, #12dd7e 49.9%, #fff 49.9%, #fff 50%, #12dd7e 50%, #0a6e3f 62.4%, #fff 62.4%, #fff 62.5%);
+            transform: rotate(-112.5deg);
+            transform-origin: 50% 50%;
+        }
+        
+        .bg::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 370px;
+            height: 370px;
+            border-radius: 50%;
+            background: #fff;
+        }
+        
+        .bg::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background:
+                radial-gradient(#fff 0%, #fff 25%, transparent 25%, transparent 100%),
+                conic-gradient(#f1462c 0 12.5%, #fba73e 0 25%, #e0fa4e 0 37.5%, #12dd7e 0 50%, #0a6e3f 0 62.5%, #fff 0 100%);
+                
+        }
+        
+        .point {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+            background: radial-gradient(#467dc6 0%, #a4c6f3 100%);
+            border-radius: 50%;
+            z-index: 999;
+        }
+        
+        .point::before {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 350px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(0);
+            border-radius: 100% 100% 5% 5%;
+            background: linear-gradient(
+                180deg,
+                #9bc7f6 0,
+                #467dc6 50%,
+                transparent 50%,
+                transparent 100%
+            );
+            animation: rotate2 3s cubic-bezier(.93, 1.32, .89, 1.15) infinite;
+        }
+        
+        @keyframes rotate2 {
+            50% {
+                transform: translate(-50%, -50%) rotate(150deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(150deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box_bg">
+        <div class="box1"></div>
+    </div>
+    <div class="bg">
+        <div class="point"></div>
+    </div>
+    <!-- 参考 -->
+    <!-- https://www.cnblogs.com/coco1s/p/7079529.html -->
+    <!-- https://codepen.io/Chokcoco/pen/gRRdQq -->
+</body>
+</html>
