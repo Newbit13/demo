@@ -40,10 +40,17 @@
             background: url(./image/dog.jpg) no-repeat center/cover;
             -webkit-mask: linear-gradient(45deg, #000 40%, transparent 60%);
         }
+
+        .mask3{
+            background: url('./image/cat.jpg') no-repeat center/contain;
+            mask: linear-gradient(90deg, transparent, #f00);
+            -webkit-mask: conic-gradient(#000 25%, transparent 60%, transparent);
+        }
     </style>
 </head>
 <body>
     <div class="box mask"></div>
     <div class="box mask2"></div>
+    <div class="box mask3"></div>
 </body>
 </html>
