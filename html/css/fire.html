@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html{
+            background: #000;
+        }
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .bg{
+            width: 300px;
+            height: 300px;
+            background: #fff;
+            filter: contrast(20);
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #00f;
+            filter: blur(10px);
+        }
+
+        .box2{
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            background: #f00;
+            filter: blur(10px);
+        }
+
+        .fire {
+            position: relative;
+            width: 0;
+            height: 0;
+            border-radius: 45%;
+            box-sizing: border-box;
+            border: 200px solid #000;
+            border-bottom: 200px solid transparent;
+            background-color: #b5932f;
+            transform: scaleX(.4);
+            filter: blur(20px) contrast(30);
+        }
+
+        .fire .dot{
+            position: absolute;
+            bottom: -100px;
+            width: 20px;
+            height: 20px;
+            /* background: #fa8763; */
+            background: #000;
+            border-radius: 50%;
+            filter: blur(20px);
+            animation-name: fireDotUp;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            /* mix-blend-mode: screen; */
+            z-index: -1;
+        }
+
+        @keyframes fireDotUp{
+            0% {
+                transform: translateY(200px);
+            }
+
+            100% {
+                transform: translateY(-100px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class='box'></div>
+        <div class='box2'></div>
+    </div>
+    <div class="fire" id="fire">
+        <!-- <div class="dot"></div> -->
+    </div>
+<script>
+    var fire = document.querySelector('#fire');
+    for(var i = 0;i<100;i++){
+        let dot = document.createElement('div');
+        dot.className = 'dot';
+        dot.style.animationDelay = Math.random() + 's';
+        dot.style.animationDuration = Math.random() + 0.4 + 's';
+        dot.style.left = Math.random()*400 - 200 + 'px';
+        fire.appendChild(dot);
+    }
+</script>
+</body>
+</html>
