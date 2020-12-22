@@ -4,6 +4,7 @@ const clean = require('gulp-clean');
 const babel = require('gulp-babel'); // 编译es6
 const uglify = require('gulp-uglify');//注意单独使用时不能解析es6
 const rev = require('gulp-rev');//为静态文件添加一串hash值
+const myGulpPlugin = require('./my-plugin/my-gulp-plugin.js');
 
 function testTask(){
     return src('src/**/*.js')
@@ -30,6 +31,7 @@ function testTask3(){
                 }]
             ],
         }))
+        .pipe(myGulpPlugin('//首句被我注释掉啦'))
         .pipe(dest('dist/'))
 }
 

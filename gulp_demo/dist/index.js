@@ -1,4 +1,4 @@
-"use strict";
+//首句被我注释掉啦"use strict";
 
 // import oObj from './b.js'
 var Bar = /*#__PURE__*/function () {
