@@ -23,7 +23,7 @@ function testTask(){
 }
 
 function testTask3(){
-    return src('src/index.js')
+    return src('src/*.js')
         .pipe(babel({
             presets: [
                 ['@babel/preset-env',{
