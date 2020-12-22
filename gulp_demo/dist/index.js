@@ -1,20 +1,14 @@
-//首句被我注释掉啦"use strict";
-
+// hjyong 525842854
 // import oObj from './b.js'
-var Bar = /*#__PURE__*/function () {
-  function Bar() {
-    this.name = 'gg';
-  }
 
-  var _proto = Bar.prototype;
-
-  _proto.getName = function getName() {
-    return this.name;
-  };
-
-  return Bar;
-}();
-
-var ha = '哈';
+class Bar{
+    constructor(){
+        this.name = 'gg'
+    }
+    getName(){
+        return this.name;
+    }
+}
+const ha = '哈'
 oObj.count++;
 console.log(oObj);

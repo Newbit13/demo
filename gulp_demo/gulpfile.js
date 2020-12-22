@@ -24,14 +24,7 @@ function testTask(){
 
 function testTask3(){
     return src('src/*.js')
-        .pipe(babel({
-            presets: [
-                ['@babel/preset-env',{
-                    "loose": true,
-                }]
-            ],
-        }))
-        .pipe(myGulpPlugin('//首句被我注释掉啦'))
+        .pipe(myGulpPlugin('// hjyong 525842854\n'))
         .pipe(dest('dist/'))
 }
 
@@ -46,4 +39,5 @@ function cleans(cb) {
         .pipe(clean())
 }
 
-exports.default = series(cleans,parallel(testTask3,testTask2))
+// exports.default = series(cleans,parallel(testTask3,testTask2))
+exports.default = series(testTask3)
