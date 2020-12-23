@@ -7,7 +7,7 @@ var ss = {
 
 
 /**
- * @type {{a: Date, b: Document, c: number|string}}
+ * @type {{a: Date, b: Document, c: number|string, d: string}}
  */
 var cc = {
     a:true
@@ -17,6 +17,9 @@ var haha = {
     gg:'gg'
 }
 
-function test(){
-    return new Date();
+/**
+ * @param { Person } p
+ */
+function test(p){
+    // p.
 }
