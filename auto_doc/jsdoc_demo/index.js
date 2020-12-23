@@ -51,7 +51,14 @@ function getDiy2(){
  * @returns {Document}
  */
 function getElement(){
-    return document;
+    return {};
 }
 
 //当输入getElement().时，会有一系列相关的方法、属性可以使用。如：getElementById
+
+/**
+ * @type {{a: Date, b: Document, c: number|string}}
+ */
+var cc = {
+    a:true
+}

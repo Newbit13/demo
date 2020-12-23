@@ -1,7 +1,7 @@
 # 安装
 npm install jsdoc -g
 
-vscode查找jsdoc插件，以便自动生成注释(ctrl + shift + p,输入jsdoc)
+vscode查找jsdoc插件，以便自动生成注释
 # 上手
 新建index.js:
 
@@ -59,10 +59,17 @@ function getDiy2(){
  * @returns {Document}
  */
 function getElement(){
-    return document;
+    return {};
 }
 
 //当输入getElement().时，会有一系列相关的方法、属性可以使用。如：getElementById
+
+/**
+ * @type {{a: Date, b: Document, c: number|string}}
+ */
+var cc = {
+    a:true
+}
 
 ```
 
@@ -90,8 +97,21 @@ function getElement(){
 生成相关文档
 代码智能提示
 
-# 暂不清楚的点
-或者说jsdoc代码提示的缺陷：全局类型在不同文件中如何共用
+# vscode智能提示有多智能
+在./src/a.js中：
+```
+/**
+ * @type {{a: Date, b: Document, c: number|string}}
+ */
+var cc = {
+    a:true
+}
+```
+
+在./src/b.js中：
+输入cc.a.会出现相应的代码提示
+
+    注意：当出现同名类型时,上级目录中的type会覆盖下级的,对type按照ctrl+鼠标左键可以预览到所有定义的位置，并跳转
 
 # todo
 根据jsdoc动态生成d.ts(egg.js的做法)
