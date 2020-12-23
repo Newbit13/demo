@@ -75,7 +75,7 @@ var cc = {
 
 命令行运行```jsdoc index.js```
 
-也可以通过配置jsdoc.json:
+也可以通过配置jsdoc.[json|js]:
 ```
 {
   "source": {
@@ -125,3 +125,5 @@ var cc = {
 [JS 工具库文档化 - JSDoc](https://juejin.cn/post/6844904160274415623)
 
 [Annotating JavaScript for the Closure Compiler](https://github.com/google/closure-compiler/wiki/Annotating-JavaScript-for-the-Closure-Compiler#type-expressions)
+
+[Configuring JSDoc with a configuration file](https://jsdoc.app/about-configuring-jsdoc.html)

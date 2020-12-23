@@ -1,0 +1,14 @@
+{
+    "source": {
+      "include": [ "src/" ],
+      "exclude": [ "src/libs" ]
+    },
+    "opts": {
+      "template": "templates/default",
+      "encoding": "utf8",
+      "destination": "./docs/",
+      "recurse": true,
+      "verbose": false
+    },
+    "plugins": ["plugins/far.js"]
+  }
