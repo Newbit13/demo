@@ -4,7 +4,7 @@
       "exclude": [ "src/libs" ]
     },
     "opts": {
-      "template": "templates/default",
+      "template": "mytemplate/default",
       "encoding": "utf8",
       "destination": "./docs/",
       "recurse": true,
