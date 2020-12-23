@@ -2,7 +2,7 @@
  * @type {{s: Date, z: Document, k: number|string}}
  */
 var ss = {
-    s:true
+    qqqq:true
 }
 
 
@@ -11,4 +11,12 @@ var ss = {
  */
 var cc = {
     a:true
+}
+
+var haha = {
+    gg:'gg'
+}
+
+function test(){
+    return new Date();
 }

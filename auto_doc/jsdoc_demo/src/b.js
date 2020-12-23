@@ -1,3 +1,1 @@
-// ss.s.getDate
-
-cc.a
+// ss.s.getDates
