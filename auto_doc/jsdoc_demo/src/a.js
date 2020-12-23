@@ -1,3 +1,5 @@
+//@ts-check
+
 /**
  * @type {{s: Date, z: Document, k: number|string}}
  */

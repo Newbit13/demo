@@ -1,3 +1,4 @@
+//@ts-check
 // ss.s.getDates
 
 // class Person{
@@ -8,3 +9,6 @@
 //         this.name = name || 'dage'
 //     }
 // }
+
+// @ts-ignore
+haha.gg = Date
