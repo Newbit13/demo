@@ -8,5 +8,7 @@
  */
 exports.publish = function(taffyData, opts, tutorials) {
     // 我们需要的数据都在 taffyData 中
-    console.log(taffyData);
+    taffyData().each(doclet=>{
+        console.log(doclet);
+    })
 }
