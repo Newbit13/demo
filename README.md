@@ -5,6 +5,7 @@
 
 # 研究清单
 [开源录屏工具](https://github.com/rrweb-io/rrweb)
+[web页面录屏实现](https://juejin.cn/post/6844903774897569805)
 
 [Storybook](https://storybook.js.org/)
 
