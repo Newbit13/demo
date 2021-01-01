@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .vertical-mid{
+            position: relative;
+            font-family: "Akrobat-Bold";
+            line-height: 120px;
+            height: 120px;
+            background: #c04949;
+            font-size: 50px;
+        }
+
+        .vertical-mid2{
+            position: relative;
+            line-height: 120px;
+            height: 120px;
+            background: #6b69da;
+            font-size: 50px;
+        }
+        .cenbar::after{
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: #000000;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* 解决方案 */
+        .fix1 .positon_c{
+            /* 肉眼微调 */
+            position: absolute;
+            line-height: 1;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-top: 4px;
+        }
+
+        .fix2{
+            line-height: 1;
+            height: auto;
+            padding: 35px 0;
+        }
+
+        .fix3 .positon_c{
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>特殊字体中，中文、英语大小写、数字对齐问题</h1>
+    <p>特殊字体实际上是垂直居中了，视觉上没有</p>
+    <div class="vertical-mid cenbar">特哈xX8</div>
+    <hr>
+    <div class="vertical-mid2 cenbar">普哈xX8</div>
+    <hr>
+    <h2>解决方案</h2>
+    <p>1. 利用margin微调</p>
+    <div class="vertical-mid cenbar fix1"><span class="positon_c">特哈xX8Fix1</span></div>
+    <p style="text-decoration:line-through">2. 利用padding撑高上下(无用)</p>
+    <div class="vertical-mid cenbar fix2">特哈xX8</div>
+    <p>3. vertical-align:middle(与之对齐的是某个东西，通过父级元素设置font-size就能看到其存在的证据，好像在说gui)</p>
+    <div class="vertical-mid cenbar fix3"><span class="positon_c">特哈xX8Fix3</span></div>
+    <script>
+        //字体兼容性问题
+		const fnCssSheet = (() => {
+			const style = window.document.createElement('style');
+			style.type = 'text/css';
+			window.document.head.appendChild(style);
+			return style.sheet;
+		})();
+		const fnCssStyle = (_selector, _rules) => {
+			fnCssSheet && fnCssSheet.insertRule(`${_selector}{${_rules}}`, 0);
+		};
+		fnCssStyle('@font-face', 'font-family: "Akrobat-Bold";src: url("https://g.alicdn.com/ykvip_rax/assets/0.0.1/Akrobat-Bold.ttf") format("truetype");');
+    </script>
+</body>
+</html>
