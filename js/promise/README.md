@@ -23,5 +23,11 @@ demo2.js为看了参考资料后做的调整，虽然还是简陋，但demo.js�
 # 03
 demo3.js对then进行了简单的改进
 
+# 04 
+demo4.js实现了静态方法all
+
+# 总结
+    promise实现的核心思想是，将then的函数参数注册到列表中，当resolve的时候逐一将列表中的函数消费掉
+
 # 参考资料
 [彻底理解Promise原理及全功能实现](https://juejin.cn/post/6866372840451473415)
