@@ -20,5 +20,8 @@ console.log(222);
 # 02
 demo2.js为看了参考资料后做的调整，虽然还是简陋，但demo.js看起来好一些了
 
+# 03
+demo3.js对then进行了简单的改进
+
 # 参考资料
 [彻底理解Promise原理及全功能实现](https://juejin.cn/post/6866372840451473415)
