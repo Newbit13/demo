@@ -67,11 +67,26 @@ MyPromise.resolve = function(res){
 //     console.log(res);
 // })
 // console.log(666);
-MyPromise.resolve(1).then(res=>{
-    console.log(res);
-    return new MyPromise((resolve, reject) => {
-        resolve('promise second')
-    })
-}).then(res=>{
-    console.log(res);
-})
+
+// MyPromise.resolve(1).then(res=>{
+//     console.log(res);
+//     return new MyPromise((resolve, reject) => {
+//         resolve('promise second')
+//     })
+// }).then(res=>{
+//     console.log(res);
+// })
+
+// var p = MyPromise.resolve(1);
+// p.then(res=>{
+//     console.log(res);
+//     return new MyPromise((resolve, reject) => {
+//         resolve('promise second')
+//     })
+// }).then(res=>{
+//     console.log(res);
+// })
+
+// p.then(res=>{
+//     console.log(res);
+// })
