@@ -1,6 +1,10 @@
+const PENDDING = "PENDDING"; // 初始化pendding状态
+const RESOLVED = "RESOLVED"; // 正确完成resolve状态
+// const REJECTED = "REJECTED"; // 错误完成reject状态
+
 class MyPromise{
     constructor(stateChangeFn){
-        this.state = 'pending',
+        this.state = PENDDING,
         this.resolveV;
         this.rejectV;
         this.regisFn = [];
@@ -8,33 +12,33 @@ class MyPromise{
     }
 
     then(resloveFn){
-        this.regisFn.push(resloveFn);
+        if(this.state === RESOLVED){
+            resloveFn(this.resolveV);
+        }
+        if(this.state === PENDDING){
+            this.regisFn.push(resloveFn);
+        }
     }
 
     resolve(res){
         var promise = this;
-        promise.state = 'resolve',
+        promise.state = RESOLVED,
         promise.resolveV = res;
-        setTimeout(function(){
-            promise.regisFn.forEach((fn)=>{
-                fn(promise.resolveV)
-            })
+        promise.regisFn.forEach((fn)=>{
+            fn(promise.resolveV)
         })
-        return promise
     }
 }
 
 MyPromise.resolve = function(res){
-    var promise = new MyPromise();
-    promise.state = 'resolve',
-    promise.resolveV = res;
-    setTimeout(function(){
-        promise.regisFn.forEach((fn)=>{
-            fn(promise.resolveV)
+    return new MyPromise(resolve=>{
+        setTimeout(function(){
+            resolve(res)
         })
-    })
-    return promise
+    });
 }
+
+
 
 //验证用的代码
 // MyPromise.resolve(1).then((res)=>{
@@ -45,7 +49,7 @@ MyPromise.resolve = function(res){
 // new MyPromise(resolve=>{
 //     setTimeout(function(){
 //         resolve(2333)
-//     },3000)
+//     },1000)
 // }).then((res)=>{
 //     console.log(res);
 // })
