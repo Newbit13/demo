@@ -1,0 +1,12 @@
+.symbol-top {
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+  border: 1px solid #666;
+  margin-right: 10px;
+}
+#div1 {
+  width: 1000px;
+  height: 400px;
+  border: 1px solid #666;
+}
