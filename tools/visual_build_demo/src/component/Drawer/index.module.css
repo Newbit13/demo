@@ -1,5 +1,29 @@
 .main{
+    position: relative;
     width: 100%;
     height: calc(100vh - 50px);
     background: #f1f2f5;
+}
+
+.shape{
+    position: absolute;
+}
+
+.menuBox{
+    position: absolute;
+    width: 80px;
+    background: #ffffff;
+    z-index: 99999999999999;
+}
+
+.menuItem{
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #f1f2f5;
+}
+
+.menuItem:hover{
+    background: #24a5ff;
+    color: #ffffff;
 }
