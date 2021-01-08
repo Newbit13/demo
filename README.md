@@ -4,6 +4,10 @@
 
 
 # 研究清单
+- hard-source-webpack-plugin
+
+'之前使用 DllPlugin 和 DllReferencePlugin 完成，但是其配置非常复杂，而且假如更新了文件，还需要手动重新生成 dll。这里选择了 AutoDllPlugin'
+
 [开源录屏工具](https://github.com/rrweb-io/rrweb)
 [web页面录屏实现](https://juejin.cn/post/6844903774897569805)
 
