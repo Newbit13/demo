@@ -4,18 +4,21 @@ const initialState = {
     startX:0,
     startY:0,
     startTop:0,
-    startLeft:0
+    startLeft:0,
+    snapShopList:[]
 }
 
 function MyReducer(state = initialState,action){
     let currentComp;
+    let temp;
     switch (action.type){
         case 'AddComp':
             state.renderList.push(action.comp);
             let newList = [...state.renderList];
             return {
                 ...state,
-                renderList:newList
+                renderList:newList,
+                currentIndex:state.renderList.length - 1
             };
         case 'setCurrentIndex':
             state.currentIndex = action.index;
@@ -51,19 +54,74 @@ function MyReducer(state = initialState,action){
                 }
             }
             currentComp = state.renderList[state.currentIndex];
-            let temp = state.renderList[state.currentIndex - 1];
+            temp = state.renderList[state.currentIndex - 1];
             state.renderList[state.currentIndex - 1] = currentComp;
             state.renderList[state.currentIndex] = temp;
             return {
                 ...state,
                 renderList:[...state.renderList],
             };
-        case 'deleteComp':
-                state.renderList.splice(state.currentIndex,1)
+        case 'sdownIndex':
+            if(state.currentIndex === 0){
                 return {
-                    ...state,
-                    renderList:[...state.renderList],
-                };
+                    ...state
+                }
+            }
+            currentComp = state.renderList.splice(state.currentIndex,1);
+            state.renderList.unshift(currentComp[0]);
+            return {
+                ...state,
+                renderList:[...state.renderList],
+            };
+        case 'upIndex':
+            if(state.currentIndex === state.renderList.length - 1){
+                return {
+                    ...state
+                }
+            }
+            currentComp = state.renderList[state.currentIndex];
+            temp = state.renderList[state.currentIndex + 1];
+            state.renderList[state.currentIndex + 1] = currentComp;
+            state.renderList[state.currentIndex] = temp;
+            return {
+                ...state,
+                renderList:[...state.renderList],
+            };
+        case 'supIndex':
+            if(state.currentIndex === state.renderList.length - 1){
+                return {
+                    ...state
+                }
+            }
+            currentComp = state.renderList.splice(state.currentIndex,1);
+            state.renderList.push(currentComp[0]);
+            return {
+                ...state,
+                renderList:[...state.renderList],
+            };
+        case 'deleteComp':
+            state.renderList.splice(state.currentIndex,1)
+            return {
+                ...state,
+                renderList:[...state.renderList],
+            };
+        case 'save':
+            state.snapShopList.push(state.renderList);
+            return {
+                ...state,
+                snapShopList:[...state.snapShopList]
+            }
+        case 'updateStyle':
+            // currentComp = state.renderList[state.currentIndex];
+            // currentComp.style = {
+            //     ...currentComp.style,
+            //     // ...action.pos
+            // }
+            // return {
+            //     ...state,
+            //     renderList:[...state.renderList]
+            // };
+            return state;
         default:
             return state;
     }

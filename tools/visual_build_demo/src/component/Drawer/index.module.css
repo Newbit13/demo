@@ -27,3 +27,16 @@
     background: #24a5ff;
     color: #ffffff;
 }
+
+.active{
+    border: 1px solid #24a5ff;
+}
+
+.shapePoint{
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #24a5ff;
+}
