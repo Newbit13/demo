@@ -125,11 +125,10 @@ function Shape(props){
         document.addEventListener('mouseup', up)
     },[props.index])
 
-    const handleMouseDownOnPoint = useCallback(function (point,defaultStyle) {
-        const downEvent = window.event;
-        downEvent.stopPropagation()
-        downEvent.preventDefault()
-        return
+    const handleMouseDownOnPoint = useCallback(function (e,point,defaultStyle) {
+        const event = e;
+        event.stopPropagation()
+        event.preventDefault()
 
 
         const pos = {...defaultStyle}
@@ -137,8 +136,8 @@ function Shape(props){
         const width = Number(pos.width)
         const top = Number(pos.top)
         const left = Number(pos.left)
-        const startX = downEvent.clientX
-        const startY = downEvent.clientY
+        const startX = event.clientX
+        const startY = event.clientY 
     
         // 是否需要保存快照
         let needSave = false
@@ -169,11 +168,11 @@ function Shape(props){
         const up = () => {
             document.removeEventListener('mousemove', move)
             document.removeEventListener('mouseup', up)
-            // needSave && (
-            //     dispatch({
-            //         type:'save'
-            //     })
-            // )
+            needSave && (
+                dispatch({
+                    type:'save'
+                })
+            )
         }
     
         document.addEventListener('mousemove', move)
@@ -182,15 +181,15 @@ function Shape(props){
 
     return (
         <div 
-            className={[css.shape,(currentIndex == props.index?css.active:null)].join(' ')}
+            className={[css.shape,(currentIndex === props.index?css.active:null)].join(' ')}
             onMouseDown={handleMouseDown}
             style={props.style}
         >
-            {(currentIndex == props.index && props.havePoint) && pointList.map((point,index)=>{
+            {(currentIndex === props.index && props.havePoint) && pointList.map((point,index)=>{
                 return (
                     <div
                         className={css.shapePoint}
-                        onMouseDown={handleMouseDownOnPoint(point,props.style)}
+                        onMouseDown={(e)=>handleMouseDownOnPoint(e,point,props.style)}
                         key={index}
                         style={getPointStyle(point,props.style)}>
                     </div>
@@ -223,6 +222,9 @@ function Drawer(){
         dispatch({
             type:'AddComp',
             comp:copyObj
+        })
+        dispatch({
+            type:'save'
         })
         // componentData.push(copyObj);
         // setComponentData([...componentData])
