@@ -207,7 +207,11 @@ const TopToolBarHeight = 50;
 function Drawer(){
     const [menuIsShow,menuIsShowHandle] = useState(false);
     const [menuPos,updateMenuPos] = useState({top:0,left:0});
-    const componentData = useSelector(state => state.MyReducer.renderList);
+    // const componentData = useSelector(state => state.MyReducer.renderList);
+    const {
+        renderList:componentData,
+        auxiliary
+    } = useSelector(state => state.MyReducer);
     // console.log(useSelector(state => state.MyReducer));
     const dispatch = useDispatch();
 
@@ -291,6 +295,14 @@ function Drawer(){
                 <div className={css.menuItem} onClick={handleUpIndex}>上移</div>
                 <div className={css.menuItem} onClick={handleDelete}>删除</div>
             </div>
+            <div className={css.auxiliary_horizontal_line} style={{
+                display:auxiliary.auxiliary_horizontal_line?'block':'none',
+                top:auxiliary.auxiliary_line_top
+            }}></div>
+            <div className={css.auxiliary_vertical_line} style={{
+                display:auxiliary.auxiliary_vertical_line?'block':'none',
+                left:auxiliary.auxiliary_line_left
+            }}></div>
             {componentData.map((item,index)=>{
                 let DynamicComp = transformComp(item.component);
                 return (

@@ -41,3 +41,21 @@
     background: #ffffff;
     border: 1px solid #24a5ff;
 }
+
+.auxiliary_horizontal_line{
+    position: absolute;
+    width: 100vw;
+    height: 1px;
+    left: 0;
+    top: 0;
+    background: #24a5ff;
+}
+
+.auxiliary_vertical_line{
+    position: absolute;
+    width: 1px;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background: #24a5ff;
+}
