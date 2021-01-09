@@ -16,6 +16,105 @@ const initialState = {
     }
 }
 
+function computeAuxiliary(state,currentComp,action){
+    let haveMatch_vertical = false;
+    let haveMatch_horizontal = false;
+    let vertical_diration = (action.pos.currY - state.startY)>0?'down':'up';
+    let horizontal_diration = (action.pos.currX - state.startX)>0?'right':'left';
+    let diffV = 3;
+    function dirationCommonFn(diration,comp,currentComp,diffV){
+        let keyDiration;
+        let KeyValue;
+        let haveMatch = {
+            left:false,
+            right:false,
+            up:false,
+            down:false
+        };
+        let auxiliart_line_positon_v;
+        if(diration === 'left' || diration === 'right'){
+            keyDiration = 'left';
+            KeyValue = 'width';
+        }else{
+            keyDiration = 'top';
+            KeyValue = 'height';
+        }
+        let halfComp = comp.style[keyDiration] + comp.style[KeyValue]/2;
+        let halfCurComp = currentComp.style[keyDiration] + currentComp.style[KeyValue]/2;
+        let compBorder = comp.style[keyDiration] + comp.style[KeyValue];
+        if(diration === 'left' || diration === 'up'){
+            if(currentComp.style[keyDiration] >= compBorder - diffV && currentComp.style[keyDiration] <= compBorder + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = compBorder;
+                auxiliart_line_positon_v = currentComp.style[keyDiration];
+            }else if(halfCurComp >= compBorder - diffV && halfCurComp <= compBorder + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = compBorder - currentComp.style[KeyValue]/2;
+                auxiliart_line_positon_v = compBorder;
+            }else if(currentComp.style[keyDiration] >= halfComp - diffV && currentComp.style[keyDiration] <= halfComp + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = halfComp;
+                auxiliart_line_positon_v = currentComp.style[keyDiration];
+            }else if(halfCurComp >= halfComp - diffV && halfCurComp <= halfComp + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = halfComp - currentComp.style[KeyValue]/2;
+                auxiliart_line_positon_v = halfComp;
+            }else if(halfCurComp >= comp.style[keyDiration] - diffV && halfCurComp <= comp.style[keyDiration] + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = comp.style[keyDiration] - currentComp.style[KeyValue]/2;
+                auxiliart_line_positon_v = comp.style[keyDiration];
+            }else if(currentComp.style[keyDiration] >= comp.style[keyDiration] - diffV && currentComp.style[keyDiration] <= comp.style[keyDiration] + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = comp.style[keyDiration];
+                auxiliart_line_positon_v = currentComp.style[keyDiration];
+            }
+        }else if(diration === 'right' || diration === 'down'){
+            let curcompBorder = currentComp.style[keyDiration] + currentComp.style[KeyValue];
+            if(curcompBorder >= comp.style[keyDiration] - diffV && curcompBorder <= comp.style[keyDiration] + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = comp.style[keyDiration] - currentComp.style[KeyValue];
+                auxiliart_line_positon_v = comp.style[keyDiration];
+            }else if(halfCurComp >= comp.style[keyDiration] - diffV && halfCurComp <= comp.style[keyDiration] + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = comp.style[keyDiration] - currentComp.style[KeyValue]/2;
+                auxiliart_line_positon_v = comp.style[keyDiration];
+            }else if(curcompBorder >= halfComp - diffV && curcompBorder <= halfComp + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = halfComp - currentComp.style[KeyValue];
+                auxiliart_line_positon_v = halfComp;
+            }else if(halfCurComp >= halfComp - diffV && halfCurComp <= halfComp + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = halfComp - currentComp.style[KeyValue]/2;
+                auxiliart_line_positon_v = halfComp;
+            }else if(halfCurComp >= compBorder - diffV && halfCurComp <= compBorder + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = compBorder - currentComp.style[KeyValue]/2;
+                auxiliart_line_positon_v = compBorder;
+            }else if(curcompBorder >= compBorder - diffV && curcompBorder <= compBorder + diffV){
+                haveMatch[diration] = true;
+                currentComp.style[keyDiration] = compBorder - currentComp.style[KeyValue];
+                auxiliart_line_positon_v = compBorder;
+            }
+        }
+
+        if(diration === 'left' || diration === 'right'){
+            state.auxiliary.auxiliary_line_left = auxiliart_line_positon_v;
+        }else{
+            state.auxiliary.auxiliary_line_top = auxiliart_line_positon_v;
+        }
+
+        return haveMatch[diration];
+    }
+    state.renderList.forEach((comp,index)=>{
+        if(index === state.currentIndex)return
+        haveMatch_horizontal = dirationCommonFn(vertical_diration,comp,currentComp,diffV);
+        haveMatch_vertical = dirationCommonFn(horizontal_diration,comp,currentComp,diffV);
+    })
+    
+    state.auxiliary.auxiliary_vertical_line = haveMatch_vertical?true:false;
+    state.auxiliary.auxiliary_horizontal_line = haveMatch_horizontal?true:false;
+}
+
 function MyReducer(state = initialState,action){
     let currentComp;
     let temp;
@@ -60,97 +159,8 @@ function MyReducer(state = initialState,action){
             state.renderList[state.currentIndex] = tempObj
             currentComp = tempObj
 
-            // 辅助线判断逻辑
-            let haveMatch_vertical = false;
-            let haveMatch_horizontal = false;
-            let vertical_diration = (action.pos.currY - state.startY)>0?'down':'up';
-            let horizontal_diration = (action.pos.currX - state.startX)>0?'right':'left';
-            let diffV = 3;
-            state.renderList.forEach((comp,index)=>{
-                if(index === state.currentIndex)return
-
-                let targetHalf = comp.style.left + comp.style.width/2;
-                if(horizontal_diration === 'left'){
-                    let compLeft = comp.style.left + comp.style.width;
-                    if(currentComp.style.left >= compLeft - diffV && currentComp.style.left <= compLeft + diffV){
-                        haveMatch_vertical = true;
-                        currentComp.style.left = compLeft;
-                    }else if(currentComp.style.left >= targetHalf - diffV && currentComp.style.left <= targetHalf + diffV){
-                        haveMatch_vertical = true;
-                        currentComp.style.left = targetHalf;
-                    }else if(currentComp.style.left >= comp.style.left - diffV && currentComp.style.left <= comp.style.left + diffV){
-                        haveMatch_vertical = true;
-                        currentComp.style.left = comp.style.left;
-                    }
-                    if(haveMatch_vertical){
-                        state.auxiliary.auxiliary_line_left = currentComp.style.left;
-                    }
-                }else if(horizontal_diration === 'right'){
-                    let compRight = currentComp.style.left + currentComp.style.width;
-                    let compRight2 = comp.style.left + comp.style.width;
-
-                    if(compRight >= comp.style.left - diffV && compRight <= comp.style.left + diffV){
-                        haveMatch_vertical = true;
-                        currentComp.style.left = comp.style.left - currentComp.style.width;
-                        state.auxiliary.auxiliary_line_left = comp.style.left;
-                    }else if(compRight >= targetHalf - diffV && compRight <= targetHalf + diffV){
-                        haveMatch_vertical = true;
-                        currentComp.style.left = targetHalf - currentComp.style.width;
-                        state.auxiliary.auxiliary_line_left = targetHalf;
-                    }else if(compRight >= compRight2 - diffV && compRight <= compRight2 + diffV){
-                        haveMatch_vertical = true;
-                        currentComp.style.left = compRight2 - currentComp.style.width;
-                        state.auxiliary.auxiliary_line_left = compRight2;
-                    }
-                }
-
-                let targetHalf2 = comp.style.top + comp.style.height/2;
-                if(vertical_diration === 'up'){
-                    let compTop = comp.style.top + comp.style.height;
-                    if(currentComp.style.top >= compTop - diffV && currentComp.style.top <= compTop + diffV){
-                        haveMatch_horizontal = true;
-                        currentComp.style.top = compTop;
-                    }else if(currentComp.style.top >= targetHalf2 - diffV && currentComp.style.top <= targetHalf2 + diffV){
-                        haveMatch_horizontal = true;
-                        currentComp.style.top = targetHalf2;
-                    }else if(currentComp.style.top >= comp.style.top - diffV && currentComp.style.top <= comp.style.top + diffV){
-                        haveMatch_horizontal = true;
-                        currentComp.style.top = comp.style.top;
-                    }
-                    if(haveMatch_horizontal){
-                        state.auxiliary.auxiliary_line_top = currentComp.style.top;
-                    }
-                }else if(vertical_diration === 'down'){
-                    let compTop = currentComp.style.top + currentComp.style.height;
-                    let compTop2 = comp.style.top + comp.style.height;
-
-                    if(compTop >= comp.style.top - diffV && compTop <= comp.style.top + diffV){
-                        haveMatch_horizontal = true;
-                        currentComp.style.top = comp.style.top - currentComp.style.height;
-                        state.auxiliary.auxiliary_line_top = comp.style.top;
-                    }else if(compTop >= targetHalf2 - diffV && compTop <= targetHalf2 + diffV){
-                        haveMatch_horizontal = true;
-                        currentComp.style.top = targetHalf2 - currentComp.style.height;
-                        state.auxiliary.auxiliary_line_top = targetHalf2;
-                    }else if(compTop >= compTop2 - diffV && compTop <= compTop2 + diffV){
-                        haveMatch_horizontal = true;
-                        currentComp.style.top = compTop2 - currentComp.style.height;
-                        state.auxiliary.auxiliary_line_top = compTop2;
-                    }
-                }
-                
-            })
-            if(haveMatch_vertical){
-                state.auxiliary.auxiliary_vertical_line = true;
-            }else{
-                state.auxiliary.auxiliary_vertical_line = false;
-            }
-            if(haveMatch_horizontal){
-                state.auxiliary.auxiliary_horizontal_line = true;
-            }else{
-                state.auxiliary.auxiliary_horizontal_line = false;
-            }
-            
+            // 辅助线判断逻辑,这是个有副作用的函数
+            computeAuxiliary(state,currentComp,action);
 
             return {
                 ...state,

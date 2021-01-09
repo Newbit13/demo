@@ -35,8 +35,8 @@
 
 .shapePoint{
     position: absolute;
-    width: 5px;
-    height: 5px;
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
     background: #ffffff;
     border: 1px solid #24a5ff;
@@ -48,7 +48,10 @@
     height: 1px;
     left: 0;
     top: 0;
-    background: #24a5ff;
+    /* background: #24a5ff; */
+    background-image: linear-gradient(to right,#24a5ff 5px,transparent 0,transparent);
+    background-size: 15px 15px;
+    background-repeat: repeat;
 }
 
 .auxiliary_vertical_line{
@@ -57,5 +60,8 @@
     height: 100vh;
     left: 0;
     top: 0;
-    background: #24a5ff;
+    /* background: #24a5ff; */
+    background-image: linear-gradient(to bottom,#24a5ff 5px,transparent 0,transparent);
+    background-size: 15px 15px;
+    background-repeat: repeat;
 }

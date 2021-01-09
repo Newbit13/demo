@@ -69,8 +69,8 @@ function getPointStyle(point,defaultStyle) {
     }
 
     const style = {
-        marginLeft: hasR? '-4px' : '-3px',
-        marginTop: '-3px',
+        marginLeft: hasR? '-2.5px' : '-2.5px',
+        marginTop: '-2.5px',
         left: `${newLeft}px`,
         top: `${newTop}px`,
         cursor: point.split('').reverse().map(m => directionKey[m]).join('') + '-resize',
