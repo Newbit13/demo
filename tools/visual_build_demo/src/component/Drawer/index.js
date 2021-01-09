@@ -208,6 +208,7 @@ function Drawer(){
     const [menuIsShow,menuIsShowHandle] = useState(false);
     const [menuPos,updateMenuPos] = useState({top:0,left:0});
     const componentData = useSelector(state => state.MyReducer.renderList);
+    // console.log(useSelector(state => state.MyReducer));
     const dispatch = useDispatch();
 
     const dropEndHandle = useCallback(function (e){

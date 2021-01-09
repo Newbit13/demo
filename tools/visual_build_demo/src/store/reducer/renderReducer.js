@@ -14,6 +14,8 @@ function MyReducer(state = initialState,action){
     let temp;
     let index;
     let newList;
+    let tempObj;
+    // console.log(action.type);
     switch (action.type){
         case 'AddComp':
             newList = [...state.renderList];
@@ -114,10 +116,14 @@ function MyReducer(state = initialState,action){
         case 'updateStyle':
             newList = [...state.renderList];
             currentComp = newList[state.currentIndex];
-            currentComp.style = {
+            tempObj = {
+                ...currentComp
+            }
+            tempObj.style = {
                 ...currentComp.style,
                 ...action.pos
             }
+            newList[state.currentIndex] = tempObj
             return {
                 ...state,
                 renderList:newList
@@ -131,7 +137,6 @@ function MyReducer(state = initialState,action){
                 snapShopIndex:state.snapShopList.length
             }
         case 'undo':
-            console.log(state.snapShopList);
             index = state.snapShopIndex - 1;
             if(index < 0)index = 0;
             state.renderList = state.snapShopList[index];
