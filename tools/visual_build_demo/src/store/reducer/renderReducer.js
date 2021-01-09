@@ -48,13 +48,17 @@ function MyReducer(state = initialState,action){
             };
         case 'updateMovePos':
             currentComp = state.renderList[state.currentIndex];
-            // pos.top = currY - startY + startTop
-            // pos.left = currX - startX + startLeft
-            currentComp.style = {
+
+            tempObj = {
+                ...currentComp
+            }
+            tempObj.style = {
                 ...currentComp.style,
                 top: action.pos.currY - state.startY + state.startTop,
                 left: action.pos.currX - state.startX + state.startLeft
             }
+            state.renderList[state.currentIndex] = tempObj
+            currentComp = tempObj
 
             // 辅助线判断逻辑
             let haveMatch_vertical = false;
@@ -242,8 +246,12 @@ function MyReducer(state = initialState,action){
             }
         case 'undo':
             index = state.snapShopIndex - 1;
-            if(index < 0)index = 0;
-            state.renderList = state.snapShopList[index];
+            if(index < 0){
+                index = -1;
+                state.renderList = [];
+            }else{
+                state.renderList = state.snapShopList[index];
+            }
             return {
                 ...state,
                 renderList:[...state.renderList],

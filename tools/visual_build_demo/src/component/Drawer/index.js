@@ -117,6 +117,9 @@ function Shape(props){
         }
     
         const up = () => {
+            dispatch({
+                type:'save'
+            })
             document.removeEventListener('mousemove', move)
             document.removeEventListener('mouseup', up)
         }
@@ -275,7 +278,10 @@ function Drawer(){
     const handleDelete = useCallback(function (e) {
         dispatch({
             type:'deleteComp',
-        })
+        });
+        dispatch({
+            type:'save'
+        });
     },[])
 
     return (

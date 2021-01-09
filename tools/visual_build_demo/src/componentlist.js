@@ -10,7 +10,8 @@ let componentList = [{
         // position: 'absolute',
         // top: 0,
         // left: 0,
-        color:'#fff123'
+        color:'#24a5ff',
+        fontSize:20
     }
 },
 {
