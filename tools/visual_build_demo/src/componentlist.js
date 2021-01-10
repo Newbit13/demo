@@ -1,4 +1,4 @@
-import cat from './static/images/cat.jpg';
+import pkq from './static/images/pkq.jpg';
 
 let componentList = [{
     component:"Text",//对应组件class
@@ -43,11 +43,11 @@ let componentList = [{
         // position: 'absolute',
         // top: 0,
         // left: 0,
-        width: 50,
-        height:50
+        width: 200,
+        height:200
     },
     propV:{
-        url:cat
+        url:pkq
     }
 }]; 
 
