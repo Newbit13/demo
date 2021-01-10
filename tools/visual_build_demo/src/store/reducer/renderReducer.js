@@ -246,6 +246,21 @@ function MyReducer(state = initialState,action){
                 ...state,
                 renderList:newList
             };
+        case 'updateProp':
+            newList = [...state.renderList];
+            currentComp = newList[state.currentIndex];
+            tempObj = {
+                ...currentComp
+            }
+            tempObj.propV = {
+                ...currentComp.propV,
+                ...action.pos
+            }
+            newList[state.currentIndex] = tempObj
+            return {
+                ...state,
+                renderList:newList
+            };
         case 'save':
             newList = [...state.snapShopList];
             newList.push(state.renderList);

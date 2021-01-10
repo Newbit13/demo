@@ -6,17 +6,17 @@ import css from './index.module.css';
 //业务组件
 function Text(props){
     return (
-        <div style={props.style}>{props.propV}</div>
+        <div style={props.style}>{props.propV.text}</div>
     )
 }
 function Button(props){
     return (
-        <button style={props.style}>{props.propV}</button>
+        <button style={props.style}>{props.propV.text}</button>
     )
 }
 function Image(props){
     return (
-        <img src={props.propV} style={props.style} alt='pic'/>
+        <img src={props.propV.url} style={props.style} alt='pic'/>
     )
 }
 // window.Test = Test;

@@ -7,7 +7,7 @@ function dragStartHandle(e){
 }
 
 
-function Header(){
+function Comp(){
     return (
         <div className={css.leftBar}>
             {componentList.map((comp,compIndex)=>{
@@ -27,4 +27,4 @@ function Header(){
     );
 }
 
-export default Header
+export default Comp

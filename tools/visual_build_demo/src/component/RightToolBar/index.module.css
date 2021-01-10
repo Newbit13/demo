@@ -1,0 +1,6 @@
+.rightBar{
+    border-left: 1px solid #999999;
+    padding: 10px;
+    width: 280px;
+    height: calc(100vh - 50px);
+}
