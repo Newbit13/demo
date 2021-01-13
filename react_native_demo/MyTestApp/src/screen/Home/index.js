@@ -3,7 +3,10 @@ import {
     View,
     Text,
     Button
-  } from 'react-native';
+} from 'react-native';
+
+import request from '../../util/request';
+
 class HomeScreen extends React.Component {
     static navigationOptions = {
         title: 'Welcome',
@@ -16,10 +19,10 @@ class HomeScreen extends React.Component {
             title="Go to Chat"
             onPress={() => this.props.navigation.navigate('Chat')}
             />
-            {/* <Button
-            title="ttt"
-            onPress={() => console.log(123)}
-            /> */}
+            <Button
+                title="request"
+                onPress={() => {request();}}
+            />
         </View>
         );
     }

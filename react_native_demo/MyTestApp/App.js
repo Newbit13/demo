@@ -11,7 +11,7 @@ import AppContainer from './src/route';
 import Adp from './src/screen/Adp';
 
 const App = () =>{
-  const [flag,setFlag] = useState(true);
+  const [flag,setFlag] = useState(false);
   const hideHandle = useCallback(()=>{
     setFlag(false)
   })
