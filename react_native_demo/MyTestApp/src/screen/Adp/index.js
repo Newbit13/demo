@@ -41,7 +41,7 @@ const Adp = (props) => {
 
     return (
         <>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="dark-content" backgroundColor="#9b63cd"/>
         <SafeAreaView>
             <ScrollView
             contentInsetAdjustmentBehavior="automatic"
@@ -50,10 +50,10 @@ const Adp = (props) => {
                 <Text>这是广告页{num}s</Text>
                 </View>
                 <LinearGradinet
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 0}}
-                colors={['#9b63cd', '#e0708c']}
-                // style={{width: 200, height: 200}}
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 0}}
+                    colors={['#9b63cd', '#e0708c']}
+                    // style={{width: 200, height: 200}}
                 >
                 <Button 
                     title="Learn More"

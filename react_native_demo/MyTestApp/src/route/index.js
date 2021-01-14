@@ -22,7 +22,7 @@ const AppNavigator = createStackNavigator({
     // },
   },
 },{
-  initialRouteName: 'Home',
+  initialRouteName: 'Chat',
 });
 
 const AppContainer = createAppContainer(AppNavigator);

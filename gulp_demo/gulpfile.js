@@ -5,6 +5,7 @@ const babel = require('gulp-babel'); // 编译es6
 const uglify = require('gulp-uglify');//注意单独使用时不能解析es6
 const rev = require('gulp-rev');//为静态文件添加一串hash值
 const myGulpPlugin = require('./my-plugin/my-gulp-plugin.js');
+const myGulpPlugin2 = require('./my-plugin/my-gulp-plugin2.js');
 
 function testTask(){
     return src('src/**/*.js')
@@ -30,6 +31,7 @@ function testTask3(){
 
 function testTask2(){
     return src('src/**/*.html')
+        .pipe(myGulpPlugin2())
         .pipe(dest('dist/'))
 }
 
@@ -40,4 +42,4 @@ function cleans(cb) {
 }
 
 // exports.default = series(cleans,parallel(testTask3,testTask2))
-exports.default = series(testTask3)
+exports.default = series(testTask2)

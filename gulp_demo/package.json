@@ -15,5 +15,9 @@
     "gulp-clean": "^0.4.0",
     "gulp-rev": "^9.0.0",
     "gulp-uglify": "^3.0.2"
+  },
+  "dependencies": {
+    "gulp-util": "^3.0.8",
+    "htmlparser2": "^6.0.0"
   }
 }
