@@ -3,6 +3,7 @@ import { createStackNavigator  } from 'react-navigation-stack';
 
 import ChatScreen from '../screen/Chat';
 import HomeScreen from '../screen/Home';
+import ZeroScreen from '../screen/Zero';
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -21,8 +22,11 @@ const AppNavigator = createStackNavigator({
     //   navigationBar: null
     // },
   },
+  Zero: {
+    screen: ZeroScreen,
+  },
 },{
-  initialRouteName: 'Chat',
+  initialRouteName: 'Zero',
 });
 
 const AppContainer = createAppContainer(AppNavigator);

@@ -34,19 +34,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#24a5ff'
   },
   flat:{
-    height:200,
     backgroundColor: '#ff0000'
   },
   logo: {
     width:50,
     height:50,
     backgroundColor: '#e0708c',
+  },
+  box:{
+    position:'absolute',
+    top:0,
+    width: 30,
+    height:200,
+    backgroundColor: '#000000'
   }
 })
 
 const DATA = [];
 
-// for(var i = 0;i<20;i++){
+// for(var i = 0;i<50;i++){
 //   DATA.push({
 //     id:String(i),
 //     title:i
@@ -88,19 +94,28 @@ class ChatScreen extends React.Component {
     };
     render() {
       return (
-        <View style={{height:200}}>
+        <View style={{
+          flex: 1
+          // height:400
+        }}>
           <Button
             title="Go back"
             color='#006000'
             onPress={() => this.props.navigation.goBack()}
           />
-          <FlatList 
-            stlye={styles.flat}
-            data={DATA}
-            ItemSeparatorComponent = {Separator}
-            ListEmptyComponent = {EmptyComp}
-            renderItem={renderItem}
-            keyExtractor={item => item.id} />
+          <View style={{
+            flex: 1
+            // height:400
+          }}>
+            <FlatList 
+              stlye={styles.flat}
+              data={DATA}
+              ItemSeparatorComponent = {Separator}
+              ListEmptyComponent = {EmptyComp}
+              renderItem={renderItem}
+              keyExtractor={item => item.id} />
+            <View style={styles.box}></View>
+          </View>
           <Text>End</Text>
         </View>
       );
