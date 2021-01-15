@@ -8,5 +8,11 @@
 3. FlatList外面在包一层View可以使得其高度可控(!!!),但是不加的话其父级flex为1时不会遮挡(参考第1条),加的话反而又遮挡了
     总结：高度确定时挺方便的，高度不确定时得靠计算该组件高度，麻烦
 
+# KeyboardAvoidingView
+1. KeyboardAvoidingView配合ScrollView一起使用，ScrollView的高度记得跟其子元素设置同样高度，否则键盘唤起时ScrollView的高度会不符合预期
+
+# 曲折
+改一个组件样式为100%,然后模拟器就失去响应，工作被迫中断（解决方案：上备用真机）
+
 # 参考资料
 [React Navigation](https://reactnavigation.org/docs/4.x/tab-based-navigation/)
