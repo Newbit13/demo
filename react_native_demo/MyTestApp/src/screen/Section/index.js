@@ -18,18 +18,22 @@ import LinearGradinet from 'react-native-linear-gradient';
 
 const DATA = [
     {
+        ha:'dsadsa1',
         title: "Main dishes",
         data: ["Pizza", "Burger", "Risotto"]
     },
     {
+        ha:'dsadsa2',
         title: "Sides",
         data: ["French Fries", "Onion Rings", "Fried Shrimps"]
     },
     {
+        ha:'dsadsa3',
         title: "Drinks",
         data: ["Water", "Coke", "Beer"]
     },
     {
+        ha:'dsadsa4',
         title: "Desserts",
         data: ["Cheese Cake", "Ice Cream"]
     }
@@ -71,10 +75,16 @@ class SectionScreen extends React.Component {
                 <SectionList
                     sections={DATA}
                     keyExtractor={(item, index) => item + index}
-                    renderItem={({ item }) => <Item title={item} />}
-                    renderSectionHeader={({ section: { title } }) => (
-                        <Text style={styles.header}>{title}</Text>
-                    )}
+                    renderItem={(a) => {
+                        console.log(a);
+                        let { item } = a;
+                        return <Item title={item} />
+                    }}
+                    renderSectionHeader={(a) => {
+                        // console.log(a);
+                        let { section: { title,ha } } = a;
+                        return <Text style={styles.header}>{title}-{ha}</Text>
+                    }}
                 />
             </SafeAreaView>
         );
