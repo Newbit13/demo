@@ -52,12 +52,12 @@ const styles = StyleSheet.create({
 
 const DATA = [];
 
-// for(var i = 0;i<50;i++){
-//   DATA.push({
-//     id:String(i),
-//     title:i
-//   })
-// }
+for(var i = 0;i<10;i++){
+  DATA.push({
+    id:String(i),
+    title:i
+  })
+}
 
 const Item = ({ title }) => {
   return (

@@ -4,6 +4,9 @@ import { createStackNavigator  } from 'react-navigation-stack';
 import ChatScreen from '../screen/Chat';
 import HomeScreen from '../screen/Home';
 import ZeroScreen from '../screen/Zero';
+import ZeroScreen1 from '../screen/Zero1';
+import ZeroScreen2 from '../screen/Zero2';
+import SectionScreen from '../screen/Section';
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -25,8 +28,17 @@ const AppNavigator = createStackNavigator({
   Zero: {
     screen: ZeroScreen,
   },
+  Zero1: {
+    screen: ZeroScreen1,
+  },
+  Zero2: {
+    screen: ZeroScreen2,
+  },
+  Section: {
+    screen: SectionScreen,
+  },
 },{
-  initialRouteName: 'Zero',
+  initialRouteName: 'Section',
 });
 
 const AppContainer = createAppContainer(AppNavigator);

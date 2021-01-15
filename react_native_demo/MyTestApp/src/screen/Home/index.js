@@ -16,6 +16,11 @@ import LinearGradinet from 'react-native-linear-gradient';
 
 
 const styles = StyleSheet.create({
+    scroll:{
+        // flex:1,
+        // height:100,
+        backgroundColor: '#24a5ff',
+    },
     normalBtn:{
         width:100,
         borderRadius:20,
@@ -70,7 +75,7 @@ class HomeScreen extends React.Component {
     };
     render() {
         return (
-        <ScrollView>
+        <ScrollView style={styles.scroll}>
             <Text>Hello, Navigation!</Text>
             <View style={styles.center} backgroundColor='#ff0000'>
                 <View style={styles.normalBtn} backgroundColor='#ffff00'>
@@ -83,8 +88,8 @@ class HomeScreen extends React.Component {
             <View style={styles.center}>
                 <Button
                     style={styles.mybtn}
-                    title="Go to Chat"
-                    onPress={() => this.props.navigation.navigate('Chat')}
+                    title="Go to Zero"
+                    onPress={() => this.props.navigation.navigate('Zero')}
                 />
             </View>
             <LinearGradinet

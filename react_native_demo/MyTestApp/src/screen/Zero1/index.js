@@ -97,19 +97,9 @@ function ZeroScreen(){
   }, []);
 
   return (
-    <KeyboardAvoidingView 
-      enabled
-      behavior="padding" 
-      style={styles.kb}
-      // keyboardVerticalOffset={100}
-    >
-      <ScrollView 
-        style={styles.scroll}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <View style={styles.container}>
+    <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',}} behavior="padding" enabled   keyboardVerticalOffset={100}>
+      <ScrollView>
+      <View style={styles.container}>
           <TextInput value='123'/>
           <View style={styles.box}></View>
           <Text>123</Text>
@@ -155,7 +145,7 @@ function ZeroScreen(){
 }
 
 ZeroScreen.navigationOptions = {
-  title: 'Zero23333',
+  title: 'Zero1',
 };
 
 export default ZeroScreen

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   container:{
     // flex:1,
-    height:500,
+    height:400,
     backgroundColor: '#ff0000',
     justifyContent:'center',
     alignItems:'center'
@@ -97,17 +97,11 @@ function ZeroScreen(){
   }, []);
 
   return (
-    <KeyboardAvoidingView 
-      enabled
-      behavior="padding" 
-      style={styles.kb}
-      // keyboardVerticalOffset={100}
-    >
-      <ScrollView 
-        style={styles.scroll}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
+    <ScrollView style={{ flex: 1 ,backgroundColor: "#24a5ff",}}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 ,backgroundColor: "#00ffff",}}
+        keyboardVerticalOffset={100}
+        behavior={"position"}
       >
         <View style={styles.container}>
           <TextInput value='123'/>
@@ -149,13 +143,13 @@ function ZeroScreen(){
             </View>
           </Modal>
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
 ZeroScreen.navigationOptions = {
-  title: 'Zero23333',
+  title: 'Zero1',
 };
 
 export default ZeroScreen
