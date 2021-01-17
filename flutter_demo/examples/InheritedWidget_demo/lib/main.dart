@@ -4,7 +4,9 @@
 
 import 'package:flutter/material.dart';
 
+import 'Cart/ProviderRoute.dart';
 import 'inheritedwidget/InheritedWidgetTestRoute.dart';
+import 'inheritedwidget/testWidget.dart';
 
 void main() => runApp(MaterialApp(
     title: 'Gold Rupee',
@@ -12,4 +14,5 @@ void main() => runApp(MaterialApp(
       primarySwatch: Colors.orange,
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    home: InheritedWidgetTestRoute()));
+    // home: InheritedWidgetTestRoute(child: TestWidget(),)
+    home: ProviderRoute()));

@@ -5,6 +5,9 @@ import 'shareDataWidget.dart';
 import 'testWidget.dart';
 
 class InheritedWidgetTestRoute extends StatefulWidget {
+  InheritedWidgetTestRoute({Key key, this.child}) : super(key: key);
+  final Widget child;
+
   @override
   _InheritedWidgetTestRouteState createState() =>
       new _InheritedWidgetTestRouteState();
@@ -24,14 +27,15 @@ class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
-              child: TestWidget(), //子widget中依赖ShareDataWidget
+              child: widget.child,
+              // child: TestWidget(), //子widget中依赖ShareDataWidget
             ),
             RaisedButton(
               child: Text("Increment"),
               //每点击一次，将count自增，然后重新build,ShareDataWidget的data将被更新
               onPressed: () => setState(() => ++count),
             ),
-            TestWidget2()
+            // TestWidget2()
           ],
         ),
       ),
