@@ -5,8 +5,10 @@ import 'shareDataWidget.dart';
 import 'testWidget.dart';
 
 class InheritedWidgetTestRoute extends StatefulWidget {
-  InheritedWidgetTestRoute({Key key, this.child}) : super(key: key);
+  InheritedWidgetTestRoute({Key key, this.child, this.child2})
+      : super(key: key);
   final Widget child;
+  final Widget child2;
 
   @override
   _InheritedWidgetTestRouteState createState() =>
@@ -28,6 +30,11 @@ class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
             Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
               child: widget.child,
+              // child: TestWidget(), //子widget中依赖ShareDataWidget
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: widget.child2,
               // child: TestWidget(), //子widget中依赖ShareDataWidget
             ),
             RaisedButton(

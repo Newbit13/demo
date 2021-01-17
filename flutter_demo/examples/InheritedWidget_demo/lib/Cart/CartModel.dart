@@ -17,6 +17,7 @@ class CartModel extends ChangeNotifier {
   // 将 [item] 添加到购物车。这是唯一一种能从外部改变购物车的方法。
   void add(Item item) {
     _items.add(item);
+    // print(totalPrice);
     // 通知监听器（订阅者），重新构建InheritedProvider， 更新状态。
     notifyListeners();
   }

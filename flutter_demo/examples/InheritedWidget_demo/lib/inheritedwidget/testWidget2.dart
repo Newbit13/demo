@@ -9,12 +9,8 @@ class __TestWidget2State extends State<TestWidget2> {
   @override
   Widget build(BuildContext context) {
     print("TestWidget2 build");
-    //使用InheritedWidget中的共享数据
-    return Center(
-      child:
-          RaisedButton(child: Text("Increment"), onPressed: () => print("111")),
-    );
-    // return Text("Hellow world");
+
+    return Text("Hellow world");
   }
 
   @override
