@@ -7,6 +7,7 @@ import ZeroScreen from '../screen/Zero';
 import ZeroScreen1 from '../screen/Zero1';
 import ZeroScreen2 from '../screen/Zero2';
 import SectionScreen from '../screen/Section';
+import DiyScreen from '../screen/DIY';
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -37,8 +38,11 @@ const AppNavigator = createStackNavigator({
   Section: {
     screen: SectionScreen,
   },
+  Diy: {
+    screen: DiyScreen,
+  },
 },{
-  initialRouteName: 'Home',
+  initialRouteName: 'Diy',
 });
 
 const AppContainer = createAppContainer(AppNavigator);

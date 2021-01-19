@@ -25,6 +25,9 @@
 
 在使用模拟器开发预览时发现滚动过快会出现空白区，可以在上述链接中看到解决方法：设置maxToRenderPerBatch
 
+# 关于使用模块
+(Android原生模块)[https://reactnative.cn/docs/native-modules-android]
+
 # 曲折
 改一个组件样式为100%,然后模拟器就失去响应，工作被迫中断（解决方案：上备用真机）
 
