@@ -38,7 +38,7 @@ const AppNavigator = createStackNavigator({
     screen: SectionScreen,
   },
 },{
-  initialRouteName: 'Section',
+  initialRouteName: 'Home',
 });
 
 const AppContainer = createAppContainer(AppNavigator);

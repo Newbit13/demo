@@ -20,7 +20,10 @@
 #  flex:1
 1. 使用flex：1的前提是父元素有高度，有时设置该属性会让其高度变为0。譬如父元素是KeyboardAvoidingView且behavior为"position"时
 
+# 关于列表的性能及表现
+[列表配置优化](https://reactnative.cn/docs/optimizing-flatlist-configuration)
 
+在使用模拟器开发预览时发现滚动过快会出现空白区，可以在上述链接中看到解决方法：设置maxToRenderPerBatch
 
 # 曲折
 改一个组件样式为100%,然后模拟器就失去响应，工作被迫中断（解决方案：上备用真机）
