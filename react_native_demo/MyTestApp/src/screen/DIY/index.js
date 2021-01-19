@@ -45,6 +45,9 @@ class HomeScreen extends React.Component {
                     onPress={() => {
                         // console.log(typeof NativeModules.ToastExample.show);
                         NativeModules.ToastExample.show("我是通过原生模块调用的toast", NativeModules.ToastExample.LONG);
+                        NativeModules.ToastExample.testCallBack(function(v){
+                            console.log('这是回调的：',v);
+                        });
                         console.log(1);
                     }}
                 />

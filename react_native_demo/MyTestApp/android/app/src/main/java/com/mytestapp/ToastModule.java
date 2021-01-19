@@ -8,6 +8,8 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
+import com.facebook.react.bridge.Callback;
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -39,5 +41,10 @@ public class ToastModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void show(String message,int duration){
         Toast.makeText(getReactApplicationContext(),message,duration).show();
+    }
+
+    @ReactMethod
+    public void testCallBack(Callback cb){
+        cb.invoke(2333333);
     }
 }
