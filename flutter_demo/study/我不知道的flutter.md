@@ -48,3 +48,9 @@ provider的原理：
     传递(data,child)给InheritedWidget
 
 在实践中体会到,使用了InheritedWidget的数据,并不会随着该数据的更新而"自动"更新视图,而是InheritedWidget因为setState重新构建时,其所依赖的Widget才会更新
+
+# 线性布局（Row、Column）
+
+Row、Column的mainAxisSize默认为MainAxisSize.max会使其占用尽可能大的空间。
+
+    特殊情况：如果Row里面嵌套Row，或者Column里面再嵌套Column，那么只有最外面的Row或Column会占用尽可能大的空间，里面Row或Column所占用的空间为实际大小
