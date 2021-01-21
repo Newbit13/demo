@@ -53,4 +53,4 @@ provider的原理：
 
 Row、Column的mainAxisSize默认为MainAxisSize.max会使其占用尽可能大的空间。
 
-    特殊情况：如果Row里面嵌套Row，或者Column里面再嵌套Column，那么只有最外面的Row或Column会占用尽可能大的空间，里面Row或Column所占用的空间为实际大小
+    特殊情况：如果Row里面嵌套Row，或者Column里面再嵌套Column，那么只有最外面的Row或Column会占用尽可能大的空间，里面Row或Column所占用的空间为实际大小。如果想让里面的Row、Column占满外部，可以使其父组件为Expanded
