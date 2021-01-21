@@ -54,3 +54,9 @@ provider的原理：
 Row、Column的mainAxisSize默认为MainAxisSize.max会使其占用尽可能大的空间。
 
     特殊情况：如果Row里面嵌套Row，或者Column里面再嵌套Column，那么只有最外面的Row或Column会占用尽可能大的空间，里面Row或Column所占用的空间为实际大小。如果想让里面的Row、Column占满外部，可以使其父组件为Expanded
+
+# 尺寸限制布局
+在实际开发中，当我们发现已经使用SizedBox或ConstrainedBox给子元素指定了宽高，但是仍然没有效果时，几乎可以断定：已经有父元素已经设置了限制！这时候需要用UnconstrainedBox解除限制，具体可见：[5.2 尺寸限制类容器](https://book.flutterchina.club/chapter5/constrainedbox_and_sizebox.html)
+
+# Container
+    Container是一个组合类容器，它本身不对应具体的RenderObject，它是DecoratedBox、ConstrainedBox、Transform、Padding、Align等组件组合的一个多功能容器，所以我们只需通过一个Container组件可以实现同时需要装饰、变换、限制的场景。
