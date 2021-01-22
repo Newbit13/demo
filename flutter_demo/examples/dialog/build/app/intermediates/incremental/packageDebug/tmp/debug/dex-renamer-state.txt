@@ -1,0 +1,4 @@
+#Fri Jan 22 10:07:52 CST 2021
+base.0=H\:\\hjyong\\swatow\\demo\\flutter_demo\\examples\\dialog\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

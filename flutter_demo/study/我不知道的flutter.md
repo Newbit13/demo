@@ -60,3 +60,29 @@ Row、Column的mainAxisSize默认为MainAxisSize.max会使其占用尽可能大�
 
 # Container
     Container是一个组合类容器，它本身不对应具体的RenderObject，它是DecoratedBox、ConstrainedBox、Transform、Padding、Align等组件组合的一个多功能容器，所以我们只需通过一个Container组件可以实现同时需要装饰、变换、限制的场景。
+
+# StatefulWidgetBuilder
+setState只会更新当前context的视图
+
+有时候我们需要下方这段代码：
+```
+class UpdateChild extends StatefulWidget {
+  final StatefulWidgetBuilder builder;
+
+  UpdateChild({Key? key,required this.builder}) : super(key: key);
+
+  @override
+  _UpdateChildState createState() => _UpdateChildState();
+}
+
+class _UpdateChildState extends State<UpdateChild> {
+  @override
+  Widget build(BuildContext context) {
+    print("UpdateChild rebuild");
+    return widget.builder(context,setState);
+  }
+}
+```
+通过传给UpdateChild一个形如：(context,setState)=>widget的builder参数，我们可以在context不一致的情况下也调用setState来更新视图。
+
+参考使用场景：[对话框详解一文中的：使用StatefulBuilder方法](https://book.flutterchina.club/chapter7/dailog.html)
