@@ -18,29 +18,34 @@ class _FooState extends State<Foo> {
         // print(context);
         return AlertDialog(
           title: Text("提示"),
-          content: Text("您确定要删除当前文件吗?"),
+          content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("您确定要删除当前文件吗?"),
+                Row(
+                  children: <Widget>[
+                    Text("同时删除子目录？"),
+                    UpdateChild(builder: (context, _setState) {
+                      return Checkbox(
+                        value: withTree,
+                        onChanged: (bool? value) {
+                          print(withTree);
+                          //复选框选中状态发生变化时重新构建UI
+                          _setState(() {
+                            //更新复选框状态
+                            withTree = !withTree;
+                          });
+                        },
+                      );
+                    }),
+                  ],
+                )
+              ]),
           actions: <Widget>[
             FlatButton(
               child: Text("取消"),
               onPressed: () => Navigator.of(context).pop(), // 关闭对话框
-            ),
-            Row(
-              children: <Widget>[
-                Text("同时删除子目录？"),
-                UpdateChild(builder: (context,_setState) {
-                  return Checkbox(
-                    value: withTree,
-                    onChanged: (bool? value) {
-                      print(withTree);
-                      //复选框选中状态发生变化时重新构建UI
-                      _setState(() {
-                        //更新复选框状态
-                        withTree = !withTree;
-                      });
-                    },
-                  );
-                }),
-              ],
             ),
             FlatButton(
               child: Text("删除"),
@@ -211,7 +216,39 @@ class _FooState extends State<Foo> {
                 builder: (context) {
                   return AlertDialog(
                     title: Text("提示"),
-                    content: Text("您确定要删除当前文件吗?"),
+                    content: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text("您确定要删除当前文件吗?"),
+                          Row(
+                            children: <Widget>[
+                              Text("同时删除子目录？"),
+                              Checkbox(
+                                value: withTree,
+                                onChanged: (bool? value) {
+                                  print(withTree);
+                                  //复选框选中状态发生变化时重新构建UI
+                                  // 此时的context是整个AlertDialog的context，刷新访问还可以再缩小，借助Builder组件
+                                  (context as Element).markNeedsBuild();
+                                  withTree = !withTree;
+                                },
+                              ),
+                              Builder(builder: (BuildContext context) {
+                                return Checkbox(
+                                  value: withTree,
+                                  onChanged: (bool? value) {
+                                    print(withTree);
+                                    //复选框选中状态发生变化时重新构建UI
+                                    // 此时的context是整个AlertDialog的context，刷新访问还可以再缩小，借助Builder组件
+                                    (context as Element).markNeedsBuild();
+                                    withTree = !withTree;
+                                  },
+                                );
+                              })
+                            ],
+                          )
+                        ]),
                     actions: <Widget>[
                       FlatButton(
                         child: Text("取消"),
