@@ -1,13 +1,10 @@
+2017-3-8的代码跟2017-3-20的变化较大，所以我称前者为1.0，后者为2.0
+
 # anu.js读后感
 # 准备工作
 拉代码xxx
 导出较初的节点xxx
 live-server配置方法，用利用se6 原生module进行调试
-
-为了可以看到各种代码执行情况，需要模拟各种情景，这里针对reconcile:
-- 有无key
-- class组件reconcile
-- type改变，比如div换成img
 
 阅读源码的顺序
 1. 阅读```anu.createElement```的实现
@@ -73,8 +70,5 @@ createElementNS???用于创建有命名空间的元素，比如svg。创建svg�
 # 备忘
 createElement中的index的作用：
 声明了一个空数组：var children = []，index就是用与将子元素按顺序保存到children中。
-作用我能猜到，在了解vdom的diff算法时就知道，是比较数组里相应的vnode实现的，这里的作用应该一样。
-继续看，
-疑问：不用children.push吗
 
-forceUpdate中的reconcileNodes第四个参数(oldNodeType)写死为1？？？
+疑问：不用children.push吗
