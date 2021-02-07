@@ -63,6 +63,8 @@ createElementNS???用于创建有命名空间的元素，比如svg。创建svg�
 
 [void 0 与 undefined的区别](https://blog.csdn.net/juzipchy/article/details/86367565)
 
+dom也有contains方法：父dom.contains(子孙dom)返回Bool值
+
 2. 阅读```anu.render```的实现
 
 
