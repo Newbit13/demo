@@ -1,0 +1,24 @@
+{
+  "name": "karma_test_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-preset-es2015": "^6.24.1",
+    "karma-jasmine": "^4.0.1",
+    "webpack": "^5.21.2"
+  },
+  "devDependencies": {
+    "karma": "^6.1.0",
+    "karma-webpack": "^5.0.0"
+  }
+}
