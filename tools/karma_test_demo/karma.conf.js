@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Tue Feb 09 2021 17:12:40 GMT+0800 (GMT+08:00)
 var webpackConfig = require('./webpack.test.config');
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'webpack'],
 
 
     // list of files / patterns to load in the browser
@@ -26,11 +26,11 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/*.js':['webpack']
+      'test/*.js': ['webpack']
     },
     webpack: webpackConfig,
-    webpackMiddleware:{
-      noInfo:false
+    webpackMiddleware: {
+      noInfo: false
     },
 
 
@@ -39,7 +39,7 @@ module.exports = function(config) {
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
 
-
+    hostname: '127.0.0.1',
     // web server port
     port: 9876,
 
@@ -61,7 +61,47 @@ module.exports = function(config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     // browsers: ['Chrome', 'Firefox', 'IE'],
     browsers: ['Chrome'],
+    // browsers: ['PhantomJS','Chrome'],
 
+    customLaunchers: {//用于模拟浏览器操作
+      'Chrome': {
+        base: 'WebDriverio',
+        browserName: 'chrome',
+        name: 'Karma',
+        config: {
+          browserName: 'chrome',
+          host: '127.0.0.1', // default
+          port: '3000' // default
+        }
+      },
+      // 'PhantomJS': {
+      //   base: 'WebDriverio',
+      //   browserName: 'chrome',
+      //   name: 'Karma',
+      //   config: {
+      //     browserName: 'chrome',
+      //     host: '127.0.0.1', // default
+      //     port: '3000' // default
+      //   }
+      // },
+      // 'Firefox': {
+      //   base: 'WebDriverio',
+      //   browserName: 'firefox',
+      //   name: 'Karma-Firefox',
+      //   config: {
+      //     browserName: 'firefox',
+      //     host: '127.0.0.1', // default
+      //     port: '4444' // default
+      //   }
+      // }
+    },
+    plugins: [
+      'karma-webdriverio-launcher',
+      'karma-webpack',
+      'karma-jasmine',
+      'karma-chrome-launcher',
+      // 'karma-phantomjs-launcher'
+    ],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

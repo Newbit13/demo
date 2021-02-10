@@ -22,6 +22,11 @@
     "babel-loader": "^8.2.2",
     "karma": "^6.1.0",
     "karma-chrome-launcher": "^3.1.0",
-    "karma-webpack": "^5.0.0"
+    "karma-event-driver-ext": "0.0.13",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-webdriverio-launcher": "0.0.1",
+    "karma-webpack": "^5.0.0",
+    "selenium-server-standalone": "^2.53.1",
+    "webdriverio": "^7.0.1"
   }
 }
