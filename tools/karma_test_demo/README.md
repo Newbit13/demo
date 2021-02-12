@@ -89,3 +89,9 @@ karma-event-driver-ext：模仿浏览器操作用的
 https://github.com/karma-runner/karma/issues/2372
 
 我决定换无头浏览器试试,也无法解决问题
+
+我再重新阅读了[karma-event-driver-ext](https://www.npmjs.com/package/karma-event-driver-ext)：
+- 得知需要通过```java -jar selenium-server-standalone-3.3.1.jar```运行selenium server
+- 下载chromedriver并将其放到chrome安装目录下并配置环境变量
+
+报错：SessionNotCreatedException，可能原因是浏览器版本与chromedriver版本不对，果然！成功运行！

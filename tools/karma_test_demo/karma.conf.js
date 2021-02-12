@@ -71,7 +71,7 @@ module.exports = function (config) {
         config: {
           browserName: 'chrome',
           host: '127.0.0.1', // default
-          port: '3000' // default
+          port: '4444' // default
         }
       },
       // 'PhantomJS': {

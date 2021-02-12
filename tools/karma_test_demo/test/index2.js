@@ -28,7 +28,7 @@ describe('haha', function () {
         // .buttonDown();
         await browser
             .moveToObject(document.body, 0, 0).$apply();
-
+        console.log(a);
         expect(a).toBe(1);
         //  done()
         return new Promise(function (r) {
