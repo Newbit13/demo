@@ -121,3 +121,5 @@ const getPublicKey = function(key) {
 [NodeJS 两个模块进行 RSA 加密解密(匹配Java RSA)](https://my.oschina.net/u/943746/blog/2885763)
 
 [RSA_PKCS1_PADDING](https://www.douban.com/note/338531480/)
+
+[JDK安全模块JCE核心Cipher使用详解](https://blog.csdn.net/zcmain/article/details/90640797)
