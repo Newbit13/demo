@@ -46,6 +46,13 @@ self.addEventListener('fetch', function (event) {
                 return response;
             }
 
+            //
+            // return fetch(request).then(function (httpRes) {
+            //     //继续请求
+            //     return httpRes;
+            // });
+
+            //不用
             // 匹配失败则继续请求
             var request = event.request.clone(); // 把原始请求拷过来
 
@@ -74,6 +81,7 @@ self.addEventListener('fetch', function (event) {
         })
     );
 });
+
 
 
 

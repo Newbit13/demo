@@ -1,1 +1,1 @@
-console.log(123);
+console.log("js加载");
