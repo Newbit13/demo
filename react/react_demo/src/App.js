@@ -1,8 +1,8 @@
 import React,{useState,useEffect,lazy,Suspense} from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './static/css/App.css';
 
-const Foo = lazy(() => import('./Foo'));
+const Foo = lazy(() => import('./component/Foo'));
 
 
 function App() {
@@ -22,11 +22,11 @@ function App() {
 
   function loadCmp(){
     //用import才能在需要组件时异步加载相应的js
-    // const Foo = require('./Foo');
+    // const Foo = require('./component/Foo');
     // upCmp(Foo);
 
     // webpack提供了import供异步执行和独立出来打包成ChunkName,react.lazy原理与此相同
-    const Foo = import(/* webpackChunkName: 'Foo' */'./Foo');
+    const Foo = import(/* webpackChunkName: 'Foo' */'./component/Foo');
     Foo.then((v)=>{
       console.log(v.default);
       upCmp(v);

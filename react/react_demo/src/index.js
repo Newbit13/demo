@@ -1,22 +1,85 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-// import App from './App';//异步加载
-// import FnVsClass from './FnVsClass'//体验class组件跟fn组件的魅力&区别
-// import SuperFn from './SuperFn'
-import HookApp from './HookApp'
-import * as serviceWorker from './serviceWorker';
+import dva from 'dva';
 
-ReactDOM.render(
-  <React.StrictMode>
-    {/* <App /> */}
-    {/* <FnVsClass /> */}
-    <HookApp />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// 1. Initialize
+const app = dva();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// 2. Plugins
+// app.use({});
+
+// 3. Model
+app.model({
+  namespace: 'example',
+  state: {
+    a:{
+      value:123
+    }
+  },
+
+  subscriptions: {
+    setup({ dispatch, history }) {  // eslint-disable-line
+    },
+  },
+
+  effects: {
+    *fetch({ payload }, { call, put }) {  // eslint-disable-line
+      yield put({ type: 'save' });
+    },
+  },
+
+  reducers: {
+    save(state, action) {
+      return { ...state, ...action.payload };
+    },
+    add(state, action) {
+      return { 
+        ...state, 
+        a:{
+          value:++state.a.value
+        }
+      };
+    },
+  },
+
+});
+
+app.model({
+  namespace: 'example2',
+  state: {
+    a:{
+      value:123
+    }
+  },
+
+  subscriptions: {
+    setup({ dispatch, history }) {  // eslint-disable-line
+    },
+  },
+
+  effects: {
+    *fetch({ payload }, { call, put }) {  // eslint-disable-line
+      yield put({ type: 'save' });
+    },
+  },
+
+  reducers: {
+    save(state, action) {
+      return { ...state, ...action.payload };
+    },
+    add(state, action) {
+      return { 
+        ...state, 
+        a:{
+          value:++state.a.value
+        }
+      };
+    },
+  },
+
+});
+
+// 4. Router
+app.router(require('./router').default);
+
+// 5. Start
+app.start('#root');
+
