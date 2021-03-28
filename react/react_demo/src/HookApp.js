@@ -35,9 +35,12 @@ function IndexPage(props) {
       data2:data.example2,
     }
   });
-  const handleLog = useCallback(()=>{
-    console.log(data1.a.value);
+  const v = data1.a.value;
+  const handleLog = useCallback((id)=>{
+    console.log(id);
+    console.log(v);
   },[data1]);
+  console.log(v);
   const handleAdd = useCallback(()=>{
     dispatch({
       type:'example/add'
@@ -46,7 +49,7 @@ function IndexPage(props) {
   return (
     <div>
       <button onClick={handleAdd}>click</button>
-      <button onClick={handleLog}>log</button>
+      <button onClick={handleLog.bind(this,777)}>log</button>
       <div>{data1.a.value}</div>
     </div>
   );
