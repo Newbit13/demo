@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dsadsad</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .test{
+            /* 如何形成BFC */
+            /* 1.float不为none */
+            /* float: left; */
+            /* 2.overfloat不为visible */
+            /* overflow: hidden; */
+            /* overflow: auto; */
+            /* 3.display为tabel-cell、table-caption、inline-block */
+            /* display: table-cell;  */
+            /* display: inline-block; */
+            /* 4.positon不为relative或static */
+            /* position: absolute; */
+            /* position: fixed; */
+            /* 思考：transform是否也会形成BFC?不会 */
+            /* transform: translate(15px); */
+            border: 1px solid red;
+            width: 700px;
+            /* height: 400px; */
+            background: gold;
+            margin: 20px 0;
+            box-shadow: 0 10px 0 0 rgba(0,0,0,.3);
+            /* 总结：tabel-cell有奇特效果，position从效果来看不太符合其他形成BFC的效果 */
+        }
+        .test2{
+            border: 1px solid red;
+            width: 700px;
+            height: 100px;
+            /* overflow: hidden; */
+            /* display: inline-block; */
+            /* position: absolute; */
+            background: gold;
+            margin: 20px 0;
+        }
+        /* BFC的约束规则 */
+        /* 
+        1.内部的Box会在垂直方向上一个接一个的放置     "好像没什么特别的（块级盒子都这样），还以为说两个行内元素会垂直放置（按理解是两个行内元素会合并成一个inline box）"
+        2.垂直方向的距离由margin决定(属于同一个BFC的两个相邻Box的margin会发生重叠，与方向无关)
+        3.每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此 "好像就算不是BFC也是如此。。。疑惑"
+        4.BFC的区域不会与float的元素区域重叠     “这个规则有用，需要注意的是position：absolute时其实还是会重叠的，这一点与规则有矛盾”
+        5.计算BFC的高度时，浮动子元素也参与计算  “这个规则有用”
+        6.BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面元素，反之亦然  "不是BFC好像也有一样的表现吧，表现指的是：不会影响外面元素"
+        */
+        /* 了解BFC有什么用？ */
+        /* 1.根据规则，如果不想垂直方向上两个盒子的magin重叠，需要不让他们属于同一个BFC，注意这个“属于”这个字眼，意味着即使两个盒子分别成为BFC，他们还是属于同一个BFC下的，
+            所以具体操作是：在外面包一层，并使这个父层变成BFC。这样子元素的margin就不会和父元素的margin发生重叠了*/
+        /* 2.子元素浮动，可以使用BFC让其撑起高度 这个太常用！*/
+        /* 3.BFC的区域不会与float的元素区域重叠，这规则部分正确（用position时不正确）， 这个常用于自动适应宽度的布局，因为浮动元素可以缩小BFC区域的宽度 */
+
+        .box{
+            margin: 10px;
+            width: 100px;
+            height: 100px;
+            /* float: left; */
+            background: lawngreen;
+        }
+        .fr{
+            float: right;
+        }
+        .fl{
+            float: left;
+        }
+        .inlineBox{
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="fl box"></div> -->
+    <!-- <div class="fr box"></div> -->
+    <div class="test">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box inlineBox"></div>
+        <div class="box inlineBox"></div>
+    </div>
+    <div class="test2"></div>
+    <!-- <div class="fl box"></div> -->
+</body>
+</html>
