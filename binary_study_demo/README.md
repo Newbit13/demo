@@ -30,6 +30,43 @@ ArrayBuffer 基本上就像原始内存一样。它模拟了使用 C 之类的�
 
 由此可以知道，如果我们想生成特定的二进制数据，可以使用Int8Array这类TypedArray来构建；也可以通过TypedArray来修改ArrayBuffer
 
+# base64转Blob
+```js
+function dataUrlToBlob(base64, mimeType) {
+  let bytes = window.atob(base64.split(",")[1]);
+  let ab = new ArrayBuffer(bytes.length);
+  let ia = new Uint8Array(ab);
+  for (let i = 0; i < bytes.length; i++) {
+    ia[i] = bytes.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mimeType });
+}
+```
+## 图片上传中，普通上传和base64上传哪个更节省流量?
+普通上传更节省流量，Base64编码会把3字节的二进制数据编码为4字节的文本数据，长度增加33%
+
+## 非要上传base64格式的图片
+服务器(举例express)需要特别处理：
+```js
+const app = require('express')();
+app.post('/upload', function(req, res){
+    let imgData = req.body.imgData; // 获取POST请求中的base64图片数据
+    let base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
+    let dataBuffer = Buffer.from(base64Data, 'base64');
+    fs.writeFile("haha.png", dataBuffer, function(err) {
+        if(err){
+          res.send(err);
+        }else{
+          res.send("图片上传成功！");
+        }
+    });
+});
+```
+
+# 注意区分图片像素数据和二进制数据
+todo
+通道:
+
 # 总结&注意的点
 FileReader.readAsDataURL()生成的base64，其中的mediatype只是简单根据文件后缀来生成的
 
@@ -42,3 +79,7 @@ URL.createObjectURL创建的Object URL会在应用关闭前常驻内存，可以
 [base64](https://www.liaoxuefeng.com/wiki/897692888725344/949441536192576)
 
 [FileReader](https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader)
+
+[一步一步解码 PNG 图片](https://vivaxyblog.github.io/2019/12/07/decode-a-png-image-with-javascript-cn.html)
+
+[png解码编码工具](https://github.com/vivaxy/png)

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>获取远程图片并灰度化</title>
+</head>
+
+<body>
+    <h3>阿宝哥：获取远程图片并灰度化示例</h3>
+    <div>
+        <input type="file" accept="image/*" onchange="loadFile(event)" />
+        <button id="grayscalebtn">灰度化</button>
+        <button id="compressbtn">图片压缩</button>
+        <div style="display: flex;">
+            <div style="flex: 33.3%;">
+                <p>预览容器</p>
+                <img id="previewContainer" width="10" height="10" style="border: 2px dashed blue;" />
+            </div>
+            <div style="flex: 33.3%;">
+                <p>Canvas容器</p>
+                <canvas id="canvas" width="10" height="10" style="border: 2px dashed grey;"></canvas>
+            </div>
+            <div style="flex: 33.3%;">
+                <p>压缩预览容器</p>
+                <img id="compressPrevContainer" width="10" height="10" style="border: 2px dashed green;" />
+            </div>
+        </div>
+    </div>
+    <script>
+        const image = document.querySelector("#previewContainer");
+        const canvas = document.querySelector("#canvas");
+
+        fetch("./r.jpg")
+            .then((response) => {
+                // return response.arrayBuffer();
+                return response.blob();
+            })
+            .then((blob) => {
+                const objectURL = URL.createObjectURL(blob);
+                image.src = objectURL;
+                image.onload = () => {
+                    draw();
+                };
+
+                // 无用
+                // console.log(blob);
+                // const ctx = canvas.getContext("2d");
+                // let imageData = new ImageData(10,10);
+                // imageData.data = new Uint8ClampedArray(blob);
+                // ctx.putImageData(imageData, 0, 0);
+
+                // “canvas 提取像素的时候，需要对图片的二进制数据进行解码。”
+            });
+
+        const loadFile = function (event) {
+            // URL.createObjectURL
+            const objectURL = URL.createObjectURL(event.target.files[0]);
+            console.log('objectURL', objectURL);
+            image.src = objectURL;
+            image.onload = () => {
+                draw();
+            };
+        };
+        //绑定-灰度化
+        function draw() {
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(image, 0, 0, 10, 10);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            console.log(imageData);
+            const data = imageData.data;
+            // console.log(data);
+            console.log('操作前', data);
+            const grayscale = function () {
+                // for (let i = 0; i < data.length; i += 4) {
+                //     const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                //     // const avg = (data[i] + data[i + 1] + data[i + 2]) / 6;
+                //     // const avg = (data[i] + data[i + 1] + data[i + 2])*1.1;
+                //     data[i] = avg; // red
+                //     data[i + 1] = avg; // green
+                //     data[i + 2] = avg; // blue
+                // }
+                data[0] = 66
+                ctx.putImageData(imageData, 0, 0);
+                console.log('操作后', data);
+                // 无用
+                // compressImage.src = URL.createObjectURL(new Blob([imageData.data.buffer]));
+            };
+            // grayscale();
+            console.log('操作后', data);
+            const grayscalebtn = document.querySelector("#grayscalebtn");
+            grayscalebtn.addEventListener("click", grayscale);
+        }
+
+        //压缩
+        const compressbtn = document.querySelector("#compressbtn");
+        const compressImage = document.querySelector("#compressPrevContainer");
+        compressbtn.addEventListener("click", compress);
+
+        function dataUrlToBlob(base64, mimeType) {
+            let bytes = window.atob(base64.split(",")[1]);
+            let ab = new ArrayBuffer(bytes.length);
+            let ia = new Uint8Array(ab);
+            for (let i = 0; i < bytes.length; i++) {
+                ia[i] = bytes.charCodeAt(i);
+            }
+            return new Blob([ab], { type: mimeType });
+        }
+
+        function compress(quality = 80, mimeType = "image/webp") {
+            const imageDataURL = canvas.toDataURL(mimeType, quality / 100);//在指定图片格式为 image/jpeg 或 image/webp 的情况下，可以从 0 到 1 的区间内选择图片的质量
+            const B = dataUrlToBlob(imageDataURL, "image/webp");
+            console.log(B);
+            canvas.toBlob((blob) => {
+                console.log(blob);
+            }, mimeType, quality / 100);//在指定图片格式为 image/jpeg 或 image/webp 的情况下，可以从 0 到 1 的区间内选择图片的质量
+            compressImage.src = imageDataURL;
+        }
+
+
+    </script>
+</body>
+
+</html>
