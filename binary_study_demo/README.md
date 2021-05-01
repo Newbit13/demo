@@ -64,8 +64,7 @@ app.post('/upload', function(req, res){
 ```
 
 # 注意区分图片像素数据和二进制数据
-todo
-通道:
+
 
 # 总结&注意的点
 FileReader.readAsDataURL()生成的base64，其中的mediatype只是简单根据文件后缀来生成的
@@ -73,6 +72,9 @@ FileReader.readAsDataURL()生成的base64，其中的mediatype只是简单根据
 FileReader.readAsDataURL和URL.createObjectURL都可以通过Blob类型的参数返回一个url，前者兼容性好些（前者IE10及以上兼容，后者IE11都不兼容）
 
 URL.createObjectURL创建的Object URL会在应用关闭前常驻内存，可以使用URL.revokeObjectURL(url)来删除该URL对该Blob资源的引用，以释放内存
+
+# 使用到的库
+png解码编码工具: [@vivaxy/png](https://github.com/vivaxy/png)
 
 # 参考资料
 [玩转前端二进制](https://mp.weixin.qq.com/s/QHi6BVM5Jt8XwZ_FKcRYsg)
@@ -82,4 +84,8 @@ URL.createObjectURL创建的Object URL会在应用关闭前常驻内存，可以
 
 [一步一步解码 PNG 图片](https://vivaxyblog.github.io/2019/12/07/decode-a-png-image-with-javascript-cn.html)
 
-[png解码编码工具](https://github.com/vivaxy/png)
+# 扩展知识
+在看《一步一步解码 PNG 图片》一文时，有个概念叫做通道，所以对此进行了解： [图像像素中通道概念解析](https://blog.csdn.net/lmhuanying1012/article/details/78766847)
+
+结论：通道可以控制图像的显示。具体应用可以扩展为 颜色显示、透明度显示、特殊颜色添加（参考，烫金），图片混合，置换贴图与凹凸贴图等
+
