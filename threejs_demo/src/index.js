@@ -5,8 +5,7 @@ function init() {
     const renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
+    document.body.appendChild(renderer.domElement);//renderer.domElement 一个canvas
     // 场景
     const scene = new THREE.Scene();
     // 相机
