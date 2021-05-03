@@ -62,6 +62,20 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 + 
 + }
 ```
+- 旋转90°
+`geometry.rotation.x = Math.PI / 2`
+
+# 优化
+用BufferGeometry代替Geometry，BufferGeometry 会缓存网格模型，性能更高效。
+使用clone()方法// 创建一个立方体，大小默认为 1,1,1
+```js
+const baseBoxBufferGeometry = new THREE.BoxBufferGeometry()
+// 克隆几何体
+const geometry = baseBoxBufferGeometry.clone()
+// 通过缩放设置几何体的大小
+geometry.scale(20, 20, 20)
+```
+不再需要的物体应该进行销毁操作dispose
 
 # 光源
 环境光( AmbientLight )：笼罩在整个空间无处不在的光
@@ -74,6 +88,7 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 [three.js官方文档](https://threejs.org/docs/)
 [《Three.js 入门指南》3.1.1 - 基本几何形状 - 球体（SphereGeometry）](https://www.cnblogs.com/jaycethanks/p/12032947.html)
 [关于从入门three.js到做出3d地球这件事(第四篇: 贴图地球)](https://www.it610.com/article/1381281198894030848.htm)
+[深度解析，用Threejs临摹微信跳一跳 (1)](https://juejin.cn/post/6844903966573068302)
 
 别人收集的教程，demo，工具：
 [ThreeJS For Fun](https://github.com/chenjsh36/ThreeJSForFun/)
