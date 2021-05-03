@@ -79,8 +79,14 @@ function init() {
 	renderer.setAnimationLoop(animation);
 	document.body.appendChild(renderer.domElement);
 
+
+	const stat = new Stats();
+    document.body.appendChild(stat.dom);
+
 	function render() {
 		renderer.render(scene, camera);
+
+		stat.update();
 	}
 	// render();
 	function animation(time) {
@@ -93,4 +99,6 @@ function init() {
 	// 轨道控制器
 	const controls = new THREE.OrbitControls(camera, renderer.domElement);
 	controls.addEventListener("change", render);
+	controls.enablePan = false;
+	// controls.autoRotate = true;
 }

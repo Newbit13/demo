@@ -80,3 +80,7 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 
 # 文中涉及的api
 [AxesHelper](http://www.yanhuangxueyuan.com/doc/Three.js/AxesHelper.html)
+
+# 学习笔记
+# OrbitControls.js
+`controls.enablePan = false`禁止摄像机可以平移（通过鼠标右键）
