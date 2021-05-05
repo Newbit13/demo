@@ -1,44 +1,3 @@
-# 问题：webview可以代替原生吗
-这是个开放性问题
-
-- 从应用商店上考虑，好像区别不大，但感觉会添加审核被拒的概率
-
-    web的灵活性会让app失去监管，所以审核人员在审核时有一定的主观性，并且上架规则也不是一直不变的（在网上可以看到别人用webview做成app有也上架成功的）
-
-- 从体验上考虑
-    资源加载速度
-    webview首屏加载需要时间，会造成白屏。（关于这点，在上文中，美团给出了一些优化方案，由于是网络加载页面，所以只是优化，不能避免白屏问题）
-    js解析速度，由于js是动态语言的特点，不像java，kotlin，swift这种静态语言可以事先编译
-
-- 从渲染原理上
-    “h5的差别在于webview渲染是使用独立的渲染进程，渲染完成后无法与gpu共享纹理资源，需要通过IPC通信将资源同步gpu进程，而对于原生渲染来说仅仅一个render线程相对于独立进程的开销来说那就好得多，对于极限的16ms刷新频率来说，任何多余的开销都有可能是对性能的雪上加霜” --摘自 知乎 webview与跨平台框架性能差距扫盲
-
-
-
-参考
-美团技术团队的[WebView性能、体验分析与优化](https://tech.meituan.com/2017/06/09/webviewperf.html)
-知乎上的[webview与跨平台框架性能差距扫盲](https://zhuanlan.zhihu.com/p/150289826)
-
-那么类似cordova这种一开始就将html放到app里的，是不是就解决了网络加载问题了？对
-
-那么其他体验差异在哪？
-我列出一些指标来作为探究方向
-- 内存使用
-- 运行效率
-- 首屏渲染速度
-- 帧率
-- 动画、切换效果
-- 长列表性能
-
-内存方面，原生表现优异。可以理解为webview本身就占用了很大的系统空间
-
-运行效率方面，原生有多线程的概念。web受限于js单线程的特点，所以这点需要结合实际业务考虑（并行计算的场景，比如动画）
-
-帧率方面，普通列表滑动帧率都在40~60，区别不大（但是看数据rn和原生稳定一些，两者差不多，且两者平均感觉比cordova高一点）
-
-内存、运行效率、帧率对比数据来源
-[iOS原生，React Native，Cordova技术选型对比](https://blog.csdn.net/shisanshuno1/article/details/80644959)
-
 # 跨端App有三种形式
 ## 1.webview + JSBridge（H5+原生混合）
 通过原生webview组件，进而利用web排版技术进行UI显示，并且由js与原生系统进行双向通讯
@@ -59,7 +18,18 @@ hybird 就是混合的意思。主要特点就是最后渲染得都是 *native U
 
 # flutter与react native的区别
 ## react native技术架构及原理
-todo
+RN中虚拟DOM会通过 JavaScriptCore 映射为原生控件树
+
+JavaScriptCore 是一个JavaScript解释器，它在React Native中主要有两个作用：
+
+1. 为JavaScript提供运行环境。
+2. 是JavaScript与原生应用之间通信的桥梁，作用和JsBridge一样，事实上，在iOS中，很多JsBridge的实现都是基于 JavaScriptCore 。
+
+而RN中将虚拟DOM映射为原生控件的过程中分两步：
+
+1. 布局消息传递； 将虚拟DOM布局信息传递给原生；
+2. 原生根据布局信息通过对应的原生控件渲染控件树；
+
 ## flutter技术架构及原理
 ![flutter](/分享/flutter.png)
 
@@ -126,9 +96,53 @@ webview渲染细节可参考浏览器的渲染原理：
 按我的理解，光栅化就是要得到：投到屏幕上每个元素是什么颜色（RGB值） --参考[图形学 光栅化详解（Rasterization）](https://www.jianshu.com/p/54fe91a946e2?open_source=weibo_search)
 
 
+# 问题：webview可以代替原生吗
+这是个开放性问题
+
+- 从应用商店上考虑，好像区别不大，但感觉会添加审核被拒的概率
+
+    web的灵活性会让app失去监管，所以审核人员在审核时有一定的主观性，并且上架规则也不是一直不变的（在网上可以看到别人用webview做成app有也上架成功的）
+
+- 从体验上考虑
+    资源加载速度
+    webview首屏加载需要时间，会造成白屏。（关于这点，在上文中，美团给出了一些优化方案，由于是网络加载页面，所以只是优化，不能避免白屏问题）
+    js解析速度，由于js是动态语言的特点，不像java，kotlin，swift这种静态语言可以事先编译
+
+- 从渲染原理上
+    “h5的差别在于webview渲染是使用独立的渲染进程，渲染完成后无法与gpu共享纹理资源，需要通过IPC通信将资源同步gpu进程，而对于原生渲染来说仅仅一个render线程相对于独立进程的开销来说那就好得多，对于极限的16ms刷新频率来说，任何多余的开销都有可能是对性能的雪上加霜” --摘自 知乎 webview与跨平台框架性能差距扫盲
+
+
+
+参考
+美团技术团队的[WebView性能、体验分析与优化](https://tech.meituan.com/2017/06/09/webviewperf.html)
+知乎上的[webview与跨平台框架性能差距扫盲](https://zhuanlan.zhihu.com/p/150289826)
+
+那么类似cordova这种一开始就将html放到app里的，是不是就解决了网络加载问题了？对
+
+那么其他体验差异在哪？
+我列出一些指标来作为探究方向
+- 内存使用
+- 运行效率
+- 首屏渲染速度
+- 帧率
+- 动画、切换效果
+- 长列表性能
+
+内存方面，原生表现优异。可以理解为webview本身就占用了很大的系统空间
+
+运行效率方面，原生有多线程的概念。web受限于js单线程的特点，所以这点需要结合实际业务考虑（并行计算的场景，比如动画）
+
+帧率方面，普通列表滑动帧率都在40~60，区别不大（但是看数据rn和原生稳定一些，两者差不多，且两者平均感觉比cordova高一点）
+
+内存、运行效率、帧率对比数据来源
+[iOS原生，React Native，Cordova技术选型对比](https://blog.csdn.net/shisanshuno1/article/details/80644959)
+
 ？？？
 现时常用的底层图形 API 包括 OpenGL (ES)、Direct2D/3D、Vulkan、Metal。操作系统提供的较高层 API 有 GDI(+)、WPF、Quartz。还有一些跨平台的图形库如 Cairo、Skia、SDL 等。
 
 # todo
 flutter web效果如何？
+
 尝试下 sliver控件
+
+[全网最全 Flutter 与 React Native 深入对比分析](https://zhuanlan.zhihu.com/p/70070316)
