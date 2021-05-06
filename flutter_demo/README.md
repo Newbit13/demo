@@ -59,6 +59,9 @@ Flutter 使用自己的渲染引擎来绘制UI，布局数据等由Dart语言直
 工具
 [可以在线编写dart并运行查看效果](https://dartpad.cn/)
 
+体会
+    如果没有需要与原生交互，只画UI的话，跨端技术挺好用的。一旦做深，不会原生根本解决不了问题。所以使用前还是得综合考虑下实际情况。
+
 # 参考资料
 [flutter中文官网](https://flutter.cn/)
 
@@ -73,6 +76,7 @@ flutter技术架构（推荐）
 [Flutter 高性能原理浅析](https://www.jianshu.com/p/ff50f15edb54)
 
 [Flutter Engage China 视频 - UC Flutter 基础建设深度优化](https://www.bilibili.com/video/BV1wv411h7Ni?from=search&seid=2527907128675724600)
+
 # 其他
 观点
 [原生渲染为何比webview渲染快？](https://www.zhihu.com/question/264592475/answer/283852178)
@@ -102,6 +106,9 @@ webview渲染细节可参考浏览器的渲染原理：
 - 从应用商店上考虑，好像区别不大，但感觉会添加审核被拒的概率
 
     web的灵活性会让app失去监管，所以审核人员在审核时有一定的主观性，并且上架规则也不是一直不变的（在网上可以看到别人用webview做成app有也上架成功的）
+    
+    Apple 明确指出不欢迎 WebView 套壳 APP，有拒审危险
+[苹果官方AppStore准则-设计-最小功能](https://developer.apple.com/app-store/review/guidelines/#design)
 
 - 从体验上考虑
     资源加载速度
