@@ -122,7 +122,15 @@ webview渲染细节可参考浏览器的渲染原理：
 
 参考
 美团技术团队的[WebView性能、体验分析与优化](https://tech.meituan.com/2017/06/09/webviewperf.html)
+
 知乎上的[webview与跨平台框架性能差距扫盲](https://zhuanlan.zhihu.com/p/150289826)
+
+[Webkit底层原理（1）--Webkit架构和模块](https://zhuanlan.zhihu.com/p/85014585)
+
+阅读拓展：
+
+chrome为什么从webkit换成Blink？
+[Blink 引擎相对于 WebKit 好在哪里？](https://www.zhihu.com/question/20930880)
 
 那么类似cordova这种一开始就将html放到app里的，是不是就解决了网络加载问题了？对
 
