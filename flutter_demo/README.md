@@ -77,6 +77,8 @@ flutter技术架构（推荐）
 
 [Flutter Engage China 视频 - UC Flutter 基础建设深度优化](https://www.bilibili.com/video/BV1wv411h7Ni?from=search&seid=2527907128675724600)
 
+进阶拓展
+[5分钟彻底搞懂Flutter中PlatFormView与Texture](https://cloud.tencent.com/developer/article/1584477)
 # 其他
 观点
 [原生渲染为何比webview渲染快？](https://www.zhihu.com/question/264592475/answer/283852178)

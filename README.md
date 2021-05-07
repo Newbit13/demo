@@ -15,6 +15,8 @@
 
 [backpack-js](https://www.npmjs.com/package/backpack-js)
 
+[从零实现webpack热更新HMR](https://juejin.cn/post/6844904020528594957)
+
 # 实践清单
 - H5转小程序
 
