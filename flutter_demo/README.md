@@ -65,6 +65,8 @@ Flutter 使用自己的渲染引擎来绘制UI，布局数据等由Dart语言直
 # 参考资料
 [flutter中文官网](https://flutter.cn/)
 
+[如何评价 Flutter for Web？](https://www.zhihu.com/question/323439136/answer/1272757814)
+
 [【深入解析】跨端框架的核心技术到底是什么？](https://mp.weixin.qq.com/s/rSIAyQihmBQnyaoY0XtB-w)
 
 [移动端跨平台开发框架对比分析](https://www.jianshu.com/p/900bf9cbd005)
@@ -163,3 +165,8 @@ flutter web效果如何？
 尝试下 sliver控件
 
 [全网最全 Flutter 与 React Native 深入对比分析](https://zhuanlan.zhihu.com/p/70070316)
+[Flutter 革命性的地方在哪里？](https://www.zhihu.com/question/283991634/answer/434665898)
+
+
+我的灵感来源：
+[流言终结者- Flutter和RN谁才是更好的跨端开发方案？](https://zhuanlan.zhihu.com/p/44169959)
