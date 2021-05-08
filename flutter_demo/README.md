@@ -6,7 +6,7 @@
     而混合框架一般都会在原生代码中预先实现一些访问系统能力的API，然后暴露给 Webview以供 Javascript调用，这样一来， Webview就成为 Javascript与原生AP之间通信的桥梁，主要负责 Javascript与原生之间调用消息的传递，而消息的传递必须遵守一个标准的协议，其规定了消息的格式与含义，我们将依赖于 Webview的、用于在 Javascript与原生之间通信并实现了某种消息传输协议的工具称为 Webview Javascript Bridge，简称 Jsbridge，它也是混合开发框架的核心.
 
 ### cordova
-![cordova](/分享/cordova.png)
+![cordova](分享/cordova.png)
 ## 2.js开发+原生渲染
 hybird 就是混合的意思。主要特点就是最后渲染得都是 *native UI*。
 
@@ -31,7 +31,7 @@ JavaScriptCore 是一个JavaScript解释器，它在React Native中主要有两�
 2. 原生根据布局信息通过对应的原生控件渲染控件树；
 
 ## flutter技术架构及原理
-![flutter](/分享/flutter.png)
+![flutter](分享/flutter.png)
 
 Flutter主要被分为两层 Framework层和Flutter Engine
 - Framework层全部使用Dart编写，有完整UI框架的API，并预写了Android（MaterialDesign）和IOS的（Cupertino）风格的UI
@@ -164,9 +164,14 @@ flutter web效果如何？
 
 尝试下 sliver控件
 
-[全网最全 Flutter 与 React Native 深入对比分析](https://zhuanlan.zhihu.com/p/70070316)
 [Flutter 革命性的地方在哪里？](https://www.zhihu.com/question/283991634/answer/434665898)
 
+高质量文章：
+[全网最全 Flutter 与 React Native 深入对比分析](https://zhuanlan.zhihu.com/p/70070316)
+
+
+Blibli视频
+[Flutter 教程 Key-2 Widget 和 Element 的对应关系](https://www.bilibili.com/video/av753847393/)
 
 我的灵感来源：
 [流言终结者- Flutter和RN谁才是更好的跨端开发方案？](https://zhuanlan.zhihu.com/p/44169959)
