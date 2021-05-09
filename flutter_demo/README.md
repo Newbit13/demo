@@ -55,32 +55,17 @@ Flutter 使用自己的渲染引擎来绘制UI，布局数据等由Dart语言直
 
 在官网上看的的，一个用flutter web做的网站，据说app也是用同一套代码，也就是一套代码实现web移动端，web pc端，ios，安卓，感觉好卡
 [irobot](https://code.irobot.com/)
-# 开发心得&填坑
-工具
-[可以在线编写dart并运行查看效果](https://dartpad.cn/)
-
-体会
-    如果没有需要与原生交互，只画UI的话，跨端技术挺好用的。一旦做深，不会原生根本解决不了问题。所以使用前还是得综合考虑下实际情况。
 
 # 参考资料
-[flutter中文官网](https://flutter.cn/)
-
 [如何评价 Flutter for Web？](https://www.zhihu.com/question/323439136/answer/1272757814)
 
+推荐：
 [【深入解析】跨端框架的核心技术到底是什么？](https://mp.weixin.qq.com/s/rSIAyQihmBQnyaoY0XtB-w)
-
-[移动端跨平台开发框架对比分析](https://www.jianshu.com/p/900bf9cbd005)
 
 cordova技术架构
 [浅谈Cordova框架的一些理解](https://www.cnblogs.com/cr330326/p/7082821.html)
 
-flutter技术架构（推荐）
-[Flutter 高性能原理浅析](https://www.jianshu.com/p/ff50f15edb54)
 
-[Flutter Engage China 视频 - UC Flutter 基础建设深度优化](https://www.bilibili.com/video/BV1wv411h7Ni?from=search&seid=2527907128675724600)
-
-进阶拓展
-[5分钟彻底搞懂Flutter中PlatFormView与Texture](https://cloud.tencent.com/developer/article/1584477)
 # 其他
 观点
 [原生渲染为何比webview渲染快？](https://www.zhihu.com/question/264592475/answer/283852178)
@@ -136,16 +121,7 @@ webview渲染细节可参考浏览器的渲染原理：
 chrome为什么从webkit换成Blink？
 [Blink 引擎相对于 WebKit 好在哪里？](https://www.zhihu.com/question/20930880)
 
-那么类似cordova这种一开始就将html放到app里的，是不是就解决了网络加载问题了？对
-
-那么其他体验差异在哪？
-我列出一些指标来作为探究方向
-- 内存使用
-- 运行效率
-- 首屏渲染速度
-- 帧率
-- 动画、切换效果
-- 长列表性能
+# RN vs 原生 vs cordova
 
 内存方面，原生表现优异。可以理解为webview本身就占用了很大的系统空间
 
@@ -153,25 +129,46 @@ chrome为什么从webkit换成Blink？
 
 帧率方面，普通列表滑动帧率都在40~60，区别不大（但是看数据rn和原生稳定一些，两者差不多，且两者平均感觉比cordova高一点）
 
-内存、运行效率、帧率对比数据来源
+从内存、运行效率、帧率进行对比
 [iOS原生，React Native，Cordova技术选型对比](https://blog.csdn.net/shisanshuno1/article/details/80644959)
 
-？？？
+
+# 归类
+讲了阿里如何通过分帧渲染、延迟；高延迟渲染来解决掉帧问题；介绍监控内存泄漏做法：通过监控BuildContext；
+（看个意思，毕竟我自己改造不来）
+[Flutter Engage China 视频 - UC Flutter 基础建设深度优化](https://www.bilibili.com/video/BV1wv411h7Ni?from=search&seid=2527907128675724600)
+
+讲了跨端移动开发的发展历史；从布局方面与css进行了比对；提到flutter将渲染框架放到自身框架中的意义
+[Flutter 革命性的地方在哪里？](https://www.zhihu.com/question/283991634/answer/434665898)
+
+高质量文章：
+本文从环境搭建、实现原理、编程开发、插件开发、编译运行、性能稳定、发展未来 等七个方面，对当前的 React Native 和 Flutter 进行全面的分析对比：
+[全网最全 Flutter 与 React Native 深入对比分析](https://zhuanlan.zhihu.com/p/70070316)
+
+
+Blibli视频，理解flutter三棵树的作用与区别：
+[Flutter 教程 Key-2 Widget 和 Element 的对应关系](https://www.bilibili.com/video/av753847393/)
+
+从内存、帧率的实测数据方面进行对比：
+[流言终结者- Flutter和RN谁才是更好的跨端开发方案？](https://zhuanlan.zhihu.com/p/44169959)
+
+
+讲了flutter技术架构、垃圾回收机制、渲染机制
+[Flutter 高性能原理浅析](https://www.jianshu.com/p/ff50f15edb54)
+
+
+# 零零散散的概念
 现时常用的底层图形 API 包括 OpenGL (ES)、Direct2D/3D、Vulkan、Metal。操作系统提供的较高层 API 有 GDI(+)、WPF、Quartz。还有一些跨平台的图形库如 Cairo、Skia、SDL 等。
+
+# 工具
+[可以在线编写dart并运行查看效果](https://dartpad.cn/)
+
+vscode插件：Dart、Flutter、Awesome Flutter Snippets。安装后可以在vscode里快速编写Flutter代码，运行真机，调试，热加载等
 
 # todo
 flutter web效果如何？
 
 尝试下 sliver控件
 
-[Flutter 革命性的地方在哪里？](https://www.zhihu.com/question/283991634/answer/434665898)
-
-高质量文章：
-[全网最全 Flutter 与 React Native 深入对比分析](https://zhuanlan.zhihu.com/p/70070316)
-
-
-Blibli视频
-[Flutter 教程 Key-2 Widget 和 Element 的对应关系](https://www.bilibili.com/video/av753847393/)
-
-我的灵感来源：
-[流言终结者- Flutter和RN谁才是更好的跨端开发方案？](https://zhuanlan.zhihu.com/p/44169959)
+# 进阶拓展
+[Flutter 实时视频渲染：Texture与PlatformView](https://zhuanlan.zhihu.com/p/62821195)
