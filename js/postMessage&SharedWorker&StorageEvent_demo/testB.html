@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>testB</h1>
+    <button onclick="send()">响应A</button>
+    <button onclick="sendWithWorker()">通过sharedWorker</button>
+    <script>
+        window.name="zzz"
+        window.addEventListener("storage", function (e) {
+            console.log(77);
+            console.log(e);
+        });
+
+        let otherWindow;
+        window.addEventListener("message", receiveMessage, false);
+        function receiveMessage(event) {
+            console.log(event);
+            otherWindow = event.source;
+            console.log(event.data);
+            // var origin = event.origin
+        }
+
+        function send() {
+            //otherWindow
+            otherWindow.postMessage("哈哈哈BB", "*");
+        }
+
+
+        //SharedWorker
+        var myWorker = new SharedWorker("worker.js");
+        myWorker.port.onmessage = function (e) {
+            console.log(e);
+            console.log('Message received from worker');
+        }
+        // myWorker.port.start();
+        function sendWithWorker(){
+            myWorker.port.postMessage([3,4,5]);
+        }
+    </script>
+</body>
+
+</html>

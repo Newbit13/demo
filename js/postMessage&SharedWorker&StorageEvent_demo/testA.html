@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>testA</h1>
+    <p>标签页通讯还可以通过监听storage事件（使用localstorage时）或者SharedWorker</p>
+    <button onclick="openWindow()">打开窗口</button>
+    <button onclick="send()">发送给B</button>
+    <button onclick="ll()">触发其他页的storage事件</button>
+    <button onclick="sendWithWorker()">通过sharedWorker</button>
+    <script>
+        window.name = "sss"
+        function ll() {
+            console.log(1);
+            localStorage.setItem('ha', new Date().getTime());
+        }
+        //在本页调用ll()不会触发storage，但是在其他标签页中，就算地址同样也是testA.html，可以触发
+        window.addEventListener("storage", function (e) {
+            console.log(88);
+            console.log(e);
+        });
+        //otherWindow.postMessage(message, targetOrigin, [transfer]);
+        let otherWindow;
+        function openWindow() {
+            otherWindow = window.open('./testB.html');
+        }
+        function send() {
+            //otherWindow
+            otherWindow.postMessage("哈哈哈AA", "*");
+        }
+
+        window.addEventListener("message", receiveMessage, false);
+        function receiveMessage(event) {
+            console.log(event);
+            console.log(event.data);
+            // var origin = event.origin
+        }
+
+
+        //SharedWorker
+        var myWorker = new SharedWorker("worker.js");
+        myWorker.port.onmessage = function (e) {
+            console.log(e);
+            console.log('Message received from worker');
+        }
+        // myWorker.port.start();
+        function sendWithWorker(){
+            myWorker.port.postMessage([3,4,5]);
+        }
+
+    </script>
+</body>
+
+</html>
