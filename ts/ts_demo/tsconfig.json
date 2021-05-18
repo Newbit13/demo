@@ -1,0 +1,12 @@
+{
+    "compilerOptions":{
+        "outDir":"./built",
+        "allowJs":true,
+        "target":"es6",
+        "sourceMap": true,
+        "strict":true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "include":["./src/**/*"]
+}
