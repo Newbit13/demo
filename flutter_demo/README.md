@@ -165,8 +165,12 @@ Blibli视频，理解flutter三棵树的作用与区别：
 
 vscode插件：Dart、Flutter、Awesome Flutter Snippets。安装后可以在vscode里快速编写Flutter代码，运行真机，调试，热加载等
 
-# todo
-flutter web效果如何？
+
+# flutter web效果如何？
+开发：
+```flutter run -d chrome```
+打包：
+```flutter build web```
 
 尝试下 sliver控件
 
