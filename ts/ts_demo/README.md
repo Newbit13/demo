@@ -42,3 +42,4 @@ process().toUpperCase() // error
 
 
 [ts-高级类型](https://www.tslang.cn/docs/handbook/advanced-types.html)
+[巧用 Typescript](https://zhuanlan.zhihu.com/p/39620591)
