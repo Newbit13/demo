@@ -123,3 +123,19 @@ let ddd:tt;ddd = {
     a:"22",
     b:22
 }
+
+
+// infer
+type ParamType<T> = T extends (param: infer P) => number ? P : T;
+
+interface User {
+    name: string;
+    age: number;
+  }
+  
+  type Func = (user: User) => void
+  type Func2 = (user: User) => number
+  
+  type Param = ParamType<Func>;   // Param = Func
+  type Param2 = ParamType<Func2>;   // Param = User
+  type AA = ParamType<string>;  
