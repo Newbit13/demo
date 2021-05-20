@@ -25,16 +25,22 @@ props["bar"] = 123; // error
 //     return text;
 // }
 
-//3 ???error
-// function process<T extends string | number>(text: T): T extends string ? string : number {
-//     return text;
-// }
-function process<T extends string | number>(text: T): T{
+//3
+function process<T extends string | number>(text: T): T {
     return text;
 }
 process("sss").toUpperCase() // ???
 process(1).toFixed()
 process(true)
+
+//4 ？？
+type returnType233<T> = T extends string ? string : number;
+function process2<T extends string | number>(text: T): returnType233<T> {
+    let a:returnType233<T> = 2;
+    return a;
+}
+let r = process2('233') 
+let s = process2(233)
 
 // 巧用查找类型
 type newProps = Props["la"];
@@ -118,10 +124,10 @@ type testIn3 = {
 // 巧用Partial
 type pp = Partial<tt>
 
-let ccc:pp = {};ccc.a = "1";
-let ddd:tt;ddd = {
-    a:"22",
-    b:22
+let ccc: pp = {}; ccc.a = "1";
+let ddd: tt; ddd = {
+    a: "22",
+    b: 22
 }
 
 
@@ -131,11 +137,21 @@ type ParamType<T> = T extends (param: infer P) => number ? P : T;
 interface User {
     name: string;
     age: number;
-  }
-  
-  type Func = (user: User) => void
-  type Func2 = (user: User) => number
-  
-  type Param = ParamType<Func>;   // Param = Func
-  type Param2 = ParamType<Func2>;   // Param = User
-  type AA = ParamType<string>;  
+}
+
+type Func = (user: User) => void
+type Func2 = (user: User) => number
+
+type Param = ParamType<Func>;   // Param = Func
+type Param2 = ParamType<Func2>;   // Param = User
+type AA = ParamType<string>;
+
+
+
+// 其他
+type foo<T extends String | Number> = T;
+let fff:foo<Number>
+let fff2:foo<Boolean>
+
+type foo2<T extends String = "ok"> = T;
+let fff3:foo2 = 'ok2'
