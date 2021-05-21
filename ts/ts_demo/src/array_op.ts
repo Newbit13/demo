@@ -17,3 +17,7 @@ type shiftResult = ShiftAction<tuple>
 type unshiftResult = UnshiftAction<tuple,'jq'>
 type popResult = PopAction<tuple>
 type pushResult = PushAction<tuple,'jq'>
+
+
+let s233:str2333 = {};
+s233.la = true;
