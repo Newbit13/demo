@@ -36,10 +36,10 @@ process(true)
 //4 ？？
 type returnType233<T> = T extends string ? string : number;
 function process2<T extends string | number>(text: T): returnType233<T> {
-    let a:returnType233<T> = 2;
+    let a: returnType233<T> = 2;
     return a;
 }
-let r = process2('233') 
+let r = process2('233')
 let s = process2(233)
 
 // 巧用查找类型
@@ -150,8 +150,20 @@ type AA = ParamType<string>;
 
 // 其他
 type foo<T extends String | Number> = T;
-let fff:foo<Number>
-let fff2:foo<Boolean>
+let fff: foo<Number>
+let fff2: foo<Boolean>
 
 type foo2<T extends String = "ok"> = T;
-let fff3:foo2 = 'ok2'
+let fff3: foo2 = 'ok2'
+
+
+declare type str2333 = {
+    la?: boolean;
+};
+// 如何你的模块使用了 export 关键字导出了内容，上述的声明方式可能会失效
+// 如果你依然想要将类型声明到全局，那么你就需要显式地声明到全局：
+declare global {
+    const ModuleGlobalFoo: string;
+}
+// 没有export的话，global会报错
+export const asssss = 2;//可以尝试注释这行
