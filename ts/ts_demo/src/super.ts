@@ -71,7 +71,7 @@ type testInfer = haha1 extends haha2 ? "a" : "b"
 type AB<T> = T extends 'x' ? 'a' : 'b';
 type All = AB<'x' | 'y'>; // 非确定条件，可能是 'x' 或 'y'
 // 得到 type All = 'a' | 'b';
-type testInfer2 = ({ ha: string } | { la: string } )extends { ha: string } ? "a" : "b"
+type testInfer2 = ({ ha: string } | { la: string }) extends { ha: string } ? "a" : "b"
 
 
 
@@ -85,22 +85,39 @@ type t4<T> = (T extends any ? (args: T) => any : never);
 //注意比较 t2 和 tt4的区别！！！
 type tt4 = t4<haha1>;
 
-type t5 = (((args: {la:string}) => any) | ((args: {sa:number}) => any)) extends (args: infer A) => any ? A : never;
-let tt5:t5 = {la:"",sa:2};
+type t5 = (((args: { la: string }) => any) | ((args: { sa: number }) => any)) extends (args: infer A) => any ? A : never;
+let tt5: t5 = { la: "", sa: 2 };
 
 //extends 测试
-type e1 = {ha:string} extends {ha:string} ? 1:2;//1
-type e2 = {ha:string,la:number} extends {ha:string} ? 1:2;//1
-type e3 = {ha:string} extends {ha:string,la:number} ? 1:2;//2
-type e4 = ({ha:string} | {la:string}) extends {ha:string,la:number} ? 1:2;//2
-type e5 = ({ha:string} | {la:string}) extends {ha:string} ? 1:2;//2
-type e6 = ({ha:string} | {la:string}) extends ({ha:string} | {la:string}) ? 1:2;//1
+type e1 = { ha: string } extends { ha: string } ? 1 : 2;//1
+type e2 = { ha: string, la: number } extends { ha: string } ? 1 : 2;//1
+type e3 = { ha: string } extends { ha: string, la: number } ? 1 : 2;//2
+type e4 = ({ ha: string } | { la: string }) extends { ha: string, la: number } ? 1 : 2;//2
+type e5 = ({ ha: string } | { la: string }) extends { ha: string } ? 1 : 2;//2
+type e6 = ({ ha: string } | { la: string }) extends ({ ha: string } | { la: string }) ? 1 : 2;//1
 // 注意e7和t5的区别！！！
-type e7 = ({ha:string} | {la:string}) extends infer A ? A:never;//{ha:string} | {la:string}
+type e7 = ({ ha: string } | { la: string }) extends infer A ? A : never;//{ha:string} | {la:string}
+
+type Exclude2<T, U> = T extends U ? never : T;
+type e8 = Exclude2<("x" | "y" | "z"), ("y")>;//"x" | "z"
+type e9 = Exclude2<("y"), ("x" | "y" | "z")>;//never
+type e10 = Exclude2<({ ha: string } | { la: string } | { sa: string }), { ha: string }>;
 
 //体验keyof在某些情况下的表现
-type myCombine<T> = keyof T;
-type rC1 = myCombine<{ha:2,dsa:23}>;
-type rC2 = myCombine<haha1>;
-type rC3 = myCombine<haha2>;
+type myKeyOf<T> = keyof T;
+type myIn<T> = {
+    [p in keyof T]?: T[p]
+}
+type rC1 = myKeyOf<{ ha: 2, dsa: 23 }>;
+type rC2 = myKeyOf<haha1>;
+type rC3 = myKeyOf<haha2>;
+
+type rN1 = myIn<haha1>;
+type rN2 = myIn<haha2>;
+
+//is
+function isA(x:any): x is rN2 {
+    return true;
+  }
+
 
