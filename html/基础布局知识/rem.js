@@ -20,8 +20,8 @@
     var rootItem,rootStyle;
 
     function refreshRem() {
-        // var width = docEl.getBoundingClientRect().width;
-        var width = window.screen.width;
+        var width = docEl.getBoundingClientRect().width;
+        // var width = window.screen.width;
         if (!maxWidth) {
             maxWidth = 540;
         };
