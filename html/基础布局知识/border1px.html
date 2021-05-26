@@ -7,6 +7,38 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5"> -->
     <title>1px边框</title>
     <style>
+        /* 方法一 */
+        /* ios8适用 */
+        /* 缺点: 安卓与低版本IOS不适用, 这个或许是未来的标准写法, 现在不做指望 */
+        .border {
+            border: 1px solid #999
+        }
+
+        @media screen and (-webkit-min-device-pixel-ratio: 2) {
+            .border {
+                border: 0.5px solid #999
+            }
+        }
+
+        @media screen and (-webkit-min-device-pixel-ratio: 3) {
+            .border {
+                border: 0.333333px solid #999
+            }
+        }
+
+        /* 方法二 */
+        /* 利用一张6*6的图片 */
+        /* border-image兼容性：ie10以上 */
+        /* 缺点: 对于圆角样式, 将图片放大修改成圆角也能满足需求, 但这样无形中增加了border图片的宽度，存在多种边框颜色或者更改的时候麻烦 */
+        /* @media screen and (-webkit-min-device-pixel-ratio: 2) {
+            .border {
+                border: 1px solid transparent;
+                border-image: url(border.gif) 2 repeat;
+            }
+        } */
+
+
+        /* 其他 */
         * {
             margin: 0;
             padding: 0;
@@ -15,33 +47,83 @@
         .box {
             width: 3.75rem;
             height: 3.75rem;
-            background: #ff0000;
-            border:1px solid #00ffff;
-            transform: scale(0.5);
+            /* background: #ff0000; */
+            border: 1px solid #000000;
+            margin: 10px;
+            /* transform: scale(0.5); */
         }
 
         .box2 {
             width: 160px;
             height: 160px;
-            background: #0000ff;
-            border:1px solid #00ffff;
+            /* background: #00f0ff; */
+            border: 0.5px solid #000000;
+            margin: 10px;
         }
 
         .box3 {
             width: 160px;
             height: 160px;
-            background: #f00ff0;
-            border:1px solid #00ffff;
-            transform: scale(0.5);
+            /* background: #f00ff0; */
+            /* border:0.5px solid #000000; */
+            margin: 10px;
+            position: relative;
+            /* transform: scale(0.5); */
+        }
+
+        .box3::after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: #000000;
+            transform: scaleY(0.5);
+        }
+
+        .box3::before {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 0;
+            height: 100%;
+            width: 1px;
+            background: #000000;
+            transform: scaleX(0.5);
+        }
+
+        .box4 {
+            width: 160px;
+            height: 160px;
+            margin: 10px;
         }
     </style>
 </head>
 
 <body>
-    <div class="box"></div>
-    <div class="box2"></div>
-    <div class="box3"></div>
+    <div class="box">
+        border 1px + rem宽高
+    </div>
+    <div class="box2">
+        border 0.5px + px宽高
+    </div>
+    <div class="box3">
+        transform+伪类 + px宽高
+    </div>
+    <!-- <div class="box4">
+        background渐变 + px宽高
+    </div> -->
     <script src="./rem.js"></script>
+    <script>
+        var b1 = document.querySelector('.box');
+        var b2 = document.querySelector('.box2');
+        // var b3 = document.querySelector('.box3');
+
+        b1.innerHTML += b1.offsetWidth;
+        b2.innerHTML += b2.offsetWidth;
+        // b3.innerHTML += b3.innerHTML + b3.offsetWidth;
+    </script>
 </body>
 
 </html>
