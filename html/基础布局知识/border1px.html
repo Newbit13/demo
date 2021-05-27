@@ -3,10 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <title>1px边框</title>
     <style>
+        /* 
+        /* 先说总结：1px物理像素可以实现，但有没有必要还是看具体需求，个人一般不建议使用，
+        /* 原因是增加程序复杂度，且视觉上满足UI更细的需求而已。视觉上其实1px的css长度不变，但只是视网膜屏可以做到0.5px的css长度
+        /* 全局使用initial-scale=0.5是有局限性的，如果你页面有iframe等内容不可控元素，控件文字会被缩小，体验变糟
+        */
+
         /* 方法一 */
         /* ios8适用 */
         /* 缺点: 安卓与低版本IOS不适用, 这个或许是未来的标准写法, 现在不做指望 */
@@ -55,6 +61,7 @@
             border: 1px solid #000000;
             margin: 10px;
             /* transform: scale(0.5); */
+            /* font-size: 0.2rem; */
         }
 
         .box2 {
@@ -115,6 +122,8 @@
     <div class="box3">
         transform+伪类 + px宽高
     </div>
+    <iframe width="100%" src="//player.bilibili.com/player.html?aid=248010421&bvid=BV1Kv41157qh&cid=337896889&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+    <!-- <video src=""></video> -->
     <!-- <div class="box4">
         background渐变 + px宽高
     </div> -->
