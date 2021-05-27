@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./a.css">
+    <style>
+        .ib_white_space{
+            letter-spacing:-4px;
+            margin-bottom: 5px;
+        }
+        .ib_white_space2{
+            font-size: 0;
+            margin-bottom: 5px;
+        }
+        .ib_white_space3{
+            word-spacing: -4px;
+            margin-bottom: 5px;
+        }
+        .ib{
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+        }
+        .colorA{
+            background: #ff0000;
+        }
+        .colorB{
+            background: #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <p>inline-block间隙</p>
+    <div class="ib_white_space">
+        <span class="hahaha">横看成岭侧成峰</span>
+        <span>横看成岭侧成峰</span>
+    </div>
+    <div class="ib_white_space">
+        <div class="ib colorA"></div>
+        <div class="ib colorB"></div>
+    </div>
+    <div class="ib_white_space2">
+        <div class="ib colorB"></div>
+        <div class="ib colorA"></div>
+    </div>
+    <div class="ib_white_space3">
+        <div class="ib colorA"></div>
+        <div class="ib colorB"></div>
+    </div>
+    <div class="ib_white_space4"><div class="ib colorA"></div><div class="ib colorB"></div></div>
+</body>
+</html>
