@@ -1,5 +1,114 @@
-$body-color: red;
-
+$body-color: rgb(0, 174, 255);
+@mixin box-style {
+    background: #e74266;
+    width: 100px;
+    height: 100px;
+}
+@mixin colofulorBorder(
+    $normalColor: blue,
+    $topColor: $normalColor,
+    $rightColor: $normalColor,
+    $bottomColor: $normalColor,
+    $leftColor: $normalColor
+) {
+    border: 5px solid;
+    border-top-color: $topColor;
+    border-right-color: $rightColor;
+    border-bottom-color: $bottomColor;
+    border-left-color: $leftColor;
+}
+.mb10 {
+    margin-bottom: 10px;
+}
 body {
-  background: $body-color;
+    background: $body-color;
+}
+
+.box {
+    @extend .mb10;
+    // $width只用于此块作用域内
+    $width: 100px;
+    width: $width;
+    height: 100px;
+    background: #ce5fce;
+    cursor: pointer;
+    // 使用&指代父元素
+    &:hover {
+        background: #dd8c74;
+    }
+}
+
+.box2 {
+    @extend .mb10;
+    // 群组选择器的嵌套
+    .item1,
+    .item2,
+    .item3 {
+        display: inline-block;
+        height: 50px;
+        width: 50px;
+        background: #e2e987;
+        margin-right: 5px;
+        // 嵌套属性
+        border: {
+            style: solid;
+            width: 1px;
+            color: #000;
+        }
+        /**
+        上述相当于：
+        border-style: solid;
+        border-width: 1px;
+        border-color: #ccc;
+        */
+    }
+}
+
+.box3 {
+    @include box-style;
+    @extend .mb10;
+    border: 1px solid #000 {
+        left: 0px;
+        top: 0px;
+    }
+    /**
+    上述相当于：
+    border: 1px solid #ccc;
+    border-left: 0px;
+    border-right: 0px;
+    */
+}
+
+.box4 {
+    @include box-style;
+    @include colofulorBorder(blue, pink, yellow, green);
+    border-radius: 10px;
+    @extend .mb10;
+    animation: ttt2 5s linear infinite;
+}
+
+.box5 {
+    @include box-style;
+    @include colofulorBorder();
+    // @include colofulorBorder(gray);
+    border-radius: 10px;
+    @extend .mb10;
+    animation: ttt 5s infinite;
+}
+
+@keyframes ttt {
+    @for $i from 1 through 100 {
+        #{$i * 1%}{
+            transform: rotate($i * 3.6 + deg);
+        }
+    }
+}
+
+@keyframes ttt2 {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
 }
