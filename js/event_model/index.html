@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件模型-冒泡与捕获</title>
+    <style>
+        .box{
+            width: 600px;
+            height: 600px;
+            background:#5678d8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .item{
+            width: 100px;
+            height: 100px;
+            background:#eaec71;
+        }
+    </style>
+</head>
+<body>
+    <!-- 结论 -->
+    <!-- stopPropagation（w3c标准）、cancelBubble（ie的，目前chrome都支持）可以阻止冒泡，也可以阻止捕获 -->
+
+    <div class="box">
+        <div class="item"></div>
+    </div>
+    <script>
+        document.querySelector('.box').addEventListener('click',function(){
+            console.log('box click');
+        });
+
+        document.querySelector('.box').addEventListener('click',function(e){
+            console.log('box click true');
+            // e.stopPropagation();
+            // e.cancelBubble = true;
+        },true);
+
+        document.querySelector('.item').addEventListener('click',function(e){
+            console.log('item click');
+            // e.stopPropagation();
+            // e.cancelBubble = true;
+        });
+
+        document.querySelector('.item').addEventListener('click',function(){
+            console.log('item click true');
+        },true);
+    </script>
+</body>
+</html>
