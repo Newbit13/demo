@@ -55,11 +55,15 @@
             //@ sourceURL=nameTTTT
         `);
 
-        // eval的好兄弟，Function
-        var sa;
-        Function('sa = 789;sa++;')();
-        // eval('sa = 789;sa++;');
-        console.log(sa);
+        var sa = 2;
+        (function () {
+            // eval的好兄弟，Function,Function就相当于eval的间接调用
+            var sa = 3;
+            Function('console.log(sa);sa = 789;sa++;')(); //2//Function只能获取到全局下的作用域
+            eval('console.log(sa);sa = 222;sa++;'); //3
+            console.log(sa);//223
+        })();
+        console.log(sa);//790
     </script>
 </body>
 
