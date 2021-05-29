@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dispatchEvent</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #486eeb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="btn" onclick="fire()">触发自定义事件</div>
+    <script>
+        // 方法一
+        const buildEvent = new Event('build');
+
+        // 方法二
+        // CustomEvent 还可以设置事件的detail值
+        // ie不支持，polyfill方法：https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+        // const buildEvent = new CustomEvent('build',{detail:'fds'});
+
+        // 方法三 以前的流行方法
+        // const buildEvent = document.createEvent('Event');
+        // buildEvent.initEvent('build', true, true);
+
+
+        const boxDom = document.querySelector('.box');
+        boxDom.addEventListener('build', function (e) {
+            console.log(e);
+        })
+
+        function fire() {
+            boxDom.dispatchEvent(buildEvent);
+        }
+    </script>
+</body>
+
+</html>
