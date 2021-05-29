@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eval</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #486eeb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <!-- <div class="btn" onclick="fire()">触发自定义事件</div> -->
+    <script>
+        // 参考文献：https://juejin.cn/post/6844903713140637709 《你不知道的 eval》
+
+        //传入非字符串会直接返回
+        console.log(eval(true));//true
+
+        var context = 'outside';
+        (function () {
+            var context = 'inside';
+            //直接调用
+            console.log(eval('context'));//inside
+
+
+            //间接调用
+            let fn = eval;
+            console.log(fn('context'));//outside
+            // 下面两种也属于间接调用
+            // console.log(eval.call(null, 'context'));
+            // console.log((1, eval)('context'));
+
+            // 间接调用时，eval 并不会修改调用函数作用域内的任何东西。JS 解释器有 fast path 和 slow path 两种模式，当直接调用 eval 时，解释器处于 slow path。因为此时作用域是不可控的，需要监听整个作用域，不能应用 v8 的一些编译优化，相应的编译效率也会比 fast path 低。
+            // 结论：直接调用效率低
+
+        })();
+
+        //eval 调试问题
+        // 可以在 eval 创建的代码末尾添加一行 "//@ sourceURL=name" 就可以给这段代码命名（浏览器会特殊对待这种特殊形式的注释），
+        // 这样它就会出现在 Sources 面板上，然后就可以设置断点调试了
+        eval(`
+            function ha(){
+                let a = 123;
+                let b = ++a;
+                console.log(b);
+            }
+            ha();
+            //@ sourceURL=nameTTTT
+        `);
+    </script>
+</body>
+
+</html>
