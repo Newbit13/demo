@@ -54,6 +54,12 @@
             ha();
             //@ sourceURL=nameTTTT
         `);
+
+        // eval的好兄弟，Function
+        var sa;
+        Function('sa = 789;sa++;')();
+        // eval('sa = 789;sa++;');
+        console.log(sa);
     </script>
 </body>
 
