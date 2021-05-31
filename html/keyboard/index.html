@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0 ,minimum-scale=1.0,maximum-scale=1.0,user-scalable = no">
+    <title>软键盘问题</title>
+    <style>
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        ul,
+        li,
+        img,
+        span,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            height: 40px;
+            width: 100%;
+            background: #d44c4c;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background: #745be2;
+        }
+
+        .box {
+            height: 800px;
+            background: #da3bb2;
+        }
+
+        .b40 {
+            padding-bottom: 400px;
+        }
+
+        .btn {
+            /* padding-top: 40px; */
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 4px;
+            background: #ff0000;
+            color: #ffffff;
+            text-align: center;
+            margin: 40px auto 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function ttt() {
+            document.querySelector('#tt').focus();
+            //通过scrollIntoView让软键盘唤起后滚动距离最大，从而让底部的fixed元素不被键盘遮挡（用于解决ios键盘遮挡底部fixed元素的问题）
+            document.querySelector('#tt').scrollIntoView();
+        }
+        function ttt2() {
+            document.querySelector('#tt').scrollIntoView();
+        }
+    </script>
+    <header></header>
+    <div class="btn" onclick="ttt()">获取焦点</div>
+    <div class="btn" onclick="ttt2()">scrollIntoView</div>
+    <div class="box">
+        安卓唤起软键盘时：界面高度会重新调整，fixed元素也会重新定位（根据：屏幕-软键盘后的界面）
+        ios唤起软键盘时： 界面高度不变，整个可视区域变为可以滚动，fixed元素不会重新定位
+    </div>
+    <label for="tt">
+        测试软键盘遮挡问题
+        <input type="text" id="tt">
+    </label>
+    <div class="b40"></div>
+    <footer></footer>
+
+</body>
+
+</html>
