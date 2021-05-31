@@ -1,31 +1,7 @@
 <template>
   <h1>{{ msg }}</h1>
 
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a
-      href="https://marketplace.visualstudio.com/items?itemName=octref.vetur"
-      target="_blank"
-    >
-      Vetur
-    </a>
-    or
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-    (if using
-    <code>&lt;script setup&gt;</code>)
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Docs
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
+  <C @smsm="formC" />
 
   <button
     @click="
@@ -51,8 +27,12 @@ import {
   watch,
   watchEffect,
 } from "vue";
+import C from "./C.vue";
 export default defineComponent({
   name: "HelloWorld",
+  components: {
+    C,
+  },
   props: {
     msg: {
       type: String,
@@ -92,15 +72,18 @@ export default defineComponent({
     //   console.log(count, prevCount, "para list watch");
     // });
 
-    watchEffect(() => {
-      // 这里除非有使用到响应式的值，否则不会在值改变时自动执行这里面的语句
-      console.log("watchEffect");
-      console.log(count.value);//如果只存在单独这句时,当count.value变化时，这里能监听到
-      console.log(count);//如果只存在单独这句时,当count.value变化时，这里不能能监听到
-      // console.log(oo.ha);
-    });
+    // watchEffect(() => {
+    //   // 这里除非有使用到响应式的值，否则不会在值改变时自动执行这里面的语句
+    //   console.log("watchEffect");
+    //   console.log(count.value);//如果只存在单独这句时,当count.value变化时，这里能监听到
+    //   console.log(count);//如果只存在单独这句时,当count.value变化时，这里不能能监听到
+    //   // console.log(oo.ha);
+    // });
 
-    return { count, double, oo };
+    const formC = function () {
+      console.log("formC");
+    };
+    return { count, double, oo, formC };
   },
 });
 </script>

@@ -1,3 +1,10 @@
+# 参考资料
+[全面总结Vue3.0的新特性](https://juejin.cn/post/6968094627375087653?utm_source=gold_browser_extension#heading-5)
+
+值得注意的:
+vue2:优先级:v-for > v-if
+vue3:优先级:v-if > v-for
+
 # Vue 3 + Typescript + Vite
 
 This template should help get you started developing with Vue 3 and Typescript in Vite.
