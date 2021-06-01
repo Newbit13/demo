@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>异常捕获</title>
-</head>
-<body>
-    <img src="fds" alt="">
+    <script type="text/javascript">
+      // 记录页面加载开始时间
+      var timerStart = Date.now();
+    </script>
     <script src="./index.js"></script>
-</body>
+  </head>
+  <body>
+    <img src="fds" alt="" />
+
+    <!-- 加载静态JS资源 -->
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        // console.log("DOM 挂载时间: ", Date.now() - timerStart);
+        // 性能日志上报
+      });
+      window.addEventListener("load", function () {
+        // console.log("所有资源加载完成时间: ", Date.now() - timerStart);
+        // 性能日志上报
+      });
+
+      //统计网页耗时，性能的api
+      //console.log(window.performance);
+    </script>
+    <script>
+      let req = new XMLHttpRequest();
+      req.onreadystatechange = function () {
+        if (req.readyState == 4 && req.status == 200) {
+          console.log("数据返回成功");
+          console.log(req.responseText);
+        }
+      };
+      req.open("GET", "http://www.baidu.coms");
+      req.send();
+    </script>
+  </body>
 </html>
