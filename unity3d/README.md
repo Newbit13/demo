@@ -8,6 +8,9 @@ F
 
 选中摄像机（或者物体），调整你在场景看到的画面 ， ctrl + shift + f 可以将选中的物体位置进行改变
 
+## 关于优化
+occlusion culling 遮挡剔除
+levels of detail 多细节层次
 
 
 # 资料
