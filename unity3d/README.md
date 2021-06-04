@@ -14,5 +14,10 @@ F
  [levels of detail 多细节层次](https://www.bilibili.com/video/BV12s411g7gU?p=17)
 
 
+# 关于VISUAL STUDIO 2019里写c#
+ctrl + K + D 自动对齐代码
+ctrl + K + c 注释
+ctrl + K + u 取消注释
+
 # 资料
 [史上最全Unity3D教程](https://www.bilibili.com/video/BV12s411g7gU)
