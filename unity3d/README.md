@@ -19,5 +19,17 @@ ctrl + K + D 自动对齐代码
 ctrl + K + c 注释
 ctrl + K + u 取消注释
 
+```c#
+// 标准数字字符串格式化
+Console.WriteLine("{0:c}",10); //¥10.00
+Console.WriteLine("{0:d2}",5); //05
+Console.WriteLine("{0:f1}",1.26); //1.3
+Console.WriteLine("{0:p0}",0.1); //10%
+```
+
+对我来说的新语法：
+ref
+out
+
 # 资料
 [史上最全Unity3D教程](https://www.bilibili.com/video/BV12s411g7gU)
