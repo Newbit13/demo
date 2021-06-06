@@ -52,6 +52,20 @@ Class A{
             this.age = value;
         }
     }
+
+    public string Password{get;set;}//自动属性 包含一个字段 2个方法 只有编译成中间语言时才存在，相当于
+    /**
+    private password;//实际不是叫做password，随便个名词  
+    public Password{
+        get(){
+            return this.password;
+        }
+        set(){
+            this.password = value;
+        }
+    }
+    */
+
     public A(){
         Console.WriteLine("hh");
     }
