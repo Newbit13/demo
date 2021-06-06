@@ -38,6 +38,18 @@ enum Xxx{
     first,
     second
 }
+
+// 类的构造函数
+Class A{
+    private name;
+    public A(){
+        Console.WriteLine("hh");
+    }
+
+    public A(string name):this(){//这样可以同时调用上面那个无参构造函数
+        this.name = name;
+    }
+}
 ```
 
 对我来说的新语法：
