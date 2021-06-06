@@ -30,6 +30,14 @@ Console.WriteLine("{0:p0}",0.1); //10%
 int i = 123;
 string a = "" + i;//有装箱操作，应该改为如下：
 // string a = "" + i.ToString();
+
+
+// 枚举
+[flags]//有这个证明该枚举可以多选
+enum Xxx{
+    first,
+    second
+}
 ```
 
 对我来说的新语法：
