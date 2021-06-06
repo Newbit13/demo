@@ -42,12 +42,26 @@ enum Xxx{
 // 类的构造函数
 Class A{
     private name;
+    private age;
+
+    public Age{
+        get(){
+            return this.age;
+        }
+        set(){
+            this.age = value;
+        }
+    }
     public A(){
         Console.WriteLine("hh");
     }
 
-    public A(string name):this(){//这样可以同时调用上面那个无参构造函数
+    public A(string name):this(){//这样可以调用上面那个无参构造函数
         this.name = name;
+    }
+
+    public A(string name,int age):this(name){//这样可以调用上面那个一参数的构造函数
+        this.Age = age;
     }
 }
 ```
