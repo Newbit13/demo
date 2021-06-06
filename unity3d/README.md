@@ -25,6 +25,11 @@ Console.WriteLine("{0:c}",10); //¥10.00
 Console.WriteLine("{0:d2}",5); //05
 Console.WriteLine("{0:f1}",1.26); //1.3
 Console.WriteLine("{0:p0}",0.1); //10%
+
+// 尽量避免拆箱，装箱操作
+int i = 123;
+string a = "" + i;//有装箱操作，应该改为如下：
+// string a = "" + i.ToString();
 ```
 
 对我来说的新语法：
