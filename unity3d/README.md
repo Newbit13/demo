@@ -58,6 +58,16 @@ OnBecameInvisible 当Mesh Renderer 在相机上不可见时
 OnDisable 当对象变为不可用
 OnDestroy
 OnApplicationQuit 当程序结束，退出时
+
+# 调试
+复杂的：
+在调试过程中写代码：
+右键--快速监视
+或者 查看“即时窗口”
+
+简单的：
+用Debug.Log或者print，
+或者用一个临时的public字段，可以在unity面板进行观察
 ## 关于优化
  [occlusion culling 遮挡剔除](https://www.bilibili.com/video/BV12s411g7gU?p=16)
  
