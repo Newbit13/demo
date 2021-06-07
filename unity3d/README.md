@@ -18,7 +18,7 @@ F
 类字段前加``` [Range(0,30)]```能使共有int字段在unity编辑器中有个取值范围
 
 类的属性（有getter，setter那种）不会在unity编辑器里显示
-构造函数不能写（要写代码在Awake或Start里写）
+不要在脚本里写构造函数（要写代码在Awake或Start里写）
 ## 生命周期
 
 
