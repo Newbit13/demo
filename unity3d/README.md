@@ -8,6 +8,30 @@ F
 
 选中摄像机（或者物体），调整你在场景看到的画面 ， ctrl + shift + f 可以将选中的物体位置进行改变
 
+# unity脚本
+是个类，继承MonoBehaviour
+
+类字段前加```[SerializeField]```能使私有字段也显示在unity编辑器中
+
+类字段前加```[HideInInspector]```能使共有字段在unity编辑器中隐藏
+
+类字段前加``` [Range(0,30)]```能使共有int字段在unity编辑器中有个取值范围
+
+类的属性（有getter，setter那种）不会在unity编辑器里显示
+不要在脚本里写构造函数（要写代码在Awake或Start里写）
+## 生命周期
+创建游戏对象->立即执行(永远早与Start)
+作用：初始化
+Awake
+
+创建游戏对象->脚本启用（在编辑器里有勾选时）->立即执行
+作用：初始化
+Start
+
+一启用就调用（可开开关关重复启用）
+OnEnable
+
+
 ## 关于优化
  [occlusion culling 遮挡剔除](https://www.bilibili.com/video/BV12s411g7gU?p=16)
  
@@ -18,6 +42,8 @@ F
 ctrl + K + D 自动对齐代码
 ctrl + K + c 注释
 ctrl + K + u 取消注释
+
+在类中输入prop + tab + tab会快速生成类的自动属性
 
 ```c#
 // 标准数字字符串格式化
@@ -83,6 +109,23 @@ Class A{
 对我来说的新语法：
 ref
 out
+
+类型转换的两种方式（这里不考虑隐式转换）：
+显示转换 和 使用 as；显示转换可能报错（在使用类继承时，通过先隐式转为父类，再转为其他子类），用as如果转换失败会返回null
+
+```List<int>``` 跟 ```int[]``` 不同，前者自带一些操作数组的方法
+
+struct不可以设置无参构造函数；
+已过时（作者本人不加也没报错）：在有参数的构造函数里使用自动属性的话需要加上```:this()```；
+struct 是值类型，class是引用类型；
+参考：[struct 结构体 和class的区别](https://www.bilibili.com/video/BV12s411g7gU?p=108)
+
+数组清空方法：Array.clear
+
+提高代码可读性：
+#region XXX
+#endregion
+
 
 # 资料
 [史上最全Unity3D教程](https://www.bilibili.com/video/BV12s411g7gU)
