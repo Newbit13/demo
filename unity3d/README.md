@@ -20,6 +20,7 @@ F
 类的属性（有getter，setter那种）不会在unity编辑器里显示
 不要在脚本里写构造函数（要写代码在Awake或Start里写）
 ## 生命周期
+### 初始阶段
 创建游戏对象->立即执行(永远早与Start)
 作用：初始化
 Awake
@@ -31,7 +32,32 @@ Start
 一启用就调用（可开开关关重复启用）
 OnEnable
 
+### 物理阶段
+执行时机：每隔固定时间执行一次（可改）
+FixedUpdate
 
+当满足碰撞条件时
+OnCollisionXXX 碰撞
+
+当满足触发条件时
+OnTriggerXXX 触发
+
+### 游戏逻辑
+Update
+
+LateUpdate
+在Update函数被调用后执行，适用于跟随逻辑（跟Update在同一帧执行）
+### 输入事件
+OnMouseXX
+
+### 场景渲染
+OnBecameVisible   当Mesh Renderer 在相机上可见时
+OnBecameInvisible 当Mesh Renderer 在相机上不可见时
+
+###结束阶段
+OnDisable 当对象变为不可用
+OnDestroy
+OnApplicationQuit 当程序结束，退出时
 ## 关于优化
  [occlusion culling 遮挡剔除](https://www.bilibili.com/video/BV12s411g7gU?p=16)
  
