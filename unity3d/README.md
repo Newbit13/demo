@@ -20,6 +20,8 @@ F
 类的属性（有getter，setter那种）不会在unity编辑器里显示
 不要在脚本里写构造函数（要写代码在Awake或Start里写）
 ## 生命周期
+Awake
+Start
 
 
 ## 关于优化
