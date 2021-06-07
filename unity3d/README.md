@@ -28,6 +28,9 @@ Awake
 作用：初始化
 Start
 
+一启用就调用（可开开关关重复启用）
+OnEnable
+
 
 ## 关于优化
  [occlusion culling 遮挡剔除](https://www.bilibili.com/video/BV12s411g7gU?p=16)
