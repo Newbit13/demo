@@ -45,7 +45,14 @@ out
 
 struct不可以设置无参构造函数；
 已过时（作者本人不加也没报错）：在有参数的构造函数里使用自动属性的话需要加上```:this()```；
+struct 是值类型，class是引用类型；
 参考：[struct 结构体 和class的区别](https://www.bilibili.com/video/BV12s411g7gU?p=108)
+
+数组清空方法：Array.clear
+
+提高代码可读性：
+#region XXX
+#endregion
 
 
 # 资料
