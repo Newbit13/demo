@@ -8,6 +8,20 @@ F
 
 选中摄像机（或者物体），调整你在场景看到的画面 ， ctrl + shift + f 可以将选中的物体位置进行改变
 
+# unity脚本
+是个类，继承MonoBehaviour
+
+类字段前加```[SerializeField]```能使私有字段也显示在unity编辑器中
+
+类字段前加```[HideInInspector]```能使共有字段在unity编辑器中隐藏
+
+类字段前加``` [Range(0,30)]```能使共有int字段在unity编辑器中有个取值范围
+
+类的属性（有getter，setter那种）不会在unity编辑器里显示
+构造函数不能写（要写代码在Awake或Start里写）
+## 生命周期
+
+
 ## 关于优化
  [occlusion culling 遮挡剔除](https://www.bilibili.com/video/BV12s411g7gU?p=16)
  
