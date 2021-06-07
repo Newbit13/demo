@@ -25,22 +25,22 @@ F
 作用：初始化
 Awake
 
+一启用就调用（可开开关关重复启用）
+OnEnable
+
 创建游戏对象->脚本启用（在编辑器里有勾选时）->立即执行
 作用：初始化
 Start
-
-一启用就调用（可开开关关重复启用）
-OnEnable
 
 ### 物理阶段
 执行时机：每隔固定时间执行一次（可改）
 FixedUpdate
 
-当满足碰撞条件时
-OnCollisionXXX 碰撞
-
 当满足触发条件时
 OnTriggerXXX 触发
+
+当满足碰撞条件时
+OnCollisionXXX 碰撞
 
 ### 游戏逻辑
 Update
