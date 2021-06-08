@@ -74,7 +74,7 @@ OnApplicationQuit 当程序结束，退出时
  [levels of detail 多细节层次](https://www.bilibili.com/video/BV12s411g7gU?p=17)
 
 # 常用api
-Component
+Component:提供查找组件的功能（找自己，子，父）
 Transform
 GameObject
 Object
