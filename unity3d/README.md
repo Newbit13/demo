@@ -86,6 +86,8 @@ ctrl + K + D 自动对齐代码
 ctrl + K + c 注释
 ctrl + K + u 取消注释
 
+ctrl + r + m 把代码块提到新的方法里
+
 在类中输入prop + tab + tab会快速生成类的自动属性
 
 ```c#
