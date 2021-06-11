@@ -90,6 +90,16 @@ public GameObject[] enemyType;
 // 旋转角度 可以为Quaternion.identity
 ```
 
+```c#
+// 这样写一挂api脚本，其他脚本也会被自动添加进组件（观察面板可以看到）
+[RequireCompoent(typeof(EnemyAnimation))]
+[RequireCompoent(typeof(EnemyMotor))]
+[RequireCompoent(typeof(EnemyStatusInfo))]
+public class EnemyAI:MonoBehaviour{
+
+}
+```
+
 
 # 关于VISUAL STUDIO 2019里写c#
 ctrl + K + D 自动对齐代码
