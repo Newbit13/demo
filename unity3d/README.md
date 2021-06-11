@@ -80,6 +80,16 @@ GameObject
 Object
 Time
 
+# 游戏开发经验
+## 0.想用脚本创建无数个角色（enemy）
+```C#
+// 1.声明字段，将预制件拖入面板
+public GameObject[] enemyType;
+
+// 2.Instantiate(预制件，位置，旋转角度)
+// 旋转角度 可以为Quaternion.identity
+```
+
 
 # 关于VISUAL STUDIO 2019里写c#
 ctrl + K + D 自动对齐代码
