@@ -100,6 +100,13 @@ public class EnemyAI:MonoBehaviour{
 }
 ```
 
+# 三维数学api
+```c#
+//线性插值函数
+// Mathf.Lerp
+// 例子：照相机视角由快到慢，但无限接近终点
+// cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60, 0.1f);
+```
 
 # 关于VISUAL STUDIO 2019里写c#
 ctrl + K + D 自动对齐代码
