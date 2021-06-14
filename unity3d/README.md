@@ -123,6 +123,9 @@ PI(弧度) = 180角度   1弧度 = 180角度/PI    1角度=PI/180角度(弧度)
 Mathf.sin(float radian)
 反正弦
 Mathf.Asin(float radian)
+
+//将点从自身坐标系变换后，返回世界坐标系
+transform.TransformPoint(x,y,z)
 ```
 
 # 关于VISUAL STUDIO 2019里写c#
