@@ -118,6 +118,11 @@ pos / pos.magnitude
 PI(弧度) = 180角度   1弧度 = 180角度/PI    1角度=PI/180角度(弧度)
 角度=弧度数*Mathf.Rad2Deg
 弧度=角度数*Mathf.Deg2Rad
+
+正弦
+Mathf.sin(float radian)
+反正弦
+Mathf.Asin(float radian)
 ```
 
 # 关于VISUAL STUDIO 2019里写c#
