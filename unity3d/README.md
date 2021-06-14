@@ -100,13 +100,21 @@ public class EnemyAI:MonoBehaviour{
 }
 ```
 
-# 三维数学api
+# 三维数学相关知识点
 ```c#
 //线性插值函数
 // Mathf.Lerp
 // 例子：照相机视角由快到慢，但无限接近终点
 // cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60, 0.1f);
+
+
+Vector3 pos = this.transform.positon;
+// pos.magnitude相当于以下公式，可求得原点到pos的长度
+Mathf.Sqrt(Mathf.Pow(pos.x,2) + Mathf.Pow(pos.y,2) + Mathf.Pow(pos.z,2))
+// pos.normalized 单位向量、标准化向量、归一化向量，相当于
+pos / pos.magnitude
 ```
+
 
 # 关于VISUAL STUDIO 2019里写c#
 ctrl + K + D 自动对齐代码
