@@ -113,8 +113,12 @@ Vector3 pos = this.transform.positon;
 Mathf.Sqrt(Mathf.Pow(pos.x,2) + Mathf.Pow(pos.y,2) + Mathf.Pow(pos.z,2))
 // pos.normalized 单位向量、标准化向量、归一化向量，相当于
 pos / pos.magnitude
-```
 
+角度(Degree)与弧度(Radian)的换算：
+PI(弧度) = 180角度   1弧度 = 180角度/PI    1角度=PI/180角度(弧度)
+角度=弧度数*Mathf.Rad2Deg
+弧度=角度数*Mathf.Deg2Rad
+```
 
 # 关于VISUAL STUDIO 2019里写c#
 ctrl + K + D 自动对齐代码
