@@ -119,10 +119,12 @@ PI(弧度) = 180角度   1弧度 = 180角度/PI    1角度=PI/180角度(弧度)
 角度=弧度数*Mathf.Rad2Deg
 弧度=角度数*Mathf.Deg2Rad
 
+三角函数：可根据一边一角，计算另外一边长
 正弦
 Mathf.sin(float radian)
+反三角函数：可用于根据两边长，计算角度
 反正弦
-Mathf.Asin(float radian)
+Mathf.Asin(float ratio)
 
 //将点从自身坐标系变换后，返回世界坐标系
 transform.TransformPoint(x,y,z)
