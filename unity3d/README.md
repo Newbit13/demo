@@ -137,7 +137,15 @@ transform.TransformPoint(x,y,z)
          a*b = |a|*|b| cos<a,b>
          a*b =  两个向量的模长相乘后再乘以二者夹角的余弦值
          单位向量a * 单位向量b = cos<a,b>
+         
 API：float dot = Vector3.Dot(xx1.position.normalized,xx2.position.normalized)
+上述api不使用normalized的话则要把结果除以两向量模长积，才能得到夹角的余弦值
+
+// 叉乘
+[x1,y1,z1] x [x2,y2,z2] = [y1*z2-z1*y2,z1*x2-x1*z2,x1*y2-y1*x2]
+几何意义：结果为两个向量所组成面的垂直向量，模长为两向量模长乘积再乘夹角的正弦值
+(垂直方向看a,b是否顺时针，顺时向上)
+API:Vector v = Vector3.Cross(a,b);
 ```
 
 # 关于VISUAL STUDIO 2019里写c#
