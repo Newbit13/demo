@@ -135,7 +135,8 @@ transform.TransformPoint(x,y,z)
 [x1,y1,z1] * [x2,y2,z2] = x1x2 + y1y2 + z1z2
 几何意义：价值就在于求两个向量的夹角
          a*b = |a|*|b| cos<a,b>
-         a*b =  两个向量的单位向量相乘后再乘以二者夹角的余弦值
+         a*b =  两个向量的模长相乘后再乘以二者夹角的余弦值
+         单位向量a * 单位向量b = cos<a,b>
 API：float dot = Vector3.Dot(va,vb)
 ```
 
