@@ -126,6 +126,15 @@ Mathf.Asin(float radian)
 
 //将点从自身坐标系变换后，返回世界坐标系
 transform.TransformPoint(x,y,z)
+
+//向量 叉乘Cross、点乘Dot
+//点乘
+// 公式：各分量乘积和
+[x1,y1,z1] * [x2,y2,z2] = x1x2 + y1y2 + z1z2
+几何意义：价值就在于求两个向量的夹角
+         a*b = |a|*|b| cos<a,b>
+         a*b =  两个向量的模长相乘后再乘以二者夹角的余弦值
+API：float dot = Vector3.Dot(va,vb)
 ```
 
 # 关于VISUAL STUDIO 2019里写c#
