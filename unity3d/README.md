@@ -137,7 +137,7 @@ transform.TransformPoint(x,y,z)
          a*b = |a|*|b| cos<a,b>
          a*b =  两个向量的模长相乘后再乘以二者夹角的余弦值
          单位向量a * 单位向量b = cos<a,b>
-API：float dot = Vector3.Dot(va,vb)
+API：float dot = Vector3.Dot(xx1.position.normalized,xx2.position.normalized)
 ```
 
 # 关于VISUAL STUDIO 2019里写c#
