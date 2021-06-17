@@ -178,6 +178,8 @@ API:Quaternion qt = this.transform.rotation;
     qt.w = Mathf.Cos(rad / 2);
 
     this.transform.rotation = qt;
+    // 另一种写法，填欧拉角，返回四元数
+    // this.transform.rotation = Quaternion.Euler(0,50,0);
 ```
 
 # 关于VISUAL STUDIO 2019里写c#
