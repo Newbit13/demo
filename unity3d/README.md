@@ -157,6 +157,37 @@ API:Vector v = Vector3.Cross(a,b);
 
 // 万向节死锁：当自身的z轴和世界坐标的y轴重合时，将失去一个自由度
 // Unity里，万向节死锁情况下，规定沿y轴完成绕竖直轴的全部旋转，即此时观察面板可以看到y的值一直是0，z不断变化。但是如果把eulerAngles的值打印出来可以看到没有上述规定这回事，而另外一个unity的规定有效：x的值范围为0~270，倒下分别是90和270，然后y轴，z轴是0~360（因为欧拉角本身存在方位表达不一的问题，就是同一个方位，有多种数值可以表达）
+
+// 四元素
+// 在3d图形学中代表旋转，由一个三维向量（x/y/z）和一个标量（w）组成。
+旋转轴为V,旋转弧度为θ，如果使用四元数表示，则四个分量为：
+x = sin(θ/2)*V.x
+y = sin(θ/2)*V.y
+z = sin(θ/2)*V.z
+w = cos(θ/2)
+x,y,z,w的取值范围是-1到1
+API:Quaternion qt = this.transform.rotation;
+// demo：
+
+    // 旋转轴
+    Vector3 axis = Vector3.up;
+    // 旋转弧度
+    float rad = 50 * Mathf.Deg2Rad;
+
+    Quaternion qt = new Quaternion();
+    qt.x = Mathf.Sin(rad / 2) * axis.x;
+    qt.y = Mathf.Sin(rad / 2) * axis.y;
+    qt.z = Mathf.Sin(rad / 2) * axis.z;
+    qt.w = Mathf.Cos(rad / 2);
+
+    this.transform.rotation = qt;
+    // 另一种写法，填欧拉角，返回四元数
+    // this.transform.rotation = Quaternion.Euler(0,50,0);
+
+与向量相乘：四元数左乘向量，表示将该向量按照四元数表示的角度旋转
+
+与四元数相乘：意义为组合旋转
+Quaternion.Euler(0,30,0) * Quaternion.Euler(0,20,0) 相等于 Quaternion.Euler(0,50,0)
 ```
 
 # 关于VISUAL STUDIO 2019里写c#
