@@ -152,6 +152,9 @@ API:Vector v = Vector3.Cross(a,b);
 // 使用三个角度来保存方位
 // 物体可以沿自己的x轴，z轴旋转，沿世界坐标的y轴旋转
 // API:Vector3 eulerAngle = this.transform.eulerAngles;
+// 沿x轴旋转
+ transform.eulerAngles += new Vector3(1, 0, 0);
+
 // 万向节死锁：当自身的z轴和世界坐标的y轴重合时，将失去一个自由度
 // Unity里，万向节死锁情况下，规定沿y轴完成绕竖直轴的全部旋转，即此时观察面板可以看到y的值一直是0，z不断变化。但是如果把eulerAngles的值打印出来可以看到没有上述规定这回事，而另外一个unity的规定有效：x的值范围为0~270，倒下分别是90和270，然后y轴，z轴是0~360（因为欧拉角本身存在方位表达不一的问题，就是同一个方位，有多种数值可以表达）
 ```
