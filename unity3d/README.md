@@ -183,8 +183,9 @@ API:Quaternion qt = this.transform.rotation;
     this.transform.rotation = qt;
     // 另一种写法，填欧拉角，返回四元数
     // this.transform.rotation = Quaternion.Euler(0,50,0);
-
-与向量相乘：四元数左乘向量，表示将该向量按照四元数表示的角度旋转
+    // this.transform.Rotate(0,50,0);//原理其实就是四元数，跟上面代码效果一样
+四元数缺点：难使用，不建议单独修改某个值；存在不合法的四元数；
+与向量相乘：四元数左乘向量，表示将该向量按照四元数表示的角度旋转(这个感觉挺好用)
 
 与四元数相乘：意义为组合旋转
 Quaternion.Euler(0,30,0) * Quaternion.Euler(0,20,0) 相等于 Quaternion.Euler(0,50,0)
