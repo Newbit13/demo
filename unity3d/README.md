@@ -98,6 +98,17 @@ public GameObject[] enemyType;
 public class EnemyAI:MonoBehaviour{
 
 }
+
+
+//1.在父类写：为子类提供重写Start方法的机会
+protected virtual void Start(){
+    print("xxx");
+}
+// 2.在子类，写override + 空格，选择生成代码：
+protected override void Start(){
+    base.Start();
+    print("xxx2");
+}
 ```
 
 # 关于VISUAL STUDIO 2019里写c#
