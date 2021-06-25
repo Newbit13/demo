@@ -109,6 +109,12 @@ protected override void Start(){
     base.Start();
     print("xxx2");
 }
+
+// 创建特效
+// 加载资源（资源较多时用这种，少的时候可以用个公开的变量进行拖拽）
+GameObject prefabGO = Resources.Load<GameObject>("资源地址");//资源必须放在Resources目录下
+// 创建资源
+Instantiate(prefabGO);
 ```
 
 # 关于VISUAL STUDIO 2019里写c#
