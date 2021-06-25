@@ -80,42 +80,6 @@ GameObject
 Object
 Time
 
-# 游戏开发经验
-## 0.想用脚本创建无数个角色（enemy）
-```C#
-// 1.声明字段，将预制件拖入面板
-public GameObject[] enemyType;
-
-// 2.Instantiate(预制件，位置，旋转角度)
-// 旋转角度 可以为Quaternion.identity
-```
-
-```c#
-// 这样写一挂api脚本，其他脚本也会被自动添加进组件（观察面板可以看到）
-[RequireCompoent(typeof(EnemyAnimation))]
-[RequireCompoent(typeof(EnemyMotor))]
-[RequireCompoent(typeof(EnemyStatusInfo))]
-public class EnemyAI:MonoBehaviour{
-
-}
-
-
-//1.在父类写：为子类提供重写Start方法的机会
-protected virtual void Start(){
-    print("xxx");
-}
-// 2.在子类，写override + 空格，选择生成代码：
-protected override void Start(){
-    base.Start();
-    print("xxx2");
-}
-
-// 创建特效
-// 加载资源（资源较多时用这种，少的时候可以用个公开的变量进行拖拽）
-GameObject prefabGO = Resources.Load<GameObject>("资源地址");//资源必须放在Resources目录下
-// 创建资源
-Instantiate(prefabGO);
-```
 
 # 关于VISUAL STUDIO 2019里写c#
 ctrl + K + D 自动对齐代码
