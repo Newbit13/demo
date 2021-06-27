@@ -41,7 +41,7 @@ Start
 ```c#
 GameObject go = new GameObject();
 go.AddComponent<Image>();
-NumberSprite action = go.AddComponent<NumberSprite>();
+NumberSprite action = go.AddComponent<NumberSprite>();//动态添加NumberSprite脚本
 
 // 如果这时候NumberSprite类中，在Start是拿不到刚刚添加的Image的，在Awake中才能拿到
 ```
