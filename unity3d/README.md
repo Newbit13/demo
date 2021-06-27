@@ -8,6 +8,10 @@ F
 
 选中摄像机（或者物体），调整你在场景看到的画面 ， ctrl + shift + f 可以将选中的物体位置进行改变
 
+    为什么老是找不到改变物体颜色的面板？
+    要创建Material资源，在Inspector面板进行设置
+    最后将Material赋给元素
+    
 # unity脚本
 是个类，继承MonoBehaviour
 
