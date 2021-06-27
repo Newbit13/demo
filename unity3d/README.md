@@ -25,7 +25,7 @@ F
 不要在脚本里写构造函数（要写代码在Awake或Start里写）
 ## 生命周期
 ### 初始阶段
-创建游戏对象->立即执行(永远早与Start)
+创建游戏对象->立即执行(永远早与Start) 
 作用：初始化
 Awake
 
@@ -36,6 +36,15 @@ OnEnable
 作用：初始化
 Start
 
+如果在同一端代码中，Awake会立即执行，Start会在下一帧执行
+比如：
+```c#
+GameObject go = new GameObject();
+go.AddComponent<Image>();
+NumberSprite action = go.AddComponent<NumberSprite>();
+
+// 如果这时候NumberSprite类中，在Start是拿不到刚刚添加的Image的，在Awake中才能拿到
+```
 ### 物理阶段
 执行时机：每隔固定时间执行一次（可改）
 FixedUpdate
