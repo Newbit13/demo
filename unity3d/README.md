@@ -8,6 +8,10 @@ F
 
 选中摄像机（或者物体），调整你在场景看到的画面 ， ctrl + shift + f 可以将选中的物体位置进行改变
 
+    为什么老是找不到改变物体颜色的面板？
+    要创建Material资源，在Inspector面板进行设置
+    最后将Material赋给元素
+    
 # unity脚本
 是个类，继承MonoBehaviour
 
@@ -21,7 +25,7 @@ F
 不要在脚本里写构造函数（要写代码在Awake或Start里写）
 ## 生命周期
 ### 初始阶段
-创建游戏对象->立即执行(永远早与Start)
+创建游戏对象->立即执行(永远早与Start) 
 作用：初始化
 Awake
 
@@ -32,6 +36,15 @@ OnEnable
 作用：初始化
 Start
 
+如果在同一端代码中，Awake会立即执行，Start会在下一帧执行
+比如：
+```c#
+GameObject go = new GameObject();
+go.AddComponent<Image>();
+NumberSprite action = go.AddComponent<NumberSprite>();//动态添加NumberSprite脚本
+
+// 如果这时候NumberSprite类中，在Start是拿不到刚刚添加的Image的，在Awake中才能拿到
+```
 ### 物理阶段
 执行时机：每隔固定时间执行一次（可改）
 FixedUpdate
@@ -151,11 +164,13 @@ Class A{
         this.Age = age;
     }
 }
+
+// int? 不再是原来的值类型，如果需要获得值类型数据，使用a.Value
 ```
 
 对我来说的新语法：
 ref
-out
+out 相当于拥有了多个函数返回值
 
 类型转换的两种方式（这里不考虑隐式转换）：
 显示转换 和 使用 as；显示转换可能报错（在使用类继承时，通过先隐式转为父类，再转为其他子类），用as如果转换失败会返回null
