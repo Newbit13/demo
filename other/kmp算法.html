@@ -1,78 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>测试用的demo</title>
     <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script> -->
-    <style>
-        
-    </style>
-</head>
-<body>
+    <style></style>
+  </head>
+  <body>
     zzz
     <script>
-        //参考阮一峰的kmp算法 http://news.cnblogs.com/n/176771/
-        //部分匹配表
-        //题外话：匹配表首个字母对应的肯定为0，因为一个字母没有前缀跟后缀
-        //看完阮一峰的文章再来看代码才好理解，或者。。。自己写一个，比如我就是看不懂别人的代码才自己写的。。。
-        //简单总结：1.利用匹配过的信息，2.利用
-        function getPartMatchTable(str){
-            var parMatchTable = [];
-            var strLen = str.length;
-            for(var i = 0; i < strLen; i++){//先全部部分匹配表置为0
-                parMatchTable[i] = 0;
-            }
-            var tmpStr1,tmpStr2;//用来存前后缀，可拿来检测是否是共有元素的
-            var matchValue;//存放共有的最大元素长度
-            for(var i = 0;i < strLen;i++){
-                for(var tmp = 0;tmp <= i;tmp++){
-                    tmpStr1 = str.slice(0,i - tmp);
-                    tmpStr2 = str.slice(1 + tmp,i + 1);
-                    if(tmpStr1 === tmpStr2){
-                        matchValue = tmpStr1.length;
-                        parMatchTable[i] = matchValue;
-                        break;
-                    }
-                }
-            }
-            return parMatchTable;
+      //参考阮一峰的kmp算法 http://news.cnblogs.com/n/176771/
+      //部分匹配表
+      //题外话：匹配表首个字母对应的肯定为0，因为一个字母没有前缀跟后缀
+      //看完阮一峰的文章再来看代码才好理解，或者。。。自己写一个，比如我就是看不懂别人的代码才自己写的。。。
+      //简单总结：1.利用匹配过的信息，2.利用
+      function getPartMatchTable(str) {
+        var parMatchTable = [];
+        var strLen = str.length;
+        for (var i = 0; i < strLen; i++) {
+          //先全部部分匹配表置为0
+          parMatchTable[i] = 0;
         }
-        /* var a = getPartMatchTable('ABCDABD');
+        var tmpStr1, tmpStr2; //用来存前后缀，可拿来检测是否是共有元素的
+        var matchValue; //存放共有的最大元素长度
+        for (var i = 0; i < strLen; i++) {
+          for (var tmp = 0; tmp <= i; tmp++) {
+            tmpStr1 = str.slice(0, i - tmp);
+            tmpStr2 = str.slice(1 + tmp, i + 1);
+            if (tmpStr1 === tmpStr2) {
+              matchValue = tmpStr1.length;
+              parMatchTable[i] = matchValue;
+              break;
+            }
+          }
+        }
+        return parMatchTable;
+      }
+      /* var a = getPartMatchTable('ABCDABD');
         console.log(a); */
-        //search 函数
-        //@param str1文本
-        //@param str2搜索词
-        function search(str1,str2){
-            var index1 = 0,//str1的搜索指针
-                index2 = 0,//str2的搜索指针
-                len1 = str1.length,
-                len2 = str2.length,
-                theTable = getPartMatchTable(str2);
-            for(;index1 < len1;index1++){
-                if(str1[index1]===str2[index2]){
-                    index2++
-                }else{
-                    index2 = index2 - theTable[index2];
-                }
-                if(index2===len2){
-                    //找到时index2才能走到len2（尽头）
-                    return index1 - len2 + 1;
-                }
-            }
+      //search 函数
+      //@param str1文本
+      //@param str2搜索词
+      function search(str1, str2) {
+        var index1 = 0, //str1的搜索指针
+          index2 = 0, //str2的搜索指针
+          len1 = str1.length,
+          len2 = str2.length,
+          theTable = getPartMatchTable(str2);
+        for (; index1 < len1; index1++) {
+          if (str1[index1] === str2[index2]) {
+            index2++;
+          } else {
+            index2 = index2 - theTable[index2];
+          }
+          if (index2 === len2) {
+            //找到时index2才能走到len2（尽头）
+            return index1 - len2 + 1;
+          }
         }
-        var result;
-        var sss = 'ABCDACABCD AAABABCDEABCDABCDEF';
-        var sss2 = 'ABC';
+      }
+      var result;
+      var sss = "ABCDACABCD AAABABCDEABCDABCDEF";
+      var sss2 = "ABCDABCDE";
 
-        console.time();
-        result = search(sss,sss2);
-        console.log(result);
-        console.timeEnd();
+      console.time();
+      result = search(sss, sss2);
+      console.log(result);
+      console.timeEnd();
 
-        console.time();
-        result = sss.indexOf(sss2);
-        console.log(result);
-        console.timeEnd();
+      console.time();
+      result = sss.indexOf(sss2);
+      console.log(result);
+      console.timeEnd();
+
+    //串——KMP算法:https://blog.csdn.net/olizxq/article/details/82851680
+      function get_next(T, next_list) {
+        var next_list = [];
+        next_list[0] = -1;
+        var j = 0;
+        var k = -1;
+        while (j < T.length - 1) {
+          if (k == -1 || T[j] == T[k]) {
+            j = j + 1;
+            k = k + 1;
+            // 跳过T[j] == T[k]的位置，因为T[j] != S[i],则T[k] != S[i]，故无须比较
+            if (T[j] != T[k]) {
+              next_list[j] = k;
+            } else {
+              next_list[j] = next_list[k];
+            }
+          } else {
+            k = next_list[k];
+          }
+        }
+        return next_list;
+      }
+      function search2(str1, str2) {
+        var index1 = 0, //str1的搜索指针
+          index2 = 0, //str2的搜索指针
+          len1 = str1.length,
+          len2 = str2.length,
+          theTable = get_next(str2);
+          console.log(theTable);
+        for (; index1 < len1; index1++) {
+          if (str1[index1] === str2[index2]) {
+            index2++;
+          } else {
+            index2 = theTable[index2] == -1?0:theTable[index2];
+          }
+          if (index2 === len2) {
+            //找到时index2才能走到len2（尽头）
+            return index1 - len2 + 1;
+          }
+        }
+      }
+      console.time();
+      result = search2(sss, sss2);
+      console.log(result);
+      console.timeEnd();
     </script>
-</body>
+  </body>
 </html>
