@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const webpack = require("webpack");
 const path = require("path");
 
 const webpackConfig = {
@@ -31,11 +32,18 @@ const webpackConfig = {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
+  devServer: {
+    hot: true,
+    contentBase: path.join(__dirname, 'dist'),
+    // compress: true,
+    port: 9000,
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "./index.html",
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };
 
