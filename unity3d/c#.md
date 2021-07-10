@@ -101,4 +101,5 @@ struct 是值类型，class是引用类型；
 // 列表 ArrayList List<T>
 // 字典 Hashtable Dictionary<TKey,TValue>
 // 栈 Stack Stack<T>
+// 队列 Queue Queue<T>
 ```

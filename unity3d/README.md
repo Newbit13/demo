@@ -93,5 +93,16 @@ GameObject
 Object
 Time
 
+# 数据持久化存储
+## PlayerPrefs类
+SetFloat(name,value) GetFloat(name)
+SetString() GetString()
+SetInt() GetInt()
+HasKey(name)//判断是否有这个名字对应的值
+
+# 场景切换
+SceneManager类，需要引入UnityEngine.SceneManagement
+SceneManager.LoadScene(int); //在发布游戏前有个build setting,把场景拖过去就有序号
+
 # 资料
 [史上最全Unity3D教程](https://www.bilibili.com/video/BV12s411g7gU)
