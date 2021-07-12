@@ -82,3 +82,9 @@ model.evaluate(test_images, test_labels)
 目前不清楚的点：
 metrics 衡量指标，对应的值有什么
 优化器，损失函数各有什么类型的，作用跟适用范围
+# 优化器
+## Adam
+the name is derived from adaptive(自适应) moment estimation(估算)
+“Adam可以理解为加了Momentum(动量) 的 RMSprop” 
+Adam使用动量和自适应学习率来加快收敛速度
+to do
