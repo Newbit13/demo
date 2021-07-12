@@ -99,6 +99,8 @@ SetFloat(name,value) GetFloat(name)
 SetString() GetString()
 SetInt() GetInt()
 HasKey(name)//判断是否有这个名字对应的值
+DeleteAll()
+DeleteKey()
 
 # 场景切换
 SceneManager类，需要引入UnityEngine.SceneManagement
