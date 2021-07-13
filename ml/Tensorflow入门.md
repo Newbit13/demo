@@ -87,4 +87,4 @@ metrics 衡量指标，对应的值有什么
 the name is derived from adaptive(自适应) moment estimation(估算)
 “Adam可以理解为加了Momentum(动量) 的 RMSprop” 
 Adam使用动量和自适应学习率来加快收敛速度
-to do
+找到一个简单介绍公式和含义的视频，帮助我们理解 [优化器 Optimizer 加速神经网络训练 (深度学习)](https://www.bilibili.com/video/BV1Vx411j7pA)
