@@ -22,3 +22,4 @@ Relu (rectified linear unit 修正线性单元)
 # p5
 # p6
 # p7 二分分类
+01:54
