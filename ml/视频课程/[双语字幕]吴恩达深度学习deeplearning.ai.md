@@ -34,6 +34,5 @@ Relu (rectified linear unit 修正线性单元)
 只有一个变量的函数求导用d符号（导数）
 多个一个变量的函数求导用是∂符号（偏导数）
 
-# p11 导数
-
-
+# p11 导数derivatives
+3:00
