@@ -83,3 +83,21 @@ def relu_backward(dA, cache):
     assert (dZ.shape == Z.shape)
 
     return dZ
+
+def tanh(z):
+    """
+    参数：
+        z  - 任何大小的标量或numpy数组。
+
+    返回：
+        s  -  tanh
+    """
+    s = np.tanh(z)
+    return s,z
+
+def tanh_backward(dA, cache):
+    Z = cache
+    a = (np.exp(Z) - np.exp(-Z))/(np.exp(Z)+np.exp(-Z))
+    dZ = np.multiply(dA, 1 - np.power(a, 2))
+
+    return dZ
