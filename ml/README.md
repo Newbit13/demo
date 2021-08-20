@@ -5,3 +5,6 @@
 
 我了解过的算法：
 [李宏毅-Transformer](https://www.bilibili.com/video/BV1J441137V6)
+
+体验:
+[百度的飞浆平台,提供在线demo体验](https://aistudio.baidu.com/aistudio/projectoverview/recommend/1)
