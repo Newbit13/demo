@@ -6,18 +6,20 @@ const uglify = require('gulp-uglify');//注意单独使用时不能解析es6
 const rev = require('gulp-rev');//为静态文件添加一串hash值
 const myGulpPlugin = require('./my-plugin/my-gulp-plugin.js');
 const myGulpPlugin2 = require('./my-plugin/my-gulp-plugin2.js');
+const myGulpPlugin3 = require('./my-plugin/my-gulp-plugin3.js');
 
 function testTask(){
     return src('src/**/*.js')
-        .pipe(babel({
-            presets: [
-                ['@babel/preset-env',{
-                    "loose": true,
-                }]
-            ],
-        }))
-        // .pipe(uglify())
+        // .pipe(babel({
+        //     presets: [
+        //         ['@babel/preset-env',{
+        //             "loose": true,
+        //         }]
+        //     ],
+        // }))
+        .pipe(uglify())
         // .pipe(rev())
+        .pipe(myGulpPlugin3())
         .pipe(dest('dist/'))
         // .pipe(rev.manifest())
         // .pipe(dest('dist/map/js'))//保存原文件名和改为hash名间的映射
@@ -42,4 +44,5 @@ function cleans(cb) {
 }
 
 // exports.default = series(cleans,parallel(testTask3,testTask2))
-exports.default = series(testTask2)
+// exports.default = series(testTask2)
+exports.default = series(testTask)

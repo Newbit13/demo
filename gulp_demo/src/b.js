@@ -1,5 +1,5 @@
-var b = {
-    count:1
-}
+// var b = {
+//     count:1
+// }
 
-export default b
+// export default b
