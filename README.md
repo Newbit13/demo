@@ -6,6 +6,7 @@
 - [node图片压缩工具](./node/util/imagemin)
 - [大数据相关](./BigData)
 - [机器学习相关](./ml/python_study)
+- [gulp插件编写方法](./gulp_demo)
 
 # 研究清单
 - hard-source-webpack-plugin

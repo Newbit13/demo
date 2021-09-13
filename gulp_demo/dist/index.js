@@ -1,1 +1,1 @@
-let a="123456";console.log(a);666
+let a = "123" + "456";console.log(a);

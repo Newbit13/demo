@@ -4,6 +4,12 @@ var gutil = require("gulp-util");
 var PluginError = gutil.PluginError;
 var color = gutil.colors;
 
+// 引入ast操作工具
+const babylon = require("babylon");
+const traverse = require("babel-traverse").default;
+const t = require("babel-types");
+const generate = require("babel-generator").default;
+
 // 插件级别函数 (处理文件)
 function gulpPrefixer() {
   // 创建一个让每个文件通过的 stream 通道
@@ -17,8 +23,24 @@ function gulpPrefixer() {
         cb(null, file);
       }
       if (file.isBuffer()) {
-        var code = file.contents.toString() + 666;
-        file.contents = Buffer.from(code);
+        var code = file.contents.toString(); //拿到js代码
+
+        // main
+        let ast = babylon.parse(code, {});
+        //转换、修改ast
+        traverse(ast, {
+          Literal(path) {
+            if (path.node.value == "123456") {
+              // path.node.value = "6666" //可改变值，但无法直接写为"66"+"66",因为后者是个表达式，与path.node的type不符合
+              // 错误例子(无效)：path.node = t.binaryExpression("+",t.stringLiteral("123"),t.stringLiteral("456"));
+              path.replaceWith(t.binaryExpression("+",t.stringLiteral("123"),t.stringLiteral("456")));
+            }
+          },
+        });
+        //根据ast生成代码
+        const res = generate(ast, {}, code);
+
+        file.contents = Buffer.from(res.code);
       }
       cb(null, file);
     },
