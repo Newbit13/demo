@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        /* background: url(./bg_shantou.jpg) no-repeat center/cover; */
+        background: url(./bg_hangzhou.jpg) no-repeat center/cover;
+      }
+      .pic {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -33%);
+        /* background: url(./lake_shantou.gif) no-repeat center/cover; */
+        background: url(./lake_hangzhou.gif) no-repeat center/cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pic"></div>
+    <script>
+      var designW = 4096;
+      var designH = 2160;
+      // var picW = 1826;
+      // var picH = 529;
+      var picW = 2166;
+      var picH = 927;
+
+      var windowW = document.body.clientWidth;
+      var windowH = document.body.clientHeight;
+
+      var picRadio = picW / picH;
+      var containerRatio = windowW / windowH;
+
+      var computeW, computeH;
+      if (picRadio > containerRatio) {
+        // 就按容器高度拉伸
+        var r = windowH / designH;
+        computeW = picW * r;
+        computeH = picH * r;
+      } else {
+        // 就按容器宽度拉伸
+        var r = windowW / designW;
+        computeW = picW * r;
+        computeH = picH * r;
+      }
+
+      document.querySelector(".pic").style.width = computeW + "px";
+      document.querySelector(".pic").style.height = computeH + "px";
+    </script>
+  </body>
+</html>
