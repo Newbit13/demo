@@ -121,6 +121,6 @@ class Register extends Component<any, any> {
   }
 }
 
-export default connect((state) => ({ user: state.user }), { register })(
+export default connect((state:any) => ({ user: state.user }), { register })(
   Register
 );
