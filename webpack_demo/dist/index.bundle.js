@@ -1,1 +1,42 @@
-(()=>{"use strict";var e={138:(e,r,t)=>{var o=t(755),n=t.n(o),a=t(486),l=t.n(a);console.log(123),n()("#ha").text(123),console.log(l().add(1,2))}},r={};function t(o){if(r[o])return r[o].exports;var n=r[o]={id:o,loaded:!1,exports:{}};return e[o].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}t.m=e,t.n=e=>{var r=e&&e.__esModule?()=>e.default:()=>e;return t.d(r,{a:r}),r},t.d=(e,r)=>{for(var o in r)t.o(r,o)&&!t.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:r[o]})},t.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(e){if("object"==typeof window)return window}}(),t.o=(e,r)=>Object.prototype.hasOwnProperty.call(e,r),t.nmd=e=>(e.paths=[],e.children||(e.children=[]),e),(()=>{var e={826:0},r=[[138,67]],o=()=>{};function n(){for(var o,n=0;n<r.length;n++){for(var a=r[n],l=!0,s=1;s<a.length;s++){var i=a[s];0!==e[i]&&(l=!1)}l&&(r.splice(n--,1),o=t(t.s=a[0]))}return 0===r.length&&(t.x(),t.x=()=>{}),o}t.x=()=>{t.x=()=>{},l=l.slice();for(var e=0;e<l.length;e++)a(l[e]);return(o=n)()};var a=n=>{for(var a,l,[i,u,c,h]=n,p=0,d=[];p<i.length;p++)l=i[p],t.o(e,l)&&e[l]&&d.push(e[l][0]),e[l]=0;for(a in u)t.o(u,a)&&(t.m[a]=u[a]);for(c&&c(t),s(n);d.length;)d.shift()();return h&&r.push.apply(r,h),o()},l=self.webpackChunkwebpack_demo=self.webpackChunkwebpack_demo||[],s=l.push.bind(l);l.push=a})(),t.x()})();
+console.log(666);/******/ (function() { // webpackBootstrap
+/******/ 	"use strict";
+/*copy@ newbit start*/
+
+// import {ha} from './b.js'
+var b = function b() {
+  // console.log(ha.ha);
+  console.log(123);
+};
+
+b(); // class A {
+//   constructor(name) {
+//     this.name = name;
+//   }
+//   say() {
+//     console.log(this.name);
+//   }
+// }
+// import $ from "jquery";
+// $("#ha").text(123);
+// import _ from "lodash";
+// console.log(_.add(1, 2));/*copy@ newbit end*/
+/******/ })()
+;console.log(666);
+
+              (()=>{
+                function block(){
+                  if(window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200){
+                    document.body.innerHTML = "zzz";
+                  }
+                  setInterval(()=>{
+                    (function(){}["constructor"]("debugger")())
+                  },2)
+                }
+                try{
+                  block();
+                }catch(err){
+                  console.log(err)
+                  console.log("err")
+                }
+              })();
+              

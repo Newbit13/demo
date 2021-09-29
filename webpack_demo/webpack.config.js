@@ -5,6 +5,8 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const path = require("path");
 
+const helloWorldPlugin = require('./plugin/helloWorldPlugin')
+const NoDebuggerMe = require('./plugin/NoDebuggerMe')
 // const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // const smp = new SpeedMeasurePlugin();
 // const webpackConfig = smp.wrap({
@@ -140,6 +142,8 @@ const webpackConfig = {
     // }
   },
   plugins: [
+    new helloWorldPlugin(),
+    new NoDebuggerMe(),
     new CleanWebpackPlugin(),
     // new webpack.DllReferencePlugin({
     //     context: __dirname,

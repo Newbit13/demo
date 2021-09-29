@@ -5,17 +5,17 @@ const b = () => {
 };
 b();
 
-class A {
-  constructor(name) {
-    this.name = name;
-  }
-  say() {
-    console.log(this.name);
-  }
-}
+// class A {
+//   constructor(name) {
+//     this.name = name;
+//   }
+//   say() {
+//     console.log(this.name);
+//   }
+// }
 
-import $ from "jquery";
-$("#ha").text(123);
+// import $ from "jquery";
+// $("#ha").text(123);
 
-import _ from "lodash";
-console.log(_.add(1, 2));
+// import _ from "lodash";
+// console.log(_.add(1, 2));
