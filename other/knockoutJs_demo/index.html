@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ko demo</title>
+  </head>
+  <body>
+    <div data-bind="foreach:dataList">
+      <p>
+        <span data-bind="text:n"></span> :
+        <span data-bind="text:a"></span>
+        <button data-bind="click:$parent.click">换</button>
+      </p>
+    </div>
+    <script src="./node_modules/knockout/build/output/knockout-latest.debug.js"></script>
+    <script>
+      function ViewModel() {
+        var self = this;
+        this.dataList = ko.observableArray([
+          { n: "ad", a: "yes" },
+          { n: "zs", a: "no" },
+          { n: "ls", a: "no" },
+        ]);
+        self.click = function () {
+          //拷贝当前点击对象到tmp，更改tmp需要更新的值，将this替换为tmp
+          var tmp = this.clone();
+          tmp.a = tmp.a == "yes" ? "no" : "yes";
+          self.dataList.replace(this, tmp);
+        };
+      }
+      ko.applyBindings(new ViewModel());
+
+      //克隆对象
+      Object.prototype.clone = function () {
+        var obj = {};
+        for (var p in this) obj[p] = this[p];
+        return obj;
+      };
+    </script>
+  </body>
+</html>
