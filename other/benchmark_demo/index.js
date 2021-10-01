@@ -1,78 +1,54 @@
-var Benchmark = require('benchmark')
-var suite = new Benchmark.Suite;
+var Benchmark = require("benchmark");
+var suite = new Benchmark.Suite();
 
-var a = {
-    h:'发顺丰',
-    s:'风格的',
-    z:{
-        b:'发生的',
-        c:'天那',
-        h:'发顺丰',
-        s:'风格的',
-        z:{
-            b:'发生的',
-            c:'天那',
-            z:{
-                b:'发生的',
-                c:'天那',
-                z:{
-                    b:'发生的',
-                    c:'天那',
-                    z:{
-                        b:'发生的',
-                        c:'天那'
-                    }
-                }
-            }
-        }
-    }
+var a = { ss: "1232", ll: [1, 23, 4, 5], oo: { ha: 123 }, nn: 666 };
+// 比较两种深拷贝的性能差异,结论 用遍历的方式比JSON.parse高效多
+
+var test1 = function () {
+  var b = JSON.parse(JSON.stringify(a));
+  return b;
+};
+
+function deepClone(target) {
+  let typeStr = Object.prototype.toString.call(target);
+  let v;
+  switch (typeStr) {
+    case "[object Object]":
+      v = {};
+      for (var key in target) {
+        v[key] = deepClone(target[key]);
+      }
+      break;
+    case "[object Array]":
+      v = [];
+      for (var key in target) {
+        v[key] = deepClone(target[key]);
+      }
+      break;
+    default:
+      v = target;
+  }
+  return v;
 }
-
-var aStr = JSON.stringify(a,null,2);
-// console.log(aStr);
-
-var test1 = function(){
-    var b = [];
-
-    aStr.replace(/:.*["]/g,function(a){
-        // console.log(a);
-        b.push(a.replace(/[:"\s]/g,''));
-    })
-
-    return b;
-}
-
-var test2 = function(){
-    var b = [];
-
-    function walkObj(v,container){
-        var objType = Object.prototype.toString.call(v);
-        switch (objType){
-            case "[object String]":
-                container.push(v);
-                break;
-            case "[object Object]":
-                for(var i in v){
-                    walkObj(v[i],container)
-                }
-                break;
-        }
-    }
-    walkObj(a,b);
-
-    return b;
-}
+var test2 = function () {
+  var b = deepClone(a);
+  return b;
+};
 var res;
 res = test1();
 console.log(res);
 res = test2();
 console.log(res);
-// return
+// return;
 
-suite.add('test1',function(){
+suite
+  .add("test1", function () {
     test1();
-}).add('test2',function(){
+  })
+  .add("test2", function () {
     test2();
-}).on('cycle',function(event){
+  })
+  .on("cycle", function (event) {
     console.log(String(event.target));
-}).run({async:true});
+  })
+  .run({ async: true });
