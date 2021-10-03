@@ -10,8 +10,8 @@ console.log(reg1.lastIndex); //8
 console.log('--------------------------------------');
 var reg2 =  /\{\{([^}]*)\}\}/;
 console.log(reg2.test(c));//true
-console.log(reg1.lastIndex);//8
+console.log(reg2.lastIndex);//0
 console.log(reg2.test(c));//true
-console.log(reg1.lastIndex);//8
+console.log(reg2.lastIndex);//0
 console.log(reg2.test(c));//true
-console.log(reg1.lastIndex);//8
+console.log(reg2.lastIndex);//0

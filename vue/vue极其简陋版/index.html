@@ -1,119 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>自制vue</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="app">{{haha}} {{lala}}</div>
-</body>
-<script>
-    function Observe(obj){//为数据添加“能添加监听事件”的功能
-        if(!obj || typeof obj !== 'object')return
-        Object.keys(obj).forEach(function(v){
-            defineProperty(v,obj,obj[v]);
-        })
+  </body>
+  <script>
+    function Observe(obj) {
+      //为数据添加“能添加监听事件”的功能
+      if (!obj || typeof obj !== "object") return;
+      Object.keys(obj).forEach(function (v) {
+        defineProperty(v, obj, obj[v]);
+      });
     }
 
-    function defineProperty(key,obj,value){
-        var dataEmit = new DataEmit();
-        Object.defineProperty(obj,key,{
-            get:function(){
-                dataEmit.hackAdd();//此函数在平时读值时不会添加任何事件
-                return value;//切记这里不能写成return obj[key] 这样会照成死循环，因为一直重复执行getter
-            },
-            set:function(v){
-                dataEmit.notify();
-                value = v;//切记这里不能写成obj[key] = v 这样会照成死循环，因为一直重复执行setter
-            },
-        })
+    function defineProperty(key, obj, value) {
+      var dataEmit = new DataEmit();
+      Object.defineProperty(obj, key, {
+        get: function () {
+          dataEmit.hackAdd(); //此函数在平时读值时不会添加任何事件
+          return value; //切记这里不能写成return obj[key] 这样会照成死循环，因为一直重复执行getter
+        },
+        set: function (v) {
+          //   console.log(key + "被设置为" + v);
+          value = v; //切记这里不能写成obj[key] = v 这样会照成死循环，因为一直重复执行setter
+          dataEmit.notify();
+        },
+      });
     }
 
-    function DataEmit(){
-        this.dataObj = []
-        this.add = function(watcher){
-            this.dataObj.push(watcher)
+    function DataEmit() {
+      this.dataObj = [];
+      this.add = function (watcher) {
+        this.dataObj.push(watcher);
+      };
+      this.hackAdd = function () {
+        if (DataEmit.target) {
+          this.add(DataEmit.target);
         }
-        this.hackAdd = function(){
-            if(DataEmit.target){
-                this.add(DataEmit.target)
-            }
-        }
-        this.notify = function(){
-            this.dataObj.forEach(function(v){
-                v.update()
-            })
-        }
+      };
+      this.notify = function () {
+        this.dataObj.forEach(function (v) {
+          v.update();
+        });
+      };
     }
 
-    function Wather(vm,cb){//为数据提供具体的监听事件cb
-        cb();
-        DataEmit.target = this;
-        Object.keys(vm.data).forEach(function(v){
-            var value = vm.data[v];//读取设置了getter的obj，并订阅了事件
-        })
-        DataEmit.target = null;//设置为null时为了平时读值时不会进行任何添加事件的操作，具体逻辑可看obj的getter
-        this.update = cb;
+    function Wather(vm, cb) {
+      //为数据提供具体的监听事件cb
+      cb();
+      DataEmit.target = this;
+      Object.keys(vm.data).forEach(function (v) {
+        var value = vm.data[v]; //读取设置了getter的obj，并订阅了事件
+      });
+      DataEmit.target = null; //设置为null时为了平时读值时不会进行任何添加事件的操作，具体逻辑可看obj的getter
+      this.update = cb;
     }
 
-    function myVue(data,el){
-        this.data = data;
-        this.el = el;
-        Observe(data);
-        new Wather(this,function(){
-            var html = el.innerHTML;
-            //对html进行解析
-            // console.log('视图更新');
-            // console.log(RegExp.rightContext);//
-            // console.log(reg.test(html));//true
-            // var a = RegExp.rightContext;
-            // console.log(a);//{{lala}}
-            // console.log(reg.test(RegExp.rightContext));//false
-            // var b = RegExp.rightContext;
-            // console.log(b);//{{lala}}
-            // console.log(a === b);
-            // console.log(reg.test(RegExp.rightContext));//true
-            // console.log(RegExp.rightContext);//
+    function myVue(data, el) {
+      this.data = data;
+      this.el = el;
+      var originHtml = el.innerHTML;
+      Observe(data);
+      new Wather(this, function () {
+        //#region 对html进行解析
+        // console.log('视图更新');
+        // console.log(RegExp.rightContext);//
+        // console.log(reg.test(html));//true
+        // var a = RegExp.rightContext;
+        // console.log(a);//{{lala}}
+        // console.log(reg.test(RegExp.rightContext));//false
+        // var b = RegExp.rightContext;
+        // console.log(b);//{{lala}}
+        // console.log(a === b);
+        // console.log(reg.test(RegExp.rightContext));//true
+        // console.log(RegExp.rightContext);//
 
-            // var reg1 =  /\{\{([^}]*)\}\}/g;
-            // var c =  '{{lala}}';
-            // console.log(reg1.test(c));
-            // console.log(reg1.test(c));
-            // console.log(reg1.test(c));
+        // var reg1 =  /\{\{([^}]*)\}\}/g;
+        // var c =  '{{lala}}';
+        // console.log(reg1.test(c));
+        // console.log(reg1.test(c));
+        // console.log(reg1.test(c));
 
-            // var reg2 =  /\{\{([^}]*)\}\}/;
-            // console.log(reg2.test(c));
-            // console.log(reg2.test(c));
-            // console.log(reg2.test(c));
-            // var regList = [];
-            // // regList.push(RegExp.$1);
-            // while(RegExp.rightContext){
-            //     console.log(RegExp.rightContext);
-            //     reg.test(RegExp.rightContext);
-            //     console.log(RegExp.rightContext);
-            //     regList.push(RegExp.$1);
-            // }
-            // //对html进行更新
-            // console.log(regList);
-            var reg =  /\{\{([^\}]*)\}\}/g;
-            html = html.replace(reg,function(...a){
-                console.log(a);
-                return data[a[1]]
-            });
-            // html = html.replace(reg,'21321\$&');//21321{{haha}}!21321{{lala}}!
-            el.innerHTML = html;
-        })
-        return this;
+        // var reg2 =  /\{\{([^}]*)\}\}/;
+        // console.log(reg2.test(c));
+        // console.log(reg2.test(c));
+        // console.log(reg2.test(c));
+        // var regList = [];
+        // // regList.push(RegExp.$1);
+        // while(RegExp.rightContext){
+        //     console.log(RegExp.rightContext);
+        //     reg.test(RegExp.rightContext);
+        //     console.log(RegExp.rightContext);
+        //     regList.push(RegExp.$1);
+        // }
+        // //对html进行更新
+        // console.log(regList);
+        //#endregion
+        var reg = /\{\{([^\}]*)\}\}/g;
+        var newHtml = originHtml.replace(reg, function (...a) {
+          return data[a[1]];
+        });
+        // html = html.replace(reg,'21321\$&');//21321{{haha}}!21321{{lala}}!
+        el.innerHTML = newHtml;
+      });
+      return this;
     }
 
     // 最终代码
-    var myVue = new myVue({haha:'hello',lala:'world'},document.getElementById('app'))
+    var testData = { haha: "hello", lala: "world" };
+    var myVue = new myVue(testData, document.getElementById("app"));
 
-
-    function escapeRegExp (string) {
-        return string.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
+    function escapeRegExp(string) {
+      return string.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
     }
-</script>
+  </script>
 </html>
