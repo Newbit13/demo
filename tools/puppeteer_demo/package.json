@@ -1,0 +1,17 @@
+{
+  "name": "puppeteer_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^10.4.0",
+    "superagent": "^6.1.0"
+  }
+}
