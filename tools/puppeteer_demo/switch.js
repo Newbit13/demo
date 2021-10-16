@@ -88,6 +88,7 @@ async function openUrl(browser, url) {
           baiduCode,
         };
       });
+      // to note off
       // await page.goto(gameInfo.baiduLinkTemp);//先禁用，因为访问会消耗下载次数
 
       console.log(index);
