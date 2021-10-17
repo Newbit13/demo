@@ -1,5 +1,8 @@
 const puppeteer = require("puppeteer");
+var ProgressBar = require("progress");
+const { curl } = require("./utils.js");
 
+// curl({list:[{ha:1}]},"http://127.0.0.1/datasource/uploadgame")
 async function openUrl(browser, url) {
   let page = await browser.newPage(); //创建Page实例，相当于一个标签页
   page.setViewport({ width: 1920, height: 926 });
@@ -69,46 +72,80 @@ async function openUrl(browser, url) {
         img: imgUrl,
       });
     });
-    return postUrls.slice(0, 2); //test,先返回一个
+    return postUrls.slice(0, 1); //test,先返回一个
   });
 
   // 跳转进每个游戏界面获取游戏详情
+  var bar = new ProgressBar(
+    "数据获取中： [:bar] 进度:percent 预计:etas后完成",
+    { total: postUrls.length, width: 100 }
+  );
   await Promise.all(
     postUrls.map(async (game, index) => {
       let page = await browser.newPage();
       await page.goto(game.url);
-      
-      let gameInfo = await page.$eval(".btn-group", (dom) => {
+
+      let gameInfo = await page.$eval("#app", (app) => {
+        let dom = app.querySelector(".btn-group");
         let baiduLinkTemp = dom.querySelector("a").href;
         let baiduCode = dom
           .querySelector("button.go-copy")
           .innerText.replace("密码：", "");
+
+        let videoUrl = "";
+        let remarkText = "";
+        let remarkDom = app.querySelector(".article-content .entry-wrapper");
+        if (remarkDom) {
+          remarkText = remarkDom.innerText;
+          // 因为删除dom后，其innerText内容不变，所以使用别的方法代替
+          // todo 待调试
+          let alertDom = remarkDom.querySelector(".alert");
+          if (alertDom) {
+            remarkText = remarkText.replace(alertDom.innerText, "");
+          }
+          let shareDom = remarkDom.querySelector(".entry-share");
+          if (shareDom) {
+            remarkText = remarkText.replace(shareDom.innerText, "");
+          }
+          let videoIframe = remarkDom.querySelector("iframe");
+          if (videoIframe) {
+            videoUrl = videoIframe.src;
+            remarkText = remarkText.replace(videoIframe.innerText, "");
+          }
+        }
+
         return {
           baiduLinkTemp,
           baiduCode,
+          videoUrl,
+          remarkText,
         };
       });
       // to note off
       // await page.goto(gameInfo.baiduLinkTemp);//先禁用，因为访问会消耗下载次数
 
-      console.log(index);
-      postUrls[index].index = index;
-      // await page.goto("https//www.baidu.com");
-      // let baiduLink = await page.url();
-      // postUrls[index].baiduLink = baiduLink;
-      // postUrls[index].baiduCode = gameInfo.baiduCode;
+      await page.goto("https://www.baidu.com");
+      let baiduLink = await page.url();
+
+      postUrls[index].baiduLink = baiduLink;
+      postUrls[index].baiduCode = gameInfo.baiduCode;
+      postUrls[index].video = gameInfo.videoUrl;
+      postUrls[index].remark = gameInfo.remarkText;
+
+      bar.tick();
     })
   );
   console.log(postUrls);
+  // curl({list:postUrls},"http://127.0.0.1/datasource/uploadgame")
   //   todo
   // page.mouse //鼠标操作
 }
 
 async function start() {
   const browser = await puppeteer.launch({
-    headless: false, //默认无头（true），就是不需要渲染界面，设置为false则让你看到当前浏览器显示的是什么
-    devtools: true, //开启时可以在page.evaluate里写debugger
-    slowMo: 150, //可以延迟150ms,有啥用？
+    // headless: false, //默认无头（true），就是不需要渲染界面，设置为false则让你看到当前浏览器显示的是什么
+    // devtools: true, //开启时可以在page.evaluate里写debugger
+    // slowMo: 150, //可以延迟150ms,有啥用？
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",

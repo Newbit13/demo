@@ -1,13 +1,12 @@
 const superagent = require("superagent");
 /**
  * 用于发送爬取的信息*/
-function curl(data) {
-  const url = "xxx";
+function curl(data, url) {
   superagent
     .post(url)
     //.auth('xx', 'pwdpwd', {type:'auto'})
-    .set("Referer", "http://xxx")
-    .send({ contents: data })
+    // .set("Referer", "http://xxx")
+    .send(data)
     .type("json")
     .end(function (err, res) {
       if (err == null) {
@@ -19,3 +18,7 @@ function curl(data) {
       }
     });
 }
+
+module.exports = {
+  curl,
+};
