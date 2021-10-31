@@ -1,37 +1,42 @@
-# demo 
+# demo
 
     分类别收藏平时的练习，代码测试等，包括一些实用工具的实现
 
 # 目录
-- [node图片压缩工具](./node/util/imagemin)
+
+- [node 图片压缩工具](./node/util/imagemin)
 - [大数据相关](./BigData)
 - [机器学习相关](./ml/python_study)
-- [gulp插件编写方法](./gulp_demo)
+- [gulp 插件编写方法](./gulp_demo)
 
 # 研究清单
+
+[dumi，是一款为组件开发场景而生的文档工具](https://d.umijs.org/zh-CN/guide)
+
 - hard-source-webpack-plugin
 
 '之前使用 DllPlugin 和 DllReferencePlugin 完成，但是其配置非常复杂，而且假如更新了文件，还需要手动重新生成 dll。这里选择了 AutoDllPlugin'
 
 [开源录屏工具](https://github.com/rrweb-io/rrweb)
-[web页面录屏实现](https://juejin.cn/post/6844903774897569805)
 
-[Storybook](https://storybook.js.org/)
+[web 页面录屏实现](https://juejin.cn/post/6844903774897569805)
 
 [backpack-js](https://www.npmjs.com/package/backpack-js)
 
-[从零实现webpack热更新HMR](https://juejin.cn/post/6844904020528594957)
+[从零实现 webpack 热更新 HMR](https://juejin.cn/post/6844904020528594957)
 
 # 实践清单
-- H5转小程序
+
+- H5 转小程序
 
 - 可视化页面搭建
 
-
 ## i18n
+
 [I18nWebpackPlugin](https://www.webpackjs.com/plugins/i18n-webpack-plugin/)
 
 ## 微前端
+
 [berial：更精致的微前端框架](https://zhuanlan.zhihu.com/p/301283431)
 
 ```
@@ -52,7 +57,7 @@ get(target, key) {
       }else{
         return target[key]
       }
-      
+
     },
 set(target, key,val) {
       console.log('设置了setter属性');
@@ -81,5 +86,3 @@ new MutationObserver((mutations) => {
     })
 }).observe(document, { childList: true, subtree: true })
 ```
-    
-
