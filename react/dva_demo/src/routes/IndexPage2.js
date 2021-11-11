@@ -1,27 +1,30 @@
-import React, { useCallback,useReducer } from 'react';
-// import { connect,useSelector } from 'dva';
-import { connect } from 'react-redux'
+import React, { useCallback } from 'react';
+import { connect } from 'dva';
 import styles from './IndexPage.css';
-console.log(connect);
+
 function IndexPage(props) {
-  // const data = useSelector(data=>data.example);
-  // console.log(data);
+  console.log("IndexPage2");
+  const dispatch = props.dispatch;
   const handleLog = useCallback(()=>{
-    // console.log(props.a.value);
+    console.log(props.a.value);
   },[props]);
   const handleAdd = useCallback(()=>{
-    // dispatch({
-    //   type:'example/add'
-    // })
+    dispatch({
+      type:'example2/add'
+    })
   },[]);
   return (
     <div className={styles.normal}>
       <button onClick={handleAdd}>click</button>
       <button onClick={handleLog}>log</button>
-      {/* <div>{props.a.value}</div> */}
+      <div>{props.a.value}</div>
     </div>
   );
 }
 
+IndexPage.propTypes = {
+};
 
-export default IndexPage
+export default connect(state=>{
+  return state.example2;
+})(IndexPage);

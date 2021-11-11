@@ -3,15 +3,18 @@ import { connect } from 'dva';
 import styles from './IndexPage.css';
 
 function IndexPage(props) {
+  console.log("IndexPage");
   // 使用connect，改变model的值，有依赖的useCallback里的值会随之变化
   const dispatch = props.dispatch;
   const handleLog = useCallback(()=>{
     console.log(props.a.value);
   },[props]);
   const handleAdd = useCallback(()=>{
-    dispatch({
-      type:'example/add'
-    })
+    setInterval(()=>{
+      dispatch({
+        type:'example/add'
+      })
+    },1000)
   },[]);
   return (
     <div className={styles.normal}>
