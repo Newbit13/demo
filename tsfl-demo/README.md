@@ -37,3 +37,6 @@ poseDetection.createDetector 接受两个参数：
     
 通过poseDetection.createDetector创建的detector。
 detector.estimatePoses接收各类图片或视频通过这些格式：tf.Tensor3D, ImageData, HTMLVideoElement, HTMLImageElement, HTMLCanvasElement.
+
+Calculate Distance or Size of an Object in a photo image：
+https://www.scantips.com/lights/subjectdistance.html
