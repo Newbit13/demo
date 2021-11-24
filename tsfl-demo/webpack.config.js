@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
 const webpackConfig = {
+  devtool: "eval-cheap-module-source-map",
   mode: "development", //none
   // target: ["web", "es3"], //不然生成的代码包裹在es6的arrow function里,output.environment 也可以起到同样的效果
   module: {
