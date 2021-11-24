@@ -1,7 +1,7 @@
 const { createWorker } = require("tesseract.js");
 // import txtpic from "./eng_bw.png";
-// import txtpic from "./a.png";
-import txtpic from "./b.png";
+import txtpic from "./a.png";
+// import txtpic from "./b.png";
 console.log(123);
 
 const dom_status = document.getElementById("status");
@@ -19,7 +19,7 @@ const worker = createWorker({
 
 (async () => {
   await worker.load();
-  await worker.loadLanguage("eng");
+  await worker.loadLanguage("eng");//eng+hin
   await worker.initialize("eng");
   const {
     data: { text },
