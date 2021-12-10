@@ -1,7 +1,21 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+const path = require("path");
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()]
-})
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
+  },
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          ["@babel/plugin-proposal-decorators", { legacy: true }],
+          ["@babel/plugin-proposal-class-properties", { loose: true }],
+        ],
+      },
+    }),
+  ],
+});
