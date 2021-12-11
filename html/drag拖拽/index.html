@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <script defer src="./test.js"></script> -->
+    <style>
+      body {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="p2"
+      draggable="true"
+      style="
+        border: 1px solid #000000;
+        width: 100px;
+        height: 100px;
+        background: #ff0000;
+      "
+    ></div>
+
+    <p
+      id="p1"
+      draggable="true"
+      style="
+        border: 1px solid #000000;
+        width: 100px;
+        height: 100px;
+        background: #ff0000;
+      "
+    >
+      This element is draggable.
+    </p>
+    <script>
+      function dragstart_handler(ev) {
+        console.log("drag");
+        // event.dataTransfer.effectAllowed = "move";
+        // Add the target element's id to the data transfer object
+        ev.dataTransfer.setData("xxx", ev.target.id);
+      }
+      function allowDrop(ev) {
+        console.log("over");
+        ev.preventDefault();
+      }
+
+      function onDrop(event) {
+        console.log("drop");
+        const data = event.dataTransfer.getData("xxx");
+        // console.log(data);
+        event.target.appendChild(document.getElementById(data));
+        event.preventDefault();
+      }
+      window.addEventListener("DOMContentLoaded", () => {
+        // Get the element by id
+        const element = document.getElementById("p1");
+        const element2 = document.getElementById("p2");
+        // Add the ondragstart event listener
+        element.addEventListener("dragstart", dragstart_handler);
+        // element.addEventListener("mouseover", () => {
+        //   console.log("hover");
+        // });
+        element2.addEventListener("drop", onDrop);
+        element2.addEventListener("dragover", allowDrop);
+
+        document.body.addEventListener("drop", onDrop);
+        document.body.addEventListener("dragover", allowDrop);
+      });
+    </script>
+  </body>
+</html>
