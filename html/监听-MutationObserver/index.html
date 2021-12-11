@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>javascript监听DOM内容改变事件</title>
+    <style type="text/css">
+      #el-test {
+        line-height: 100px;
+        width: 200px;
+        border: #e5e5e5 solid 1px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="el-test">123</div>
+    <button onclick="addDom()">add dom</button>
+    <button onclick="addAttr()">add attr</button>
+
+    <script type="text/javascript">
+      // 选择将观察突变的节点
+      var targetNode = document.getElementById("el-test");
+
+      // 观察者的选项(要观察哪些突变)
+      var config = { attributes: true, childList: true, subtree: true };
+
+      // 当观察到突变时执行的回调函数
+      var callback = function (mutationsList) {
+        mutationsList.forEach(function (item, index) {
+          if (item.type == "childList") {
+            console.log("有节点发生改变，当前节点的内容是：");
+            console.log(item.target.innerHTML);
+          } else if (item.type == "attributes") {
+            console.log("修改了" + item.attributeName + "属性");
+          }
+        });
+      };
+
+      // 创建一个链接到回调函数的观察者实例
+      var observer = new MutationObserver(callback);
+
+      // 开始观察已配置突变的目标节点
+      // observer.observe(document.body, config);
+      observer.observe(targetNode, config);
+
+      // 停止观察
+      //observer.disconnect();
+
+      function addDom() {
+        let divDom = document.createElement("div");
+        divDom.innerHTML = "777";
+        targetNode.appendChild(divDom);
+      }
+      function addAttr() {
+        targetNode.style.height = "400px";
+      }
+    </script>
+  </body>
+</html>
