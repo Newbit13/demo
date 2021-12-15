@@ -41,8 +41,14 @@ function useTime() {
   return time;
 }
 function IndexPage(props) {
-  const time = useTime();
+  // const time = useTime();
   const dispatch = useDispatch();
+  // useEffect(() => {
+  //   console.log("effect");
+  // }, []);
+  // useEffect(() => {
+  //   console.log("effect");
+  // });
   const { data1, data2 } = useSelector((data) => {
     return {
       data1: data.example,
@@ -68,7 +74,7 @@ function IndexPage(props) {
       <button onClick={handleAdd}>click</button>
       <button onClick={handleLog.bind(this, 777)}>log</button>
       <div>{data1.a.value}</div>
-      <div>{time}</div>
+      {/* <div>{time}</div> */}
     </div>
   );
 }
