@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 // import { connect } from 'dva';
 
 // function IndexPage(props) {
@@ -27,6 +27,7 @@ import React, { useCallback, useEffect } from "react";
 
 import { useSelector, useDispatch } from "dva";
 import { useState } from "react";
+import { useRef } from "react";
 // import {  useSelector } from 'react-redux';
 function useTime() {
   const [time, setT] = useState(0);
@@ -40,6 +41,29 @@ function useTime() {
   }, [time]);
   return time;
 }
+
+let ff;
+function useMemoizedFn(fn) {
+  const fnRef = useRef(fn);
+  // why not write `fnRef.current = fn`?
+  // https://github.com/alibaba/hooks/issues/728
+  fnRef.current = useMemo(() => fn, [fn]);
+  console.log("ff == fnRef.current");
+  console.log(ff == fnRef.current);
+  ff = fnRef.current;
+
+  const memoizedFn = useRef();
+  // console.log(memoizedFn);
+  if (!memoizedFn.current) {
+    memoizedFn.current = function (...args) {
+      return fnRef.current.apply(this, args);
+    };
+  }
+
+  return memoizedFn.current;
+}
+
+let f;
 function IndexPage(props) {
   // const time = useTime();
   const dispatch = useDispatch();
@@ -63,18 +87,41 @@ function IndexPage(props) {
     },
     [data1]
   );
-  console.log(v);
+  // console.log(v);
   const handleAdd = useCallback(() => {
     dispatch({
       type: "example/add",
     });
   }, []);
+
+  // const fn = useCallback(() => {
+  //   console.log(data1.a.value);
+  // }, []);
+
+  const fn = useMemoizedFn(() => {
+    console.log(data1.a.value);
+  })
+
+  // const fn = () => {
+  //   console.log(data1.a.value);
+  // };
+
+  useEffect(() => {
+    console.log("effect");
+    f = fn;
+  }, []);
+
+  console.log("fn是否是原来的fn");
+  console.log(f === fn);
+
   return (
     <div>
       <button onClick={handleAdd}>click</button>
       <button onClick={handleLog.bind(this, 777)}>log</button>
       <div>{data1.a.value}</div>
       {/* <div>{time}</div> */}
+
+      <button onClick={fn}>click</button>
     </div>
   );
 }
