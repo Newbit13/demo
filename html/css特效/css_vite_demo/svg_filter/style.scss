@@ -1,0 +1,14 @@
+// svg 滤镜
+
+div {
+  width: 100px;
+  height: 100px;
+  background: #000;
+  margin-bottom: 60px;
+}
+.cssFilter {
+  filter: blur(5px);
+}
+.svgFilter{
+  filter: url(#blur);
+}

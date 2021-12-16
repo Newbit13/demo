@@ -1,0 +1,57 @@
+// 极光特效
+//https://mp.weixin.qq.com/s/7Fagey4EY1D3SlnyBY3eIQ
+
+@function randomNum($max, $min: 0, $u: 1) {
+  @return ($min + random($max)) * $u;
+}
+
+@function shadowSet($n, $size) {
+  $shadow: 0 0 0 0 #fff;
+
+  @for $i from 0 through $n {
+    $x: randomNum(320);
+    $y: randomNum(600);
+    $scale: calc(randomNum($size) / 10);
+
+    $shadow: $shadow, #{$x}px #{$y}px 0 #{$scale}px rgba(255, 255, 255, 0.8);
+  }
+
+  @return $shadow;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// 创建星空背景
+.star {
+  position: relative;
+  width: 320px;
+  height: 600px;
+  background: #0b1a3a;
+  overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    box-shadow: shadowSet(120, 6);
+  }
+}
+
+.aurora {
+  width: 320px;
+  // height: 600px;
+  height: 400px;
+  background: radial-gradient(
+    circle at 100% 100%,
+    transparent 45%,
+    #bd63c1 55%,
+    #53e5a6 65%,
+    transparent 85%
+  );
+  transform: rotate(45deg) scaleX(1.6);
+  mix-blend-mode: color-dodge;
+  filter: url(#wave);
+}
