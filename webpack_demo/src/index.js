@@ -3,7 +3,7 @@ const b = () => {
   // console.log(ha.ha);
   console.log(123);
 };
-b();
+b?.();
 
 // class A {
 //   constructor(name) {

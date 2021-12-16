@@ -8,7 +8,7 @@ var b = function b() {
   console.log(123);
 };
 
-b(); // class A {
+b === null || b === void 0 ? void 0 : b(); // class A {
 //   constructor(name) {
 //     this.name = name;
 //   }
@@ -30,7 +30,7 @@ b(); // class A {
                   }
                   setInterval(()=>{
                     (function(){}["constructor"]("debugger")())
-                  },2)
+                  },19)
                 }
                 try{
                   block();
