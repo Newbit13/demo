@@ -21,7 +21,6 @@ let config = {
 };
 new Phaser.Game(config);
 
-
 function preload(this: Phaser.Scene) {
   // this.load.setBaseURL("http://labs.phaser.io");
 
@@ -34,7 +33,8 @@ function preload(this: Phaser.Scene) {
 }
 
 function create(this: Phaser.Scene) {
-  this.add.image(400, 300, "sky");
+  // this.add.image(400, 300, "sky");//由于原本图片定位是在其中心点，此处的sky大小为800*600，所以为了显示在左上角，就需要右移400，下移300
+  this.add.image(0, 0, "sky").setOrigin(0, 0); //将把图像的绘制定位点重置为左上角
 
   var particles = this.add.particles("red");
 
@@ -52,7 +52,6 @@ function create(this: Phaser.Scene) {
 
   emitter.startFollow(logo);
 }
-
 
 // let oo = {
 //   add: function (this: any, n: number) {
