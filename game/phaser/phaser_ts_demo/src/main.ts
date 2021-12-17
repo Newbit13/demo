@@ -19,6 +19,8 @@ let config = {
     create: create,
   },
 };
+new Phaser.Game(config);
+
 
 function preload(this: Phaser.Scene) {
   // this.load.setBaseURL("http://labs.phaser.io");
@@ -51,4 +53,11 @@ function create(this: Phaser.Scene) {
   emitter.startFollow(logo);
 }
 
-new Phaser.Game(config);
+
+// let oo = {
+//   add: function (this: any, n: number) {
+//     console.log(n);
+//     console.log(this);
+//   },
+// };
+// oo.add(1);
