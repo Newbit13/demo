@@ -114,7 +114,7 @@ function update(this: Phaser.Scene) {
     player.anims.play("turn");
   }
 
-  if (cursors.up.isDown && player.body.touching.down) {
+  if (cursors.up.isDown && player.body.touching.down) {//判断玩家是否与地面接触，否则可以n连跳了
     player.setVelocityY(-330);
   }
 }
