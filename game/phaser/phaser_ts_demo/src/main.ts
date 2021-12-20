@@ -9,7 +9,7 @@ let config = {
   width: widW / 1.1,
   height: widH / 1.1,
   physics: {
-    default: "arcade",//有Arcade, Impact, Matter.js三种物理系统，Arcade物理系统，它简单，轻量，完美地支持移动浏览器
+    default: "arcade", //有Arcade, Impact, Matter.js三种物理系统，Arcade物理系统，它简单，轻量，完美地支持移动浏览器
     arcade: {
       gravity: { y: 200 },
     },
@@ -17,6 +17,7 @@ let config = {
   scene: {
     preload: preload,
     create: create,
+    update: update,
   },
 };
 new Phaser.Game(config);
@@ -33,12 +34,14 @@ function preload(this: Phaser.Scene) {
   this.load.image("ground", "assets/ground.png");
 
   // this.load.image('bomb', 'assets/bomb.png');
-  this.load.spritesheet("dude", "assets/dude.png", {//玩家，及每一帧的大小
+  this.load.spritesheet("dude", "assets/dude.png", {
+    //玩家，及每一帧的大小
     frameWidth: 32,
     frameHeight: 48,
   });
 }
 
+let player: any;
 function create(this: Phaser.Scene) {
   // 添加天空
   // this.add.image(400, 300, "sky");//由于原本图片定位是在其中心点，此处的sky大小为800*600，所以为了显示在左上角，就需要右移400，下移300
@@ -67,7 +70,7 @@ function create(this: Phaser.Scene) {
   platforms.create(750, 220, "ground");
 
   // 添加一个玩家
-  let player = this.physics.add.sprite(100, 450, "dude");
+  player = this.physics.add.sprite(100, 450, "dude");
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
   // player.body.setGravityY(300)//给玩家一个重力
@@ -91,9 +94,30 @@ function create(this: Phaser.Scene) {
     repeat: -1,
   });
 
-  this.physics.add.collider(player, platforms);//它接收两个对象，检测二者之间的碰撞，并使二者分开
+  this.physics.add.collider(player, platforms); //它接收两个对象，检测二者之间的碰撞，并使二者分开
 }
 
+function update(this: Phaser.Scene) {
+  // 添加键盘监控
+  let cursors = this.input.keyboard.createCursorKeys();
+  if (cursors.left.isDown) {
+    player.setVelocityX(-160);
+
+    player.anims.play("left", true);
+  } else if (cursors.right.isDown) {
+    player.setVelocityX(160);
+
+    player.anims.play("right", true);
+  } else {
+    player.setVelocityX(0);
+
+    player.anims.play("turn");
+  }
+
+  if (cursors.up.isDown && player.body.touching.down) {
+    player.setVelocityY(-330);
+  }
+}
 // let oo = {
 //   add: function (this: any, n: number) {
 //     console.log(n);
