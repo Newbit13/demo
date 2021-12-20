@@ -30,6 +30,7 @@ function preload(this: Phaser.Scene) {
   this.load.image("sky", "assets/space3.png");
   this.load.image("logo", "assets/phaser3-logo.png");
   this.load.image("red", "assets/red.png");
+  this.load.image("ground", "assets/ground.png");
 }
 
 function create(this: Phaser.Scene) {
@@ -46,18 +47,18 @@ function create(this: Phaser.Scene) {
   });
 
   var logo = this.physics.add.image(400, 100, "logo");
-  logo.setVelocity(100, 200); //设置初始的移动方向
+  logo.setVelocity(100, 200); //设置初始的速度（方向）
   logo.setBounce(1, 1); //设置x，y的弹力
   logo.setCollideWorldBounds(true); //让世界的边界可以被碰撞到
   // 添加红色的彗星尾巴特效给logo
   emitter.startFollow(logo);
 
-  // 设置物理系统中的静态物体
+  // 设置物理系统中的静态物体，它可以被触碰，但是不会动，一般可以用来设置墙，地面
   let platforms = this.physics.add.staticGroup();
-  platforms.create(400, 568, "red").setScale(2).refreshBody();
-  platforms.create(600, 400, "red");
-  platforms.create(50, 250, "red");
-  platforms.create(750, 220, "red");
+  platforms.create(400, 568, "ground").setScale(2).refreshBody();
+  platforms.create(600, 400, "ground");
+  platforms.create(50, 250, "ground");
+  platforms.create(750, 220, "ground");
 }
 
 // let oo = {
