@@ -33,11 +33,12 @@ function preload(this: Phaser.Scene) {
 }
 
 function create(this: Phaser.Scene) {
+  // 添加天空
   // this.add.image(400, 300, "sky");//由于原本图片定位是在其中心点，此处的sky大小为800*600，所以为了显示在左上角，就需要右移400，下移300
   this.add.image(0, 0, "sky").setOrigin(0, 0); //将把图像的绘制定位点重置为左上角
 
+  // 设置红色的彗星，并且会从大变小
   var particles = this.add.particles("red");
-
   var emitter = particles.createEmitter({
     speed: 100,
     scale: { start: 1, end: 0 },
@@ -45,12 +46,18 @@ function create(this: Phaser.Scene) {
   });
 
   var logo = this.physics.add.image(400, 100, "logo");
-
-  logo.setVelocity(100, 200);
-  logo.setBounce(1, 1);
-  logo.setCollideWorldBounds(true);
-
+  logo.setVelocity(100, 200); //设置初始的移动方向
+  logo.setBounce(1, 1); //设置x，y的弹力
+  logo.setCollideWorldBounds(true); //让世界的边界可以被碰撞到
+  // 添加红色的彗星尾巴特效给logo
   emitter.startFollow(logo);
+
+  // 设置物理系统中的静态物体
+  let platforms = this.physics.add.staticGroup();
+  platforms.create(400, 568, "red").setScale(2).refreshBody();
+  platforms.create(600, 400, "red");
+  platforms.create(50, 250, "red");
+  platforms.create(750, 220, "red");
 }
 
 // let oo = {
