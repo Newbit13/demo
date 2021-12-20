@@ -6,10 +6,10 @@ let widH = window.innerHeight;
 
 let config = {
   type: Phaser.AUTO,
-  width: widW,
-  height: widH - 4,
+  width: widW / 1.1,
+  height: widH / 1.1,
   physics: {
-    default: "arcade",
+    default: "arcade",//有Arcade, Impact, Matter.js三种物理系统，Arcade物理系统，它简单，轻量，完美地支持移动浏览器
     arcade: {
       gravity: { y: 200 },
     },
@@ -31,6 +31,12 @@ function preload(this: Phaser.Scene) {
   this.load.image("logo", "assets/phaser3-logo.png");
   this.load.image("red", "assets/red.png");
   this.load.image("ground", "assets/ground.png");
+
+  // this.load.image('bomb', 'assets/bomb.png');
+  this.load.spritesheet("dude", "assets/dude.png", {//玩家，及每一帧的大小
+    frameWidth: 32,
+    frameHeight: 48,
+  });
 }
 
 function create(this: Phaser.Scene) {
@@ -59,6 +65,33 @@ function create(this: Phaser.Scene) {
   platforms.create(600, 400, "ground");
   platforms.create(50, 250, "ground");
   platforms.create(750, 220, "ground");
+
+  // 添加一个玩家
+  let player = this.physics.add.sprite(100, 450, "dude");
+  player.setBounce(0.2);
+  player.setCollideWorldBounds(true);
+  // player.body.setGravityY(300)//给玩家一个重力
+  this.anims.create({
+    key: "left",
+    frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 3 }), //使用0~3帧
+    frameRate: 10, //跑动时每秒10帧
+    repeat: -1, //表示动画循环播放
+  });
+
+  this.anims.create({
+    key: "turn",
+    frames: [{ key: "dude", frame: 4 }],
+    frameRate: 20,
+  });
+
+  this.anims.create({
+    key: "right",
+    frames: this.anims.generateFrameNumbers("dude", { start: 5, end: 8 }),
+    frameRate: 10,
+    repeat: -1,
+  });
+
+  this.physics.add.collider(player, platforms);//它接收两个对象，检测二者之间的碰撞，并使二者分开
 }
 
 // let oo = {
