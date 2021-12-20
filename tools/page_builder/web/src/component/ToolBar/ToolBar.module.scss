@@ -1,0 +1,27 @@
+.toolBar{
+    min-width: 100px;
+    .tool_bar_title{
+        padding: 10px;
+        background-color: #6289c5;
+        color: #ffffff;
+    }
+    .btn_grounp{
+        padding: 0 10px;
+        text-align: center;
+        .btn{
+            display: inline-block;
+            min-width: 30px;
+            line-height: 1.5;
+            color: #ffffff;
+            border-radius: 4px;
+            text-align: center;
+            background-color: #1890ff;
+            padding: 0 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            &:hover{
+                background-color: #40a9ff;
+            }
+        }
+    }
+}
