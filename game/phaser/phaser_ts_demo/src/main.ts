@@ -100,7 +100,9 @@ function create(this: Phaser.Scene) {
 
   this.physics.add.collider(stars, platforms);
 
-  this.physics.add.overlap(player, stars, collectStar, undefined, this); //如果玩家和组中一颗星星重叠，则调用collectStar函数
+  //如果玩家和组中一颗星星重叠，则调用collectStar函数
+  // 第五个参数用于传入this供回调函数使用
+  this.physics.add.overlap(player, stars, collectStar, undefined, this);
 
   //记分
   scoreText = this.add.text(16, 16, "score: 0", {
@@ -141,18 +143,21 @@ function collectStar(
   scoreText.setText("Score: " + score);
 
   if (stars.countActive(true) === 0) {
-    //判断星星存在的个数,如果没有就重新激活星星并放出炸弹
+    //判断星星存在的个数
     stars.children.iterate(function (child: any) {
       child.enableBody(true, child.x, 0, true, true);
     });
+  }
 
+  //根据分数放出炸弹
+  if (bombs.getLength() < score / 40) {
     var x =
       player.x < 400
         ? Phaser.Math.Between(400, 800)
         : Phaser.Math.Between(0, 400);
 
-    var bomb = bombs.create(x, 16, "bomb");
-    bomb.setBounce(1);
+    var bomb: Phaser.Physics.Arcade.Image = bombs.create(x, 16, "bomb");
+    bomb.setBounce(1, 1);
     bomb.setCollideWorldBounds(true);
     bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
   }
