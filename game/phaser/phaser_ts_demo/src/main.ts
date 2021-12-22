@@ -6,8 +6,8 @@ let widH = window.innerHeight;
 
 let config = {
   type: Phaser.AUTO,
-  width: widW / 1.1,
-  height: widH / 1.1,
+  width: 800, //widW / 1.1,
+  height: 600, //widH / 1.1,
   physics: {
     default: "arcade", //有Arcade, Impact, Matter.js三种物理系统，Arcade物理系统，它简单，轻量，完美地支持移动浏览器
     arcade: {
@@ -28,7 +28,8 @@ function preload(this: Phaser.Scene) {
   // this.load.image("sky", "assets/skies/space3.png");
   // this.load.image("logo", "assets/sprites/phaser3-logo.png");
   // this.load.image("red", "assets/particles/red.png");
-  this.load.image("sky", "assets/space3.png");
+
+  this.load.image("sky", "assets/sky.png");
   // this.load.image("logo", "assets/phaser3-logo.png");
   this.load.image("red", "assets/red.png");
   this.load.image("ground", "assets/ground.png");
@@ -115,7 +116,6 @@ function create(this: Phaser.Scene) {
   this.physics.add.collider(bombs, platforms);
   this.physics.add.overlap(player, bombs, hitBomb, undefined, this);
 
-  /*
   // 设置红色的彗星，并且会从大变小
   var particles = this.add.particles("red");
   var emitter = particles.createEmitter({
@@ -123,14 +123,22 @@ function create(this: Phaser.Scene) {
     scale: { start: 1, end: 0 },
     blendMode: "ADD",
   });
-
   var specialStar = this.physics.add.image(400, 100, "star");
   specialStar.setVelocity(100, 200); //设置初始的速度（方向）
   specialStar.setBounce(1, 1); //设置x，y的弹力
+  specialStar.setScale(4);
   specialStar.setCollideWorldBounds(true); //让世界的边界可以被碰撞到
   // 添加红色的彗星尾巴特效给specialStar
   emitter.startFollow(specialStar);
-  */
+  // 让这颗流星帮我们消灭炸弹
+  this.physics.add.overlap(specialStar, bombs, clearBomb, undefined, this);
+}
+
+function clearBomb(
+  _specialStar: Phaser.Physics.Arcade.Image | any,
+  bombs: Phaser.Physics.Arcade.Image | any
+) {
+  bombs.disableBody(true, true);
 }
 
 function collectStar(
