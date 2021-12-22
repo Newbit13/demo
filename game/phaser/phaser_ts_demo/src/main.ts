@@ -29,9 +29,11 @@ function preload(this: Phaser.Scene) {
   // this.load.image("logo", "assets/sprites/phaser3-logo.png");
   // this.load.image("red", "assets/particles/red.png");
   this.load.image("sky", "assets/space3.png");
-  this.load.image("logo", "assets/phaser3-logo.png");
+  // this.load.image("logo", "assets/phaser3-logo.png");
   this.load.image("red", "assets/red.png");
   this.load.image("ground", "assets/ground.png");
+  this.load.image("star", "assets/star.png");
+  this.load.image("bomb", "assets/bomb.png");
 
   // this.load.image('bomb', 'assets/bomb.png');
   this.load.spritesheet("dude", "assets/dude.png", {
@@ -41,26 +43,11 @@ function preload(this: Phaser.Scene) {
   });
 }
 
-let player: any;
+let player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
 function create(this: Phaser.Scene) {
   // 添加天空
   // this.add.image(400, 300, "sky");//由于原本图片定位是在其中心点，此处的sky大小为800*600，所以为了显示在左上角，就需要右移400，下移300
   this.add.image(0, 0, "sky").setOrigin(0, 0); //将把图像的绘制定位点重置为左上角
-
-  // 设置红色的彗星，并且会从大变小
-  var particles = this.add.particles("red");
-  var emitter = particles.createEmitter({
-    speed: 100,
-    scale: { start: 1, end: 0 },
-    blendMode: "ADD",
-  });
-
-  var logo = this.physics.add.image(400, 100, "logo");
-  logo.setVelocity(100, 200); //设置初始的速度（方向）
-  logo.setBounce(1, 1); //设置x，y的弹力
-  logo.setCollideWorldBounds(true); //让世界的边界可以被碰撞到
-  // 添加红色的彗星尾巴特效给logo
-  emitter.startFollow(logo);
 
   // 设置物理系统中的静态物体，它可以被触碰，但是不会动，一般可以用来设置墙，地面
   let platforms = this.physics.add.staticGroup();
@@ -95,6 +82,42 @@ function create(this: Phaser.Scene) {
   });
 
   this.physics.add.collider(player, platforms); //它接收两个对象，检测二者之间的碰撞，并使二者分开
+
+  let stars = this.physics.add.group({
+    key: "star",
+    repeat: 11, //重复11次，所以总共得到12颗星星
+    setXY: { x: 12, y: 0, stepX: 70 }, //分别在x:12,y:0     x:82,y0    x:152,y0 ....以这样的规律分布
+  });
+
+  stars.children.iterate((child: any) => {
+    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+  });
+
+  this.physics.add.collider(stars, platforms);
+
+  this.physics.add.overlap(player, stars, collectStar); //如果玩家和组中一颗星星重叠，则调用collectStar函数
+
+  // 设置红色的彗星，并且会从大变小
+  var particles = this.add.particles("red");
+  var emitter = particles.createEmitter({
+    speed: 100,
+    scale: { start: 1, end: 0 },
+    blendMode: "ADD",
+  });
+
+  var specialStar = this.physics.add.image(400, 100, "star");
+  specialStar.setVelocity(100, 200); //设置初始的速度（方向）
+  specialStar.setBounce(1, 1); //设置x，y的弹力
+  specialStar.setCollideWorldBounds(true); //让世界的边界可以被碰撞到
+  // 添加红色的彗星尾巴特效给specialStar
+  emitter.startFollow(specialStar);
+}
+
+function collectStar(
+  _player: Phaser.Physics.Arcade.Sprite | any,
+  star: Phaser.Physics.Arcade.Image | any
+) {
+  star.disableBody(true, true);
 }
 
 function update(this: Phaser.Scene) {
@@ -114,14 +137,8 @@ function update(this: Phaser.Scene) {
     player.anims.play("turn");
   }
 
-  if (cursors.up.isDown && player.body.touching.down) {//判断玩家是否与地面接触，否则可以n连跳了
-    player.setVelocityY(-330);
+  if (cursors.up.isDown && player.body.touching.down) {
+    //判断玩家是否与地面接触，否则可以n连跳了
+    player.setVelocityY(-300);
   }
 }
-// let oo = {
-//   add: function (this: any, n: number) {
-//     console.log(n);
-//     console.log(this);
-//   },
-// };
-// oo.add(1);
