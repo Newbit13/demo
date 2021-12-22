@@ -44,6 +44,11 @@ function preload(this: Phaser.Scene) {
 }
 
 let player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+let stars: Phaser.GameObjects.Group;
+let bombs: Phaser.GameObjects.Group;
+let score = 0;
+let scoreText: Phaser.GameObjects.Text;
+
 function create(this: Phaser.Scene) {
   // 添加天空
   // this.add.image(400, 300, "sky");//由于原本图片定位是在其中心点，此处的sky大小为800*600，所以为了显示在左上角，就需要右移400，下移300
@@ -83,7 +88,7 @@ function create(this: Phaser.Scene) {
 
   this.physics.add.collider(player, platforms); //它接收两个对象，检测二者之间的碰撞，并使二者分开
 
-  let stars = this.physics.add.group({
+  stars = this.physics.add.group({
     key: "star",
     repeat: 11, //重复11次，所以总共得到12颗星星
     setXY: { x: 12, y: 0, stepX: 70 }, //分别在x:12,y:0     x:82,y0    x:152,y0 ....以这样的规律分布
@@ -95,8 +100,20 @@ function create(this: Phaser.Scene) {
 
   this.physics.add.collider(stars, platforms);
 
-  this.physics.add.overlap(player, stars, collectStar); //如果玩家和组中一颗星星重叠，则调用collectStar函数
+  this.physics.add.overlap(player, stars, collectStar, undefined, this); //如果玩家和组中一颗星星重叠，则调用collectStar函数
 
+  //记分
+  scoreText = this.add.text(16, 16, "score: 0", {
+    fontSize: "32px",
+    color: "#fff",
+  });
+
+  // 添加敌人：炸弹
+  bombs = this.physics.add.group();
+  this.physics.add.collider(bombs, platforms);
+  this.physics.add.overlap(player, bombs, hitBomb, undefined, this);
+
+  /*
   // 设置红色的彗星，并且会从大变小
   var particles = this.add.particles("red");
   var emitter = particles.createEmitter({
@@ -111,6 +128,7 @@ function create(this: Phaser.Scene) {
   specialStar.setCollideWorldBounds(true); //让世界的边界可以被碰撞到
   // 添加红色的彗星尾巴特效给specialStar
   emitter.startFollow(specialStar);
+  */
 }
 
 function collectStar(
@@ -118,6 +136,36 @@ function collectStar(
   star: Phaser.Physics.Arcade.Image | any
 ) {
   star.disableBody(true, true);
+
+  score += 10;
+  scoreText.setText("Score: " + score);
+
+  if (stars.countActive(true) === 0) {
+    //判断星星存在的个数,如果没有就重新激活星星并放出炸弹
+    stars.children.iterate(function (child: any) {
+      child.enableBody(true, child.x, 0, true, true);
+    });
+
+    var x =
+      player.x < 400
+        ? Phaser.Math.Between(400, 800)
+        : Phaser.Math.Between(0, 400);
+
+    var bomb = bombs.create(x, 16, "bomb");
+    bomb.setBounce(1);
+    bomb.setCollideWorldBounds(true);
+    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+  }
+}
+
+function hitBomb(
+  this: Phaser.Scene,
+  player: Phaser.Physics.Arcade.Sprite | any,
+  _bombs: Phaser.Physics.Arcade.Image | any
+) {
+  this.physics.pause();
+  player.setTint(0xff0000);
+  player.anims.play("turn");
 }
 
 function update(this: Phaser.Scene) {
