@@ -46,3 +46,9 @@ intersectionObserver.observe(image);
 ```
 (function(){}["constructor"]("console.log(1)")())
 ```
+
+# js filter
+```
+let list = [,,,1,,3];
+list.filter(Boolean);//[1,3]  其中Boolean是一个函数
+```
