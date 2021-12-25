@@ -16,7 +16,9 @@
     color: red;
     font-size: 12px;
 }
-
+.aaa p{
+    color: blue;
+}
 p {
     color: red;
     font-size: 12px;
