@@ -1,3 +1,4 @@
+//https://webpack.js.org/api/loaders/#the-loader-context 一些api，可以获取更多信息
 module.exports = function(source,map){
     // console.log(this.loaders[this.loaderIndex].options);
     // console.log(this.resourcePath);
