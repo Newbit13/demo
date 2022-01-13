@@ -182,8 +182,8 @@ interface LooseObject {
 let developer2: LooseObject = {};
 developer2.name = "semlinker";
 
-
-interface Developer {//name必须，age可选，还支持动态设置字符串类型的属性
+interface Developer {
+  //name必须，age可选，还支持动态设置字符串类型的属性
   name: string;
   age?: number;
   [key: string]: any;
@@ -192,3 +192,18 @@ interface Developer {//name必须，age可选，还支持动态设置字符串�
 let developer3: Developer = { name: "semlinker" };
 developer3.age = 30;
 developer3.city = "XiaMen";
+
+
+// extends可以这样指定字符串
+type Person = {
+  age: number;
+  name: string;
+};
+type TestExpendStringType<nn extends string = "haha"> = {
+  [k in nn]: Person;
+};
+
+let TestExpendStringType: TestExpendStringType = {
+  haha: { age: 123, name: "asd" },
+};
+TestExpendStringType.haha.age = 123;
