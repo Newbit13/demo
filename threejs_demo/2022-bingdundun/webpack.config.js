@@ -25,7 +25,7 @@ const webpackConfig = {
                     }
                 ]
             },{
-                test:/\.(glb|stl)$/,
+                test:/\.(glb|gltf|stl|png|jpg)$/,
                 loader:'file-loader',
             }
         ]
