@@ -262,11 +262,10 @@ function init() {
   geometry.center();
   points = new THREE.Points(geometry, pointsMaterial);
   points.position.y = -30;
-  console.log(points);
   scene.add(points);
 
   // 新增一个红色球
-  const myGeometry = new THREE.SphereGeometry(1, 10, 10);
+  // const myGeometry = new THREE.SphereGeometry(1, 10, 10);
   // #region 其他
   //材质
   //材质一般是应用在mesh上，用来模拟物体的表面，在光线、阴影等因素的作用下所展示出来的最终效果。
@@ -277,21 +276,21 @@ function init() {
   // ·MeshLambertMaterial材质是漫反射材质，漫反射材质一般用来模拟表面较为粗糙，不会直接反射的表面，而是漫反射光线的材质。例如墙壁、衣服等。
   // ·MeshStandardMaterial 一种pbr(Physically based rendering)材质，用来模拟物理的材质属性。一般使用金属性metalness和粗糙度roughness来控制最终外观的效果。
   //   const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-  const material = new THREE.MeshStandardMaterial({
-    roughness: 0.6,
-    metalness: 1,
-    // color: 0xffffff //本来是设置材质颜色的，在这里变成了反光的颜色
-  });
+  // const material = new THREE.MeshStandardMaterial({
+  //   roughness: 0.6,
+  //   metalness: 1,
+  //   // color: 0xffffff //本来是设置材质颜色的，在这里变成了反光的颜色
+  // });
   // Mesh翻译是网格、网状物的意思
-  const mesh = new THREE.Mesh(myGeometry, material);
-  scene.add(mesh);
+  // const mesh = new THREE.Mesh(myGeometry, material);
+  // scene.add(mesh);
   // #endregion
 
   // 坐标轴辅助线
-  scene.add(new THREE.AxisHelper(1000)); //辅助线，绿色：y 红色：x 蓝色：z
+  // scene.add(new THREE.AxisHelper(1000)); //辅助线，绿色：y 红色：x 蓝色：z
 
   controls.update(); // 控制器需要
-  controls.target.copy(mesh.position);
+  // controls.target.copy(mesh.position);//todo 什么作用
 
   function render() {
     let vertices = pointsArray;
@@ -323,3 +322,8 @@ init();
 //参考资料
 //卧槽！用代码实现冰墩墩，太浪漫了吧https://mp.weixin.qq.com/s/Z0AkpppCJBoe1m58eOZtog
 //Threejs效果调参在调什么？https://zhuanlan.zhihu.com/p/142773940
+
+
+// todo
+// 研究骨骼动画
+// https://juejin.cn/post/6940079683740368933
