@@ -318,7 +318,7 @@ function init() {
   // 添加自己加的模型2
   loader.load(gandaModel, (mesh) => {
     // mesh.scene.rotation.y = Math.PI / 24;
-    mesh.scene.position.set(-50, 20, -80);
+    mesh.scene.position.set(-50, -20, -80);
     mesh.scene.scale.set(0.1, 0.1, 0.1);
     
     let meshAnimations = mesh.animations;
@@ -371,3 +371,9 @@ init();
 // todo
 // 研究骨骼动画
 // https://juejin.cn/post/6940079683740368933
+
+// 简单好用的骨骼教学介绍
+// http://www.xumenger.com/blender-bone-03-20190908/
+
+// 设置骨骼权重
+// https://blog.csdn.net/ttm2d/article/details/102522677
