@@ -7,6 +7,8 @@ import bingdundunModel from "./assets/bingdundun.glb";
 
 import landModel from "./assets/land.glb";
 import flagModel from "./assets/flag.glb";
+import testModel from "./assets/test.glb";
+import gandaModel from "./assets/ganda.glb";
 import treeModel from "./assets/tree.gltf";
 import flagTexture from "./assets/flag.png";
 import treeTexture from "./assets/tree.png";
@@ -155,7 +157,7 @@ function init() {
   fiveCyclesGroup.position.set(0, 10, -8);
   scene.add(fiveCyclesGroup);
 
-  let mixer;
+  let mixerList = [];
   var clock = new THREE.Clock();
   // 添加插旗
   loader.load(flagModel, (mesh) => {
@@ -182,7 +184,8 @@ function init() {
     mesh.scene.scale.set(4, 4, 4);
     // 动画,todo 了解
     let meshAnimation = mesh.animations[0];
-    mixer = new THREE.AnimationMixer(mesh.scene);
+    let mixer = new THREE.AnimationMixer(mesh.scene);
+    mixerList.push(mixer);
     let animationClip = meshAnimation;
     let clipAction = mixer.clipAction(animationClip).play();
     animationClip = clipAction.getClip();
@@ -289,6 +292,47 @@ function init() {
   // 坐标轴辅助线
   // scene.add(new THREE.AxisHelper(1000)); //辅助线，绿色：y 红色：x 蓝色：z
 
+  // 添加自己加的模型
+  loader.load(testModel, (mesh) => {
+    mesh.scene.rotation.y = Math.PI / 24;
+    mesh.scene.position.set(-20, -7, 10);
+    mesh.scene.scale.set(4, 4, 4);
+
+    // let meshAnimation = mesh.animations[0];
+    // let mixer = new THREE.AnimationMixer(mesh.scene);
+    // mixerList.push(mixer);
+    // let animationClip = meshAnimation;
+    // let clipAction = mixer.clipAction(animationClip).play();
+    // animationClip = clipAction.getClip();
+    // scene.add(mesh.scene);
+    let meshAnimations = mesh.animations;
+    let mixer = new THREE.AnimationMixer(mesh.scene);
+    mixerList.push(mixer);
+    meshAnimations.forEach(animationClip=>{
+      let clipAction = mixer.clipAction(animationClip).play();
+      animationClip = clipAction.getClip();
+    })
+    
+    scene.add(mesh.scene);
+  });
+  // 添加自己加的模型2
+  loader.load(gandaModel, (mesh) => {
+    // mesh.scene.rotation.y = Math.PI / 24;
+    mesh.scene.position.set(-50, 20, -80);
+    mesh.scene.scale.set(0.1, 0.1, 0.1);
+    
+    let meshAnimations = mesh.animations;
+    let mixer = new THREE.AnimationMixer(mesh.scene);
+    mixerList.push(mixer);
+    meshAnimations.forEach(animationClip=>{
+      let clipAction = mixer.clipAction(animationClip).play();
+      animationClip = clipAction.getClip();
+    })
+    
+    scene.add(mesh.scene);
+  });
+
+
   controls.update(); // 控制器需要
   // controls.target.copy(mesh.position);//todo 什么作用
 
@@ -303,10 +347,10 @@ function init() {
     // 顶点变动之后需要更新，否则无法实现雨滴特效
     // points.geometry.verticesNeedUpdate = true;
     geometry.setFromPoints(pointsArray);
-
-    if (mixer !== undefined) {
-      mixer.update(clock.getDelta());
-    }
+    let delta = clock.getDelta();
+    mixerList.forEach((mixer)=>{
+      mixer.update(delta);
+    });
     renderer.render(scene, camera);
   }
 
