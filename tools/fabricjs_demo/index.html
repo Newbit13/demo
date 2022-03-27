@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+    <p id="position"></p>
+    <script src="./node_modules/fabric/dist/fabric.js"></script>
+    <script>
+      var canvas = new fabric.Canvas("c", {
+        width: 500,
+        height: 500,
+        selection: false, //取消组选择
+        // isDrawingMode: false,//画画模式，true时可以开启画笔
+        // skipTargetFind: true,//会让里面的元素无法被选择到
+      });
+
+      canvas.add(
+        new fabric.Circle({
+          radius: 30,
+          fill: "#f55",
+          top: 100,
+          left: 100,
+        })
+      );
+
+      let drawingObject = null;
+      let activeEle = {
+        mouseFrom: {},
+        mouseTo: {},
+      };
+      let doDrawing = false;
+      function isScale(action) {
+        return action == "scale" || action == "scaleX" || action == "scaleY";
+      }
+      canvas.on("mouse:down", function (options) {
+        console.log(options.target == drawingObject);
+        let action = options.transform && options.transform.action;
+        if (action) return;
+        // 记录起点位置
+        activeEle.mouseFrom.x = options.e.offsetX;
+        activeEle.mouseFrom.y = options.e.offsetY;
+        doDrawing = true;
+      });
+      canvas.on("mouse:up", function (options) {
+        let action = options.transform && options.transform.action;
+        if (action) {
+          if (isScale(action)) {
+            drawing(activeEle);
+          }
+          return;
+        }
+
+        // 记录终点位置
+        activeEle.mouseTo.x = options.e.offsetX;
+        activeEle.mouseTo.y = options.e.offsetY;
+        doDrawing = false;
+      });
+      canvas.on("mouse:move", function (options) {
+        let action = options.transform && options.transform.action;
+        //减少绘制频率
+        if (action) {
+          if (action == "drag") {
+            activeEle.mouseFrom.x = options.target.left;
+            activeEle.mouseFrom.y = options.target.top;
+            activeEle.mouseTo.x = options.target.left + options.target.width;
+            activeEle.mouseTo.y = options.target.top + options.target.height;
+            updatePosition(activeEle);
+            return;
+          }
+          if (isScale(action)) {
+            activeEle.mouseFrom.x = options.target.left;
+            activeEle.mouseFrom.y = options.target.top;
+            activeEle.mouseTo.x =
+              options.target.left +
+              options.target.width * options.target.scaleX;
+            activeEle.mouseTo.y =
+              options.target.top +
+              options.target.height * options.target.scaleY;
+            updatePosition(activeEle);
+            return;
+          }
+          return;
+        }
+
+        if (doDrawing) {
+          // 更新 move 位置
+          activeEle.mouseTo.x = options.e.offsetX;
+          activeEle.mouseTo.y = options.e.offsetY;
+          drawing(activeEle);
+          updatePosition(activeEle);
+        }
+      });
+
+      function drawing(item) {
+        if (drawingObject) {
+          canvas.remove(drawingObject);
+        }
+        // 绘制区域
+        var path =
+          "M " +
+          item.mouseFrom.x +
+          " " +
+          item.mouseFrom.y +
+          " L " +
+          item.mouseTo.x +
+          " " +
+          item.mouseFrom.y +
+          " L " +
+          item.mouseTo.x +
+          " " +
+          item.mouseTo.y +
+          " L " +
+          item.mouseFrom.x +
+          " " +
+          item.mouseTo.y +
+          " L " +
+          item.mouseFrom.x +
+          " " +
+          item.mouseFrom.y +
+          " z";
+        // 记录下宽高
+        item.w = Math.abs(item.mouseTo.x - item.mouseFrom.x);
+        item.h = Math.abs(item.mouseTo.y - item.mouseFrom.y);
+        // 设置颜色
+        let colorInfo = {
+          stroke: "#F56C6C",
+          fill: "rgba(253, 226, 226, 0.5)",
+        };
+        // 绘制标题
+        drawingObject = new fabric.Path(path, {
+          strokeWidth: 1,
+          ...colorInfo,
+        });
+        // 设置标题显示位置
+        let textPosition = 0;
+        if (item.mouseTo.x - item.mouseFrom.x > 0) {
+          textPosition = item.mouseFrom.x + 20;
+        } else {
+          textPosition = item.mouseTo.x + 20;
+        }
+        // 设置文本标题
+        let textObject = new fabric.Text("标题", {
+          left: textPosition,
+          top: item.mouseFrom.y,
+          fontSize: 24,
+        });
+        // 合并标题和图形并保存
+        drawingObject = new fabric.Group([drawingObject, textObject], {
+          // id 用于拖动时更新对应的坐标数据
+          // hasControls: false,//会让对象无法放大缩小
+          hasBorders: false, //让选择时没有边框
+        });
+        drawingObject.setControlsVisibility({ mtr: false }); // 隐藏旋转点
+
+        canvas.add(drawingObject);
+      }
+      let p = document.getElementById("position");
+      function updatePosition(activeEle) {
+        p.innerText = `x:${activeEle.mouseFrom.x} y:${activeEle.mouseFrom.y}w:${
+          activeEle.mouseTo.x - activeEle.mouseFrom.x
+        }h:${activeEle.mouseTo.y - activeEle.mouseFrom.y}`;
+      }
+    </script>
+  </body>
+</html>
