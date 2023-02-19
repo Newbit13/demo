@@ -27,6 +27,7 @@ export default {
   },
   methods: {
     toggle() {
+      /* eslint-disable */
       this.fooMsg = "hello";
       // 一开始就触发不了watch
       this.dataA = [this.cool];

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>消失的精灵球</title>
+  </head>
+  <body>
+    <img id="sourcePic" src="./pkq.jpg" />
+    <canvas id="grayCanvas"></canvas>
+    <canvas id="inRangeMask"></canvas>
+    <canvas id="rectMaskCanvas"></canvas>
+    <!-- <canvas id="maskCanvas1"></canvas> -->
+    <canvas id="destCanvas"></canvas>
+    <script src="./opencv.js"></script>
+    <script>
+      cv.then((cv) => {
+        let dst = new cv.Mat();
+        let imgRGB = new cv.Mat();
+        let imgGray = new cv.Mat();
+        let imageSource = cv.imread("sourcePic", cv.CV_8UC3);
+        //转成三通道图像
+        cv.cvtColor(imageSource, imgRGB, cv.COLOR_BGRA2BGR);
+        //转成灰度图
+        cv.cvtColor(imageSource, imgGray, cv.COLOR_RGBA2GRAY);
+        cv.imshow("grayCanvas", imgGray);
+
+        // 使用inRange
+        let maskByInRange = new cv.Mat();
+        let low = new cv.Mat(
+          imgGray.rows, //等价于sourcePic.height
+          imgGray.cols, //等价于sourcePic.width
+          imgGray.type(),
+          [0, 0, 0, 0]
+        );
+        let high = new cv.Mat(
+          imgGray.rows,
+          imgGray.cols,
+          imgGray.type(),
+          [106, 106, 106, 1]
+        );
+        // You can try more different parameters
+        cv.inRange(imgGray, low, high, maskByInRange);
+        //对Mask膨胀处理，增加Mask面积
+        let kernel = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(10, 10));
+        cv.dilate(maskByInRange, maskByInRange, kernel);
+        cv.imshow("inRangeMask", maskByInRange);
+
+        // 将mask缩小范围
+        let rect = new cv.Rect(229, 294, 33, 36);
+        let rectMask = maskByInRange.roi(rect);
+        let rectImgRGB = imgRGB.roi(rect);
+        cv.imshow("rectMaskCanvas", rectMask);
+
+        cv.inpaint(rectImgRGB, rectMask, rectImgRGB, 10, cv.INPAINT_TELEA);
+        cv.imshow("destCanvas", imgRGB);
+
+        dst.delete();
+        imgRGB.delete();
+        imgGray.delete();
+        imageSource.delete();
+
+        maskByInRange.delete();
+        low.delete();
+        high.delete();
+      });
+      grayCanvas.onmousedown = function (e) {
+        x = e.offsetX; // 鼠标落下时的X
+        y = e.offsetY; // 鼠标落下时的Y
+        document.onmouseup = function (e) {
+          rx = e.offsetX; //鼠标抬起时的X坐标
+          ry = e.offsetY; //鼠标抬起时的Y坐标
+          document.onmousemove = null;
+          document.onmouseup = null;
+          console.log(x, y, rx - x, ry - y);
+        };
+      };
+    </script>
+  </body>
+</html>

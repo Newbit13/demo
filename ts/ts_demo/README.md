@@ -18,6 +18,7 @@ interface Props {
 2. extends
 ```T extends U ? X : Y```
 如果 T 和 U 兼容（T 包含 U 有的所有属性，T 可以被赋值给 U），这个类型就是 X，否则就是 Y。
+其实就是T是否为U的子类，是则为true
 例子：
 ```ts
 //但这样的类型写法是有问题的，因为返回值有可能是 null，没有 toUpperCase 这个方法。

@@ -1,7 +1,7 @@
 // 巧用注释
-/** 什么什么是 */
+/** yyy */
 interface Props {
-  /** fofofof */
+  /** xxx */
   foo: string;
   la: number;
   [key: string]: Props[keyof Props];
@@ -12,7 +12,7 @@ const props: Props = {
   la: 12,
 };
 props["foo"] = "baz"; // ok
-props["bar"] = 123; // error
+props["bar"] = 123; // ok
 
 //1
 // function process(text: string | number): string | number {
@@ -144,7 +144,7 @@ type Func2 = (user: User) => number;
 
 type Param = ParamType<Func>; // Param = Func
 type Param2 = ParamType<Func2>; // Param = User
-type AA = ParamType<string>;
+type AA = ParamType<string>;//string
 
 // 其他
 type foo<T extends String | Number> = T;

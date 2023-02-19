@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>探究去水印和生成蒙版的实现</title>
+  </head>
+  <body>
+    <img id="sourcePic" src="./pkq.jpg" />
+    <canvas id="grayCanvas"></canvas>
+    <canvas id="maskCanvas1"></canvas>
+    <!-- <canvas id="maskCanvas2"></canvas>
+    <canvas id="maskCanvas3"></canvas>
+    <canvas id="maskCanvas4"></canvas>
+    <canvas id="maskCanvas5"></canvas>
+    <canvas id="maskCanvas6"></canvas> -->
+    <canvas id="destCanvas"></canvas>
+    <script src="./opencv.js"></script>
+    <script>
+      cv.then((cv) => {
+        // let mat = cv.imread("sourcePic");
+        // cv.imshow("destCanvas", mat);
+
+        let dst = new cv.Mat();
+        let imgRGB = new cv.Mat();
+        let imgGray = new cv.Mat();
+        let imageSource = cv.imread("sourcePic", cv.CV_8UC3);
+        //转成三通道图像
+        cv.cvtColor(imageSource, imgRGB, cv.COLOR_BGRA2BGR);
+        //转成灰度图
+        cv.cvtColor(imageSource, imgGray, cv.COLOR_RGBA2GRAY);
+        cv.imshow("grayCanvas", imgGray);
+
+        let imgMask = new cv.Mat(
+          sourcePic.height,
+          sourcePic.width,
+          cv.CV_8UC1,
+          new cv.Scalar(0, 0, 0, 0)
+        );
+        //通过阈值处理生成Mask
+        // cv.threshold(imgGray, imgMask, 240, 255, cv.THRESH_BINARY);
+        cv.threshold(imgGray, imgMask, 240, 255, cv.THRESH_BINARY);
+        cv.imshow("maskCanvas1", imgMask);
+        // cv.threshold(imgGray, imgMask, 240, 255, cv.THRESH_TRUNC);
+        // cv.imshow("maskCanvas2", imgMask);
+        // cv.threshold(imgGray, imgMask, 240, 255, cv.THRESH_TOZERO);
+        // cv.imshow("maskCanvas3", imgMask);
+        // cv.threshold(imgGray, imgMask, 240, 255, cv.THRESH_TOZERO_INV);
+        // cv.imshow("maskCanvas4", imgMask);
+        // cv.threshold(imgGray, imgMask, 240, 255, cv.THRESH_OTSU);
+        // cv.imshow("maskCanvas5", imgMask);
+        // cv.threshold(imgGray, imgMask, 240, 255, cv.THRESH_TRIANGLE);
+        // cv.imshow("maskCanvas6", imgMask);
+
+        //对Mask膨胀处理，增加Mask面积
+        // let kernel = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(3, 3));
+        // cv.dilate(imgMask, imgMask, kernel);
+
+        cv.inpaint(imgRGB, imgMask, dst, 10, cv.INPAINT_TELEA);
+        cv.imshow("destCanvas", dst);
+
+        dst.delete();
+        imgRGB.delete();
+        imgGray.delete();
+        imageSource.delete();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cv初识</title>
+  </head>
+  <body>
+    <img id="sourcePic" src="./pkq.jpg" />
+    <canvas id="destPic"></canvas>
+    <canvas id="myCanvas"></canvas>
+    <script src="./opencv.js"></script>
+    <script>
+      cv.then((cvInstance) => {
+        let mat = cvInstance.imread("sourcePic");
+        cvInstance.imshow("destPic", mat);
+      });
+
+      const ctx = myCanvas.getContext("2d");
+      myCanvas.width = 400;
+      myCanvas.height = 333;
+      ctx.drawImage(sourcePic, 0, 0,400,333);
+    </script>
+  </body>
+</html>

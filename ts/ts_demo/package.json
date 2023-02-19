@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch src/**/*.ts --exec ts-node src/app.ts",
+    "start": "nodemon --watch src/**/*.ts --exec ts-node src/index.ts",
     "other": "nodemon --exec babel-node --presets env ./built/demo_decoration.js",
     "build": "webpack --config webpack.config.js"
   },
