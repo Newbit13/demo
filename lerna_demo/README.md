@@ -20,4 +20,11 @@ lerna add pk1 --scope=pk2
 
 # 运行每个包的脚本,如运行这些包的package.json中的script：test
 lerna run test
+# 运行某个包的脚本
+lerna run test --scope=pk2
+
+# 给某个包添加jquery依赖,然后这个包其实会安装在根目录的node_modules中，这样所有包就不用重复装依赖
+lerna add jquery --scope=pk1
+# 给所有包都添加lodash依赖
+lerna add lodash
 ```

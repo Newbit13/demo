@@ -27,6 +27,8 @@
     "url": "https://github.com/Newbit13/demo/issues"
   },
   "dependencies": {
-    "pk1": "^1.0.0"
+    "jquery": "^3.6.3",
+    "pk1": "^1.0.0",
+    "react": "^18.2.0"
   }
 }
