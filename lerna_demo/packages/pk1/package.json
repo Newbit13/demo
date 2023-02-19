@@ -21,6 +21,7 @@
     "url": "git+https://github.com/Newbit13/demo.git"
   },
   "scripts": {
+    "start": "node ./lib/pk1.js",
     "test": "node ./__tests__/pk1.test.js"
   },
   "bugs": {
@@ -30,5 +31,6 @@
     "jquery": "^3.6.3",
     "lodash": "^4.17.21",
     "react": "^18.2.0"
-  }
+  },
+  "gitHead": "d48b972592c7be007fdb085e0915e7cdf5305c39"
 }

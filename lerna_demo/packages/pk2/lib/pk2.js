@@ -6,3 +6,4 @@ function pk2() {
   pk1();
   return 'Hello from pk2';
 }
+pk2();
