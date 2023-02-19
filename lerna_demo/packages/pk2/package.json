@@ -1,6 +1,6 @@
 {
   "name": "pk2",
-  "version": "1.0.1",
+  "version": "0.1.0",
   "description": "xixi",
   "author": "黄骏泳 <525842854@qq.com>",
   "homepage": "https://github.com/Newbit13/demo#readme",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "jquery": "^3.6.3",
-    "pk1": "^1.0.0",
+    "pk1": "^0.1.0",
     "react": "^18.2.0"
   }
 }
